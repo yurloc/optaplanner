@@ -117,25 +117,3 @@ rule "insertEmployeeConsecutiveWeekendAssignmentEnd"
     then
         insertLogical(new EmployeeConsecutiveWeekendAssignmentEnd($employee, $weekendSundayIndex));
 end
-
-rule "insertEmployeeWeekendSequence"
-    when
-        EmployeeConsecutiveWeekendAssignmentStart(
-            $employee : employee,
-            $firstSundayIndex : sundayIndex
-        )
-
-        EmployeeConsecutiveWeekendAssignmentEnd(
-            employee == $employee,
-            sundayIndex >= $firstSundayIndex,
-            $lastSundayIndex : sundayIndex
-        )
-
-        // There are no free weekends between the first and last weekend
-        not EmployeeConsecutiveWeekendAssignmentEnd(
-            employee == $employee,
-            sundayIndex >= $firstSundayIndex && < $lastSundayIndex
-        )
-    then
-        insertLogical(new EmployeeWeekendSequence($employee, $firstSundayIndex, $lastSundayIndex));
-end

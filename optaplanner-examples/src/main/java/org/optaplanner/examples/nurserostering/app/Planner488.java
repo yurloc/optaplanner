@@ -30,6 +30,13 @@ public class Planner488 {
         NurseRosteringDao dao = new NurseRosteringDao();
         NurseRoster solution = (NurseRoster) dao.readSolution(new File(dao.getDataDir(), "unsolved/long01-init.xml"));
 
+        solution.getEmployeeList().stream().forEach(e -> {
+            e.getDayOffRequestMap().clear();
+            e.getDayOnRequestMap().clear();
+            e.getShiftOffRequestMap().clear();
+            e.getShiftOnRequestMap().clear();
+        });
+
         SolverFactory<NurseRoster> solverFactory = SolverFactory.createFromXmlResource(NurseRosteringApp.SOLVER_CONFIG);
         solverFactory.buildSolver().solve(solution);
     }

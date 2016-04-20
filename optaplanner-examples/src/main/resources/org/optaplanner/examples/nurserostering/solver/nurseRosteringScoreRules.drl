@@ -76,14 +76,6 @@ global HardSoftScoreHolder scoreHolder;
 //                - Math.abs($requiredEmployeeSize - $totalEmployeeSize.intValue());
 //end
 
-// a nurse can only work one shift per day, i.e. no two shift can be assigned to the same nurse on a day.
-rule "oneShiftPerDay"
-    when
-        ShiftAssignment($leftId : id, $employee : employee, $shiftDate : shiftDate, employee != null)
-        ShiftAssignment(employee == $employee, shiftDate == $shiftDate, id > $leftId)
-    then
-        scoreHolder.addHardConstraintMatch(kcontext, -1);
-end
 
 // ############################################################################
 // Soft constraints

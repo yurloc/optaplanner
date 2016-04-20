@@ -158,41 +158,6 @@ rule "insertEntireEmployeeFreeSequence"
         insertLogical(new EmployeeFreeSequence($employee, $firstDayIndex, $lastDayIndex));
 end
 
-// Minimum number of consecutive free days
-rule "minimumConsecutiveFreeDays"
-    when
-        $contractLine : MinMaxContractLine(
-            contractLineType == ContractLineType.CONSECUTIVE_FREE_DAYS, minimumEnabled == true,
-            $contract : contract, $minimumValue : minimumValue
-        )
-        $employee : Employee(contract == $contract)
-
-        EmployeeFreeSequence(
-            employee == $employee,
-            dayLength < $minimumValue,
-            $dayLength : dayLength
-        )
-    then
-        scoreHolder.addSoftConstraintMatch(kcontext, ($dayLength - $minimumValue) * $contractLine.getMinimumWeight());
-end
-
-// Maximum number of consecutive free days
-rule "maximumConsecutiveFreeDays"
-    when
-        $contractLine : MinMaxContractLine(
-            contractLineType == ContractLineType.CONSECUTIVE_FREE_DAYS, maximumEnabled == true,
-            $contract : contract, $maximumValue : maximumValue
-        )
-        $employee : Employee(contract == $contract)
-
-        EmployeeFreeSequence(
-            employee == $employee,
-            dayLength > $maximumValue,
-            $dayLength : dayLength
-        )
-    then
-        scoreHolder.addSoftConstraintMatch(kcontext, ($maximumValue - $dayLength) * $contractLine.getMaximumWeight());
-end
 
 
 rule "insertEmployeeConsecutiveWeekendAssignmentStart"

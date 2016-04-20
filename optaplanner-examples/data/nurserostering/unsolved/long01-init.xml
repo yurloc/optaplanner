@@ -9940,44 +9940,9 @@
   </shiftOffRequestList>
   <shiftOnRequestList class="empty-list"/>
   <shiftAssignmentList id="1295">
-    <ShiftAssignment id="1700">
-      <id>404</id>
-      <shift reference="269"/>
-      <indexInShift>5</indexInShift>
-    </ShiftAssignment>
     <ShiftAssignment id="1701">
       <id>405</id>
       <shift reference="272"/>
-      <indexInShift>0</indexInShift>
-    </ShiftAssignment>
-    <ShiftAssignment id="1702">
-      <id>406</id>
-      <shift reference="272"/>
-      <indexInShift>1</indexInShift>
-    </ShiftAssignment>
-    <ShiftAssignment id="1703">
-      <id>407</id>
-      <shift reference="272"/>
-      <indexInShift>2</indexInShift>
-    </ShiftAssignment>
-    <ShiftAssignment id="1704">
-      <id>408</id>
-      <shift reference="272"/>
-      <indexInShift>3</indexInShift>
-    </ShiftAssignment>
-    <ShiftAssignment id="1705">
-      <id>409</id>
-      <shift reference="272"/>
-      <indexInShift>4</indexInShift>
-    </ShiftAssignment>
-    <ShiftAssignment id="1706">
-      <id>410</id>
-      <shift reference="272"/>
-      <indexInShift>5</indexInShift>
-    </ShiftAssignment>
-    <ShiftAssignment id="1707">
-      <id>411</id>
-      <shift reference="273"/>
       <indexInShift>0</indexInShift>
     </ShiftAssignment>
     <ShiftAssignment id="1708">
@@ -9989,11 +9954,6 @@
       <id>413</id>
       <shift reference="273"/>
       <indexInShift>2</indexInShift>
-    </ShiftAssignment>
-    <ShiftAssignment id="1710">
-      <id>414</id>
-      <shift reference="274"/>
-      <indexInShift>0</indexInShift>
     </ShiftAssignment>
     <ShiftAssignment id="1711">
       <id>415</id>
@@ -10024,11 +9984,6 @@
       <id>585</id>
       <shift reference="208"/>
       <indexInShift>1</indexInShift>
-    </ShiftAssignment>
-    <ShiftAssignment id="1882">
-      <id>586</id>
-      <shift reference="208"/>
-      <indexInShift>2</indexInShift>
     </ShiftAssignment>
     <ShiftAssignment id="1883">
       <id>587</id>
@@ -10070,11 +10025,6 @@
       <shift reference="209"/>
       <indexInShift>4</indexInShift>
     </ShiftAssignment>
-    <ShiftAssignment id="1891">
-      <id>595</id>
-      <shift reference="209"/>
-      <indexInShift>5</indexInShift>
-    </ShiftAssignment>
     <ShiftAssignment id="1892">
       <id>596</id>
       <shift reference="210"/>
@@ -10089,31 +10039,6 @@
       <id>598</id>
       <shift reference="210"/>
       <indexInShift>2</indexInShift>
-    </ShiftAssignment>
-    <ShiftAssignment id="1895">
-      <id>599</id>
-      <shift reference="211"/>
-      <indexInShift>0</indexInShift>
-    </ShiftAssignment>
-    <ShiftAssignment id="1896">
-      <id>600</id>
-      <shift reference="211"/>
-      <indexInShift>1</indexInShift>
-    </ShiftAssignment>
-    <ShiftAssignment id="1897">
-      <id>601</id>
-      <shift reference="211"/>
-      <indexInShift>2</indexInShift>
-    </ShiftAssignment>
-    <ShiftAssignment id="1898">
-      <id>602</id>
-      <shift reference="211"/>
-      <indexInShift>3</indexInShift>
-    </ShiftAssignment>
-    <ShiftAssignment id="1899">
-      <id>603</id>
-      <shift reference="212"/>
-      <indexInShift>0</indexInShift>
     </ShiftAssignment>
   </shiftAssignmentList>
   <score id="2036">0hard/-264soft</score>

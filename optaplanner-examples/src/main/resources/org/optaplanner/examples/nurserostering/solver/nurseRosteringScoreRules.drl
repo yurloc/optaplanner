@@ -103,32 +103,6 @@ rule "insertEmployeeAssignmentTotal"
         insertLogical(new EmployeeAssignmentTotal($employee, $assignmentTotal.intValue()));
 end
 
-// Minimum number of assignments
-rule "minimumTotalAssignments"
-    when
-        $contractLine : MinMaxContractLine(
-            contractLineType == ContractLineType.TOTAL_ASSIGNMENTS, minimumEnabled == true,
-            $contract : contract, $minimumValue : minimumValue
-        )
-        EmployeeAssignmentTotal(employeeContract == $contract, total < $minimumValue,
-            $employee : employee, $total : total)
-    then
-        scoreHolder.addSoftConstraintMatch(kcontext, ($total - $minimumValue) * $contractLine.getMinimumWeight());
-end
-
-// Maximum number of assignments
-rule "maximumTotalAssignments"
-    when
-        $contractLine : MinMaxContractLine(
-            contractLineType == ContractLineType.TOTAL_ASSIGNMENTS, maximumEnabled == true,
-            $contract : contract, $maximumValue : maximumValue
-        )
-        EmployeeAssignmentTotal(employeeContract == $contract, total > $maximumValue,
-            $employee : employee, $total : total)
-    then
-        scoreHolder.addSoftConstraintMatch(kcontext, ($maximumValue - $total) * $contractLine.getMaximumWeight());
-end
-
 
 rule "insertEmployeeConsecutiveAssignmentStart"
         salience 2 // Do these rules first (optional, for performance)

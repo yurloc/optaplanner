@@ -17,9 +17,6 @@
     <secondsSpentLimit>700</secondsSpentLimit>
     <!--<bestScoreLimit>-0hard/-999999soft</bestScoreLimit>-->
   </termination>
-  <constructionHeuristic>
-    <constructionHeuristicType>WEAKEST_FIT</constructionHeuristicType>
-  </constructionHeuristic>
   <localSearch>
     <unionMoveSelector>
       <moveListFactory>

@@ -26,6 +26,9 @@ public class EmployeeStrengthComparator implements Comparator<Employee>, Seriali
 
     @Override
     public int compare(Employee a, Employee b) {
+        if (a == null || b == null) {
+            return 0;
+        }
         // TODO refactor to DifficultyWeightFactory and use getContract().getContractLineList()
         // to sum maximumValue and minimumValue etc
         return new CompareToBuilder()

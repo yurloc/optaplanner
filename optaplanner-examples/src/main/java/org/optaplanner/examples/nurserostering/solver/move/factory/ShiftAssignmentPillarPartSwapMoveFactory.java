@@ -60,6 +60,8 @@ public class ShiftAssignmentPillarPartSwapMoveFactory implements MoveListFactory
             employeeToAssignmentSequenceListMap.put(employee,
                     new ArrayList<>(assignmentSequenceCapacity));
         }
+        employeeToAssignmentSequenceListMap.put(null,
+                new ArrayList<AssignmentSequence>(assignmentSequenceCapacity));
         for (ShiftAssignment shiftAssignment : shiftAssignmentList) {
             Employee employee = shiftAssignment.getEmployee();
             List<AssignmentSequence> assignmentSequenceList = employeeToAssignmentSequenceListMap.get(employee);

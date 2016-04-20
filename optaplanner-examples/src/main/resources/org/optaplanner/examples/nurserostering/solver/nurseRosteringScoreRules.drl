@@ -341,35 +341,3 @@ rule "identicalShiftTypesDuringWeekend"
         scoreHolder.addSoftConstraintMatch(kcontext,
                 ($weekendAssignmentTotal.intValue() - $weekendLength) * $contractLine.getWeight());
 end
-
-// Requested day on/off
-rule "dayOffRequest"
-    when
-        DayOffRequest($employee : employee, $shiftDate : shiftDate, $weight : weight)
-        ShiftAssignment(employee == $employee, shiftDate == $shiftDate)
-    then
-        scoreHolder.addSoftConstraintMatch(kcontext, - $weight);
-end
-rule "dayOnRequest"
-    when
-        DayOnRequest($employee : employee, $shiftDate : shiftDate, $weight : weight)
-        not ShiftAssignment(employee == $employee, shiftDate == $shiftDate)
-    then
-        scoreHolder.addSoftConstraintMatch(kcontext, - $weight);
-end
-
-// Requested shift on/off
-rule "shiftOffRequest"
-    when
-        ShiftOffRequest($employee : employee, $shift : shift, $weight : weight)
-        ShiftAssignment(employee == $employee, shift == $shift)
-    then
-        scoreHolder.addSoftConstraintMatch(kcontext, - $weight);
-end
-rule "shiftOnRequest"
-    when
-        ShiftOnRequest($employee : employee, $shift : shift, $weight : weight)
-        not ShiftAssignment(employee == $employee, shift == $shift)
-    then
-        scoreHolder.addSoftConstraintMatch(kcontext, - $weight);
-end

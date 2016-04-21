@@ -28,7 +28,7 @@ public class Planner488 {
      */
     public static void main(String[] args) {
         NurseRosteringDao dao = new NurseRosteringDao();
-        NurseRoster solution = (NurseRoster) dao.readSolution(new File(dao.getDataDir(), "unsolved/long01-init.xml"));
+        NurseRoster solution = (NurseRoster) dao.readSolution(new File(dao.getDataDir(), "unsolved/long01-2empl.xml"));
 
         solution.getEmployeeList().stream().forEach(e -> {
             e.getDayOffRequestMap().clear();

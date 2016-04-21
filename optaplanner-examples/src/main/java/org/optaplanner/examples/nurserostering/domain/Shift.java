@@ -66,7 +66,7 @@ public class Shift extends AbstractPersistable {
 
     @Override
     public String toString() {
-        return shiftDate + "/" + shiftType;
+        return id + ":" + shiftDate + "/" + shiftType;
     }
 
 }

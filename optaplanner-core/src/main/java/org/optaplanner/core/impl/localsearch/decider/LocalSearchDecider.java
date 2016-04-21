@@ -120,7 +120,7 @@ public class LocalSearchDecider<Solution_> {
             moveScope.setMove(move);
             // TODO use Selector filtering to filter out not doable moves
             if (!move.isMoveDoable(scoreDirector)) {
-                logger.trace("        Move index ({}) not doable, ignoring move ({}).", moveScope.getMoveIndex(), move);
+                logger.trace("        [{}]Move index ({}) not doable, ignoring move ({}).", stepScope.getStepIndex(), moveScope.getMoveIndex(), move);
             } else {
                 doMove(moveScope);
                 if (forager.isQuitEarly()) {
@@ -156,7 +156,7 @@ public class LocalSearchDecider<Solution_> {
             LocalSearchPhaseScope<Solution_> phaseScope = moveScope.getStepScope().getPhaseScope();
             phaseScope.assertExpectedUndoMoveScore(move, undoMove, phaseScope.getLastCompletedStepScope().getScore());
         }
-        logger.trace("        Move index ({}), score ({}), accepted ({}), move ({}).",
+        logger.trace("        [{}]Move index ({}), score ({}), accepted ({}), move ({}).", moveScope.getStepScope().getStepIndex(),
                 moveScope.getMoveIndex(), moveScope.getScore(), moveScope.getAccepted(),
                 moveScope.getMove());
     }

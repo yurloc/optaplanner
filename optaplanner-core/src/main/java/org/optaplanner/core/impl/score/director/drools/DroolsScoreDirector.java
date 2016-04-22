@@ -80,9 +80,12 @@ public class DroolsScoreDirector<Solution_>
         return getSolutionDescriptor().getAllFacts(workingSolution);
     }
 
+    int rulesFired = 0;
+
     @Override
     public Score calculateScore() {
         variableListenerSupport.assertNotificationQueuesAreEmpty();
+        logger.info("FIRE ALL RULES #{}", ++rulesFired);
         kieSession.fireAllRules();
         Score score = workingScoreHolder.extractScore();
         setCalculatedScore(score);

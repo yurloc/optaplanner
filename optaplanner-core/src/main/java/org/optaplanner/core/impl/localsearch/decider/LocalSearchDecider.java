@@ -18,6 +18,7 @@ package org.optaplanner.core.impl.localsearch.decider;
 
 import org.optaplanner.core.api.domain.solution.PlanningSolution;
 import org.optaplanner.core.api.score.Score;
+import org.optaplanner.core.api.score.buildin.hardsoft.HardSoftScore;
 import org.optaplanner.core.impl.heuristic.move.Move;
 import org.optaplanner.core.impl.heuristic.selector.move.MoveSelector;
 import org.optaplanner.core.impl.localsearch.decider.acceptor.Acceptor;
@@ -117,6 +118,10 @@ public class LocalSearchDecider<Solution_> {
             LocalSearchMoveScope<Solution_> moveScope = new LocalSearchMoveScope<>(stepScope);
             moveScope.setMoveIndex(moveIndex);
             moveIndex++;
+            // I need to keep moves from steps 0, 1 and 2 -> I can only afford to skip moves in the last step (3).
+            // However I want minimize the number of moves whose score is calculated (have effect on Drools WM),
+            // therfore I skip score calculation in doMove()->processMove() -- see below.
+            if (stepScope.getStepIndex() > 2 && moveIndex < 335) continue;
             moveScope.setMove(move);
             // TODO use Selector filtering to filter out not doable moves
             if (!move.isMoveDoable(scoreDirector)) {
@@ -137,7 +142,7 @@ public class LocalSearchDecider<Solution_> {
             Move step = pickedMoveScope.getMove();
             stepScope.setStep(step);
             if (logger.isDebugEnabled()) {
-                stepScope.setStepString(step.toString());
+                stepScope.setStepString("[" + pickedMoveScope.getMoveIndex() + "]" + step.toString());
             }
             stepScope.setUndoStep(pickedMoveScope.getUndoMove());
             stepScope.setScore(pickedMoveScope.getScore());
@@ -162,7 +167,17 @@ public class LocalSearchDecider<Solution_> {
     }
 
     private void processMove(LocalSearchMoveScope<Solution_> moveScope) {
-        Score score = moveScope.getStepScope().getPhaseScope().calculateScore();
+        int moveIndex = moveScope.getMoveIndex();
+        int stepIndex = moveScope.getStepScope().getStepIndex();
+        Score score;
+        // We only need the last two or three score calculations so we completely skip move score calculation in steps
+        // 0 and 1. Then calculate the last move from step 2 and any move from step 3 (however most of the moves from
+        // step 3 are skipped (above), so actually only 2 of them are going to be calculated).
+        if (stepIndex == 3 ||
+                stepIndex == 2 && moveIndex == 844)
+            score = moveScope.getStepScope().getPhaseScope().calculateScore();
+        else
+            score = HardSoftScore.valueOf(0, 0);
         if (assertMoveScoreFromScratch) {
             moveScope.getStepScope().getPhaseScope().assertWorkingScoreFromScratch(score, moveScope.getMove());
         }

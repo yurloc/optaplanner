@@ -4422,31 +4422,6 @@
       <guest reference="164"/>
       <seat reference="640"/>
     </SeatDesignation>
-    <SeatDesignation id="810">
-      <id>35</id>
-      <guest reference="168"/>
-      <seat reference="654"/>
-    </SeatDesignation>
-    <SeatDesignation id="811">
-      <id>36</id>
-      <guest reference="173"/>
-      <seat reference="663"/>
-    </SeatDesignation>
-    <SeatDesignation id="812">
-      <id>37</id>
-      <guest reference="176"/>
-      <seat reference="677"/>
-    </SeatDesignation>
-    <SeatDesignation id="813">
-      <id>38</id>
-      <guest reference="180"/>
-      <seat reference="697"/>
-    </SeatDesignation>
-    <SeatDesignation id="814">
-      <id>39</id>
-      <guest reference="185"/>
-      <seat reference="711"/>
-    </SeatDesignation>
   </seatDesignationList>
   <score id="919">-2890</score>
 </DinnerParty>

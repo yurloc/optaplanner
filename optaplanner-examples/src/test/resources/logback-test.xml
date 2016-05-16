@@ -9,7 +9,7 @@
     </encoder>
   </appender>
 
-  <logger name="org.optaplanner" level="info"/>
+  <logger name="org.optaplanner" level="${logback.level.org.optaplanner:-trace}"/>
   <!-- Don't pollute the test log with a stacktrace -->
   <logger name="org.optaplanner.benchmark.impl.PlannerBenchmarkRunner.singleBenchmarkRunnerException" level="error"/>
 

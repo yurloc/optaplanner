@@ -19,14 +19,7 @@ package org.optaplanner.examples.dinnerparty.solver;
 
 import org.optaplanner.core.api.score.buildin.simple.SimpleScoreHolder;
 
-import org.optaplanner.examples.dinnerparty.domain.Gender;
-import org.optaplanner.examples.dinnerparty.domain.Guest;
-import org.optaplanner.examples.dinnerparty.domain.Hobby;
-import org.optaplanner.examples.dinnerparty.domain.HobbyPractician;
-import org.optaplanner.examples.dinnerparty.domain.Job;
 import org.optaplanner.examples.dinnerparty.domain.JobType;
-import org.optaplanner.examples.dinnerparty.domain.DinnerParty;
-import org.optaplanner.examples.dinnerparty.domain.Seat;
 import org.optaplanner.examples.dinnerparty.domain.SeatDesignation;
 import org.optaplanner.examples.dinnerparty.domain.Table;
 
@@ -52,32 +45,6 @@ rule "twoSameJobTypePerTable"
             SeatDesignation(guestJobType == $jobType, seatTable == $table, $leftId : id, $firstJob : guestJob)
             and SeatDesignation(guestJobType == $jobType, seatTable == $table, id > $leftId,
                     differentKindIfNeeded($firstJob))
-        )
-    then
-        scoreHolder.addConstraintMatch(kcontext, -100);
-end
-// This is to avoid score traps. The score function should for example give an incentive
-// to put it 1 doctor at a table without doctors even though 2 doctors are needed.
-// This extra rule can be avoided by weighting the broken constraint of the other rule
-rule "atLeastOneJobTypePerTableScoreGuider"
-    when
-        $table : Table()
-        $jobType : JobType()
-        not SeatDesignation(guestJobType == $jobType, seatTable == $table)
-    then
-        scoreHolder.addConstraintMatch(kcontext, -100);
-end
-
-
-// Each person must share a hobby with his/her left neighbour
-// (so also the same or another hobby with his/her right neighbour)
-rule "leftHasHobbyInCommon"
-    when
-        $leftDesignation : SeatDesignation($leftGuest : guest)
-        $rightDesignation : SeatDesignation(isRightOf($leftDesignation), $rightGuest : guest)
-        not (
-            HobbyPractician(guest == $leftGuest, $leftHobby : hobby)
-            and HobbyPractician(guest == $rightGuest, hobby == $leftHobby)
         )
     then
         scoreHolder.addConstraintMatch(kcontext, -100);

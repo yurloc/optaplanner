@@ -4382,31 +4382,6 @@
       <guest reference="132"/>
       <seat reference="642"/>
     </SeatDesignation>
-    <SeatDesignation id="802">
-      <id>27</id>
-      <guest reference="137"/>
-      <seat reference="656"/>
-    </SeatDesignation>
-    <SeatDesignation id="803">
-      <id>28</id>
-      <guest reference="140"/>
-      <seat reference="670"/>
-    </SeatDesignation>
-    <SeatDesignation id="804">
-      <id>29</id>
-      <guest reference="144"/>
-      <seat reference="684"/>
-    </SeatDesignation>
-    <SeatDesignation id="805">
-      <id>30</id>
-      <guest reference="149"/>
-      <seat reference="699"/>
-    </SeatDesignation>
-    <SeatDesignation id="806">
-      <id>31</id>
-      <guest reference="152"/>
-      <seat reference="713"/>
-    </SeatDesignation>
     <SeatDesignation id="807">
       <id>32</id>
       <guest reference="156"/>

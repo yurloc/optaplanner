@@ -1,130 +1,15 @@
 <DinnerParty id="1">
   <id>0</id>
   <jobList id="2">
-    <Job id="3">
-      <id>18</id>
-      <jobType>DEVELOPER</jobType>
-      <name>Ruby</name>
-    </Job>
-    <Job id="4">
-      <id>10</id>
-      <jobType>TEACHER</jobType>
-      <name>English</name>
-    </Job>
-    <Job id="5">
-      <id>15</id>
-      <jobType>DEVELOPER</jobType>
-      <name>Ceylon</name>
-    </Job>
-    <Job id="6">
-      <id>19</id>
-      <jobType>DEVELOPER</jobType>
-      <name>Clojure</name>
-    </Job>
     <Job id="7">
       <id>2</id>
       <jobType>DOCTOR</jobType>
       <name>Pediatrician</name>
     </Job>
-    <Job id="8">
-      <id>8</id>
-      <jobType>COACH</jobType>
-      <name>Baseball</name>
-    </Job>
-    <Job id="9">
-      <id>1</id>
-      <jobType>POLITICIAN</jobType>
-      <name>Republican</name>
-    </Job>
-    <Job id="10">
-      <id>9</id>
-      <jobType>TEACHER</jobType>
-      <name>Math</name>
-    </Job>
-    <Job id="11">
-      <id>20</id>
-      <jobType>DEVELOPER</jobType>
-      <name>Python</name>
-    </Job>
-    <Job id="12">
-      <id>12</id>
-      <jobType>TEACHER</jobType>
-      <name>French</name>
-    </Job>
     <Job id="13">
       <id>3</id>
       <jobType>DOCTOR</jobType>
       <name>Surgeon</name>
-    </Job>
-    <Job id="14">
-      <id>23</id>
-      <jobType>SOCIALITE</jobType>
-      <name>Republican</name>
-    </Job>
-    <Job id="15">
-      <id>7</id>
-      <jobType>COACH</jobType>
-      <name>Football</name>
-    </Job>
-    <Job id="16">
-      <id>17</id>
-      <jobType>DEVELOPER</jobType>
-      <name>Groovy</name>
-    </Job>
-    <Job id="17">
-      <id>22</id>
-      <jobType>DEVELOPER</jobType>
-      <name>C</name>
-    </Job>
-    <Job id="18">
-      <id>14</id>
-      <jobType>DEVELOPER</jobType>
-      <name>Java</name>
-    </Job>
-    <Job id="19">
-      <id>13</id>
-      <jobType>TEACHER</jobType>
-      <name>History</name>
-    </Job>
-    <Job id="20">
-      <id>21</id>
-      <jobType>DEVELOPER</jobType>
-      <name>Perl</name>
-    </Job>
-    <Job id="21">
-      <id>11</id>
-      <jobType>TEACHER</jobType>
-      <name>Science</name>
-    </Job>
-    <Job id="22">
-      <id>24</id>
-      <jobType>SOCIALITE</jobType>
-      <name>Democrat</name>
-    </Job>
-    <Job id="23">
-      <id>0</id>
-      <jobType>POLITICIAN</jobType>
-      <name>Democrat</name>
-    </Job>
-    <Job id="24">
-      <id>4</id>
-      <jobType>DOCTOR</jobType>
-      <name>Osteopath</name>
-    </Job>
-    <Job id="25">
-      <id>5</id>
-      <jobType>COACH</jobType>
-      <name>Basketball</name>
-    </Job>
-    <Job id="26">
-      <id>6</id>
-      <jobType>COACH</jobType>
-      <name>Soccer</name>
-    </Job>
-    <Job id="27">
-      <id>16</id>
-      <jobType>DEVELOPER</jobType>
-      <name>Scala</name>
     </Job>
   </jobList>
   <guestList id="28">

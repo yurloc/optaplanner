@@ -39,6 +39,16 @@ import org.optaplanner.core.impl.score.director.ScoreDirector;
 import org.optaplanner.core.impl.score.director.easy.EasyScoreCalculator;
 import org.optaplanner.core.impl.solver.scope.DefaultSolverScope;
 
+/**
+ * Most of the compilation errors are caused by removing Solution being the upper bound of the type parameter of some
+ * classes (e.g. SolverFactory〈Solution_ extends Solution〉 → SolverFactory〈Solution_〉) introduced by
+ * "http://github.com/droolsjbpm/optaplanner/commit/90b9357a7f" and by ignoring type parameter of those classes, which
+ * was (and still is) optional. However because its upper bound was removed the code that relies on it will break.
+ * <p>
+ * {@link MyInitializer} was broken a few commits later by generifying {@link CustomPhaseCommand}.
+ * <p>
+ * All of this code compiles successfully when rebased onto c230e2ef17.
+ */
 public class CompilationErrorsTest {
 
     public static class MyListener extends PhaseLifecycleListenerAdapter {
@@ -104,6 +114,10 @@ public class CompilationErrorsTest {
         Solution solution = solver.getBestSolution();
     }
 
+    //-----------------------------------------------------------------------------------------------------------------
+    // Helper code
+    //-----------------------------------------------------------------------------------------------------------------
+    //
     private void initFactory(SolverFactory<?> solverFactory) {
         solverFactory.getSolverConfig().setSolutionClass(DummySolution.class);
         solverFactory.getSolverConfig().setEntityClassList(Arrays.asList(DummyEntity.class));

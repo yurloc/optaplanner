@@ -27,9 +27,31 @@ import org.optaplanner.core.api.domain.valuerange.ValueRangeProvider;
 import org.optaplanner.core.api.domain.variable.PlanningVariable;
 import org.optaplanner.core.api.score.Score;
 import org.optaplanner.core.config.score.director.ScoreDirectorFactoryConfig;
+import org.optaplanner.core.impl.phase.event.PhaseLifecycleListenerAdapter;
+import org.optaplanner.core.impl.phase.scope.AbstractPhaseScope;
+import org.optaplanner.core.impl.phase.scope.AbstractStepScope;
 import org.optaplanner.core.impl.score.director.easy.EasyScoreCalculator;
+import org.optaplanner.core.impl.solver.scope.DefaultSolverScope;
 
 public class CompilationErrorsTest {
+
+    public static class MyListener extends PhaseLifecycleListenerAdapter {
+
+        @Override
+        public void stepEnded(AbstractStepScope stepScope) {
+            Solution createOrGetClonedSolution = stepScope.createOrGetClonedSolution();
+        }
+
+        @Override
+        public void phaseEnded(AbstractPhaseScope phaseScope) {
+            Solution workingSolution = phaseScope.getWorkingSolution();
+        }
+
+        @Override
+        public void solvingEnded(DefaultSolverScope solverScope) {
+            Solution bestSolution = solverScope.getBestSolution();
+        }
+    }
 
     @Test
     public void getBestSolution_should_be_assignable_to_Solution() {

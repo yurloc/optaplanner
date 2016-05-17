@@ -62,6 +62,14 @@ public class CompilationErrorsTest {
         }
     }
 
+    public static class DummyCalculator implements EasyScoreCalculator {
+
+        @Override
+        public Score calculateScore(Solution solution) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+    }
+
     @Test
     public void getBestSolution_should_be_assignable_to_Solution() {
         SolverFactory solverFactory = SolverFactory.createEmpty();
@@ -111,14 +119,6 @@ public class CompilationErrorsTest {
 
         @ValueRangeProvider(id = "x")
         public Collection getValues() {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        }
-    }
-
-    public static class DummyCalculator implements EasyScoreCalculator {
-
-        @Override
-        public Score calculateScore(Solution solution) {
             throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         }
     }

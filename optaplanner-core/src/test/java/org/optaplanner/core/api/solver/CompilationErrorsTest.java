@@ -23,6 +23,7 @@ import org.optaplanner.core.api.domain.entity.PlanningEntity;
 import org.optaplanner.core.api.domain.solution.PlanningEntityProperty;
 import org.optaplanner.core.api.domain.solution.PlanningSolution;
 import org.optaplanner.core.api.domain.solution.Solution;
+import org.optaplanner.core.api.domain.solution.cloner.SolutionCloner;
 import org.optaplanner.core.api.domain.valuerange.ValueRangeProvider;
 import org.optaplanner.core.api.domain.variable.PlanningVariable;
 import org.optaplanner.core.api.score.Score;
@@ -50,6 +51,14 @@ public class CompilationErrorsTest {
         @Override
         public void solvingEnded(DefaultSolverScope solverScope) {
             Solution bestSolution = solverScope.getBestSolution();
+        }
+    }
+
+    public static class MyClonerWithoutTypeArgument implements SolutionCloner {
+
+        @Override
+        public Solution cloneSolution(Solution original) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         }
     }
 

@@ -117,6 +117,7 @@ public class LocalSearchDecider<Solution_> {
             LocalSearchMoveScope<Solution_> moveScope = new LocalSearchMoveScope<>(stepScope);
             moveScope.setMoveIndex(moveIndex);
             moveIndex++;
+            if (moveIndex < 19) continue;
             moveScope.setMove(move);
             // TODO use Selector filtering to filter out not doable moves
             if (!move.isMoveDoable(scoreDirector)) {

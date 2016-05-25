@@ -1209,12 +1209,6 @@
   <shiftOffRequestList id="596"/>
   <shiftOnRequestList class="empty-list"/>
   <shiftAssignmentList id="597">
-    <ShiftAssignment id="1000">
-      <id>402</id>
-      <shift reference="512"/>
-      <indexInShift>3</indexInShift>
-      <employee reference="131"/>
-    </ShiftAssignment>
     <ShiftAssignment id="1001">
       <id>403</id>
       <shift reference="512"/>
@@ -1226,12 +1220,6 @@
       <shift reference="555"/>
       <indexInShift>6</indexInShift>
       <employee reference="176"/>
-    </ShiftAssignment>
-    <ShiftAssignment id="1168">
-      <id>570</id>
-      <shift reference="555"/>
-      <indexInShift>7</indexInShift>
-      <employee reference="186"/>
     </ShiftAssignment>
     <ShiftAssignment id="1182">
       <id>584</id>

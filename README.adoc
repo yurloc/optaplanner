@@ -3,10 +3,13 @@
 This branch contains a reproducer for https://issues.jboss.org/browse/DROOLS-1186[DROOLS-1186],
 which re-occured during isolation work on https://issues.jboss.org/browse/DROOLS-1187[DROOLS-1187].
 
-To reproduce, run:
+To reproduce locally, run:
 
 [source,shell]
 ----
+$ cd optaplanner
+$ git checkout -b tmp
+$ git pull git@github.com:yurloc/optaplanner.git drools-1187-NPE
 $ mvn clean install -DskipTests
 $ cd optaplanner-examples
 $ mvn test -Dtest=Drools1187Test

@@ -1,41 +1,13 @@
-image:https://jenkins-kieci.rhcloud.com/buildStatus/icon?job=optaplanner["Build Status", link="https://jenkins-kieci.rhcloud.com/job/optaplanner"]
+= README
 
-== Quick development start
+This branch contains a reproducer for https://issues.jboss.org/browse/DROOLS-1186[DROOLS-1186],
+which re-occured during isolation work on https://issues.jboss.org/browse/DROOLS-1187[DROOLS-1187].
 
-To build and run from source:
+To reproduce, run:
 
+[source,shell]
 ----
 $ mvn clean install -DskipTests
 $ cd optaplanner-examples
-$ mvn exec:java
+$ mvn test -Dtest=Drools1187Test
 ----
-
-To develop with IntelliJ IDEA, Eclipse or NetBeans, open the root `pom.xml` as a new project
-and configure a _Run/Debug configuration_ like this:
-
-* Type: Application
-* Main class: `org.optaplanner.examples.app.OptaPlannerExamplesApp`
-* VM options: `-Xmx2G -server` (memory only needed when using the big datasets in the examples)
-* Program arguments: (none)
-* Working directory: `$MODULE_DIR$` (must resolve to optaplanner-examples directory)
-* Use classpath of module: `optaplanner-examples`
-
-=== Starter issues
-
-If you're just starting out with OptaPlanner and want to contribute,
-take a look at our *starter* issues.
-They're specifically chosen to be easier for first time contributors.
-
-To view a complete list of them, go to https://issues.jboss.org/issues/?jql=[OptaPlanner's JIRA issue tracker],
-click the 'Advanced' search link in the top right and paste this query:
-
-`project = PLANNER AND status in (Open, Reopened) AND labels = starter`
-
-== Developing Drools, OptaPlanner and jBPM
-
-*If you want to build or contribute to a droolsjbpm project, https://github.com/droolsjbpm/droolsjbpm-build-bootstrap/blob/master/README.md[read this document].*
-
-*It will save you and us a lot of time by setting up your development environment correctly.*
-It solves all known pitfalls that can disrupt your development.
-It also describes all guidelines, tips and tricks.
-If you want your pull requests (or patches) to be merged into master, please respect those guidelines.

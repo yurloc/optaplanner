@@ -11,3 +11,269 @@ $ mvn clean install -DskipTests
 $ cd optaplanner-examples
 $ mvn test -Dtest=Drools1187Test
 ----
+
+----
+Running org.optaplanner.examples.nurserostering.app.Drools1187Test
+2016-05-25 20:04:29,405 [main] INFO  [o.o.e.n.p.NurseRosteringDao] Opened: data/nurserostering/unsolved/long_hint01_init01.xml
+2016-05-25 20:04:29,529 [main] TRACE [o.o.c.i.d.s.d.SolutionDescriptor]     Model annotations parsed for Solution NurseRoster:
+2016-05-25 20:04:29,529 [main] TRACE [o.o.c.i.d.s.d.SolutionDescriptor]         Entity ShiftAssignment:
+2016-05-25 20:04:29,529 [main] TRACE [o.o.c.i.d.s.d.SolutionDescriptor]             Variable employee (genuine)
+2016-05-25 20:04:30,164 [main] INFO  [o.d.c.k.b.i.KieRepositoryImpl] KieModule was added: MemoryKieModule[releaseId=org.default:artifact:1.0.0-SNAPSHOT]
+2016-05-25 20:04:30,198 [main] DEBUG [o.d.c.i.KnowledgeBaseImpl] Starting Engine in PHREAK mode
+2016-05-25 20:04:30,229 [main] TRACE [o.d.c.p.AddRemoveRule] Adding Rule insertEmployeeConsecutiveWeekendAssignmentEnd
+2016-05-25 20:04:30,275 [main] TRACE [o.d.c.r.EntryPointNode] Insert [fact 0:1:624693846:624693846:1:DEFAULT:NON_TRAIT:org.optaplanner.examples.nurserostering.domain.NurseRosterParametrization:2010-01-01 - 2010-01-28]
+2016-05-25 20:04:30,276 [main] TRACE [o.d.c.r.EntryPointNode] Insert [fact 0:2:1830969563:1830969563:2:DEFAULT:NON_TRAIT:org.optaplanner.examples.nurserostering.domain.ShiftAssignment:2010-01-16/E@403]
+2016-05-25 20:04:30,277 [main] TRACE [o.d.c.r.EntryPointNode] Insert [fact 0:3:523051393:523051393:3:DEFAULT:NON_TRAIT:org.optaplanner.examples.nurserostering.domain.ShiftAssignment:2010-01-22/L@569]
+2016-05-25 20:04:30,277 [main] TRACE [o.d.c.r.EntryPointNode] Insert [fact 0:4:1237264838:1237264838:4:DEFAULT:NON_TRAIT:org.optaplanner.examples.nurserostering.domain.ShiftAssignment:2010-01-23/E@584]
+2016-05-25 20:04:30,277 [main] TRACE [o.d.c.r.EntryPointNode] Insert [fact 0:5:2128961136:2128961136:5:DEFAULT:NON_TRAIT:org.optaplanner.examples.nurserostering.domain.ShiftAssignment:2010-01-23/L@592]
+2016-05-25 20:04:30,277 [main] TRACE [o.d.c.r.EntryPointNode] Insert [fact 0:6:1096682443:1096682443:6:DEFAULT:NON_TRAIT:org.optaplanner.examples.nurserostering.domain.contract.Contract:0]
+2016-05-25 20:04:30,277 [main] TRACE [o.d.c.r.EntryPointNode] Insert [fact 0:7:423711439:423711439:7:DEFAULT:NON_TRAIT:org.optaplanner.examples.nurserostering.domain.contract.Contract:2]
+2016-05-25 20:04:30,277 [main] TRACE [o.d.c.r.EntryPointNode] Insert [fact 0:8:1238994373:1238994373:8:DEFAULT:NON_TRAIT:org.optaplanner.examples.nurserostering.domain.Employee:6]
+2016-05-25 20:04:30,278 [main] TRACE [o.d.c.r.EntryPointNode] Insert [fact 0:9:741390111:741390111:9:DEFAULT:NON_TRAIT:org.optaplanner.examples.nurserostering.domain.Employee:14]
+2016-05-25 20:04:30,278 [main] TRACE [o.d.c.r.EntryPointNode] Insert [fact 0:10:495051009:495051009:10:DEFAULT:NON_TRAIT:org.optaplanner.examples.nurserostering.domain.Employee:41]
+2016-05-25 20:04:30,278 [main] TRACE [o.d.c.r.EntryPointNode] Insert [fact 0:11:247795540:247795540:11:DEFAULT:NON_TRAIT:org.optaplanner.examples.nurserostering.domain.ShiftDate:2010-01-16]
+2016-05-25 20:04:30,278 [main] TRACE [o.d.c.r.EntryPointNode] Insert [fact 0:12:200744172:200744172:12:DEFAULT:NON_TRAIT:org.optaplanner.examples.nurserostering.domain.ShiftDate:2010-01-22]
+2016-05-25 20:04:30,278 [main] TRACE [o.d.c.r.EntryPointNode] Insert [fact 0:13:584501954:584501954:13:DEFAULT:NON_TRAIT:org.optaplanner.examples.nurserostering.domain.ShiftDate:2010-01-23]
+2016-05-25 20:04:30,282 [main] DEBUG [o.d.c.c.DefaultAgenda] State was INACTIVE is now FIRING_ALL_RULES
+2016-05-25 20:04:30,282 [main] TRACE [o.d.c.c.DefaultAgenda] Starting Fire All Rules
+2016-05-25 20:04:30,283 [main] DEBUG [o.d.c.c.DefaultAgenda] Fire Loop
+2016-05-25 20:04:30,298 [main] TRACE [o.d.c.r.SegmentMemory] LinkNode notify=false nmask=2 smask=2 spos=-1 rules=
+2016-05-25 20:04:30,301 [main] TRACE [o.d.c.r.SegmentMemory] LinkNode notify=true nmask=1 smask=3 spos=0 rules=[RuleMem insertEmployeeConsecutiveWeekendAssignmentEnd]
+2016-05-25 20:04:30,302 [main] TRACE [o.d.c.r.PathMemory]   LinkSegment smask=1 rmask=1 name=insertEmployeeConsecutiveWeekendAssignmentEnd
+2016-05-25 20:04:30,310 [main] TRACE [o.d.c.r.PathMemory]  LinkRule name=insertEmployeeConsecutiveWeekendAssignmentEnd
+2016-05-25 20:04:30,310 [main] TRACE [o.d.c.r.PathMemory] Queue RuleAgendaItem [Activation rule=insertEmployeeConsecutiveWeekendAssignmentEnd, act#=0, salience=2, tuple=null]
+2016-05-25 20:04:30,310 [main] TRACE [o.d.c.u.BinaryHeapQueue] Queue Added 1 [Activation rule=insertEmployeeConsecutiveWeekendAssignmentEnd, act#=0, salience=2, tuple=null]
+2016-05-25 20:04:30,311 [main] TRACE [o.d.c.r.PathMemory]   LinkSegment smask=1 rmask=1 name=insertEmployeeConsecutiveWeekendAssignmentEnd
+2016-05-25 20:04:30,311 [main] TRACE [o.d.c.r.PathMemory]  LinkRule name=insertEmployeeConsecutiveWeekendAssignmentEnd
+2016-05-25 20:04:30,311 [main] TRACE [o.d.c.p.RuleNetworkEvaluator] Rule[name=insertEmployeeConsecutiveWeekendAssignmentEnd] segments=1 TupleSets[hasInsert=true, hasDelete=false, hasUpdate=false]
+2016-05-25 20:04:30,311 [main] TRACE [o.d.c.p.RuleNetworkEvaluator]      1 [NotNode(7) - [ClassObjectType class=org.optaplanner.examples.nurserostering.domain.ShiftAssignment]] TupleSets[hasInsert=true, hasDelete=false, hasUpdate=false]
+2016-05-25 20:04:30,311 [main] TRACE [o.d.c.p.RuleNetworkEvaluator]      Segment 0
+2016-05-25 20:04:30,311 [main] TRACE [o.d.c.p.RuleNetworkEvaluator]      1 [NotNode(7) - [ClassObjectType class=org.optaplanner.examples.nurserostering.domain.ShiftAssignment]] TupleSets[hasInsert=true, hasDelete=false, hasUpdate=false]
+2016-05-25 20:04:30,311 [main] TRACE [o.d.c.p.RuleNetworkEvaluator]      rightTuples TupleSets[hasInsert=true, hasDelete=false, hasUpdate=false]
+2016-05-25 20:04:30,317 [main] TRACE [o.d.c.p.RuleNetworkEvaluator]        2 [RuleTerminalNode(8): rule=insertEmployeeConsecutiveWeekendAssignmentEnd] TupleSets[hasInsert=true, hasDelete=false, hasUpdate=false]
+2016-05-25 20:04:30,317 [main] TRACE [o.d.c.p.RuleNetworkEvaluator]        Segment 0
+2016-05-25 20:04:30,317 [main] TRACE [o.d.c.p.RuleNetworkEvaluator]        2 [RuleTerminalNode(8): rule=insertEmployeeConsecutiveWeekendAssignmentEnd] TupleSets[hasInsert=true, hasDelete=false, hasUpdate=false]
+2016-05-25 20:04:30,317 [main] TRACE [o.d.c.c.DefaultAgenda] Fire "insertEmployeeConsecutiveWeekendAssignmentEnd" 
+[[ insertEmployeeConsecutiveWeekendAssignmentEnd active=false ] [ null
+[fact 0:4:1237264838:1237264838:4:DEFAULT:NON_TRAIT:org.optaplanner.examples.nurserostering.domain.ShiftAssignment:2010-01-23/E@584] ] ]
+2016-05-25 20:04:30,325 [main] TRACE [o.d.c.r.EntryPointNode] Insert [fact 0:14:2065886345:1661653627:14:DEFAULT:NON_TRAIT:org.optaplanner.examples.nurserostering.solver.drools.EmployeeConsecutiveWeekendAssignmentEnd:14 weekend ... - 23]
+2016-05-25 20:04:30,325 [main] TRACE [o.d.c.c.DefaultAgenda] Fire "insertEmployeeConsecutiveWeekendAssignmentEnd" 
+[[ insertEmployeeConsecutiveWeekendAssignmentEnd active=false ] [ null
+[fact 0:5:2128961136:2128961136:5:DEFAULT:NON_TRAIT:org.optaplanner.examples.nurserostering.domain.ShiftAssignment:2010-01-23/L@592] ] ]
+2016-05-25 20:04:30,326 [main] TRACE [o.d.c.r.EntryPointNode] Insert [fact 0:15:1274225913:-1401825159:15:DEFAULT:NON_TRAIT:org.optaplanner.examples.nurserostering.solver.drools.EmployeeConsecutiveWeekendAssignmentEnd:6 weekend ... - 23]
+2016-05-25 20:04:30,326 [main] TRACE [o.d.c.p.RuleExecutor] Removing RuleAgendaItem [Activation rule=insertEmployeeConsecutiveWeekendAssignmentEnd, act#=0, salience=2, tuple=null]
+2016-05-25 20:04:30,326 [main] TRACE [o.d.c.u.BinaryHeapQueue] Queue Removed 1 [Activation rule=insertEmployeeConsecutiveWeekendAssignmentEnd, act#=0, salience=2, tuple=null]
+2016-05-25 20:04:30,326 [main] DEBUG [o.d.c.c.DefaultAgenda] Fire Loop
+2016-05-25 20:04:30,326 [main] DEBUG [o.d.c.c.DefaultAgenda] State was FIRING_ALL_RULES is now HALTING
+2016-05-25 20:04:30,326 [main] DEBUG [o.d.c.c.DefaultAgenda] State was HALTING is now INACTIVE
+2016-05-25 20:04:30,326 [main] TRACE [o.d.c.c.DefaultAgenda] Ending Fire All Rules
+2016-05-25 20:04:30,326 [main] TRACE [o.d.c.r.EntryPointNode] Insert [fact 0:1:624693846:624693846:1:DEFAULT:NON_TRAIT:org.optaplanner.examples.nurserostering.domain.NurseRosterParametrization:2010-01-01 - 2010-01-28]
+2016-05-25 20:04:30,326 [main] TRACE [o.d.c.r.EntryPointNode] Insert [fact 0:2:1830969563:1830969563:2:DEFAULT:NON_TRAIT:org.optaplanner.examples.nurserostering.domain.ShiftAssignment:2010-01-16/E@403]
+2016-05-25 20:04:30,327 [main] TRACE [o.d.c.r.EntryPointNode] Insert [fact 0:3:523051393:523051393:3:DEFAULT:NON_TRAIT:org.optaplanner.examples.nurserostering.domain.ShiftAssignment:2010-01-22/L@569]
+2016-05-25 20:04:30,327 [main] TRACE [o.d.c.r.EntryPointNode] Insert [fact 0:4:1237264838:1237264838:4:DEFAULT:NON_TRAIT:org.optaplanner.examples.nurserostering.domain.ShiftAssignment:2010-01-23/E@584]
+2016-05-25 20:04:30,327 [main] TRACE [o.d.c.r.EntryPointNode] Insert [fact 0:5:2128961136:2128961136:5:DEFAULT:NON_TRAIT:org.optaplanner.examples.nurserostering.domain.ShiftAssignment:2010-01-23/L@592]
+2016-05-25 20:04:30,327 [main] TRACE [o.d.c.r.EntryPointNode] Insert [fact 0:6:1096682443:1096682443:6:DEFAULT:NON_TRAIT:org.optaplanner.examples.nurserostering.domain.contract.Contract:0]
+2016-05-25 20:04:30,327 [main] TRACE [o.d.c.r.EntryPointNode] Insert [fact 0:7:423711439:423711439:7:DEFAULT:NON_TRAIT:org.optaplanner.examples.nurserostering.domain.contract.Contract:2]
+2016-05-25 20:04:30,327 [main] TRACE [o.d.c.r.EntryPointNode] Insert [fact 0:8:1238994373:1238994373:8:DEFAULT:NON_TRAIT:org.optaplanner.examples.nurserostering.domain.Employee:6]
+2016-05-25 20:04:30,327 [main] TRACE [o.d.c.r.EntryPointNode] Insert [fact 0:9:741390111:741390111:9:DEFAULT:NON_TRAIT:org.optaplanner.examples.nurserostering.domain.Employee:14]
+2016-05-25 20:04:30,327 [main] TRACE [o.d.c.r.EntryPointNode] Insert [fact 0:10:495051009:495051009:10:DEFAULT:NON_TRAIT:org.optaplanner.examples.nurserostering.domain.Employee:41]
+2016-05-25 20:04:30,327 [main] TRACE [o.d.c.r.EntryPointNode] Insert [fact 0:11:247795540:247795540:11:DEFAULT:NON_TRAIT:org.optaplanner.examples.nurserostering.domain.ShiftDate:2010-01-16]
+2016-05-25 20:04:30,327 [main] TRACE [o.d.c.r.EntryPointNode] Insert [fact 0:12:200744172:200744172:12:DEFAULT:NON_TRAIT:org.optaplanner.examples.nurserostering.domain.ShiftDate:2010-01-22]
+2016-05-25 20:04:30,328 [main] TRACE [o.d.c.r.EntryPointNode] Insert [fact 0:13:584501954:584501954:13:DEFAULT:NON_TRAIT:org.optaplanner.examples.nurserostering.domain.ShiftDate:2010-01-23]
+2016-05-25 20:04:30,328 [main] DEBUG [o.d.c.c.DefaultAgenda] State was INACTIVE is now FIRING_ALL_RULES
+2016-05-25 20:04:30,328 [main] TRACE [o.d.c.c.DefaultAgenda] Starting Fire All Rules
+2016-05-25 20:04:30,328 [main] DEBUG [o.d.c.c.DefaultAgenda] Fire Loop
+2016-05-25 20:04:30,328 [main] TRACE [o.d.c.r.SegmentMemory] LinkNode notify=true nmask=1 smask=3 spos=0 rules=[RuleMem insertEmployeeConsecutiveWeekendAssignmentEnd]
+2016-05-25 20:04:30,328 [main] TRACE [o.d.c.r.PathMemory]   LinkSegment smask=1 rmask=1 name=insertEmployeeConsecutiveWeekendAssignmentEnd
+2016-05-25 20:04:30,328 [main] TRACE [o.d.c.r.PathMemory]  LinkRule name=insertEmployeeConsecutiveWeekendAssignmentEnd
+2016-05-25 20:04:30,328 [main] TRACE [o.d.c.r.PathMemory] Queue RuleAgendaItem [Activation rule=insertEmployeeConsecutiveWeekendAssignmentEnd, act#=0, salience=2, tuple=null]
+2016-05-25 20:04:30,328 [main] TRACE [o.d.c.u.BinaryHeapQueue] Queue Added 1 [Activation rule=insertEmployeeConsecutiveWeekendAssignmentEnd, act#=0, salience=2, tuple=null]
+2016-05-25 20:04:30,328 [main] TRACE [o.d.c.r.PathMemory]   LinkSegment smask=1 rmask=1 name=insertEmployeeConsecutiveWeekendAssignmentEnd
+2016-05-25 20:04:30,328 [main] TRACE [o.d.c.r.PathMemory]  LinkRule name=insertEmployeeConsecutiveWeekendAssignmentEnd
+2016-05-25 20:04:30,329 [main] TRACE [o.d.c.p.RuleNetworkEvaluator] Rule[name=insertEmployeeConsecutiveWeekendAssignmentEnd] segments=1 TupleSets[hasInsert=true, hasDelete=false, hasUpdate=false]
+2016-05-25 20:04:30,329 [main] TRACE [o.d.c.p.RuleNetworkEvaluator]      3 [NotNode(7) - [ClassObjectType class=org.optaplanner.examples.nurserostering.domain.ShiftAssignment]] TupleSets[hasInsert=true, hasDelete=false, hasUpdate=false]
+2016-05-25 20:04:30,329 [main] TRACE [o.d.c.p.RuleNetworkEvaluator]      Segment 0
+2016-05-25 20:04:30,329 [main] TRACE [o.d.c.p.RuleNetworkEvaluator]      3 [NotNode(7) - [ClassObjectType class=org.optaplanner.examples.nurserostering.domain.ShiftAssignment]] TupleSets[hasInsert=true, hasDelete=false, hasUpdate=false]
+2016-05-25 20:04:30,329 [main] TRACE [o.d.c.p.RuleNetworkEvaluator]      rightTuples TupleSets[hasInsert=true, hasDelete=false, hasUpdate=false]
+2016-05-25 20:04:30,329 [main] TRACE [o.d.c.p.RuleNetworkEvaluator]        4 [RuleTerminalNode(8): rule=insertEmployeeConsecutiveWeekendAssignmentEnd] TupleSets[hasInsert=true, hasDelete=false, hasUpdate=false]
+2016-05-25 20:04:30,329 [main] TRACE [o.d.c.p.RuleNetworkEvaluator]        Segment 0
+2016-05-25 20:04:30,329 [main] TRACE [o.d.c.p.RuleNetworkEvaluator]        4 [RuleTerminalNode(8): rule=insertEmployeeConsecutiveWeekendAssignmentEnd] TupleSets[hasInsert=true, hasDelete=false, hasUpdate=false]
+2016-05-25 20:04:30,329 [main] TRACE [o.d.c.c.DefaultAgenda] Fire "insertEmployeeConsecutiveWeekendAssignmentEnd" 
+[[ insertEmployeeConsecutiveWeekendAssignmentEnd active=false ] [ null
+[fact 0:4:1237264838:1237264838:4:DEFAULT:NON_TRAIT:org.optaplanner.examples.nurserostering.domain.ShiftAssignment:2010-01-23/E@584] ] ]
+2016-05-25 20:04:30,329 [main] TRACE [o.d.c.r.EntryPointNode] Insert [fact 0:14:212232499:1661653627:14:DEFAULT:NON_TRAIT:org.optaplanner.examples.nurserostering.solver.drools.EmployeeConsecutiveWeekendAssignmentEnd:14 weekend ... - 23]
+2016-05-25 20:04:30,329 [main] TRACE [o.d.c.c.DefaultAgenda] Fire "insertEmployeeConsecutiveWeekendAssignmentEnd" 
+[[ insertEmployeeConsecutiveWeekendAssignmentEnd active=false ] [ null
+[fact 0:5:2128961136:2128961136:5:DEFAULT:NON_TRAIT:org.optaplanner.examples.nurserostering.domain.ShiftAssignment:2010-01-23/L@592] ] ]
+2016-05-25 20:04:30,329 [main] TRACE [o.d.c.r.EntryPointNode] Insert [fact 0:15:489047267:-1401825159:15:DEFAULT:NON_TRAIT:org.optaplanner.examples.nurserostering.solver.drools.EmployeeConsecutiveWeekendAssignmentEnd:6 weekend ... - 23]
+2016-05-25 20:04:30,330 [main] TRACE [o.d.c.p.RuleExecutor] Removing RuleAgendaItem [Activation rule=insertEmployeeConsecutiveWeekendAssignmentEnd, act#=0, salience=2, tuple=null]
+2016-05-25 20:04:30,330 [main] TRACE [o.d.c.u.BinaryHeapQueue] Queue Removed 1 [Activation rule=insertEmployeeConsecutiveWeekendAssignmentEnd, act#=0, salience=2, tuple=null]
+2016-05-25 20:04:30,330 [main] DEBUG [o.d.c.c.DefaultAgenda] Fire Loop
+2016-05-25 20:04:30,330 [main] DEBUG [o.d.c.c.DefaultAgenda] State was FIRING_ALL_RULES is now HALTING
+2016-05-25 20:04:30,330 [main] DEBUG [o.d.c.c.DefaultAgenda] State was HALTING is now INACTIVE
+2016-05-25 20:04:30,330 [main] TRACE [o.d.c.c.DefaultAgenda] Ending Fire All Rules
+2016-05-25 20:04:30,330 [main] DEBUG [o.d.c.c.DefaultAgenda] State was INACTIVE is now FIRING_ALL_RULES
+2016-05-25 20:04:30,330 [main] TRACE [o.d.c.c.DefaultAgenda] Starting Fire All Rules
+2016-05-25 20:04:30,330 [main] DEBUG [o.d.c.c.DefaultAgenda] Fire Loop
+2016-05-25 20:04:30,330 [main] DEBUG [o.d.c.c.DefaultAgenda] State was FIRING_ALL_RULES is now HALTING
+2016-05-25 20:04:30,330 [main] DEBUG [o.d.c.c.DefaultAgenda] State was HALTING is now INACTIVE
+2016-05-25 20:04:30,330 [main] TRACE [o.d.c.c.DefaultAgenda] Ending Fire All Rules
+2016-05-25 20:04:30,331 [main] INFO  [o.o.c.i.s.DefaultSolver] Solving started: time spent (93), best score (0hard/0soft), environment mode (NON_INTRUSIVE_FULL_ASSERT), random (JDK with seed 0).
+2016-05-25 20:04:30,332 [main] DEBUG [o.d.c.c.DefaultAgenda] State was INACTIVE is now FIRING_ALL_RULES
+2016-05-25 20:04:30,332 [main] TRACE [o.d.c.c.DefaultAgenda] Starting Fire All Rules
+2016-05-25 20:04:30,332 [main] DEBUG [o.d.c.c.DefaultAgenda] Fire Loop
+2016-05-25 20:04:30,332 [main] DEBUG [o.d.c.c.DefaultAgenda] State was FIRING_ALL_RULES is now HALTING
+2016-05-25 20:04:30,332 [main] DEBUG [o.d.c.c.DefaultAgenda] State was HALTING is now INACTIVE
+2016-05-25 20:04:30,332 [main] TRACE [o.d.c.c.DefaultAgenda] Ending Fire All Rules
+2016-05-25 20:04:30,334 [main] TRACE [o.o.c.i.h.s.m.f.MoveListFactoryToMoveSelectorBridge]     Created cachedMoveList: size (5), moveSelector (MoveListFactory(class org.optaplanner.examples.nurserostering.solver.move.factory.ShiftAssignmentPillarPartSwapMoveFactory)).
+2016-05-25 20:04:30,336 [main] TRACE [o.d.c.r.EntryPointNode] Update [fact 0:3:523051393:523051393:16:DEFAULT:NON_TRAIT:org.optaplanner.examples.nurserostering.domain.ShiftAssignment:2010-01-22/L@569]
+2016-05-25 20:04:30,336 [main] TRACE [o.d.c.r.EntryPointNode] Update [fact 0:4:1237264838:1237264838:17:DEFAULT:NON_TRAIT:org.optaplanner.examples.nurserostering.domain.ShiftAssignment:2010-01-23/E@584]
+2016-05-25 20:04:30,336 [main] DEBUG [o.d.c.c.DefaultAgenda] State was INACTIVE is now FIRING_ALL_RULES
+2016-05-25 20:04:30,336 [main] TRACE [o.d.c.c.DefaultAgenda] Starting Fire All Rules
+2016-05-25 20:04:30,336 [main] DEBUG [o.d.c.c.DefaultAgenda] Fire Loop
+2016-05-25 20:04:30,337 [main] TRACE [o.d.c.r.PathMemory]   LinkSegment smask=1 rmask=1 name=insertEmployeeConsecutiveWeekendAssignmentEnd
+2016-05-25 20:04:30,337 [main] TRACE [o.d.c.r.PathMemory]  LinkRule name=insertEmployeeConsecutiveWeekendAssignmentEnd
+2016-05-25 20:04:30,337 [main] TRACE [o.d.c.r.PathMemory] Queue RuleAgendaItem [Activation rule=insertEmployeeConsecutiveWeekendAssignmentEnd, act#=0, salience=2, tuple=null]
+2016-05-25 20:04:30,337 [main] TRACE [o.d.c.u.BinaryHeapQueue] Queue Added 1 [Activation rule=insertEmployeeConsecutiveWeekendAssignmentEnd, act#=0, salience=2, tuple=null]
+2016-05-25 20:04:30,337 [main] TRACE [o.d.c.r.PathMemory]   LinkSegment smask=1 rmask=1 name=insertEmployeeConsecutiveWeekendAssignmentEnd
+2016-05-25 20:04:30,337 [main] TRACE [o.d.c.r.PathMemory]  LinkRule name=insertEmployeeConsecutiveWeekendAssignmentEnd
+2016-05-25 20:04:30,337 [main] TRACE [o.d.c.r.PathMemory]   LinkSegment smask=1 rmask=1 name=insertEmployeeConsecutiveWeekendAssignmentEnd
+2016-05-25 20:04:30,337 [main] TRACE [o.d.c.r.PathMemory]  LinkRule name=insertEmployeeConsecutiveWeekendAssignmentEnd
+2016-05-25 20:04:30,337 [main] TRACE [o.d.c.r.PathMemory]   LinkSegment smask=1 rmask=1 name=insertEmployeeConsecutiveWeekendAssignmentEnd
+2016-05-25 20:04:30,337 [main] TRACE [o.d.c.r.PathMemory]  LinkRule name=insertEmployeeConsecutiveWeekendAssignmentEnd
+2016-05-25 20:04:30,337 [main] TRACE [o.d.c.p.RuleNetworkEvaluator] Rule[name=insertEmployeeConsecutiveWeekendAssignmentEnd] segments=1 TupleSets[hasInsert=true, hasDelete=false, hasUpdate=true]
+2016-05-25 20:04:30,337 [main] TRACE [o.d.c.p.RuleNetworkEvaluator]      5 [NotNode(7) - [ClassObjectType class=org.optaplanner.examples.nurserostering.domain.ShiftAssignment]] TupleSets[hasInsert=true, hasDelete=false, hasUpdate=true]
+2016-05-25 20:04:30,337 [main] TRACE [o.d.c.p.RuleNetworkEvaluator]      Segment 0
+2016-05-25 20:04:30,337 [main] TRACE [o.d.c.p.RuleNetworkEvaluator]      5 [NotNode(7) - [ClassObjectType class=org.optaplanner.examples.nurserostering.domain.ShiftAssignment]] TupleSets[hasInsert=true, hasDelete=false, hasUpdate=true]
+2016-05-25 20:04:30,338 [main] TRACE [o.d.c.p.RuleNetworkEvaluator]      rightTuples TupleSets[hasInsert=true, hasDelete=false, hasUpdate=true]
+2016-05-25 20:04:30,338 [main] TRACE [o.d.c.p.RuleNetworkEvaluator]        6 [RuleTerminalNode(8): rule=insertEmployeeConsecutiveWeekendAssignmentEnd] TupleSets[hasInsert=true, hasDelete=false, hasUpdate=true]
+2016-05-25 20:04:30,338 [main] TRACE [o.d.c.p.RuleNetworkEvaluator]        Segment 0
+2016-05-25 20:04:30,338 [main] TRACE [o.d.c.p.RuleNetworkEvaluator]        6 [RuleTerminalNode(8): rule=insertEmployeeConsecutiveWeekendAssignmentEnd] TupleSets[hasInsert=true, hasDelete=false, hasUpdate=true]
+2016-05-25 20:04:30,338 [main] TRACE [o.d.c.c.DefaultAgenda] Fire "insertEmployeeConsecutiveWeekendAssignmentEnd" 
+[[ insertEmployeeConsecutiveWeekendAssignmentEnd active=false ] [ null
+[fact 0:4:1237264838:1237264838:17:DEFAULT:NON_TRAIT:org.optaplanner.examples.nurserostering.domain.ShiftAssignment:2010-01-23/E@584] ] ]
+2016-05-25 20:04:30,339 [main] TRACE [o.d.c.r.EntryPointNode] Insert [fact 0:16:843686350:1137041445:18:DEFAULT:NON_TRAIT:org.optaplanner.examples.nurserostering.solver.drools.EmployeeConsecutiveWeekendAssignmentEnd:41 weekend ... - 23]
+2016-05-25 20:04:30,340 [main] TRACE [o.d.c.r.EntryPointNode] Delete [fact 0:14:2065886345:1661653627:14:DEFAULT:NON_TRAIT:org.optaplanner.examples.nurserostering.solver.drools.EmployeeConsecutiveWeekendAssignmentEnd:14 weekend ... - 23]
+2016-05-25 20:04:30,340 [main] TRACE [o.d.c.c.DefaultAgenda] Fire "insertEmployeeConsecutiveWeekendAssignmentEnd" 
+[[ insertEmployeeConsecutiveWeekendAssignmentEnd active=false ] [ null
+[fact 0:3:523051393:523051393:16:DEFAULT:NON_TRAIT:org.optaplanner.examples.nurserostering.domain.ShiftAssignment:2010-01-22/L@569] ] ]
+2016-05-25 20:04:30,340 [main] TRACE [o.d.c.p.RuleExecutor] Removing RuleAgendaItem [Activation rule=insertEmployeeConsecutiveWeekendAssignmentEnd, act#=0, salience=2, tuple=null]
+2016-05-25 20:04:30,340 [main] TRACE [o.d.c.u.BinaryHeapQueue] Queue Removed 1 [Activation rule=insertEmployeeConsecutiveWeekendAssignmentEnd, act#=0, salience=2, tuple=null]
+2016-05-25 20:04:30,340 [main] DEBUG [o.d.c.c.DefaultAgenda] Fire Loop
+2016-05-25 20:04:30,340 [main] DEBUG [o.d.c.c.DefaultAgenda] State was FIRING_ALL_RULES is now HALTING
+2016-05-25 20:04:30,340 [main] DEBUG [o.d.c.c.DefaultAgenda] State was HALTING is now INACTIVE
+2016-05-25 20:04:30,340 [main] TRACE [o.d.c.c.DefaultAgenda] Ending Fire All Rules
+2016-05-25 20:04:30,341 [main] TRACE [o.d.c.r.EntryPointNode] Insert [fact 0:1:624693846:624693846:1:DEFAULT:NON_TRAIT:org.optaplanner.examples.nurserostering.domain.NurseRosterParametrization:2010-01-01 - 2010-01-28]
+2016-05-25 20:04:30,341 [main] TRACE [o.d.c.r.EntryPointNode] Insert [fact 0:2:1830969563:1830969563:2:DEFAULT:NON_TRAIT:org.optaplanner.examples.nurserostering.domain.ShiftAssignment:2010-01-16/E@403]
+2016-05-25 20:04:30,341 [main] TRACE [o.d.c.r.EntryPointNode] Insert [fact 0:3:523051393:523051393:3:DEFAULT:NON_TRAIT:org.optaplanner.examples.nurserostering.domain.ShiftAssignment:2010-01-22/L@569]
+2016-05-25 20:04:30,341 [main] TRACE [o.d.c.r.EntryPointNode] Insert [fact 0:4:1237264838:1237264838:4:DEFAULT:NON_TRAIT:org.optaplanner.examples.nurserostering.domain.ShiftAssignment:2010-01-23/E@584]
+2016-05-25 20:04:30,341 [main] TRACE [o.d.c.r.EntryPointNode] Insert [fact 0:5:2128961136:2128961136:5:DEFAULT:NON_TRAIT:org.optaplanner.examples.nurserostering.domain.ShiftAssignment:2010-01-23/L@592]
+2016-05-25 20:04:30,341 [main] TRACE [o.d.c.r.EntryPointNode] Insert [fact 0:6:1096682443:1096682443:6:DEFAULT:NON_TRAIT:org.optaplanner.examples.nurserostering.domain.contract.Contract:0]
+2016-05-25 20:04:30,341 [main] TRACE [o.d.c.r.EntryPointNode] Insert [fact 0:7:423711439:423711439:7:DEFAULT:NON_TRAIT:org.optaplanner.examples.nurserostering.domain.contract.Contract:2]
+2016-05-25 20:04:30,341 [main] TRACE [o.d.c.r.EntryPointNode] Insert [fact 0:8:1238994373:1238994373:8:DEFAULT:NON_TRAIT:org.optaplanner.examples.nurserostering.domain.Employee:6]
+2016-05-25 20:04:30,341 [main] TRACE [o.d.c.r.EntryPointNode] Insert [fact 0:9:741390111:741390111:9:DEFAULT:NON_TRAIT:org.optaplanner.examples.nurserostering.domain.Employee:14]
+2016-05-25 20:04:30,341 [main] TRACE [o.d.c.r.EntryPointNode] Insert [fact 0:10:495051009:495051009:10:DEFAULT:NON_TRAIT:org.optaplanner.examples.nurserostering.domain.Employee:41]
+2016-05-25 20:04:30,342 [main] TRACE [o.d.c.r.EntryPointNode] Insert [fact 0:11:247795540:247795540:11:DEFAULT:NON_TRAIT:org.optaplanner.examples.nurserostering.domain.ShiftDate:2010-01-16]
+2016-05-25 20:04:30,342 [main] TRACE [o.d.c.r.EntryPointNode] Insert [fact 0:12:200744172:200744172:12:DEFAULT:NON_TRAIT:org.optaplanner.examples.nurserostering.domain.ShiftDate:2010-01-22]
+2016-05-25 20:04:30,342 [main] TRACE [o.d.c.r.EntryPointNode] Insert [fact 0:13:584501954:584501954:13:DEFAULT:NON_TRAIT:org.optaplanner.examples.nurserostering.domain.ShiftDate:2010-01-23]
+2016-05-25 20:04:30,342 [main] DEBUG [o.d.c.c.DefaultAgenda] State was INACTIVE is now FIRING_ALL_RULES
+2016-05-25 20:04:30,342 [main] TRACE [o.d.c.c.DefaultAgenda] Starting Fire All Rules
+2016-05-25 20:04:30,342 [main] DEBUG [o.d.c.c.DefaultAgenda] Fire Loop
+2016-05-25 20:04:30,342 [main] TRACE [o.d.c.r.SegmentMemory] LinkNode notify=true nmask=1 smask=3 spos=0 rules=[RuleMem insertEmployeeConsecutiveWeekendAssignmentEnd]
+2016-05-25 20:04:30,342 [main] TRACE [o.d.c.r.PathMemory]   LinkSegment smask=1 rmask=1 name=insertEmployeeConsecutiveWeekendAssignmentEnd
+2016-05-25 20:04:30,342 [main] TRACE [o.d.c.r.PathMemory]  LinkRule name=insertEmployeeConsecutiveWeekendAssignmentEnd
+2016-05-25 20:04:30,342 [main] TRACE [o.d.c.r.PathMemory] Queue RuleAgendaItem [Activation rule=insertEmployeeConsecutiveWeekendAssignmentEnd, act#=0, salience=2, tuple=null]
+2016-05-25 20:04:30,342 [main] TRACE [o.d.c.u.BinaryHeapQueue] Queue Added 1 [Activation rule=insertEmployeeConsecutiveWeekendAssignmentEnd, act#=0, salience=2, tuple=null]
+2016-05-25 20:04:30,342 [main] TRACE [o.d.c.r.PathMemory]   LinkSegment smask=1 rmask=1 name=insertEmployeeConsecutiveWeekendAssignmentEnd
+2016-05-25 20:04:30,342 [main] TRACE [o.d.c.r.PathMemory]  LinkRule name=insertEmployeeConsecutiveWeekendAssignmentEnd
+2016-05-25 20:04:30,342 [main] TRACE [o.d.c.p.RuleNetworkEvaluator] Rule[name=insertEmployeeConsecutiveWeekendAssignmentEnd] segments=1 TupleSets[hasInsert=true, hasDelete=false, hasUpdate=false]
+2016-05-25 20:04:30,343 [main] TRACE [o.d.c.p.RuleNetworkEvaluator]      7 [NotNode(7) - [ClassObjectType class=org.optaplanner.examples.nurserostering.domain.ShiftAssignment]] TupleSets[hasInsert=true, hasDelete=false, hasUpdate=false]
+2016-05-25 20:04:30,343 [main] TRACE [o.d.c.p.RuleNetworkEvaluator]      Segment 0
+2016-05-25 20:04:30,343 [main] TRACE [o.d.c.p.RuleNetworkEvaluator]      7 [NotNode(7) - [ClassObjectType class=org.optaplanner.examples.nurserostering.domain.ShiftAssignment]] TupleSets[hasInsert=true, hasDelete=false, hasUpdate=false]
+2016-05-25 20:04:30,343 [main] TRACE [o.d.c.p.RuleNetworkEvaluator]      rightTuples TupleSets[hasInsert=true, hasDelete=false, hasUpdate=false]
+2016-05-25 20:04:30,343 [main] TRACE [o.d.c.p.RuleNetworkEvaluator]        8 [RuleTerminalNode(8): rule=insertEmployeeConsecutiveWeekendAssignmentEnd] TupleSets[hasInsert=true, hasDelete=false, hasUpdate=false]
+2016-05-25 20:04:30,343 [main] TRACE [o.d.c.p.RuleNetworkEvaluator]        Segment 0
+2016-05-25 20:04:30,343 [main] TRACE [o.d.c.p.RuleNetworkEvaluator]        8 [RuleTerminalNode(8): rule=insertEmployeeConsecutiveWeekendAssignmentEnd] TupleSets[hasInsert=true, hasDelete=false, hasUpdate=false]
+2016-05-25 20:04:30,343 [main] TRACE [o.d.c.c.DefaultAgenda] Fire "insertEmployeeConsecutiveWeekendAssignmentEnd" 
+[[ insertEmployeeConsecutiveWeekendAssignmentEnd active=false ] [ null
+[fact 0:3:523051393:523051393:3:DEFAULT:NON_TRAIT:org.optaplanner.examples.nurserostering.domain.ShiftAssignment:2010-01-22/L@569] ] ]
+2016-05-25 20:04:30,344 [main] TRACE [o.d.c.r.EntryPointNode] Insert [fact 0:14:1272115420:1137041445:14:DEFAULT:NON_TRAIT:org.optaplanner.examples.nurserostering.solver.drools.EmployeeConsecutiveWeekendAssignmentEnd:41 weekend ... - 23]
+2016-05-25 20:04:30,344 [main] TRACE [o.d.c.c.DefaultAgenda] Fire "insertEmployeeConsecutiveWeekendAssignmentEnd" 
+[[ insertEmployeeConsecutiveWeekendAssignmentEnd active=false ] [ null
+[fact 0:4:1237264838:1237264838:4:DEFAULT:NON_TRAIT:org.optaplanner.examples.nurserostering.domain.ShiftAssignment:2010-01-23/E@584] ] ]
+2016-05-25 20:04:30,344 [main] TRACE [o.d.c.c.DefaultAgenda] Fire "insertEmployeeConsecutiveWeekendAssignmentEnd" 
+[[ insertEmployeeConsecutiveWeekendAssignmentEnd active=false ] [ null
+[fact 0:5:2128961136:2128961136:5:DEFAULT:NON_TRAIT:org.optaplanner.examples.nurserostering.domain.ShiftAssignment:2010-01-23/L@592] ] ]
+2016-05-25 20:04:30,344 [main] TRACE [o.d.c.r.EntryPointNode] Insert [fact 0:15:778337881:-1401825159:15:DEFAULT:NON_TRAIT:org.optaplanner.examples.nurserostering.solver.drools.EmployeeConsecutiveWeekendAssignmentEnd:6 weekend ... - 23]
+2016-05-25 20:04:30,344 [main] TRACE [o.d.c.p.RuleExecutor] Removing RuleAgendaItem [Activation rule=insertEmployeeConsecutiveWeekendAssignmentEnd, act#=0, salience=2, tuple=null]
+2016-05-25 20:04:30,344 [main] TRACE [o.d.c.u.BinaryHeapQueue] Queue Removed 1 [Activation rule=insertEmployeeConsecutiveWeekendAssignmentEnd, act#=0, salience=2, tuple=null]
+2016-05-25 20:04:30,344 [main] DEBUG [o.d.c.c.DefaultAgenda] Fire Loop
+2016-05-25 20:04:30,344 [main] DEBUG [o.d.c.c.DefaultAgenda] State was FIRING_ALL_RULES is now HALTING
+2016-05-25 20:04:30,344 [main] DEBUG [o.d.c.c.DefaultAgenda] State was HALTING is now INACTIVE
+2016-05-25 20:04:30,344 [main] TRACE [o.d.c.c.DefaultAgenda] Ending Fire All Rules
+2016-05-25 20:04:30,345 [main] TRACE [o.d.c.r.EntryPointNode] Update [fact 0:3:523051393:523051393:19:DEFAULT:NON_TRAIT:org.optaplanner.examples.nurserostering.domain.ShiftAssignment:2010-01-22/L@569]
+2016-05-25 20:04:30,345 [main] TRACE [o.d.c.r.EntryPointNode] Update [fact 0:4:1237264838:1237264838:20:DEFAULT:NON_TRAIT:org.optaplanner.examples.nurserostering.domain.ShiftAssignment:2010-01-23/E@584]
+2016-05-25 20:04:30,345 [main] TRACE [o.o.c.i.l.d.LocalSearchDecider]         Move index (28), score (0hard/0soft), accepted (true), EmployeeMultipleChangeMove ([2010-01-22/L@569, 2010-01-23/E@584] {? -> 41}).
+2016-05-25 20:04:30,345 [main] TRACE [o.d.c.r.EntryPointNode] Update [fact 0:3:523051393:523051393:21:DEFAULT:NON_TRAIT:org.optaplanner.examples.nurserostering.domain.ShiftAssignment:2010-01-22/L@569]
+2016-05-25 20:04:30,345 [main] TRACE [o.d.c.r.EntryPointNode] Update [fact 0:4:1237264838:1237264838:22:DEFAULT:NON_TRAIT:org.optaplanner.examples.nurserostering.domain.ShiftAssignment:2010-01-23/E@584]
+2016-05-25 20:04:30,345 [main] TRACE [o.d.c.r.EntryPointNode] Update [fact 0:5:2128961136:2128961136:23:DEFAULT:NON_TRAIT:org.optaplanner.examples.nurserostering.domain.ShiftAssignment:2010-01-23/L@592]
+2016-05-25 20:04:30,345 [main] DEBUG [o.d.c.c.DefaultAgenda] State was INACTIVE is now FIRING_ALL_RULES
+2016-05-25 20:04:30,345 [main] TRACE [o.d.c.c.DefaultAgenda] Starting Fire All Rules
+2016-05-25 20:04:30,345 [main] DEBUG [o.d.c.c.DefaultAgenda] Fire Loop
+2016-05-25 20:04:30,345 [main] TRACE [o.d.c.r.PathMemory]   LinkSegment smask=1 rmask=1 name=insertEmployeeConsecutiveWeekendAssignmentEnd
+2016-05-25 20:04:30,345 [main] TRACE [o.d.c.r.PathMemory]  LinkRule name=insertEmployeeConsecutiveWeekendAssignmentEnd
+2016-05-25 20:04:30,346 [main] TRACE [o.d.c.r.PathMemory] Queue RuleAgendaItem [Activation rule=insertEmployeeConsecutiveWeekendAssignmentEnd, act#=0, salience=2, tuple=null]
+2016-05-25 20:04:30,346 [main] TRACE [o.d.c.u.BinaryHeapQueue] Queue Added 1 [Activation rule=insertEmployeeConsecutiveWeekendAssignmentEnd, act#=0, salience=2, tuple=null]
+2016-05-25 20:04:30,346 [main] TRACE [o.d.c.r.PathMemory]   LinkSegment smask=1 rmask=1 name=insertEmployeeConsecutiveWeekendAssignmentEnd
+2016-05-25 20:04:30,346 [main] TRACE [o.d.c.r.PathMemory]  LinkRule name=insertEmployeeConsecutiveWeekendAssignmentEnd
+2016-05-25 20:04:30,346 [main] TRACE [o.d.c.r.PathMemory]   LinkSegment smask=1 rmask=1 name=insertEmployeeConsecutiveWeekendAssignmentEnd
+2016-05-25 20:04:30,347 [main] TRACE [o.d.c.r.PathMemory]  LinkRule name=insertEmployeeConsecutiveWeekendAssignmentEnd
+2016-05-25 20:04:30,347 [main] TRACE [o.d.c.r.PathMemory]   LinkSegment smask=1 rmask=1 name=insertEmployeeConsecutiveWeekendAssignmentEnd
+2016-05-25 20:04:30,347 [main] TRACE [o.d.c.r.PathMemory]  LinkRule name=insertEmployeeConsecutiveWeekendAssignmentEnd
+2016-05-25 20:04:30,347 [main] TRACE [o.d.c.p.RuleNetworkEvaluator] Rule[name=insertEmployeeConsecutiveWeekendAssignmentEnd] segments=1 TupleSets[hasInsert=false, hasDelete=true, hasUpdate=true]
+2016-05-25 20:04:30,347 [main] TRACE [o.d.c.p.RuleNetworkEvaluator]      9 [NotNode(7) - [ClassObjectType class=org.optaplanner.examples.nurserostering.domain.ShiftAssignment]] TupleSets[hasInsert=false, hasDelete=true, hasUpdate=true]
+2016-05-25 20:04:30,347 [main] TRACE [o.d.c.p.RuleNetworkEvaluator]      Segment 0
+2016-05-25 20:04:30,347 [main] TRACE [o.d.c.p.RuleNetworkEvaluator]      9 [NotNode(7) - [ClassObjectType class=org.optaplanner.examples.nurserostering.domain.ShiftAssignment]] TupleSets[hasInsert=false, hasDelete=true, hasUpdate=true]
+2016-05-25 20:04:30,347 [main] TRACE [o.d.c.p.RuleNetworkEvaluator]      rightTuples TupleSets[hasInsert=false, hasDelete=true, hasUpdate=true]
+2016-05-25 20:04:30,356 [main] DEBUG [o.d.c.c.DefaultAgenda] State was FIRING_ALL_RULES is now INACTIVE
+2016-05-25 20:04:30,356 [main] TRACE [o.o.c.i.l.d.LocalSearchDecider]         Move index (29), score (null), accepted (null), CompositeMove ([[2010-01-22/L@569, 2010-01-23/E@584] {? -> 6}, [2010-01-23/L@592] {? -> 14}]).
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 1.352 sec <<< FAILURE! - in org.optaplanner.examples.nurserostering.app.Drools1187Test
+test1(org.optaplanner.examples.nurserostering.app.Drools1187Test)  Time elapsed: 1.351 sec  <<< ERROR!
+java.lang.NullPointerException: null
+	at org.drools.core.phreak.RuleNetworkEvaluator.deleteChildLeftTuple(RuleNetworkEvaluator.java:725)
+	at org.drools.core.phreak.RuleNetworkEvaluator.unlinkAndDeleteChildLeftTuple(RuleNetworkEvaluator.java:718)
+	at org.drools.core.phreak.PhreakNotNode.doRightUpdates(PhreakNotNode.java:353)
+	at org.drools.core.phreak.PhreakNotNode.doNode(PhreakNotNode.java:73)
+	at org.drools.core.phreak.RuleNetworkEvaluator.switchOnDoBetaNode(RuleNetworkEvaluator.java:524)
+	at org.drools.core.phreak.RuleNetworkEvaluator.evalBetaNode(RuleNetworkEvaluator.java:505)
+	at org.drools.core.phreak.RuleNetworkEvaluator.evalNode(RuleNetworkEvaluator.java:341)
+	at org.drools.core.phreak.RuleNetworkEvaluator.innerEval(RuleNetworkEvaluator.java:301)
+	at org.drools.core.phreak.RuleNetworkEvaluator.outerEval(RuleNetworkEvaluator.java:136)
+	at org.drools.core.phreak.RuleNetworkEvaluator.evaluateNetwork(RuleNetworkEvaluator.java:94)
+	at org.drools.core.phreak.RuleExecutor.reEvaluateNetwork(RuleExecutor.java:194)
+	at org.drools.core.phreak.RuleExecutor.evaluateNetworkAndFire(RuleExecutor.java:73)
+	at org.drools.core.common.DefaultAgenda.fireNextItem(DefaultAgenda.java:1007)
+	at org.drools.core.common.DefaultAgenda.fireLoop(DefaultAgenda.java:1350)
+	at org.drools.core.common.DefaultAgenda.fireAllRules(DefaultAgenda.java:1288)
+	at org.drools.core.impl.StatefulKnowledgeSessionImpl.internalFireAllRules(StatefulKnowledgeSessionImpl.java:1333)
+	at org.drools.core.impl.StatefulKnowledgeSessionImpl.fireAllRules(StatefulKnowledgeSessionImpl.java:1324)
+	at org.drools.core.impl.StatefulKnowledgeSessionImpl.fireAllRules(StatefulKnowledgeSessionImpl.java:1305)
+	at org.optaplanner.core.impl.score.director.drools.DroolsScoreDirector.calculateScore(DroolsScoreDirector.java:86)
+	at org.optaplanner.core.impl.solver.scope.DefaultSolverScope.calculateScore(DefaultSolverScope.java:110)
+	at org.optaplanner.core.impl.phase.scope.AbstractPhaseScope.calculateScore(AbstractPhaseScope.java:159)
+	at org.optaplanner.core.impl.localsearch.decider.LocalSearchDecider.processMove(LocalSearchDecider.java:176)
+	at org.optaplanner.core.impl.localsearch.decider.LocalSearchDecider.doMove(LocalSearchDecider.java:155)
+	at org.optaplanner.core.impl.localsearch.decider.LocalSearchDecider.decideNextStep(LocalSearchDecider.java:126)
+	at org.optaplanner.core.impl.localsearch.DefaultLocalSearchPhase.solve(DefaultLocalSearchPhase.java:63)
+	at org.optaplanner.core.impl.solver.DefaultSolver.runPhases(DefaultSolver.java:229)
+	at org.optaplanner.core.impl.solver.DefaultSolver.solve(DefaultSolver.java:191)
+	at org.optaplanner.examples.nurserostering.app.Drools1187Test.test1(Drools1187Test.java:34)
+
+
+Results :
+
+Tests in error: 
+  Drools1187Test.test1:34 » NullPointer
+
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0
+----

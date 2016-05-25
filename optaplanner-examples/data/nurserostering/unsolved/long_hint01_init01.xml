@@ -1221,42 +1221,6 @@
       <indexInShift>4</indexInShift>
       <employee reference="136"/>
     </ShiftAssignment>
-    <ShiftAssignment id="1002">
-      <id>404</id>
-      <shift reference="512"/>
-      <indexInShift>5</indexInShift>
-      <employee reference="141"/>
-    </ShiftAssignment>
-    <ShiftAssignment id="1003">
-      <id>405</id>
-      <shift reference="513"/>
-      <indexInShift>0</indexInShift>
-      <employee reference="146"/>
-    </ShiftAssignment>
-    <ShiftAssignment id="1004">
-      <id>406</id>
-      <shift reference="513"/>
-      <indexInShift>1</indexInShift>
-      <employee reference="151"/>
-    </ShiftAssignment>
-    <ShiftAssignment id="1069">
-      <id>471</id>
-      <shift reference="533"/>
-      <indexInShift>3</indexInShift>
-      <employee reference="216"/>
-    </ShiftAssignment>
-    <ShiftAssignment id="1070">
-      <id>472</id>
-      <shift reference="533"/>
-      <indexInShift>4</indexInShift>
-      <employee reference="221"/>
-    </ShiftAssignment>
-    <ShiftAssignment id="1091">
-      <id>493</id>
-      <shift reference="536"/>
-      <indexInShift>4</indexInShift>
-      <employee reference="291"/>
-    </ShiftAssignment>
     <ShiftAssignment id="1167">
       <id>569</id>
       <shift reference="555"/>

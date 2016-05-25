@@ -7097,60 +7097,6 @@
       <indexInShift>3</indexInShift>
       <employee reference="281"/>
     </ShiftAssignment>
-    <ShiftAssignment id="1329">
-      <id>731</id>
-      <shift reference="19"/>
-      <indexInShift>4</indexInShift>
-      <employee reference="286"/>
-    </ShiftAssignment>
-    <ShiftAssignment id="1330">
-      <id>732</id>
-      <shift reference="20"/>
-      <indexInShift>0</indexInShift>
-      <employee reference="331"/>
-    </ShiftAssignment>
-    <ShiftAssignment id="1331">
-      <id>733</id>
-      <shift reference="20"/>
-      <indexInShift>1</indexInShift>
-      <employee reference="116"/>
-    </ShiftAssignment>
-    <ShiftAssignment id="1332">
-      <id>734</id>
-      <shift reference="20"/>
-      <indexInShift>2</indexInShift>
-      <employee reference="121"/>
-    </ShiftAssignment>
-    <ShiftAssignment id="1333">
-      <id>735</id>
-      <shift reference="20"/>
-      <indexInShift>3</indexInShift>
-      <employee reference="126"/>
-    </ShiftAssignment>
-    <ShiftAssignment id="1334">
-      <id>736</id>
-      <shift reference="20"/>
-      <indexInShift>4</indexInShift>
-      <employee reference="131"/>
-    </ShiftAssignment>
-    <ShiftAssignment id="1335">
-      <id>737</id>
-      <shift reference="20"/>
-      <indexInShift>5</indexInShift>
-      <employee reference="136"/>
-    </ShiftAssignment>
-    <ShiftAssignment id="1336">
-      <id>738</id>
-      <shift reference="21"/>
-      <indexInShift>0</indexInShift>
-      <employee reference="106"/>
-    </ShiftAssignment>
-    <ShiftAssignment id="1337">
-      <id>739</id>
-      <shift reference="21"/>
-      <indexInShift>1</indexInShift>
-      <employee reference="261"/>
-    </ShiftAssignment>
   </shiftAssignmentList>
   <score id="1338">0hard/-180soft</score>
 </NurseRoster>

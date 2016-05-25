@@ -154,8 +154,9 @@ public class LocalSearchDecider<Solution_> {
         try {
             processMove(moveScope);
         } catch (Exception e) {
-            logger.trace("        Move index ({}), score ({}), accepted ({}), move ({}).",
+            logger.trace("        Move index ({}), score ({}), accepted ({}), {} ({}).",
                          moveScope.getMoveIndex(), moveScope.getScore(), moveScope.getAccepted(),
+                         moveScope.getMove().getClass().getSimpleName(),
                          moveScope.getMove());
             throw e;
         }
@@ -165,8 +166,9 @@ public class LocalSearchDecider<Solution_> {
             LocalSearchPhaseScope<Solution_> phaseScope = moveScope.getStepScope().getPhaseScope();
             phaseScope.assertExpectedUndoMoveScore(move, undoMove, phaseScope.getLastCompletedStepScope().getScore());
         }
-        logger.trace("        Move index ({}), score ({}), accepted ({}), move ({}).",
+        logger.trace("        Move index ({}), score ({}), accepted ({}), {} ({}).",
                 moveScope.getMoveIndex(), moveScope.getScore(), moveScope.getAccepted(),
+                moveScope.getMove().getClass().getSimpleName(),
                 moveScope.getMove());
     }
 

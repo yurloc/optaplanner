@@ -3113,24 +3113,6 @@
       <indexInShift>3</indexInShift>
       <employee reference="111"/>
     </ShiftAssignment>
-    <ShiftAssignment id="1186">
-      <id>588</id>
-      <shift reference="561"/>
-      <indexInShift>4</indexInShift>
-      <employee reference="116"/>
-    </ShiftAssignment>
-    <ShiftAssignment id="1187">
-      <id>589</id>
-      <shift reference="561"/>
-      <indexInShift>5</indexInShift>
-      <employee reference="121"/>
-    </ShiftAssignment>
-    <ShiftAssignment id="1188">
-      <id>590</id>
-      <shift reference="562"/>
-      <indexInShift>0</indexInShift>
-      <employee reference="126"/>
-    </ShiftAssignment>
     <ShiftAssignment id="1190">
       <id>592</id>
       <shift reference="562"/>

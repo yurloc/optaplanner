@@ -2711,24 +2711,6 @@
   <shiftOffRequestList id="596"/>
   <shiftOnRequestList class="empty-list"/>
   <shiftAssignmentList id="597">
-    <ShiftAssignment id="661">
-      <id>63</id>
-      <shift reference="423"/>
-      <indexInShift>2</indexInShift>
-      <employee reference="196"/>
-    </ShiftAssignment>
-    <ShiftAssignment id="662">
-      <id>64</id>
-      <shift reference="424"/>
-      <indexInShift>0</indexInShift>
-      <employee reference="156"/>
-    </ShiftAssignment>
-    <ShiftAssignment id="663">
-      <id>65</id>
-      <shift reference="424"/>
-      <indexInShift>1</indexInShift>
-      <employee reference="161"/>
-    </ShiftAssignment>
     <ShiftAssignment id="664">
       <id>66</id>
       <shift reference="424"/>
@@ -3292,18 +3274,6 @@
       <shift reference="563"/>
       <indexInShift>2</indexInShift>
       <employee reference="201"/>
-    </ShiftAssignment>
-    <ShiftAssignment id="1197">
-      <id>599</id>
-      <shift reference="564"/>
-      <indexInShift>0</indexInShift>
-      <employee reference="161"/>
-    </ShiftAssignment>
-    <ShiftAssignment id="1198">
-      <id>600</id>
-      <shift reference="564"/>
-      <indexInShift>1</indexInShift>
-      <employee reference="166"/>
     </ShiftAssignment>
   </shiftAssignmentList>
   <score id="1338">0hard/-180soft</score>

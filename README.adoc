@@ -15,6 +15,8 @@ $ cd optaplanner-examples
 $ mvn test -Dtest=Drools1187Test
 ----
 
+With the current Drools snapshot, the output will be following:
+
 ----
 Running org.optaplanner.examples.nurserostering.app.Drools1187Test
 2016-05-25 20:04:29,405 [main] INFO  [o.o.e.n.p.NurseRosteringDao] Opened: data/nurserostering/unsolved/long_hint01_init01.xml

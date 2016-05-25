@@ -999,120 +999,6 @@
           <index>75</index>
           <requiredEmployeeSize>6</requiredEmployeeSize>
         </Shift>
-        <Shift id="513">
-          <id>76</id>
-          <shiftDate reference="510"/>
-          <shiftType reference="8"/>
-          <index>76</index>
-          <requiredEmployeeSize>6</requiredEmployeeSize>
-        </Shift>
-        <Shift id="514">
-          <id>77</id>
-          <shiftDate reference="510"/>
-          <shiftType reference="10"/>
-          <index>77</index>
-          <requiredEmployeeSize>3</requiredEmployeeSize>
-        </Shift>
-        <Shift id="515">
-          <id>78</id>
-          <shiftDate reference="510"/>
-          <shiftType reference="12"/>
-          <index>78</index>
-          <requiredEmployeeSize>4</requiredEmployeeSize>
-        </Shift>
-        <Shift id="516">
-          <id>79</id>
-          <shiftDate reference="510"/>
-          <shiftType reference="14"/>
-          <index>79</index>
-          <requiredEmployeeSize>1</requiredEmployeeSize>
-        </Shift>
-      </shiftList>
-    </ShiftDate>
-    <ShiftDate id="524">
-      <id>17</id>
-      <dayIndex>17</dayIndex>
-      <dateString>2010-01-18</dateString>
-      <dayOfWeek>MONDAY</dayOfWeek>
-      <shiftList id="525">
-        <Shift id="526">
-          <id>85</id>
-          <shiftDate reference="524"/>
-          <shiftType reference="6"/>
-          <index>85</index>
-          <requiredEmployeeSize>8</requiredEmployeeSize>
-        </Shift>
-        <Shift id="527">
-          <id>86</id>
-          <shiftDate reference="524"/>
-          <shiftType reference="8"/>
-          <index>86</index>
-          <requiredEmployeeSize>8</requiredEmployeeSize>
-        </Shift>
-        <Shift id="528">
-          <id>87</id>
-          <shiftDate reference="524"/>
-          <shiftType reference="10"/>
-          <index>87</index>
-          <requiredEmployeeSize>5</requiredEmployeeSize>
-        </Shift>
-        <Shift id="529">
-          <id>88</id>
-          <shiftDate reference="524"/>
-          <shiftType reference="12"/>
-          <index>88</index>
-          <requiredEmployeeSize>6</requiredEmployeeSize>
-        </Shift>
-        <Shift id="530">
-          <id>89</id>
-          <shiftDate reference="524"/>
-          <shiftType reference="14"/>
-          <index>89</index>
-          <requiredEmployeeSize>2</requiredEmployeeSize>
-        </Shift>
-      </shiftList>
-    </ShiftDate>
-    <ShiftDate id="531">
-      <id>18</id>
-      <dayIndex>18</dayIndex>
-      <dateString>2010-01-19</dateString>
-      <dayOfWeek>TUESDAY</dayOfWeek>
-      <shiftList id="532">
-        <Shift id="533">
-          <id>90</id>
-          <shiftDate reference="531"/>
-          <shiftType reference="6"/>
-          <index>90</index>
-          <requiredEmployeeSize>8</requiredEmployeeSize>
-        </Shift>
-        <Shift id="534">
-          <id>91</id>
-          <shiftDate reference="531"/>
-          <shiftType reference="8"/>
-          <index>91</index>
-          <requiredEmployeeSize>8</requiredEmployeeSize>
-        </Shift>
-        <Shift id="535">
-          <id>92</id>
-          <shiftDate reference="531"/>
-          <shiftType reference="10"/>
-          <index>92</index>
-          <requiredEmployeeSize>5</requiredEmployeeSize>
-        </Shift>
-        <Shift id="536">
-          <id>93</id>
-          <shiftDate reference="531"/>
-          <shiftType reference="12"/>
-          <index>93</index>
-          <requiredEmployeeSize>6</requiredEmployeeSize>
-        </Shift>
-        <Shift id="537">
-          <id>94</id>
-          <shiftDate reference="531"/>
-          <shiftType reference="14"/>
-          <index>94</index>
-          <requiredEmployeeSize>2</requiredEmployeeSize>
-        </Shift>
       </shiftList>
     </ShiftDate>
     <ShiftDate id="552">
@@ -1135,27 +1021,6 @@
           <index>106</index>
           <requiredEmployeeSize>8</requiredEmployeeSize>
         </Shift>
-        <Shift id="556">
-          <id>107</id>
-          <shiftDate reference="552"/>
-          <shiftType reference="10"/>
-          <index>107</index>
-          <requiredEmployeeSize>5</requiredEmployeeSize>
-        </Shift>
-        <Shift id="557">
-          <id>108</id>
-          <shiftDate reference="552"/>
-          <shiftType reference="12"/>
-          <index>108</index>
-          <requiredEmployeeSize>6</requiredEmployeeSize>
-        </Shift>
-        <Shift id="558">
-          <id>109</id>
-          <shiftDate reference="552"/>
-          <shiftType reference="14"/>
-          <index>109</index>
-          <requiredEmployeeSize>2</requiredEmployeeSize>
-        </Shift>
       </shiftList>
     </ShiftDate>
     <ShiftDate id="559">
@@ -1177,27 +1042,6 @@
           <shiftType reference="8"/>
           <index>111</index>
           <requiredEmployeeSize>6</requiredEmployeeSize>
-        </Shift>
-        <Shift id="563">
-          <id>112</id>
-          <shiftDate reference="559"/>
-          <shiftType reference="10"/>
-          <index>112</index>
-          <requiredEmployeeSize>3</requiredEmployeeSize>
-        </Shift>
-        <Shift id="564">
-          <id>113</id>
-          <shiftDate reference="559"/>
-          <shiftType reference="12"/>
-          <index>113</index>
-          <requiredEmployeeSize>4</requiredEmployeeSize>
-        </Shift>
-        <Shift id="565">
-          <id>114</id>
-          <shiftDate reference="559"/>
-          <shiftType reference="14"/>
-          <index>114</index>
-          <requiredEmployeeSize>1</requiredEmployeeSize>
         </Shift>
       </shiftList>
     </ShiftDate>

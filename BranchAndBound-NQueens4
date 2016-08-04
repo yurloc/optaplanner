@@ -17,7 +17,7 @@ The three letters at the end of each line represent algorithm configuration. The
 - ValueSorterManner (N=none, I=increasing strength, D=decreasing strength)
 
 "==" indicates that the step sequence is identical with another configuration. In the 4-NQueens example, ScoreFirst
-always behaves as some other configuration, most often as OptimisticBoundFirst.
+always behaves as DepthFirst.
 
 Please note that this record was taken before the fix for PLANNER-622 so there are some extra steps that shouldn't
 be made if nodes with OB equal to GPB were pruned away.
@@ -34,17 +34,17 @@ be made if nodes with OB equal to GPB were pruned away.
 ---- --0- --1- --2- --3- -20- -30- -31- -02- -03- -13- -00- -10- -01- -11- -21- -12- -22- -32- -23- -33- -203 -302 -031 -130 1302 BDN
 ---- --2- --1- --3- --0- -02- -31- -13- -03- -20- -30- -22- -12- -32- -21- -11- -01- -23- -33- -10- -00- -130 -031 -203 -302 2031 BDD
 ---- --0- --3- --1- --2- -30- -20- -03- -13- -31- -02- -00- -10- -33- -23- -01- -11- -21- -32- -12- -22- -302 -203 -031 -130 1302 BDI
----- 0--- 02-- 03-- 031- 1--- 13-- 130- 2--- 3--- 1302 SNN == PNN
+---- 0--- 02-- 020- 021- 023- 03-- 031- 00-- 01-- 1--- 13-- 130- 2--- 3--- 1302 SNN == DNN
 ---- 2--- 20-- 203- 1--- 3--- 0--- 2031 SND == DND
----- 0--- 03-- 031- 02-- 3--- 30-- 302- 31-- 1--- 13-- 130- 2--- 1302 SNI == PNI
----- --0- -20- -203 -30- -302 --1- --2- --3- 1302 SDN == PDN
----- --2- -02- --1- -31- --3- -13- -130 -03- -031 --0- 2031 SDD
+---- 0--- 03-- 031- 030- 033- 02-- 00-- 01-- 3--- 30-- 302- 31-- 1--- 13-- 130- 2--- 1302 SNI == DNI
+---- --0- -20- -203 -201 -202 -30- -302 --1- --2- --3- 1302 SDN == DDN
+---- --2- -02- -021 -023 -020 -22- -12- -32- --1- -31- --3- -13- -130 -03- -031 --0- 2031 SDD == DDD
 ---- --0- -30- -302 -20- --3- --1- --2- 1302 SDI == DDI
 ---- 0--- 02-- 03-- 031- 1--- 13-- 130- 2--- 3--- 1302 PNN
 ---- 2--- 20-- 203- 1--- 3--- 0--- 2031 PND == DND
 ---- 0--- 03-- 031- 02-- 3--- 30-- 302- 31-- 1--- 13-- 130- 2--- 1302 PNI
 ---- --0- -20- -203 -30- -302 --1- --2- --3- 1302 PDN
----- --2- -02- --1- -31- --3- -13- -130 -03- -031 --0- 2031 PDD == SDD
+---- --2- -02- --1- -31- --3- -13- -130 -03- -031 --0- 2031 PDD
 ---- --0- -30- -302 -20- --3- --1- --2- 1302 PDI == DDI
 ---- 0--- 00-- 000- 001- 002- 003- 01-- 02-- 03-- 031- 1--- 13-- 130- 2--- 3--- 1302 ONN
 ---- 2--- 22-- 222- 221- 223- 220- 21-- 213- 23-- 20-- 203- 1--- 3--- 0--- 2031 OND

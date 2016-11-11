@@ -44,6 +44,7 @@ import org.optaplanner.core.impl.heuristic.selector.entity.FromSolutionEntitySel
 import org.optaplanner.core.impl.heuristic.selector.entity.decorator.CachingEntitySelector;
 import org.optaplanner.core.impl.heuristic.selector.entity.decorator.FilteringEntitySelector;
 import org.optaplanner.core.impl.heuristic.selector.entity.decorator.ProbabilityEntitySelector;
+import org.optaplanner.core.impl.heuristic.selector.entity.decorator.RandomSelectionSelectedCountLimitEntitySelector;
 import org.optaplanner.core.impl.heuristic.selector.entity.decorator.SelectedCountLimitEntitySelector;
 import org.optaplanner.core.impl.heuristic.selector.entity.decorator.ShufflingEntitySelector;
 import org.optaplanner.core.impl.heuristic.selector.entity.decorator.SortingEntitySelector;
@@ -514,8 +515,9 @@ public class EntitySelectorConfig extends SelectorConfig<EntitySelectorConfig> {
             SelectionCacheType resolvedCacheType, SelectionOrder resolvedSelectionOrder,
             EntitySelector entitySelector) {
         if (selectedCountLimit != null) {
-            entitySelector = new SelectedCountLimitEntitySelector(entitySelector,
-                    resolvedSelectionOrder.toRandomSelectionBoolean(), selectedCountLimit);
+            entitySelector = resolvedSelectionOrder.toRandomSelectionBoolean()
+                    ? new RandomSelectionSelectedCountLimitEntitySelector(entitySelector, selectedCountLimit)
+                    : new SelectedCountLimitEntitySelector(entitySelector, selectedCountLimit);
         }
         return entitySelector;
     }

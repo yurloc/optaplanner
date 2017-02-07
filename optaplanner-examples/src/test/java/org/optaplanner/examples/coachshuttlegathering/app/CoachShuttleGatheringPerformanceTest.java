@@ -40,7 +40,7 @@ public class CoachShuttleGatheringPerformanceTest extends SolverPerformanceTest 
     // Tests
     // ************************************************************************
 
-    @Test(timeout = 600000)
+    // @Test(timeout = 600000)
     public void solveDemo01() {
         File unsolvedDataFile = new File("data/coachshuttlegathering/unsolved/demo01.xml");
         runSpeedTest(unsolvedDataFile, "0hard/-389030soft");
@@ -49,7 +49,7 @@ public class CoachShuttleGatheringPerformanceTest extends SolverPerformanceTest 
     @Test(timeout = 600000)
     public void solveDemo01FastAssert() {
         File unsolvedDataFile = new File("data/coachshuttlegathering/unsolved/demo01.xml");
-        runSpeedTest(unsolvedDataFile, "0hard/-389030soft", EnvironmentMode.FAST_ASSERT);
+        runSpeedTest(unsolvedDataFile, "0hard/-3soft", EnvironmentMode.FAST_ASSERT);
     }
 
 }

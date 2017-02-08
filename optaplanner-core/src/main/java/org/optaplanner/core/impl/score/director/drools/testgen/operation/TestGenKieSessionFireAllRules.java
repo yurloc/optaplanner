@@ -23,9 +23,15 @@ public class TestGenKieSessionFireAllRules implements TestGenKieSessionOperation
 
     private static final Logger logger = LoggerFactory.getLogger(TestGenKieSessionFireAllRules.class);
     private final int id;
+    private final boolean assertFire;
 
-    public TestGenKieSessionFireAllRules(int id) {
+    public TestGenKieSessionFireAllRules(int id, boolean assertFire) {
         this.id = id;
+        this.assertFire = assertFire;
+    }
+
+    public boolean isAssertFire() {
+        return assertFire;
     }
 
     @Override

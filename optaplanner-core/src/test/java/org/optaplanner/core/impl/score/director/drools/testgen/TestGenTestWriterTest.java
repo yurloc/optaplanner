@@ -58,7 +58,7 @@ public class TestGenTestWriterTest {
         VariableDescriptor<TestdataSolution> variableDescriptor = TestdataSolution.buildSolutionDescriptor()
                 .getEntityDescriptorStrict(TestdataEntity.class)
                 .getVariableDescriptor("value");
-        journal.update(entity, null, variableDescriptor);
+        journal.update(entity, variableDescriptor);
         journal.delete(value);
         journal.fireAllRules();
 

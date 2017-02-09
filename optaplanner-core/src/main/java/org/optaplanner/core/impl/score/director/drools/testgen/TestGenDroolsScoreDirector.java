@@ -16,8 +16,11 @@
 package org.optaplanner.core.impl.score.director.drools.testgen;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 import org.kie.api.runtime.KieSession;
 import org.optaplanner.core.api.score.Score;
@@ -39,7 +42,7 @@ public class TestGenDroolsScoreDirector<Solution_> extends DroolsScoreDirector<S
     private final TestGenKieSessionJournal journal = new TestGenKieSessionJournal();
     private final File testFile = new File(TEST_CLASS_NAME + ".java");
     private final TestGenTestWriter writer = new TestGenTestWriter();
-    private Object oldValue;
+    private final Queue<Object> oldValues = new LinkedList<>();
 
     public TestGenDroolsScoreDirector(
             DroolsScoreDirectorFactory<Solution_> scoreDirectorFactory,
@@ -161,14 +164,30 @@ public class TestGenDroolsScoreDirector<Solution_> extends DroolsScoreDirector<S
 
     @Override
     public void beforeVariableChanged(VariableDescriptor variableDescriptor, Object entity) {
+        if (logger.isTraceEnabled()) {
+            Object oldValue = variableDescriptor.getValue(entity);
+            if (List.class.isAssignableFrom(variableDescriptor.getVariablePropertyType())) {
+                oldValues.add(new ArrayList<>((List<?>) oldValue));
+            } else {
+                oldValues.add(oldValue);
+            }
+        }
         super.beforeVariableChanged(variableDescriptor, entity);
-        oldValue = variableDescriptor.getValue(entity);
     }
 
     @Override
     public void afterVariableChanged(VariableDescriptor variableDescriptor, Object entity) {
-        journal.update(entity, oldValue, variableDescriptor);
         super.afterVariableChanged(variableDescriptor, entity);
+        journal.update(entity, variableDescriptor);
+
+        if (logger.isTraceEnabled()) {
+            logger.trace("          Updating variable {}.{}[{}]: {} → {}",
+                    entity,
+                    variableDescriptor.getVariableName(),
+                    variableDescriptor.getVariablePropertyType().getSimpleName(),
+                    oldValues.remove(),
+                    variableDescriptor.getValue(entity));
+        }
     }
 
     @Override

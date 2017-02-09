@@ -109,7 +109,7 @@ public class TestGenKieSessionJournal {
         updateJournal.add(new TestGenKieSessionInsert(operationId++, existingInstances.get(fact)));
     }
 
-    public void update(Object entity, Object oldValue, VariableDescriptor<?> variableDescriptor) {
+    public void update(Object entity, VariableDescriptor<?> variableDescriptor) {
         TestGenFact entityFact = existingInstances.get(entity);
         if (entityFact == null) {
             throw new IllegalStateException("The entity (" + entity.getClass().getSimpleName()
@@ -120,14 +120,6 @@ public class TestGenKieSessionJournal {
         if (valueFact == null) {
             // shadow variable
             valueFact = new TestGenInlineValue(value, existingInstances);
-        }
-        if (logger.isTraceEnabled()) {
-            logger.trace("          Updating variable {}.{}[{}]: {} → {}",
-                    entity,
-                    variableDescriptor.getVariableName(),
-                    variableDescriptor.getVariablePropertyType().getSimpleName(),
-                    oldValue,
-                    value);
         }
         updateJournal.add(new TestGenKieSessionUpdate(operationId++, entityFact, variableDescriptor, valueFact));
     }

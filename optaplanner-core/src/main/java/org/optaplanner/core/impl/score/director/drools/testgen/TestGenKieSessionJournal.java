@@ -85,7 +85,7 @@ public class TestGenKieSessionJournal {
     public void addFacts(Collection<Object> workingFacts) {
         int i = 0;
         for (Object instance : workingFacts) {
-            logger.debug("Working fact added: {}[{}]", instance.getClass().getSimpleName(), instance);
+            logger.trace("        Working fact added: {}[{}]", instance.getClass().getSimpleName(), instance);
             TestGenFact fact = new TestGenValueFact(i++, instance);
             facts.add(fact);
             existingInstances.put(instance, fact);
@@ -109,7 +109,7 @@ public class TestGenKieSessionJournal {
         updateJournal.add(new TestGenKieSessionInsert(operationId++, existingInstances.get(fact)));
     }
 
-    public void update(Object entity, VariableDescriptor<?> variableDescriptor) {
+    public void update(Object entity, Object oldValue, VariableDescriptor<?> variableDescriptor) {
         TestGenFact entityFact = existingInstances.get(entity);
         if (entityFact == null) {
             throw new IllegalStateException("The entity (" + entity.getClass().getSimpleName()
@@ -119,12 +119,15 @@ public class TestGenKieSessionJournal {
         TestGenFact valueFact = value == null ? TestGenNullFact.INSTANCE : existingInstances.get(value);
         if (valueFact == null) {
             // shadow variable
-            if (logger.isTraceEnabled()) {
-                logger.trace("Updating shadow variable {}.{} → {}({})", entity.getClass().getSimpleName(),
-                        variableDescriptor.getVariableName(),
-                        value.getClass().getSimpleName(), value);
-            }
             valueFact = new TestGenInlineValue(value, existingInstances);
+        }
+        if (logger.isTraceEnabled()) {
+            logger.trace("          Updating variable {}.{}[{}]: {} → {}",
+                    entity,
+                    variableDescriptor.getVariableName(),
+                    variableDescriptor.getVariablePropertyType().getSimpleName(),
+                    oldValue,
+                    value);
         }
         updateJournal.add(new TestGenKieSessionUpdate(operationId++, entityFact, variableDescriptor, valueFact));
     }
@@ -137,6 +140,7 @@ public class TestGenKieSessionJournal {
 
     public void fireAllRules() {
         TestGenKieSessionFireAllRules fire = new TestGenKieSessionFireAllRules(operationId++, assertMode);
+        logger.trace("        FIRE ALL RULES ({})", fire);
         updateJournal.add(fire);
     }
 

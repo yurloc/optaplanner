@@ -39,6 +39,7 @@ public class TestGenDroolsScoreDirector<Solution_> extends DroolsScoreDirector<S
     private final TestGenKieSessionJournal journal = new TestGenKieSessionJournal();
     private final File testFile = new File(TEST_CLASS_NAME + ".java");
     private final TestGenTestWriter writer = new TestGenTestWriter();
+    private Object oldValue;
 
     public TestGenDroolsScoreDirector(
             DroolsScoreDirectorFactory<Solution_> scoreDirectorFactory,
@@ -159,8 +160,14 @@ public class TestGenDroolsScoreDirector<Solution_> extends DroolsScoreDirector<S
     }
 
     @Override
+    public void beforeVariableChanged(VariableDescriptor variableDescriptor, Object entity) {
+        super.beforeVariableChanged(variableDescriptor, entity);
+        oldValue = variableDescriptor.getValue(entity);
+    }
+
+    @Override
     public void afterVariableChanged(VariableDescriptor variableDescriptor, Object entity) {
-        journal.update(entity, variableDescriptor);
+        journal.update(entity, oldValue, variableDescriptor);
         super.afterVariableChanged(variableDescriptor, entity);
     }
 

@@ -59,6 +59,7 @@ public class TestGenCorruptedVariableListenerReproducer implements
 
     @Override
     public boolean isReproducible(TestGenKieSessionJournal journal) {
+        lastWorkingScore = null;
         journal.addListener(this);
         try {
             journal.replay(scoreDirector.createKieSession());

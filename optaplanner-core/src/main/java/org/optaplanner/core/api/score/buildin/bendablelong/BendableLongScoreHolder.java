@@ -65,13 +65,13 @@ public class BendableLongScoreHolder extends AbstractScoreHolder {
     public void addHardConstraintMatch(RuleContext kcontext, int hardLevel, long weight) {
         hardScores[hardLevel] += weight;
         registerConstraintMatch(kcontext,
-                () -> hardScores[hardLevel] -= weight,
-                () -> {
-                    long[] newHardScores = new long[hardScores.length];
-                    long[] newSoftScores = new long[softScores.length];
-                    newHardScores[hardLevel] = weight;
-                    return BendableLongScore.valueOf(newHardScores, newSoftScores);
-                });
+                                () -> hardScores[hardLevel] -= weight,
+                                () -> {
+                                    long[] newHardScores = new long[hardScores.length];
+                                    long[] newSoftScores = new long[softScores.length];
+                                    newHardScores[hardLevel] = weight;
+                                    return BendableLongScore.valueOf(newHardScores, newSoftScores);
+                                });
     }
 
     /**
@@ -83,13 +83,13 @@ public class BendableLongScoreHolder extends AbstractScoreHolder {
     public void addSoftConstraintMatch(RuleContext kcontext, int softLevel, long weight) {
         softScores[softLevel] += weight;
         registerConstraintMatch(kcontext,
-                () -> softScores[softLevel] -= weight,
-                () -> {
-                    long[] newHardScores = new long[hardScores.length];
-                    long[] newSoftScores = new long[softScores.length];
-                    newSoftScores[softLevel] = weight;
-                    return BendableLongScore.valueOf(newHardScores, newSoftScores);
-                });
+                                () -> softScores[softLevel] -= weight,
+                                () -> {
+                                    long[] newHardScores = new long[hardScores.length];
+                                    long[] newSoftScores = new long[softScores.length];
+                                    newSoftScores[softLevel] = weight;
+                                    return BendableLongScore.valueOf(newHardScores, newSoftScores);
+                                });
     }
 
     /**
@@ -100,35 +100,34 @@ public class BendableLongScoreHolder extends AbstractScoreHolder {
     public void addMultiConstraintMatch(RuleContext kcontext, long[] hardWeights, long[] softWeights) {
         if (hardScores.length != hardWeights.length) {
             throw new IllegalArgumentException("The hardScores length (" + hardScores.length
-                    + ") is different than the hardWeights length (" + hardWeights.length + ").");
+                                                       + ") is different than the hardWeights length (" + hardWeights.length + ").");
         }
         for (int i = 0; i < hardScores.length; i++) {
             hardScores[i] += hardWeights[i];
         }
         if (softScores.length != softWeights.length) {
             throw new IllegalArgumentException("The softScores length (" + softScores.length
-                    + ") is different than the softWeights length (" + softWeights.length + ").");
+                                                       + ") is different than the softWeights length (" + softWeights.length + ").");
         }
         for (int i = 0; i < softScores.length; i++) {
             softScores[i] += softWeights[i];
         }
         registerConstraintMatch(kcontext,
-                () -> {
-                    for (int i = 0; i < hardScores.length; i++) {
-                        hardScores[i] -= hardWeights[i];
-                    }
-                    for (int i = 0; i < softScores.length; i++) {
-                        softScores[i] -= softWeights[i];
-                    }
-                },
-                () -> BendableLongScore.valueOf(hardWeights, softWeights));
+                                () -> {
+                                    for (int i = 0; i < hardScores.length; i++) {
+                                        hardScores[i] -= hardWeights[i];
+                                    }
+                                    for (int i = 0; i < softScores.length; i++) {
+                                        softScores[i] -= softWeights[i];
+                                    }
+                                },
+                                () -> BendableLongScore.valueOf(hardWeights, softWeights));
     }
 
     @Override
     public Score extractScore(int initScore) {
         return new BendableLongScore(initScore,
-                Arrays.copyOf(hardScores, hardScores.length),
-                Arrays.copyOf(softScores, softScores.length));
+                                     Arrays.copyOf(hardScores, hardScores.length),
+                                     Arrays.copyOf(softScores, softScores.length));
     }
-
 }

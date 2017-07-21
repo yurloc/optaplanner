@@ -56,7 +56,8 @@ public class SolverFactoryTest {
         // Mocking loadClass doesn't work well enough, because the className still differs from class.getName()
         ClassLoader classLoader = new DivertingClassLoader(getClass().getClassLoader());
         SolverFactory<TestdataSolution> solverFactory = SolverFactory.createFromXmlResource(
-                "divertThroughClassLoader/org/optaplanner/core/api/solver/classloaderTestdataSolverConfig.xml", classLoader);
+                "divertThroughClassLoader/org/optaplanner/core/api/solver/classloaderTestdataSolverConfig.xml",
+                classLoader);
         Solver<TestdataSolution> solver = solverFactory.buildSolver();
         assertNotNull(solver);
     }
@@ -77,5 +78,4 @@ public class SolverFactoryTest {
         Solver<TestdataSolution> solver2 = solverFactory2.buildSolver();
         assertNotSame(solver1, solver2);
     }
-
 }

@@ -47,5 +47,4 @@ public class ConstructionHeuristicPhaseLifecycleListenerAdapter<Solution_> exten
     public void phaseEnded(ConstructionHeuristicPhaseScope<Solution_> phaseScope) {
         // Hook method
     }
-
 }

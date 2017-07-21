@@ -40,5 +40,4 @@ public class ExhaustiveSearchPhaseScopeTest extends AbstractNodeComparatorTest {
         phase.registerPessimisticBound(SimpleScore.valueOf(1));
         assertEquals(1, phase.getExpandableNodeQueue().size());
     }
-
 }

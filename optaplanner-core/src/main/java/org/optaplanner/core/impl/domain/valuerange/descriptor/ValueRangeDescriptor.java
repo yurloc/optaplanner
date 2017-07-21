@@ -56,5 +56,4 @@ public interface ValueRangeDescriptor<Solution_> {
      * @return never null
      */
     ValueRange<?> extractValueRange(Solution_ solution, Object entity);
-
 }

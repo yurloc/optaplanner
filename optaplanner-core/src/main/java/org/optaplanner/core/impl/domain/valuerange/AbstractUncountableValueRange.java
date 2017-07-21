@@ -27,6 +27,7 @@ import org.optaplanner.core.api.domain.valuerange.ValueRangeFactory;
  * @see ValueRange
  * @see ValueRangeFactory
  */
-public abstract class AbstractUncountableValueRange<T> implements ValueRange<T>, Serializable {
+public abstract class AbstractUncountableValueRange<T> implements ValueRange<T>,
+                                                                  Serializable {
 
 }

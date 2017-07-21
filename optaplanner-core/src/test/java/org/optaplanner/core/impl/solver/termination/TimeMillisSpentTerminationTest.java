@@ -74,5 +74,4 @@ public class TimeMillisSpentTerminationTest {
         assertEquals(true, termination.isPhaseTerminated(phaseScope));
         assertEquals(1.0, termination.calculatePhaseTimeGradient(phaseScope), 0.0);
     }
-
 }

@@ -26,16 +26,15 @@ import java.util.ListIterator;
 public interface ListIterable<T> extends Iterable<T> {
 
     /**
-     * @see List#listIterator()
      * @return never null, see {@link List#listIterator()}.
+     * @see List#listIterator()
      */
     ListIterator<T> listIterator();
 
     /**
-     * @see List#listIterator()
      * @param index lower than the size of this {@link ListIterable}, see {@link List#listIterator(int)}.
      * @return never null, see {@link List#listIterator(int)}.
+     * @see List#listIterator()
      */
     ListIterator<T> listIterator(int index);
-
 }

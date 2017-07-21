@@ -26,7 +26,7 @@ public class FixedTabuSizeStrategy extends AbstractTabuSizeStrategy {
         this.tabuSize = tabuSize;
         if (tabuSize < 0) {
             throw new IllegalArgumentException("The tabuSize (" + tabuSize
-                    + ") cannot be negative.");
+                                                       + ") cannot be negative.");
         }
     }
 
@@ -34,5 +34,4 @@ public class FixedTabuSizeStrategy extends AbstractTabuSizeStrategy {
     public int determineTabuSize(LocalSearchStepScope stepScope) {
         return tabuSize;
     }
-
 }

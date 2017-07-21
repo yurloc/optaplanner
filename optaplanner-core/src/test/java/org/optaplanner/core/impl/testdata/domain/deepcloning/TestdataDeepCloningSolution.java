@@ -33,7 +33,8 @@ import org.optaplanner.core.impl.testdata.domain.TestdataValue;
 public class TestdataDeepCloningSolution extends TestdataObject {
 
     public static SolutionDescriptor buildSolutionDescriptor() {
-        return SolutionDescriptor.buildSolutionDescriptor(TestdataDeepCloningSolution.class, TestdataDeepCloningEntity.class);
+        return SolutionDescriptor.buildSolutionDescriptor(TestdataDeepCloningSolution.class,
+                                                          TestdataDeepCloningEntity.class);
     }
 
     private List<TestdataValue> valueList;
@@ -89,5 +90,4 @@ public class TestdataDeepCloningSolution extends TestdataObject {
     // ************************************************************************
     // Complex methods
     // ************************************************************************
-
 }

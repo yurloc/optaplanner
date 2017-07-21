@@ -75,7 +75,6 @@ public class ExhaustiveSearchPhaseScope<Solution_> extends AbstractPhaseScope<So
         this.lastCompletedStepScope = lastCompletedStepScope;
     }
 
-
     // ************************************************************************
     // Calculated methods
     // ************************************************************************
@@ -97,5 +96,4 @@ public class ExhaustiveSearchPhaseScope<Solution_> extends AbstractPhaseScope<So
         expandableNodeQueue.add(moveNode);
         moveNode.setExpandable(true);
     }
-
 }

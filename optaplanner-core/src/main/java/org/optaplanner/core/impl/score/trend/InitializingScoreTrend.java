@@ -34,9 +34,10 @@ public class InitializingScoreTrend implements Serializable {
         boolean tokenIsSingle = trendTokens.length == 1;
         if (!tokenIsSingle && trendTokens.length != levelsSize) {
             throw new IllegalArgumentException("The initializingScoreTrendString (" + initializingScoreTrendString
-                    + ") doesn't follow the correct pattern (" + buildTrendPattern(levelsSize) + "):"
-                    + " the trendTokens length (" + trendTokens.length
-                    + ") differs from the levelsSize (" + levelsSize + ").");
+                                                       + ") doesn't follow the correct pattern (" + buildTrendPattern(
+                    levelsSize) + "):"
+                                                       + " the trendTokens length (" + trendTokens.length
+                                                       + ") differs from the levelsSize (" + levelsSize + ").");
         }
         InitializingScoreTrendLevel[] trendLevels = new InitializingScoreTrendLevel[levelsSize];
         for (int i = 0; i < levelsSize; i++) {
@@ -106,5 +107,4 @@ public class InitializingScoreTrend implements Serializable {
         }
         return true;
     }
-
 }

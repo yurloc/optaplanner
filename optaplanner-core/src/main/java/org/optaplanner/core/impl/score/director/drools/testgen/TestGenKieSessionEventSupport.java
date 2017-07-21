@@ -24,10 +24,9 @@ public class TestGenKieSessionEventSupport extends AbstractEventSupport<TestGenK
 
     @Override
     public void afterFireAllRules(KieSession kieSession, TestGenKieSessionJournal journal,
-            TestGenKieSessionFireAllRules fire) {
+                                  TestGenKieSessionFireAllRules fire) {
         for (TestGenKieSessionListener listener : eventListenerSet) {
             listener.afterFireAllRules(kieSession, journal, fire);
         }
     }
-
 }

@@ -52,8 +52,9 @@ public class TestdataAutoDiscoverGetterOverrideSolution extends TestdataObject {
     }
 
     public TestdataAutoDiscoverGetterOverrideSolution(String code, TestdataObject singleProblemFact,
-            List<TestdataValue> problemFactList, List<TestdataEntity> entityList,
-            TestdataEntity otherEntity, List<String> listFact) {
+                                                      List<TestdataValue> problemFactList,
+                                                      List<TestdataEntity> entityList,
+                                                      TestdataEntity otherEntity, List<String> listFact) {
         super(code);
         this.singleProblemFactField = singleProblemFact;
         this.problemFactListField = problemFactList;
@@ -91,5 +92,4 @@ public class TestdataAutoDiscoverGetterOverrideSolution extends TestdataObject {
     public void setScore(SimpleScore score) {
         this.score = score;
     }
-
 }

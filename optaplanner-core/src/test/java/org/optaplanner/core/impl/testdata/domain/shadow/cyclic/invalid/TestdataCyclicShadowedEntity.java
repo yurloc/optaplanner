@@ -38,7 +38,8 @@ public class TestdataCyclicShadowedEntity extends TestdataObject {
 
     public static GenuineVariableDescriptor buildVariableDescriptorForValue() {
         SolutionDescriptor solutionDescriptor = TestdataCyclicShadowedSolution.buildSolutionDescriptor();
-        EntityDescriptor entityDescriptor = solutionDescriptor.findEntityDescriptorOrFail(TestdataCyclicShadowedEntity.class);
+        EntityDescriptor entityDescriptor = solutionDescriptor.findEntityDescriptorOrFail(
+                TestdataCyclicShadowedEntity.class);
         return entityDescriptor.getGenuineVariableDescriptor("value");
     }
 
@@ -124,7 +125,6 @@ public class TestdataCyclicShadowedEntity extends TestdataObject {
             entity.setRockShadow("Rock beats (" + scissors + ")");
             scoreDirector.afterVariableChanged(entity, "rockShadow");
         }
-
     }
 
     public static class PaperShadowUpdatingVariableListener extends VariableListenerAdapter<TestdataCyclicShadowedEntity> {
@@ -145,7 +145,6 @@ public class TestdataCyclicShadowedEntity extends TestdataObject {
             entity.setPaperShadow("Paper beats (" + rock + ")");
             scoreDirector.afterVariableChanged(entity, "paperShadow");
         }
-
     }
 
     public static class ScissorsShadowUpdatingVariableListener extends VariableListenerAdapter<TestdataCyclicShadowedEntity> {
@@ -166,7 +165,5 @@ public class TestdataCyclicShadowedEntity extends TestdataObject {
             entity.setScissorsShadow("Scissors beats (" + paper + ")");
             scoreDirector.afterVariableChanged(entity, "scissorsShadow");
         }
-
     }
-
 }

@@ -51,5 +51,4 @@ public class LegacyDroolsScoreDirectorFactory<Solution_> extends DroolsScoreDire
     public KieSession newKieSession() {
         return kieBase.newKieSession();
     }
-
 }

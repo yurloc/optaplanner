@@ -50,5 +50,4 @@ public class TestGenKieSessionInsert implements TestGenKieSessionOperation {
     public String toString() {
         return "operation I #" + id;
     }
-
 }

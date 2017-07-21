@@ -32,5 +32,4 @@ public interface TestGenOriginalProblemReproducer {
      * @param contextDescription describes the context in which the problem should be reproducible
      */
     void assertReproducible(TestGenKieSessionJournal journal, String contextDescription);
-
 }

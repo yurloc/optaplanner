@@ -95,10 +95,11 @@ public abstract class SolverFactory<Solution_> {
      * @param solverConfigResource never null, a classpath resource
      * as defined by {@link ClassLoader#getResource(String)}
      * @param classLoader sometimes null, the {@link ClassLoader} to use for loading all resources and {@link Class}es,
-     *      null to use the default {@link ClassLoader}
+     * null to use the default {@link ClassLoader}
      * @return never null
      */
-    public static <Solution_> SolverFactory<Solution_> createFromXmlResource(String solverConfigResource, ClassLoader classLoader) {
+    public static <Solution_> SolverFactory<Solution_> createFromXmlResource(String solverConfigResource,
+                                                                             ClassLoader classLoader) {
         return new XStreamXmlSolverFactory<Solution_>(new SolverConfigContext(classLoader))
                 .configure(solverConfigResource);
     }
@@ -115,10 +116,11 @@ public abstract class SolverFactory<Solution_> {
     /**
      * @param solverConfigFile never null
      * @param classLoader sometimes null, the {@link ClassLoader} to use for loading all resources and {@link Class}es,
-     *      null to use the default {@link ClassLoader}
+     * null to use the default {@link ClassLoader}
      * @return never null
      */
-    public static <Solution_> SolverFactory<Solution_> createFromXmlFile(File solverConfigFile, ClassLoader classLoader) {
+    public static <Solution_> SolverFactory<Solution_> createFromXmlFile(File solverConfigFile,
+                                                                         ClassLoader classLoader) {
         return new XStreamXmlSolverFactory<Solution_>(new SolverConfigContext(classLoader))
                 .configure(solverConfigFile);
     }
@@ -135,10 +137,11 @@ public abstract class SolverFactory<Solution_> {
     /**
      * @param in never null, gets closed
      * @param classLoader sometimes null, the {@link ClassLoader} to use for loading all resources and {@link Class}es,
-     *      null to use the default {@link ClassLoader}
+     * null to use the default {@link ClassLoader}
      * @return never null
      */
-    public static <Solution_> SolverFactory<Solution_> createFromXmlInputStream(InputStream in, ClassLoader classLoader) {
+    public static <Solution_> SolverFactory<Solution_> createFromXmlInputStream(InputStream in,
+                                                                                ClassLoader classLoader) {
         return new XStreamXmlSolverFactory<Solution_>(new SolverConfigContext(classLoader))
                 .configure(in);
     }
@@ -155,7 +158,7 @@ public abstract class SolverFactory<Solution_> {
     /**
      * @param reader never null, gets closed
      * @param classLoader sometimes null, the {@link ClassLoader} to use for loading all resources and {@link Class}es,
-     *      null to use the default {@link ClassLoader}
+     * null to use the default {@link ClassLoader}
      * @return never null
      */
     public static <Solution_> SolverFactory<Solution_> createFromXmlReader(Reader reader, ClassLoader classLoader) {
@@ -180,7 +183,7 @@ public abstract class SolverFactory<Solution_> {
     /**
      * See {@link #createEmpty()}.
      * @param classLoader sometimes null, the {@link ClassLoader} to use for loading all resources and {@link Class}es,
-     *      null to use the default {@link ClassLoader}
+     * null to use the default {@link ClassLoader}
      * @return never null
      */
     public static <Solution_> SolverFactory<Solution_> createEmpty(ClassLoader classLoader) {
@@ -231,5 +234,4 @@ public abstract class SolverFactory<Solution_> {
      * @return never null
      */
     public abstract Solver<Solution_> buildSolver();
-
 }

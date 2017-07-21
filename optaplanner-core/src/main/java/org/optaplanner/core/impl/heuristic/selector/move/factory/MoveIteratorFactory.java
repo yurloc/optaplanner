@@ -62,5 +62,4 @@ public interface MoveIteratorFactory<Solution_> {
      */
     Iterator<? extends Move<Solution_>> createRandomMoveIterator(
             ScoreDirector<Solution_> scoreDirector, Random workingRandom);
-
 }

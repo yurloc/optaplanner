@@ -66,6 +66,7 @@ public interface IncrementalScoreCalculator<Solution_> {
      * @param entity never null, an instance of a {@link PlanningEntity} class
      */
     void beforeEntityRemoved(Object entity);
+
     /**
      * @param entity never null, an instance of a {@link PlanningEntity} class
      */
@@ -77,5 +78,4 @@ public interface IncrementalScoreCalculator<Solution_> {
      * @return never null
      */
     Score calculateScore();
-
 }

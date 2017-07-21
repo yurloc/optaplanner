@@ -40,5 +40,4 @@ public interface SelectionProbabilityWeightFactory<Solution_, T> {
      * @return {@code 0.0 <= returnValue <} {@link Double#POSITIVE_INFINITY}
      */
     double createProbabilityWeight(ScoreDirector<Solution_> scoreDirector, T selection);
-
 }

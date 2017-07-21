@@ -45,20 +45,20 @@ public class LookUpStrategyImmutableTest {
     @Parameterized.Parameters
     public static Object[] data() {
         return new Object[][]{
-            {true, new Boolean(true)},
-            {(byte) 1, new Byte((byte) 1)},
-            {(short) 1, new Short((short) 1)},
-            {1, new Integer(1)},
-            {1L, new Long(1)},
-            {0.5f, new Float(0.5f)},
-            {0.1d, new Double(0.1d)},
-            {BigInteger.ONE, new BigInteger("1")},
-            {BigDecimal.ONE, new BigDecimal("1")},
-            {'\n', new Character((char) 10)},
-            {"", new String()},
-            {LocalDate.of(1, 2, 3), LocalDate.of(1, 2, 3)},
-            {LocalTime.of(1, 2), LocalTime.of(1, 2)},
-            {LocalDateTime.of(1, 2, 3, 4, 5), LocalDateTime.of(1, 2, 3, 4, 5)}
+                {true, new Boolean(true)},
+                {(byte) 1, new Byte((byte) 1)},
+                {(short) 1, new Short((short) 1)},
+                {1, new Integer(1)},
+                {1L, new Long(1)},
+                {0.5f, new Float(0.5f)},
+                {0.1d, new Double(0.1d)},
+                {BigInteger.ONE, new BigInteger("1")},
+                {BigDecimal.ONE, new BigDecimal("1")},
+                {'\n', new Character((char) 10)},
+                {"", new String()},
+                {LocalDate.of(1, 2, 3), LocalDate.of(1, 2, 3)},
+                {LocalTime.of(1, 2), LocalTime.of(1, 2)},
+                {LocalDateTime.of(1, 2, 3, 4, 5), LocalDateTime.of(1, 2, 3, 4, 5)}
         };
     }
 
@@ -85,5 +85,4 @@ public class LookUpStrategyImmutableTest {
         // since they are immutable we don't care about which instance is located
         assertEquals(internalObject, lookUpManager.lookUpWorkingObject(externalObject));
     }
-
 }

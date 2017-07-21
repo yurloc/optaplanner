@@ -40,7 +40,7 @@ public final class PartitionChangedEvent<Solution_> implements Serializable {
         throwable = null;
     }
 
-    public PartitionChangedEvent(int partIndex, long eventIndex, PartitionChangeMove<Solution_>  move) {
+    public PartitionChangedEvent(int partIndex, long eventIndex, PartitionChangeMove<Solution_> move) {
         this.partIndex = partIndex;
         this.eventIndex = eventIndex;
         type = PartitionChangedEventType.MOVE;
@@ -68,7 +68,7 @@ public final class PartitionChangedEvent<Solution_> implements Serializable {
         return type;
     }
 
-    public PartitionChangeMove<Solution_>  getMove() {
+    public PartitionChangeMove<Solution_> getMove() {
         return move;
     }
 
@@ -81,5 +81,4 @@ public final class PartitionChangedEvent<Solution_> implements Serializable {
         FINISHED,
         EXCEPTION_THROWN;
     }
-
 }

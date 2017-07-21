@@ -32,8 +32,13 @@ import org.optaplanner.core.impl.testdata.domain.TestdataValue;
 import org.optaplanner.core.impl.testdata.util.PlannerTestUtils;
 
 import static org.mockito.Mockito.*;
-import static org.optaplanner.core.impl.testdata.util.PlannerAssert.*;
-import static org.optaplanner.core.impl.testdata.util.PlannerTestUtils.*;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.assertAllCodesOfArray;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.assertEquals;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.assertFalse;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.assertInstanceOf;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.assertSame;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.assertTrue;
+import static org.optaplanner.core.impl.testdata.util.PlannerTestUtils.mockScoreDirector;
 
 public class CompositeMoveTest {
 
@@ -152,5 +157,4 @@ public class CompositeMoveTest {
         assertSame(v1, e1.getValue());
         assertSame(v2, e2.getValue());
     }
-
 }

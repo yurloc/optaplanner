@@ -46,7 +46,7 @@ public enum NodeExplorationType {
                 return new OptimisticBoundFirstNodeComparator(scoreBounderEnabled);
             default:
                 throw new IllegalStateException("The nodeExplorationType ("
-                        + this + ") is not implemented.");
+                                                        + this + ") is not implemented.");
         }
     }
 

@@ -30,5 +30,4 @@ public interface ConstructionHeuristicForager extends ConstructionHeuristicPhase
     boolean isQuitEarly();
 
     ConstructionHeuristicMoveScope pickMove(ConstructionHeuristicStepScope stepScope);
-
 }

@@ -31,5 +31,4 @@ public interface StatefulVariableListener<Entity_> extends VariableListener<Enti
     void resetWorkingSolution(ScoreDirector scoreDirector);
 
     void clearWorkingSolution(ScoreDirector scoreDirector);
-
 }

@@ -174,5 +174,4 @@ public class TestGenValueFactTest {
         assertTrue(val.getImports().contains(Arrays.class));
         assertEquals("Arrays.asList(" + fa.getVariableName() + ", " + fb.getVariableName() + ")", val.toString());
     }
-
 }

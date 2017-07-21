@@ -29,5 +29,4 @@ public interface SupplyManager {
      * @return never null
      */
     <S extends Supply> S demand(Demand<S> demand);
-
 }

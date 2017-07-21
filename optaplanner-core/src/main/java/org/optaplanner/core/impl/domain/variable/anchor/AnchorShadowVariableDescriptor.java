@@ -41,7 +41,7 @@ public class AnchorShadowVariableDescriptor<Solution_> extends ShadowVariableDes
     protected VariableDescriptor<Solution_> sourceVariableDescriptor;
 
     public AnchorShadowVariableDescriptor(EntityDescriptor<Solution_> entityDescriptor,
-            MemberAccessor variableMemberAccessor) {
+                                          MemberAccessor variableMemberAccessor) {
         super(entityDescriptor, variableMemberAccessor);
     }
 
@@ -56,25 +56,27 @@ public class AnchorShadowVariableDescriptor<Solution_> extends ShadowVariableDes
 
     @Override
     public void linkShadowSources(DescriptorPolicy descriptorPolicy) {
-        AnchorShadowVariable shadowVariableAnnotation = variableMemberAccessor.getAnnotation(AnchorShadowVariable.class);
+        AnchorShadowVariable shadowVariableAnnotation = variableMemberAccessor.getAnnotation(
+                AnchorShadowVariable.class);
         String sourceVariableName = shadowVariableAnnotation.sourceVariableName();
         sourceVariableDescriptor = entityDescriptor.getVariableDescriptor(sourceVariableName);
         if (sourceVariableDescriptor == null) {
             throw new IllegalArgumentException("The entityClass (" + entityDescriptor.getEntityClass()
-                    + ") has a " + AnchorShadowVariable.class.getSimpleName()
-                    + " annotated property (" + variableMemberAccessor.getName()
-                    + ") with sourceVariableName (" + sourceVariableName
-                    + ") which is not a valid planning variable on entityClass ("
-                    + entityDescriptor.getEntityClass() + ").\n"
-                    + entityDescriptor.buildInvalidVariableNameExceptionMessage(sourceVariableName));
+                                                       + ") has a " + AnchorShadowVariable.class.getSimpleName()
+                                                       + " annotated property (" + variableMemberAccessor.getName()
+                                                       + ") with sourceVariableName (" + sourceVariableName
+                                                       + ") which is not a valid planning variable on entityClass ("
+                                                       + entityDescriptor.getEntityClass() + ").\n"
+                                                       + entityDescriptor.buildInvalidVariableNameExceptionMessage(
+                    sourceVariableName));
         }
         if (!(sourceVariableDescriptor instanceof GenuineVariableDescriptor) ||
                 !((GenuineVariableDescriptor) sourceVariableDescriptor).isChained()) {
             throw new IllegalArgumentException("The entityClass (" + entityDescriptor.getEntityClass()
-                    + ") has a " + AnchorShadowVariable.class.getSimpleName()
-                    + " annotated property (" + variableMemberAccessor.getName()
-                    + ") with sourceVariableName (" + sourceVariableName
-                    + ") which is not chained.");
+                                                       + ") has a " + AnchorShadowVariable.class.getSimpleName()
+                                                       + " annotated property (" + variableMemberAccessor.getName()
+                                                       + ") with sourceVariableName (" + sourceVariableName
+                                                       + ") which is not chained.");
         }
         sourceVariableDescriptor.registerSinkVariableDescriptor(this);
     }
@@ -104,5 +106,4 @@ public class AnchorShadowVariableDescriptor<Solution_> extends ShadowVariableDes
                 .demand(new SingletonInverseVariableDemand(sourceVariableDescriptor));
         return new AnchorVariableListener(this, sourceVariableDescriptor, inverseVariableSupply);
     }
-
 }

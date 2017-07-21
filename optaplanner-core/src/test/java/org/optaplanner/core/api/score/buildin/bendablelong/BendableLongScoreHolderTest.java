@@ -60,7 +60,8 @@ public class BendableLongScoreHolderTest extends AbstractScoreHolderTest {
         RuleContext multi1 = mockRuleContext("multi1");
         scoreHolder.addMultiConstraintMatch(multi1, new long[]{-1000L}, new long[]{-10000L, -100000L});
         callOnUpdate(multi1);
-        scoreHolder.addMultiConstraintMatch(multi1, new long[]{-4000L}, new long[]{-50000L, -600000L}); // Overwrite existing
+        scoreHolder.addMultiConstraintMatch(multi1, new long[]{-4000L},
+                                            new long[]{-50000L, -600000L}); // Overwrite existing
 
         RuleContext hard3 = mockRuleContext("hard3");
         scoreHolder.addHardConstraintMatch(hard3, 0, -1000000L);
@@ -79,13 +80,16 @@ public class BendableLongScoreHolderTest extends AbstractScoreHolderTest {
         scoreHolder.addSoftConstraintMatch(medium2Undo, 0, -9999L);
         callOnDelete(medium2Undo);
 
-        assertEquals(BendableLongScore.valueOf(new long[]{-7004001L}, new long[]{-50020L, -600300L}), scoreHolder.extractScore(0));
-        assertEquals(BendableLongScore.valueOfUninitialized(-7, new long[]{-7004001L}, new long[]{-50020L, -600300L}), scoreHolder.extractScore(-7));
+        assertEquals(BendableLongScore.valueOf(new long[]{-7004001L}, new long[]{-50020L, -600300L}),
+                     scoreHolder.extractScore(0));
+        assertEquals(BendableLongScore.valueOfUninitialized(-7, new long[]{-7004001L}, new long[]{-50020L, -600300L}),
+                     scoreHolder.extractScore(-7));
         if (constraintMatchEnabled) {
-            assertEquals(BendableLongScore.valueOf(new long[]{-1L}, new long[]{0L, 0L}), findConstraintMatchTotal(scoreHolder, "hard1").getScoreTotal());
-            assertEquals(BendableLongScore.valueOf(new long[]{0L}, new long[]{0L, -300L}), scoreHolder.getIndictmentMap().get(OTHER_JUSTIFICATION).getScoreTotal());
+            assertEquals(BendableLongScore.valueOf(new long[]{-1L}, new long[]{0L, 0L}),
+                         findConstraintMatchTotal(scoreHolder, "hard1").getScoreTotal());
+            assertEquals(BendableLongScore.valueOf(new long[]{0L}, new long[]{0L, -300L}),
+                         scoreHolder.getIndictmentMap().get(OTHER_JUSTIFICATION).getScoreTotal());
             assertNull(scoreHolder.getIndictmentMap().get(UNDO_JUSTIFICATION));
         }
     }
-
 }

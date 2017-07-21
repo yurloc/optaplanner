@@ -24,7 +24,8 @@ import org.optaplanner.core.impl.exhaustivesearch.node.ExhaustiveSearchNode;
 /**
  * Investigate deeper nodes first, in order.
  */
-public class OriginalOrderNodeComparator implements Comparator<ExhaustiveSearchNode>, Serializable {
+public class OriginalOrderNodeComparator implements Comparator<ExhaustiveSearchNode>,
+                                                    Serializable {
 
     @Override
     public int compare(ExhaustiveSearchNode a, ExhaustiveSearchNode b) {
@@ -39,5 +40,4 @@ public class OriginalOrderNodeComparator implements Comparator<ExhaustiveSearchN
         // Investigate lower breadth index first (to respect ValueSortingManner)
         return Long.compare(b.getBreadth(), a.getBreadth());
     }
-
 }

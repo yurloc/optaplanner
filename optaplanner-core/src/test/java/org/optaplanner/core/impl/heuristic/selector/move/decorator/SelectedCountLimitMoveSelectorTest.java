@@ -25,14 +25,17 @@ import org.optaplanner.core.impl.phase.scope.AbstractStepScope;
 import org.optaplanner.core.impl.solver.scope.DefaultSolverScope;
 
 import static org.mockito.Mockito.*;
-import static org.optaplanner.core.impl.testdata.util.PlannerAssert.*;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.assertAllCodesOfMoveSelector;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.verifyPhaseLifecycle;
 
 public class SelectedCountLimitMoveSelectorTest {
 
     @Test
     public void selectSizeLimitLowerThanSelectorSize() {
         MoveSelector childMoveSelector = SelectorTestUtils.mockMoveSelector(DummyMove.class,
-                new DummyMove("a1"), new DummyMove("a2"), new DummyMove("a3"), new DummyMove("a4"), new DummyMove("a5"));
+                                                                            new DummyMove("a1"), new DummyMove("a2"),
+                                                                            new DummyMove("a3"), new DummyMove("a4"),
+                                                                            new DummyMove("a5"));
         MoveSelector moveSelector = new SelectedCountLimitMoveSelector(childMoveSelector, 3L);
 
         DefaultSolverScope solverScope = mock(DefaultSolverScope.class);
@@ -87,11 +90,11 @@ public class SelectedCountLimitMoveSelectorTest {
         verify(childMoveSelector, times(5)).getSize();
     }
 
-
     @Test
     public void selectSizeLimitHigherThanSelectorSize() {
         MoveSelector childMoveSelector = SelectorTestUtils.mockMoveSelector(DummyMove.class,
-                new DummyMove("a1"), new DummyMove("a2"), new DummyMove("a3"));
+                                                                            new DummyMove("a1"), new DummyMove("a2"),
+                                                                            new DummyMove("a3"));
         MoveSelector moveSelector = new SelectedCountLimitMoveSelector(childMoveSelector, 5L);
 
         DefaultSolverScope solverScope = mock(DefaultSolverScope.class);
@@ -145,5 +148,4 @@ public class SelectedCountLimitMoveSelectorTest {
         verify(childMoveSelector, times(5)).iterator();
         verify(childMoveSelector, times(5)).getSize();
     }
-
 }

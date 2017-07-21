@@ -33,7 +33,8 @@ public class TestdataExtendedThirdPartyEntity extends TestdataThirdPartyEntityPo
 
     public static GenuineVariableDescriptor buildVariableDescriptorForValue() {
         SolutionDescriptor solutionDescriptor = TestdataExtendedThirdPartySolution.buildSolutionDescriptor();
-        EntityDescriptor entityDescriptor = solutionDescriptor.findEntityDescriptorOrFail(TestdataThirdPartyEntityPojo.class);
+        EntityDescriptor entityDescriptor = solutionDescriptor.findEntityDescriptorOrFail(
+                TestdataThirdPartyEntityPojo.class);
         return entityDescriptor.getGenuineVariableDescriptor("value");
     }
 
@@ -72,5 +73,4 @@ public class TestdataExtendedThirdPartyEntity extends TestdataThirdPartyEntityPo
     public TestdataValue getValue() {
         return super.getValue();
     }
-
 }

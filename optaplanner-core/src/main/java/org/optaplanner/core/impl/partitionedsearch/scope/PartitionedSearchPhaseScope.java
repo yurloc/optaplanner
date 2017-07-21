@@ -54,5 +54,4 @@ public class PartitionedSearchPhaseScope<Solution_> extends AbstractPhaseScope<S
     // ************************************************************************
     // Calculated methods
     // ************************************************************************
-
 }

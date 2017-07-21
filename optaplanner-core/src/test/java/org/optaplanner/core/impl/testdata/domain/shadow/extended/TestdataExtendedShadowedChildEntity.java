@@ -85,7 +85,5 @@ public class TestdataExtendedShadowedChildEntity extends TestdataExtendedShadowe
                 scoreDirector.afterVariableChanged(childEntity, "secondShadow");
             }
         }
-
     }
-
 }

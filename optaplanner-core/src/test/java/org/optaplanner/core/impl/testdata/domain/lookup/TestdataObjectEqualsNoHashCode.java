@@ -40,5 +40,4 @@ public class TestdataObjectEqualsNoHashCode {
         final TestdataObjectEqualsNoHashCode other = (TestdataObjectEqualsNoHashCode) obj;
         return Objects.equals(this.id, other.id);
     }
-
 }

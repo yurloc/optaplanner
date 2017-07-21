@@ -41,7 +41,7 @@ public class ConstructionHeuristicDecider {
     protected boolean assertExpectedUndoMoveScore = false;
 
     public ConstructionHeuristicDecider(String logIndentation,
-            Termination termination, ConstructionHeuristicForager forager) {
+                                        Termination termination, ConstructionHeuristicForager forager) {
         this.logIndentation = logIndentation;
         this.termination = termination;
         this.forager = forager;
@@ -130,8 +130,8 @@ public class ConstructionHeuristicDecider {
             phaseScope.assertExpectedUndoMoveScore(move, undoMove, phaseScope.getLastCompletedStepScope().getScore());
         }
         logger.trace("{}        Move index ({}), score ({}), move ({}).",
-                logIndentation,
-                moveScope.getMoveIndex(), moveScope.getScore(), moveScope.getMove());
+                     logIndentation,
+                     moveScope.getMoveIndex(), moveScope.getScore(), moveScope.getMove());
     }
 
     private void processMove(ConstructionHeuristicMoveScope moveScope) {
@@ -142,5 +142,4 @@ public class ConstructionHeuristicDecider {
         moveScope.setScore(score);
         forager.addMove(moveScope);
     }
-
 }

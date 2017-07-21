@@ -43,5 +43,4 @@ public class TestdataObjectMultipleIds {
     public Boolean getBool() {
         return bool;
     }
-
 }

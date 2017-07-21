@@ -57,5 +57,4 @@ public class TestdataCorrectlyClonedSolution implements SolutionCloner<TestdataC
     public boolean isClonedByCustomCloner() {
         return clonedByCustomCloner;
     }
-
 }

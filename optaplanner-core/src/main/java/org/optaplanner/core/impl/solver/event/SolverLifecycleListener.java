@@ -30,5 +30,4 @@ public interface SolverLifecycleListener<Solution_> extends EventListener {
     void solvingStarted(DefaultSolverScope<Solution_> solverScope);
 
     void solvingEnded(DefaultSolverScope<Solution_> solverScope);
-
 }

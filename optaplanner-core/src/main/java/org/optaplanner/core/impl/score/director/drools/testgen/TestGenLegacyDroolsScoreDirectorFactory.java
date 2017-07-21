@@ -27,7 +27,8 @@ public class TestGenLegacyDroolsScoreDirectorFactory<Solution_> extends LegacyDr
     private final List<String> scoreDrlList;
     private final List<File> scoreDrlFileList;
 
-    public TestGenLegacyDroolsScoreDirectorFactory(KieBase kieBase, List<String> scoreDrlList, List<File> scoreDrlFileList) {
+    public TestGenLegacyDroolsScoreDirectorFactory(KieBase kieBase, List<String> scoreDrlList,
+                                                   List<File> scoreDrlFileList) {
         super(kieBase);
         this.scoreDrlList = scoreDrlList;
         this.scoreDrlFileList = scoreDrlFileList;
@@ -39,5 +40,4 @@ public class TestGenLegacyDroolsScoreDirectorFactory<Solution_> extends LegacyDr
         return new TestGenDroolsScoreDirector<>(
                 this, lookUpEnabled, constraintMatchEnabledPreference, scoreDrlList, scoreDrlFileList);
     }
-
 }

@@ -62,8 +62,8 @@ public class ChildThreadPlumbingTermination extends AbstractTermination {
     @Override
     public boolean isPhaseTerminated(AbstractPhaseScope phaseScope) {
         throw new IllegalStateException(ChildThreadPlumbingTermination.class.getSimpleName()
-                + " configured only as solver termination."
-                + " It is always bridged to phase termination.");
+                                                + " configured only as solver termination."
+                                                + " It is always bridged to phase termination.");
     }
 
     @Override
@@ -74,8 +74,8 @@ public class ChildThreadPlumbingTermination extends AbstractTermination {
     @Override
     public double calculatePhaseTimeGradient(AbstractPhaseScope phaseScope) {
         throw new IllegalStateException(ChildThreadPlumbingTermination.class.getSimpleName()
-                + " configured only as solver termination."
-                + " It is always bridged to phase termination.");
+                                                + " configured only as solver termination."
+                                                + " It is always bridged to phase termination.");
     }
 
     // ************************************************************************
@@ -91,5 +91,4 @@ public class ChildThreadPlumbingTermination extends AbstractTermination {
     public String toString() {
         return "ChildThreadPlumbing()";
     }
-
 }

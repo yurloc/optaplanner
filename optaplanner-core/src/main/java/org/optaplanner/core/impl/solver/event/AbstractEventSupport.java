@@ -31,5 +31,4 @@ public class AbstractEventSupport<E extends EventListener> {
     public void removeEventListener(E eventListener) {
         eventListenerSet.remove(eventListener);
     }
-
 }

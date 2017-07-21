@@ -50,7 +50,7 @@ public interface Solution<S extends Score> {
     /**
      * Returns the {@link Score} of this Solution.
      * @return null if the Solution is uninitialized
-     *         or the last calculated {@link Score} is dirty the new {@link Score} has not yet been recalculated
+     * or the last calculated {@link Score} is dirty the new {@link Score} has not yet been recalculated
      */
     S getScore();
 
@@ -69,8 +69,7 @@ public interface Solution<S extends Score> {
      * Do not include the planning entities as problem facts:
      * they are automatically inserted into the {@link KieSession}.
      * @return never null (although an empty collection is allowed),
-     *         all the facts of this solution except for the planning entities
+     * all the facts of this solution except for the planning entities
      */
     Collection<? extends Object> getProblemFacts();
-
 }

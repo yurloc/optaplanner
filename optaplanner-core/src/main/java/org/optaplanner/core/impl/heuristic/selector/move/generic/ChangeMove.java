@@ -37,7 +37,7 @@ public class ChangeMove<Solution_> extends AbstractMove<Solution_> {
     protected final Object toPlanningValue;
 
     public ChangeMove(Object entity, GenuineVariableDescriptor<Solution_> variableDescriptor,
-            Object toPlanningValue) {
+                      Object toPlanningValue) {
         this.entity = entity;
         this.variableDescriptor = variableDescriptor;
         this.toPlanningValue = toPlanningValue;
@@ -127,5 +127,4 @@ public class ChangeMove<Solution_> extends AbstractMove<Solution_> {
         Object oldValue = variableDescriptor.getValue(entity);
         return entity + " {" + oldValue + " -> " + toPlanningValue + "}";
     }
-
 }

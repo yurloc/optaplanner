@@ -33,7 +33,8 @@ public class ChainedSwapMove<Solution_> extends SwapMove<Solution_> {
     protected final List<SingletonInverseVariableSupply> inverseVariableSupplyList;
 
     public ChainedSwapMove(List<GenuineVariableDescriptor<Solution_>> variableDescriptorList,
-            List<SingletonInverseVariableSupply> inverseVariableSupplyList, Object leftEntity, Object rightEntity) {
+                           List<SingletonInverseVariableSupply> inverseVariableSupplyList, Object leftEntity,
+                           Object rightEntity) {
         super(variableDescriptorList, leftEntity, rightEntity);
         this.inverseVariableSupplyList = inverseVariableSupplyList;
     }
@@ -97,5 +98,4 @@ public class ChainedSwapMove<Solution_> extends SwapMove<Solution_> {
             }
         }
     }
-
 }

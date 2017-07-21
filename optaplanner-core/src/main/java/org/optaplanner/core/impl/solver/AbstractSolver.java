@@ -57,7 +57,7 @@ public abstract class AbstractSolver<Solution_> implements Solver<Solution_> {
     // ************************************************************************
 
     public AbstractSolver(Termination termination, BestSolutionRecaller<Solution_> bestSolutionRecaller,
-            List<Phase<Solution_>> phaseList) {
+                          List<Phase<Solution_>> phaseList) {
         this.termination = termination;
         this.bestSolutionRecaller = bestSolutionRecaller;
         bestSolutionRecaller.setSolverEventSupport(solverEventSupport);
@@ -134,5 +134,4 @@ public abstract class AbstractSolver<Solution_> implements Solver<Solution_> {
     public void removePhaseLifecycleListener(PhaseLifecycleListener<Solution_> phaseLifecycleListener) {
         phaseLifecycleSupport.removeEventListener(phaseLifecycleListener);
     }
-
 }

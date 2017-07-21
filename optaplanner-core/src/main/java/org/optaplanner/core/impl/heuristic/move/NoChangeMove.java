@@ -61,5 +61,4 @@ public class NoChangeMove<Solution_> extends AbstractMove<Solution_> {
     public String toString() {
         return "No change";
     }
-
 }

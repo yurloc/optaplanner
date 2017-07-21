@@ -32,7 +32,7 @@ public class TestdataUnknownFactTypeSolution extends TestdataObject {
 
     public static SolutionDescriptor<TestdataUnknownFactTypeSolution> buildSolutionDescriptor() {
         return SolutionDescriptor.buildSolutionDescriptor(TestdataUnknownFactTypeSolution.class,
-                TestdataEntity.class);
+                                                          TestdataEntity.class);
     }
 
     private List<TestdataValue> valueList;

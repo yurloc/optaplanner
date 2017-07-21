@@ -41,7 +41,7 @@ public class SubChainSwapMoveSelector extends GenericMoveSelector {
     protected SingletonInverseVariableSupply inverseVariableSupply = null;
 
     public SubChainSwapMoveSelector(SubChainSelector leftSubChainSelector, SubChainSelector rightSubChainSelector,
-            boolean randomSelection, boolean selectReversingMoveToo) {
+                                    boolean randomSelection, boolean selectReversingMoveToo) {
         this.leftSubChainSelector = leftSubChainSelector;
         this.rightSubChainSelector = rightSubChainSelector;
         this.randomSelection = randomSelection;
@@ -49,10 +49,10 @@ public class SubChainSwapMoveSelector extends GenericMoveSelector {
         variableDescriptor = leftSubChainSelector.getVariableDescriptor();
         if (leftSubChainSelector.getVariableDescriptor() != rightSubChainSelector.getVariableDescriptor()) {
             throw new IllegalStateException("The selector (" + this
-                    + ") has a leftSubChainSelector's variableDescriptor ("
-                    + leftSubChainSelector.getVariableDescriptor()
-                    + ") which is not equal to the rightSubChainSelector's variableDescriptor ("
-                    + rightSubChainSelector.getVariableDescriptor() + ").");
+                                                    + ") has a leftSubChainSelector's variableDescriptor ("
+                                                    + leftSubChainSelector.getVariableDescriptor()
+                                                    + ") which is not equal to the rightSubChainSelector's variableDescriptor ("
+                                                    + rightSubChainSelector.getVariableDescriptor() + ").");
         }
         phaseLifecycleSupport.addEventListener(leftSubChainSelector);
         if (leftSubChainSelector != rightSubChainSelector) {
@@ -114,7 +114,8 @@ public class SubChainSwapMoveSelector extends GenericMoveSelector {
                         nextReversingSelection = new SubChainReversingSwapMove(
                                 variableDescriptor, inverseVariableSupply, leftSubSelection, rightSubSelection);
                     }
-                    return new SubChainSwapMove(variableDescriptor, inverseVariableSupply, leftSubSelection, rightSubSelection);
+                    return new SubChainSwapMove(variableDescriptor, inverseVariableSupply, leftSubSelection,
+                                                rightSubSelection);
                 }
             };
         } else {
@@ -123,8 +124,10 @@ public class SubChainSwapMoveSelector extends GenericMoveSelector {
                 protected Move newSwapSelection(SubChain leftSubSelection, SubChain rightSubSelection) {
                     boolean reversing = selectReversingMoveToo && workingRandom.nextBoolean();
                     return reversing
-                            ? new SubChainReversingSwapMove(variableDescriptor, inverseVariableSupply, leftSubSelection, rightSubSelection)
-                            : new SubChainSwapMove(variableDescriptor, inverseVariableSupply, leftSubSelection, rightSubSelection);
+                            ? new SubChainReversingSwapMove(variableDescriptor, inverseVariableSupply, leftSubSelection,
+                                                            rightSubSelection)
+                            : new SubChainSwapMove(variableDescriptor, inverseVariableSupply, leftSubSelection,
+                                                   rightSubSelection);
                 }
             };
         }
@@ -134,5 +137,4 @@ public class SubChainSwapMoveSelector extends GenericMoveSelector {
     public String toString() {
         return getClass().getSimpleName() + "(" + leftSubChainSelector + ", " + rightSubChainSelector + ")";
     }
-
 }

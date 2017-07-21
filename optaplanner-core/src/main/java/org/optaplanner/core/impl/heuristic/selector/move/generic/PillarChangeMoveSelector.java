@@ -35,15 +35,15 @@ public class PillarChangeMoveSelector extends GenericMoveSelector {
     protected final boolean randomSelection;
 
     public PillarChangeMoveSelector(PillarSelector pillarSelector, ValueSelector valueSelector,
-            boolean randomSelection) {
+                                    boolean randomSelection) {
         this.pillarSelector = pillarSelector;
         this.valueSelector = valueSelector;
         this.randomSelection = randomSelection;
         GenuineVariableDescriptor variableDescriptor = valueSelector.getVariableDescriptor();
         if (variableDescriptor.isChained()) {
             throw new IllegalStateException("The selector (" + this
-                    + ") has a variableDescriptor (" + variableDescriptor
-                    + ") which is chained (" + variableDescriptor.isChained() + ").");
+                                                    + ") has a variableDescriptor (" + variableDescriptor
+                                                    + ") which is chained (" + variableDescriptor.isChained() + ").");
         }
         phaseLifecycleSupport.addEventListener(pillarSelector);
         phaseLifecycleSupport.addEventListener(valueSelector);
@@ -67,8 +67,8 @@ public class PillarChangeMoveSelector extends GenericMoveSelector {
     public long getSize() {
         if (!(valueSelector instanceof EntityIndependentValueSelector)) {
             throw new IllegalArgumentException("To use the method getSize(), the moveSelector (" + this
-                    + ") needs to be based on an EntityIndependentValueSelector (" + valueSelector + ")."
-                    + " Check your @" + ValueRangeProvider.class.getSimpleName() + " annotations.");
+                                                       + ") needs to be based on an EntityIndependentValueSelector (" + valueSelector + ")."
+                                                       + " Check your @" + ValueRangeProvider.class.getSimpleName() + " annotations.");
         }
         return pillarSelector.getSize() * ((EntityIndependentValueSelector) valueSelector).getSize();
     }
@@ -112,7 +112,6 @@ public class PillarChangeMoveSelector extends GenericMoveSelector {
 
             return new PillarChangeMove(upcomingPillar, valueSelector.getVariableDescriptor(), toValue);
         }
-
     }
 
     private class RandomPillarChangeMoveIterator extends UpcomingSelectionIterator<Move> {
@@ -152,12 +151,10 @@ public class PillarChangeMoveSelector extends GenericMoveSelector {
 
             return new PillarChangeMove(pillar, valueSelector.getVariableDescriptor(), toValue);
         }
-
     }
 
     @Override
     public String toString() {
         return getClass().getSimpleName() + "(" + pillarSelector + ", " + valueSelector + ")";
     }
-
 }

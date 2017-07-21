@@ -32,7 +32,8 @@ public class TestdataInverseRelationSolution extends TestdataObject {
 
     public static SolutionDescriptor buildSolutionDescriptor() {
         return SolutionDescriptor.buildSolutionDescriptor(TestdataInverseRelationSolution.class,
-                TestdataInverseRelationEntity.class, TestdataInverseRelationValue.class);
+                                                          TestdataInverseRelationEntity.class,
+                                                          TestdataInverseRelationValue.class);
     }
 
     private List<TestdataInverseRelationValue> valueList;
@@ -78,5 +79,4 @@ public class TestdataInverseRelationSolution extends TestdataObject {
     // ************************************************************************
     // Complex methods
     // ************************************************************************
-
 }

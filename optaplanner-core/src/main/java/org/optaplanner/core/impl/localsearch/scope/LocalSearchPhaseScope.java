@@ -45,5 +45,4 @@ public class LocalSearchPhaseScope<Solution_> extends AbstractPhaseScope<Solutio
     // ************************************************************************
     // Calculated methods
     // ************************************************************************
-
 }

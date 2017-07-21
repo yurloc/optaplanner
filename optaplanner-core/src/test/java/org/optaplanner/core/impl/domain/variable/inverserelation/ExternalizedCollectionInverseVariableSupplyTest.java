@@ -27,7 +27,7 @@ import org.optaplanner.core.impl.testdata.domain.TestdataSolution;
 import org.optaplanner.core.impl.testdata.domain.TestdataValue;
 
 import static org.mockito.Mockito.*;
-import static org.optaplanner.core.impl.testdata.util.PlannerAssert.*;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.assertCollectionContainsExactly;
 
 public class ExternalizedCollectionInverseVariableSupplyTest {
 
@@ -35,7 +35,8 @@ public class ExternalizedCollectionInverseVariableSupplyTest {
     public void normal() {
         GenuineVariableDescriptor variableDescriptor = TestdataEntity.buildVariableDescriptorForValue();
         ScoreDirector scoreDirector = mock(ScoreDirector.class);
-        ExternalizedCollectionInverseVariableSupply supply = new ExternalizedCollectionInverseVariableSupply(variableDescriptor);
+        ExternalizedCollectionInverseVariableSupply supply = new ExternalizedCollectionInverseVariableSupply(
+                variableDescriptor);
 
         TestdataValue val1 = new TestdataValue("1");
         TestdataValue val2 = new TestdataValue("2");
@@ -66,5 +67,4 @@ public class ExternalizedCollectionInverseVariableSupplyTest {
 
         supply.clearWorkingSolution(scoreDirector);
     }
-
 }

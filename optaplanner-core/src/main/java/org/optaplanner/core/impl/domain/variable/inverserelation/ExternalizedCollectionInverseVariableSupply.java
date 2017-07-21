@@ -31,7 +31,8 @@ import org.optaplanner.core.impl.score.director.ScoreDirector;
 /**
  * Alternative to {@link CollectionInverseVariableListener}.
  */
-public class ExternalizedCollectionInverseVariableSupply implements StatefulVariableListener<Object>, CollectionInverseVariableSupply {
+public class ExternalizedCollectionInverseVariableSupply implements StatefulVariableListener<Object>,
+                                                                    CollectionInverseVariableSupply {
 
     protected final VariableDescriptor sourceVariableDescriptor;
 
@@ -97,13 +98,14 @@ public class ExternalizedCollectionInverseVariableSupply implements StatefulVari
             return;
         }
         Set<Object> inverseEntitySet = inverseEntitySetMap.computeIfAbsent(value,
-                k -> Collections.newSetFromMap(new IdentityHashMap<>()));
+                                                                           k -> Collections.newSetFromMap(
+                                                                                   new IdentityHashMap<>()));
         boolean addSucceeded = inverseEntitySet.add(entity);
         if (!addSucceeded) {
             throw new IllegalStateException("The supply (" + this + ") is corrupted,"
-                    + " because the entity (" + entity
-                    + ") for sourceVariable (" + sourceVariableDescriptor.getVariableName()
-                    + ") cannot be inserted: it was already inserted.");
+                                                    + " because the entity (" + entity
+                                                    + ") for sourceVariable (" + sourceVariableDescriptor.getVariableName()
+                                                    + ") cannot be inserted: it was already inserted.");
         }
     }
 
@@ -116,9 +118,9 @@ public class ExternalizedCollectionInverseVariableSupply implements StatefulVari
         boolean removeSucceeded = inverseEntitySet.remove(entity);
         if (!removeSucceeded) {
             throw new IllegalStateException("The supply (" + this + ") is corrupted,"
-                    + " because the entity (" + entity
-                    + ") for sourceVariable (" + sourceVariableDescriptor.getVariableName()
-                    + ") cannot be retracted: it was never inserted.");
+                                                    + " because the entity (" + entity
+                                                    + ") for sourceVariable (" + sourceVariableDescriptor.getVariableName()
+                                                    + ") cannot be retracted: it was never inserted.");
         }
         if (inverseEntitySet.isEmpty()) {
             inverseEntitySetMap.put(value, null);
@@ -138,5 +140,4 @@ public class ExternalizedCollectionInverseVariableSupply implements StatefulVari
     public String toString() {
         return getClass().getSimpleName() + "(" + sourceVariableDescriptor.getVariableName() + ")";
     }
-
 }

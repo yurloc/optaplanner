@@ -179,5 +179,4 @@ public final class SmallScalingOrderedSet<E> implements Set<E> {
             belowThreshold = true;
         }
     }
-
 }

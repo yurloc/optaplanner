@@ -26,5 +26,4 @@ public class TestdataOtherValue extends TestdataObject {
     public TestdataOtherValue(String code) {
         super(code);
     }
-
 }

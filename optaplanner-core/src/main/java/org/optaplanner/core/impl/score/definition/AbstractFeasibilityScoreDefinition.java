@@ -32,5 +32,4 @@ public abstract class AbstractFeasibilityScoreDefinition<S extends FeasibilitySc
     public AbstractFeasibilityScoreDefinition(String[] levelLabels) {
         super(levelLabels);
     }
-
 }

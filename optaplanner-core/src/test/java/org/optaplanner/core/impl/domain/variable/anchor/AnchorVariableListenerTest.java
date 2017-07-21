@@ -39,10 +39,12 @@ public class AnchorVariableListenerTest {
     @Test
     public void chained() {
         SolutionDescriptor solutionDescriptor = TestdataRichChainedSolution.buildSolutionDescriptor();
-        EntityDescriptor entityDescriptor = solutionDescriptor.findEntityDescriptorOrFail(TestdataRichChainedEntity.class);
+        EntityDescriptor entityDescriptor = solutionDescriptor.findEntityDescriptorOrFail(
+                TestdataRichChainedEntity.class);
         GenuineVariableDescriptor chainedObjectVariableDescriptor
                 = entityDescriptor.getGenuineVariableDescriptor("chainedObject");
-        ShadowVariableDescriptor nextEntityVariableDescriptor = entityDescriptor.getShadowVariableDescriptor("nextEntity");
+        ShadowVariableDescriptor nextEntityVariableDescriptor = entityDescriptor.getShadowVariableDescriptor(
+                "nextEntity");
         SingletonInverseVariableListener inverseVariableListener = new SingletonInverseVariableListener(
                 (InverseRelationShadowVariableDescriptor) nextEntityVariableDescriptor,
                 entityDescriptor.getGenuineVariableDescriptor("chainedObject"));
@@ -93,5 +95,4 @@ public class AnchorVariableListenerTest {
         inOrder.verify(scoreDirector).afterVariableChanged(anchorVariableDescriptor, a3);
         inOrder.verifyNoMoreInteractions();
     }
-
 }

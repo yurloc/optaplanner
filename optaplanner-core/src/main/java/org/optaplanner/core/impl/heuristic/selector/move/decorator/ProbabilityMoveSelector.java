@@ -42,19 +42,19 @@ public class ProbabilityMoveSelector extends AbstractMoveSelector implements Sel
     protected double probabilityWeightTotal = -1.0;
 
     public ProbabilityMoveSelector(MoveSelector childMoveSelector, SelectionCacheType cacheType,
-            SelectionProbabilityWeightFactory probabilityWeightFactory) {
+                                   SelectionProbabilityWeightFactory probabilityWeightFactory) {
         this.childMoveSelector = childMoveSelector;
         this.cacheType = cacheType;
         this.probabilityWeightFactory = probabilityWeightFactory;
         if (childMoveSelector.isNeverEnding()) {
             throw new IllegalStateException("The selector (" + this
-                    + ") has a childMoveSelector (" + childMoveSelector
-                    + ") with neverEnding (" + childMoveSelector.isNeverEnding() + ").");
+                                                    + ") has a childMoveSelector (" + childMoveSelector
+                                                    + ") with neverEnding (" + childMoveSelector.isNeverEnding() + ").");
         }
         phaseLifecycleSupport.addEventListener(childMoveSelector);
         if (cacheType.isNotCached()) {
             throw new IllegalArgumentException("The selector (" + this
-                    + ") does not support the cacheType (" + cacheType + ").");
+                                                       + ") does not support the cacheType (" + cacheType + ").");
         }
         phaseLifecycleSupport.addEventListener(new SelectionCacheLifecycleBridge(cacheType, this));
     }
@@ -129,5 +129,4 @@ public class ProbabilityMoveSelector extends AbstractMoveSelector implements Sel
     public String toString() {
         return "Probability(" + childMoveSelector + ")";
     }
-
 }

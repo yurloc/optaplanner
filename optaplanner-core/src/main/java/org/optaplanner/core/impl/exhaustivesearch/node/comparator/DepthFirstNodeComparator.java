@@ -24,7 +24,8 @@ import org.optaplanner.core.impl.exhaustivesearch.node.ExhaustiveSearchNode;
 /**
  * Investigate deeper nodes first.
  */
-public class DepthFirstNodeComparator implements Comparator<ExhaustiveSearchNode>, Serializable {
+public class DepthFirstNodeComparator implements Comparator<ExhaustiveSearchNode>,
+                                                 Serializable {
 
     private final boolean scoreBounderEnabled;
 
@@ -73,5 +74,4 @@ public class DepthFirstNodeComparator implements Comparator<ExhaustiveSearchNode
         // Investigate lower breadth index first (to respect ValueSortingManner)
         return Long.compare(b.getBreadth(), a.getBreadth());
     }
-
 }

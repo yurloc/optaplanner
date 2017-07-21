@@ -27,16 +27,23 @@ import org.optaplanner.core.impl.testdata.domain.TestdataEntity;
 import org.optaplanner.core.impl.testdata.domain.TestdataValue;
 
 import static org.mockito.Mockito.*;
-import static org.optaplanner.core.impl.testdata.util.PlannerAssert.*;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.assertAllCodesOfMoveSelector;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.assertCodesOfNeverEndingMoveSelector;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.verifyPhaseLifecycle;
 
 public class ChangeMoveSelectorTest {
 
     @Test
     public void original() {
         EntitySelector entitySelector = SelectorTestUtils.mockEntitySelector(TestdataEntity.class,
-                new TestdataEntity("a"), new TestdataEntity("b"), new TestdataEntity("c"), new TestdataEntity("d"));
+                                                                             new TestdataEntity("a"),
+                                                                             new TestdataEntity("b"),
+                                                                             new TestdataEntity("c"),
+                                                                             new TestdataEntity("d"));
         ValueSelector valueSelector = SelectorTestUtils.mockValueSelector(TestdataEntity.class, "value",
-                new TestdataValue("1"), new TestdataValue("2"), new TestdataValue("3"));
+                                                                          new TestdataValue("1"),
+                                                                          new TestdataValue("2"),
+                                                                          new TestdataValue("3"));
 
         ChangeMoveSelector moveSelector = new ChangeMoveSelector(entitySelector, valueSelector, false);
 
@@ -51,14 +58,16 @@ public class ChangeMoveSelectorTest {
         when(stepScopeA1.getPhaseScope()).thenReturn(phaseScopeA);
         moveSelector.stepStarted(stepScopeA1);
         assertAllCodesOfMoveSelector(moveSelector,
-                "a->1", "a->2", "a->3", "b->1", "b->2", "b->3", "c->1", "c->2", "c->3", "d->1", "d->2", "d->3");
+                                     "a->1", "a->2", "a->3", "b->1", "b->2", "b->3", "c->1", "c->2", "c->3", "d->1",
+                                     "d->2", "d->3");
         moveSelector.stepEnded(stepScopeA1);
 
         AbstractStepScope stepScopeA2 = mock(AbstractStepScope.class);
         when(stepScopeA2.getPhaseScope()).thenReturn(phaseScopeA);
         moveSelector.stepStarted(stepScopeA2);
         assertAllCodesOfMoveSelector(moveSelector,
-                "a->1", "a->2", "a->3", "b->1", "b->2", "b->3", "c->1", "c->2", "c->3", "d->1", "d->2", "d->3");
+                                     "a->1", "a->2", "a->3", "b->1", "b->2", "b->3", "c->1", "c->2", "c->3", "d->1",
+                                     "d->2", "d->3");
         moveSelector.stepEnded(stepScopeA2);
 
         moveSelector.phaseEnded(phaseScopeA);
@@ -71,21 +80,24 @@ public class ChangeMoveSelectorTest {
         when(stepScopeB1.getPhaseScope()).thenReturn(phaseScopeB);
         moveSelector.stepStarted(stepScopeB1);
         assertAllCodesOfMoveSelector(moveSelector,
-                "a->1", "a->2", "a->3", "b->1", "b->2", "b->3", "c->1", "c->2", "c->3", "d->1", "d->2", "d->3");
+                                     "a->1", "a->2", "a->3", "b->1", "b->2", "b->3", "c->1", "c->2", "c->3", "d->1",
+                                     "d->2", "d->3");
         moveSelector.stepEnded(stepScopeB1);
 
         AbstractStepScope stepScopeB2 = mock(AbstractStepScope.class);
         when(stepScopeB2.getPhaseScope()).thenReturn(phaseScopeB);
         moveSelector.stepStarted(stepScopeB2);
         assertAllCodesOfMoveSelector(moveSelector,
-                "a->1", "a->2", "a->3", "b->1", "b->2", "b->3", "c->1", "c->2", "c->3", "d->1", "d->2", "d->3");
+                                     "a->1", "a->2", "a->3", "b->1", "b->2", "b->3", "c->1", "c->2", "c->3", "d->1",
+                                     "d->2", "d->3");
         moveSelector.stepEnded(stepScopeB2);
 
         AbstractStepScope stepScopeB3 = mock(AbstractStepScope.class);
         when(stepScopeB3.getPhaseScope()).thenReturn(phaseScopeB);
         moveSelector.stepStarted(stepScopeB3);
         assertAllCodesOfMoveSelector(moveSelector,
-                "a->1", "a->2", "a->3", "b->1", "b->2", "b->3", "c->1", "c->2", "c->3", "d->1", "d->2", "d->3");
+                                     "a->1", "a->2", "a->3", "b->1", "b->2", "b->3", "c->1", "c->2", "c->3", "d->1",
+                                     "d->2", "d->3");
         moveSelector.stepEnded(stepScopeB3);
 
         moveSelector.phaseEnded(phaseScopeB);
@@ -100,7 +112,9 @@ public class ChangeMoveSelectorTest {
     public void emptyEntitySelectorOriginal() {
         EntitySelector entitySelector = SelectorTestUtils.mockEntitySelector(TestdataEntity.class);
         ValueSelector valueSelector = SelectorTestUtils.mockValueSelector(TestdataEntity.class, "value",
-                new TestdataValue("1"), new TestdataValue("2"), new TestdataValue("3"));
+                                                                          new TestdataValue("1"),
+                                                                          new TestdataValue("2"),
+                                                                          new TestdataValue("3"));
 
         ChangeMoveSelector moveSelector = new ChangeMoveSelector(entitySelector, valueSelector, false);
 
@@ -158,7 +172,10 @@ public class ChangeMoveSelectorTest {
     @Test
     public void emptyValueSelectorOriginal() {
         EntitySelector entitySelector = SelectorTestUtils.mockEntitySelector(TestdataEntity.class,
-                new TestdataEntity("a"), new TestdataEntity("b"), new TestdataEntity("c"), new TestdataEntity("d"));
+                                                                             new TestdataEntity("a"),
+                                                                             new TestdataEntity("b"),
+                                                                             new TestdataEntity("c"),
+                                                                             new TestdataEntity("d"));
         ValueSelector valueSelector = SelectorTestUtils.mockValueSelector(TestdataEntity.class, "value");
 
         ChangeMoveSelector moveSelector = new ChangeMoveSelector(entitySelector, valueSelector, false);
@@ -217,9 +234,14 @@ public class ChangeMoveSelectorTest {
     @Test
     public void randomSelection() {
         EntitySelector entitySelector = SelectorTestUtils.mockEntitySelector(TestdataEntity.class,
-                new TestdataEntity("a"), new TestdataEntity("b"), new TestdataEntity("c"), new TestdataEntity("d"));
+                                                                             new TestdataEntity("a"),
+                                                                             new TestdataEntity("b"),
+                                                                             new TestdataEntity("c"),
+                                                                             new TestdataEntity("d"));
         ValueSelector valueSelector = SelectorTestUtils.mockValueSelector(TestdataEntity.class, "value",
-                new TestdataValue("1"), new TestdataValue("2"), new TestdataValue("3"));
+                                                                          new TestdataValue("1"),
+                                                                          new TestdataValue("2"),
+                                                                          new TestdataValue("3"));
 
         ChangeMoveSelector moveSelector = new ChangeMoveSelector(entitySelector, valueSelector, true);
 
@@ -234,14 +256,14 @@ public class ChangeMoveSelectorTest {
         when(stepScopeA1.getPhaseScope()).thenReturn(phaseScopeA);
         moveSelector.stepStarted(stepScopeA1);
         assertCodesOfNeverEndingMoveSelector(moveSelector,
-                "a->1", "b->1", "c->1", "d->1", "a->1", "b->1", "c->1", "d->1");
+                                             "a->1", "b->1", "c->1", "d->1", "a->1", "b->1", "c->1", "d->1");
         moveSelector.stepEnded(stepScopeA1);
 
         AbstractStepScope stepScopeA2 = mock(AbstractStepScope.class);
         when(stepScopeA2.getPhaseScope()).thenReturn(phaseScopeA);
         moveSelector.stepStarted(stepScopeA2);
         assertCodesOfNeverEndingMoveSelector(moveSelector,
-                "a->1", "b->1", "c->1", "d->1", "a->1", "b->1", "c->1", "d->1");
+                                             "a->1", "b->1", "c->1", "d->1", "a->1", "b->1", "c->1", "d->1");
         moveSelector.stepEnded(stepScopeA2);
 
         moveSelector.phaseEnded(phaseScopeA);
@@ -254,21 +276,21 @@ public class ChangeMoveSelectorTest {
         when(stepScopeB1.getPhaseScope()).thenReturn(phaseScopeB);
         moveSelector.stepStarted(stepScopeB1);
         assertCodesOfNeverEndingMoveSelector(moveSelector,
-                "a->1", "b->1", "c->1", "d->1", "a->1", "b->1", "c->1", "d->1");
+                                             "a->1", "b->1", "c->1", "d->1", "a->1", "b->1", "c->1", "d->1");
         moveSelector.stepEnded(stepScopeB1);
 
         AbstractStepScope stepScopeB2 = mock(AbstractStepScope.class);
         when(stepScopeB2.getPhaseScope()).thenReturn(phaseScopeB);
         moveSelector.stepStarted(stepScopeB2);
         assertCodesOfNeverEndingMoveSelector(moveSelector,
-                "a->1", "b->1", "c->1", "d->1", "a->1", "b->1", "c->1", "d->1");
+                                             "a->1", "b->1", "c->1", "d->1", "a->1", "b->1", "c->1", "d->1");
         moveSelector.stepEnded(stepScopeB2);
 
         AbstractStepScope stepScopeB3 = mock(AbstractStepScope.class);
         when(stepScopeB3.getPhaseScope()).thenReturn(phaseScopeB);
         moveSelector.stepStarted(stepScopeB3);
         assertCodesOfNeverEndingMoveSelector(moveSelector,
-                "a->1", "b->1", "c->1", "d->1", "a->1", "b->1", "c->1", "d->1");
+                                             "a->1", "b->1", "c->1", "d->1", "a->1", "b->1", "c->1", "d->1");
         moveSelector.stepEnded(stepScopeB3);
 
         moveSelector.phaseEnded(phaseScopeB);
@@ -278,5 +300,4 @@ public class ChangeMoveSelectorTest {
         verifyPhaseLifecycle(entitySelector, 1, 2, 5);
         verifyPhaseLifecycle(valueSelector, 1, 2, 5);
     }
-
 }

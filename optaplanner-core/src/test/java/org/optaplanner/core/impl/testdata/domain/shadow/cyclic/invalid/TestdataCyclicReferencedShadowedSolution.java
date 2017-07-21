@@ -33,7 +33,7 @@ public class TestdataCyclicReferencedShadowedSolution extends TestdataObject {
 
     public static SolutionDescriptor buildSolutionDescriptor() {
         return SolutionDescriptor.buildSolutionDescriptor(TestdataCyclicReferencedShadowedSolution.class,
-                TestdataCyclicReferencedShadowedEntity.class);
+                                                          TestdataCyclicReferencedShadowedEntity.class);
     }
 
     private List<TestdataValue> valueList;
@@ -79,5 +79,4 @@ public class TestdataCyclicReferencedShadowedSolution extends TestdataObject {
     // ************************************************************************
     // Complex methods
     // ************************************************************************
-
 }

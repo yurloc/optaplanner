@@ -63,7 +63,7 @@ public class HardSoftLongScoreDefinition extends AbstractFeasibilityScoreDefinit
     public HardSoftLongScore fromLevelNumbers(int initScore, Number[] levelNumbers) {
         if (levelNumbers.length != getLevelsSize()) {
             throw new IllegalStateException("The levelNumbers (" + Arrays.toString(levelNumbers)
-                    + ")'s length (" + levelNumbers.length + ") must equal the levelSize (" + getLevelsSize() + ").");
+                                                    + ")'s length (" + levelNumbers.length + ") must equal the levelSize (" + getLevelsSize() + ").");
         }
         return HardSoftLongScore.valueOfUninitialized(initScore, (Long) levelNumbers[0], (Long) levelNumbers[1]);
     }
@@ -74,19 +74,20 @@ public class HardSoftLongScoreDefinition extends AbstractFeasibilityScoreDefinit
     }
 
     @Override
-    public HardSoftLongScore buildOptimisticBound(InitializingScoreTrend initializingScoreTrend, HardSoftLongScore score) {
+    public HardSoftLongScore buildOptimisticBound(InitializingScoreTrend initializingScoreTrend,
+                                                  HardSoftLongScore score) {
         InitializingScoreTrendLevel[] trendLevels = initializingScoreTrend.getTrendLevels();
         return HardSoftLongScore.valueOfUninitialized(0,
-                trendLevels[0] == InitializingScoreTrendLevel.ONLY_DOWN ? score.getHardScore() : Long.MAX_VALUE,
-                trendLevels[1] == InitializingScoreTrendLevel.ONLY_DOWN ? score.getSoftScore() : Long.MAX_VALUE);
+                                                      trendLevels[0] == InitializingScoreTrendLevel.ONLY_DOWN ? score.getHardScore() : Long.MAX_VALUE,
+                                                      trendLevels[1] == InitializingScoreTrendLevel.ONLY_DOWN ? score.getSoftScore() : Long.MAX_VALUE);
     }
 
     @Override
-    public HardSoftLongScore buildPessimisticBound(InitializingScoreTrend initializingScoreTrend, HardSoftLongScore score) {
+    public HardSoftLongScore buildPessimisticBound(InitializingScoreTrend initializingScoreTrend,
+                                                   HardSoftLongScore score) {
         InitializingScoreTrendLevel[] trendLevels = initializingScoreTrend.getTrendLevels();
         return HardSoftLongScore.valueOfUninitialized(0,
-                trendLevels[0] == InitializingScoreTrendLevel.ONLY_UP ? score.getHardScore() : Long.MIN_VALUE,
-                trendLevels[1] == InitializingScoreTrendLevel.ONLY_UP ? score.getSoftScore() : Long.MIN_VALUE);
+                                                      trendLevels[0] == InitializingScoreTrendLevel.ONLY_UP ? score.getHardScore() : Long.MIN_VALUE,
+                                                      trendLevels[1] == InitializingScoreTrendLevel.ONLY_UP ? score.getSoftScore() : Long.MIN_VALUE);
     }
-
 }

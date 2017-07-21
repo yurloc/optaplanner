@@ -32,7 +32,8 @@ public class TestdataRichChainedSolution extends TestdataObject {
 
     public static SolutionDescriptor<TestdataRichChainedSolution> buildSolutionDescriptor() {
         return SolutionDescriptor.buildSolutionDescriptor(TestdataRichChainedSolution.class,
-                TestdataRichChainedObject.class, TestdataRichChainedEntity.class);
+                                                          TestdataRichChainedObject.class,
+                                                          TestdataRichChainedEntity.class);
     }
 
     private List<TestdataRichChainedAnchor> chainedAnchorList;
@@ -79,5 +80,4 @@ public class TestdataRichChainedSolution extends TestdataObject {
     // ************************************************************************
     // Complex methods
     // ************************************************************************
-
 }

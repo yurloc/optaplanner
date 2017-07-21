@@ -43,5 +43,4 @@ public interface EntitySelector extends ListIterableSelector<Object> {
      * @see #iterator()
      */
     Iterator<Object> endingIterator();
-
 }

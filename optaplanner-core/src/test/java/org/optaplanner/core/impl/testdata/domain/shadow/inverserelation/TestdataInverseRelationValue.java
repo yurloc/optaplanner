@@ -43,5 +43,4 @@ public class TestdataInverseRelationValue extends TestdataObject {
     public void setEntities(Collection<TestdataInverseRelationEntity> entities) {
         this.entities = entities;
     }
-
 }

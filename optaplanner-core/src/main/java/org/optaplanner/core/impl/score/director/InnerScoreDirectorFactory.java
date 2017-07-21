@@ -66,5 +66,4 @@ public interface InnerScoreDirectorFactory<Solution_> extends ScoreDirectorFacto
      * @see InnerScoreDirector#assertWorkingScoreFromScratch(Score, Object)
      */
     void assertScoreFromScratch(Solution_ solution);
-
 }

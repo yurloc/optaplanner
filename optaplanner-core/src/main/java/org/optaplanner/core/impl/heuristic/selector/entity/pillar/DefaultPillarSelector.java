@@ -40,7 +40,8 @@ import org.optaplanner.core.impl.solver.scope.DefaultSolverScope;
  * @see PillarSelector
  */
 public class DefaultPillarSelector extends AbstractSelector
-        implements PillarSelector, SelectionCacheLifecycleListener {
+        implements PillarSelector,
+                   SelectionCacheLifecycleListener {
 
     protected static final SelectionCacheType CACHE_TYPE = SelectionCacheType.STEP;
 
@@ -59,8 +60,8 @@ public class DefaultPillarSelector extends AbstractSelector
     protected List<List<Object>> cachedBasePillarList = null;
 
     public DefaultPillarSelector(EntitySelector entitySelector,
-            Collection<GenuineVariableDescriptor> variableDescriptors, boolean randomSelection,
-            boolean subPillarEnabled, int minimumSubPillarSize, int maximumSubPillarSize) {
+                                 Collection<GenuineVariableDescriptor> variableDescriptors, boolean randomSelection,
+                                 boolean subPillarEnabled, int minimumSubPillarSize, int maximumSubPillarSize) {
         this.entitySelector = entitySelector;
         this.variableDescriptors = variableDescriptors;
         this.randomSelection = randomSelection;
@@ -69,27 +70,27 @@ public class DefaultPillarSelector extends AbstractSelector
             if (!entityClass.equals(
                     variableDescriptor.getEntityDescriptor().getEntityClass())) {
                 throw new IllegalStateException("The selector (" + this
-                        + ") has a variableDescriptor (" + variableDescriptor
-                        + ") with a entityClass (" + variableDescriptor.getEntityDescriptor().getEntityClass()
-                        + ") which is not equal to the entitySelector's entityClass (" + entityClass + ").");
+                                                        + ") has a variableDescriptor (" + variableDescriptor
+                                                        + ") with a entityClass (" + variableDescriptor.getEntityDescriptor().getEntityClass()
+                                                        + ") which is not equal to the entitySelector's entityClass (" + entityClass + ").");
             }
             if (variableDescriptor.isChained()) {
                 throw new IllegalStateException("The selector (" + this
-                        + ") has a variableDescriptor (" + variableDescriptor
-                        + ") which is chained (" + variableDescriptor.isChained() + ").");
+                                                        + ") has a variableDescriptor (" + variableDescriptor
+                                                        + ") which is chained (" + variableDescriptor.isChained() + ").");
             }
         }
         for (GenuineVariableDescriptor variableDescriptor : variableDescriptors) {
             if (variableDescriptor.isChained()) {
                 throw new IllegalStateException("The selector (" + this
-                        + ") cannot have a variableDescriptor (" + variableDescriptor
-                        + ") which is chained (" + variableDescriptor.isChained() + ").");
+                                                        + ") cannot have a variableDescriptor (" + variableDescriptor
+                                                        + ") which is chained (" + variableDescriptor.isChained() + ").");
             }
         }
         if (entitySelector.isNeverEnding()) {
             throw new IllegalStateException("The selector (" + this
-                    + ") has an entitySelector (" + entitySelector
-                    + ") with neverEnding (" + entitySelector.isNeverEnding() + ").");
+                                                    + ") has an entitySelector (" + entitySelector
+                                                    + ") with neverEnding (" + entitySelector.isNeverEnding() + ").");
         }
         phaseLifecycleSupport.addEventListener(entitySelector);
         phaseLifecycleSupport.addEventListener(new SelectionCacheLifecycleBridge(CACHE_TYPE, this));
@@ -98,19 +99,19 @@ public class DefaultPillarSelector extends AbstractSelector
         this.maximumSubPillarSize = maximumSubPillarSize;
         if (minimumSubPillarSize < 1) {
             throw new IllegalStateException("The selector (" + this
-                    + ")'s minimumPillarSize (" + minimumSubPillarSize
-                    + ") must be at least 1.");
+                                                    + ")'s minimumPillarSize (" + minimumSubPillarSize
+                                                    + ") must be at least 1.");
         }
         if (minimumSubPillarSize > maximumSubPillarSize) {
             throw new IllegalStateException("The minimumPillarSize (" + minimumSubPillarSize
-                    + ") must be at least maximumSubChainSize (" + maximumSubPillarSize + ").");
+                                                    + ") must be at least maximumSubChainSize (" + maximumSubPillarSize + ").");
         }
         if (!randomSelection && subPillarEnabled) {
             throw new IllegalStateException("The selector (" + this
-                    + ") with randomSelection  (" + randomSelection + ") and subPillarEnabled (" + subPillarEnabled
-                    + ") does not support non random selection with sub pillars" +
-                    " because the number of sub pillars scales exponentially.\n"
-                    + "Either set subPillarEnabled to false or use JIT random selection.");
+                                                    + ") with randomSelection  (" + randomSelection + ") and subPillarEnabled (" + subPillarEnabled
+                                                    + ") does not support non random selection with sub pillars" +
+                                                    " because the number of sub pillars scales exponentially.\n"
+                                                    + "Either set subPillarEnabled to false or use JIT random selection.");
         }
     }
 
@@ -133,8 +134,8 @@ public class DefaultPillarSelector extends AbstractSelector
         long entitySize = entitySelector.getSize();
         if (entitySize > (long) Integer.MAX_VALUE) {
             throw new IllegalStateException("The selector (" + this + ") has an entitySelector ("
-                    + entitySelector + ") with entitySize (" + entitySize
-                    + ") which is higher than Integer.MAX_VALUE.");
+                                                    + entitySelector + ") with entitySize (" + entitySize
+                                                    + ") which is higher than Integer.MAX_VALUE.");
         }
         Map<List<Object>, List<Object>> valueStateToPillarMap = new LinkedHashMap<>((int) entitySize);
         for (Object entity : entitySelector) {
@@ -178,9 +179,9 @@ public class DefaultPillarSelector extends AbstractSelector
             // for which n is pillar.getSize() and k iterates from minimumSubPillarSize to maximumSubPillarSize
             // This implies that a single pillar of size 64 is already too big to be held in a long
             throw new UnsupportedOperationException("The selector (" + this
-                    + ") with randomSelection  (" + randomSelection + ") and subPillarEnabled (" + subPillarEnabled
-                    + ") does not support getSize()" +
-                    " because the number of sub pillars scales exponentially.");
+                                                            + ") with randomSelection  (" + randomSelection + ") and subPillarEnabled (" + subPillarEnabled
+                                                            + ") does not support getSize()" +
+                                                            " because the number of sub pillars scales exponentially.");
         }
     }
 
@@ -215,7 +216,7 @@ public class DefaultPillarSelector extends AbstractSelector
             }
         } else {
             throw new IllegalStateException("The selector (" + this
-                    + ") does not support a ListIterator with randomSelection (" + randomSelection + ").");
+                                                    + ") does not support a ListIterator with randomSelection (" + randomSelection + ").");
         }
     }
 
@@ -231,7 +232,7 @@ public class DefaultPillarSelector extends AbstractSelector
             }
         } else {
             throw new IllegalStateException("The selector (" + this
-                    + ") does not support a ListIterator with randomSelection (" + randomSelection + ").");
+                                                    + ") does not support a ListIterator with randomSelection (" + randomSelection + ").");
         }
     }
 
@@ -276,7 +277,5 @@ public class DefaultPillarSelector extends AbstractSelector
             int baseListIndex = workingRandom.nextInt(cachedBasePillarList.size());
             return cachedBasePillarList.get(baseListIndex);
         }
-
     }
-
 }

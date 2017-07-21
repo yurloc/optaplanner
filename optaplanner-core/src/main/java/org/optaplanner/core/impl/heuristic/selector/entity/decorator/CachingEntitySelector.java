@@ -35,7 +35,7 @@ public class CachingEntitySelector extends AbstractCachingEntitySelector {
     protected final boolean randomSelection;
 
     public CachingEntitySelector(EntitySelector childEntitySelector, SelectionCacheType cacheType,
-            boolean randomSelection) {
+                                 boolean randomSelection) {
         super(childEntitySelector, cacheType);
         this.randomSelection = randomSelection;
     }
@@ -65,7 +65,7 @@ public class CachingEntitySelector extends AbstractCachingEntitySelector {
             return cachedEntityList.listIterator();
         } else {
             throw new IllegalStateException("The selector (" + this
-                    + ") does not support a ListIterator with randomSelection (" + randomSelection + ").");
+                                                    + ") does not support a ListIterator with randomSelection (" + randomSelection + ").");
         }
     }
 
@@ -75,7 +75,7 @@ public class CachingEntitySelector extends AbstractCachingEntitySelector {
             return cachedEntityList.listIterator(index);
         } else {
             throw new IllegalStateException("The selector (" + this
-                    + ") does not support a ListIterator with randomSelection (" + randomSelection + ").");
+                                                    + ") does not support a ListIterator with randomSelection (" + randomSelection + ").");
         }
     }
 
@@ -83,5 +83,4 @@ public class CachingEntitySelector extends AbstractCachingEntitySelector {
     public String toString() {
         return "Caching(" + childEntitySelector + ")";
     }
-
 }

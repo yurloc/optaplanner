@@ -24,12 +24,13 @@ import org.optaplanner.core.impl.localsearch.decider.acceptor.Acceptor;
 import org.optaplanner.core.impl.localsearch.decider.acceptor.CompositeAcceptor;
 import org.optaplanner.core.impl.localsearch.scope.LocalSearchMoveScope;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.*;
-import static org.optaplanner.core.impl.testdata.util.PlannerAssert.*;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.verifyPhaseLifecycle;
 
 public class CompositeAcceptorTest {
+
     @Test
     public void phaseLifecycle() {
         Acceptor acceptor1 = mock(Acceptor.class);
@@ -74,5 +75,4 @@ public class CompositeAcceptorTest {
         CompositeAcceptor acceptor = new CompositeAcceptor(acceptorList);
         return acceptor.isAccepted(mock(LocalSearchMoveScope.class));
     }
-
 }

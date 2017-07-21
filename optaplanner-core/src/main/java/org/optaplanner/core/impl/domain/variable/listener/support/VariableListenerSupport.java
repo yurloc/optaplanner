@@ -77,11 +77,14 @@ public class VariableListenerSupport<Solution_> implements SupplyManager {
                     if (nextGlobalOrder <= globalOrder) {
                         nextGlobalOrder = globalOrder + 1;
                     }
-                    VariableListenerNotifiable notifiable = new VariableListenerNotifiable(variableListener, globalOrder);
+                    VariableListenerNotifiable notifiable = new VariableListenerNotifiable(variableListener,
+                                                                                           globalOrder);
                     for (VariableDescriptor<Solution_> source : shadowVariableDescriptor.getSourceVariableDescriptorList()) {
-                        List<VariableListenerNotifiable> variableNotifiableList = sourceVariableToNotifiableMap.get(source);
+                        List<VariableListenerNotifiable> variableNotifiableList = sourceVariableToNotifiableMap.get(
+                                source);
                         variableNotifiableList.add(notifiable);
-                        List<VariableListenerNotifiable> entityNotifiableList = sourceEntityToNotifiableMap.get(source.getEntityDescriptor());
+                        List<VariableListenerNotifiable> entityNotifiableList = sourceEntityToNotifiableMap.get(
+                                source.getEntityDescriptor());
                         if (!entityNotifiableList.contains(notifiable)) {
                             entityNotifiableList.add(notifiable);
                         }
@@ -105,11 +108,13 @@ public class VariableListenerSupport<Solution_> implements SupplyManager {
                     variableListener.resetWorkingSolution(scoreDirector);
                 }
                 VariableDescriptor<Solution_> source = variableListener.getSourceVariableDescriptor();
-                VariableListenerNotifiable notifiable = new VariableListenerNotifiable(variableListener, nextGlobalOrder);
+                VariableListenerNotifiable notifiable = new VariableListenerNotifiable(variableListener,
+                                                                                       nextGlobalOrder);
                 nextGlobalOrder++;
                 List<VariableListenerNotifiable> variableNotifiableList = sourceVariableToNotifiableMap.get(source);
                 variableNotifiableList.add(notifiable);
-                List<VariableListenerNotifiable> entityNotifiableList = sourceEntityToNotifiableMap.get(source.getEntityDescriptor());
+                List<VariableListenerNotifiable> entityNotifiableList = sourceEntityToNotifiableMap.get(
+                        source.getEntityDescriptor());
                 if (!entityNotifiableList.contains(notifiable)) {
                     entityNotifiableList.add(notifiable);
                 }
@@ -213,16 +218,16 @@ public class VariableListenerSupport<Solution_> implements SupplyManager {
                         break;
                     default:
                         throw new IllegalStateException("The variableListenerNotificationType ("
-                                + notification.getType() + ") is not implemented.");
+                                                                + notification.getType() + ") is not implemented.");
                 }
                 notifiedCount++;
             }
             if (notifiedCount != notificationQueue.size()) {
                 throw new IllegalStateException("The variableListener (" + variableListener.getClass()
-                        + ") has been notified with notifiedCount (" + notifiedCount
-                        + ") but after notification it has different size (" + notificationQueue.size() + ").\n"
-                        + "Maybe that variableListener (" + variableListener.getClass()
-                        + ") changed an upstream shadow variable (which is illegal).");
+                                                        + ") has been notified with notifiedCount (" + notifiedCount
+                                                        + ") but after notification it has different size (" + notificationQueue.size() + ").\n"
+                                                        + "Maybe that variableListener (" + variableListener.getClass()
+                                                        + ") changed an upstream shadow variable (which is illegal).");
             }
             notificationQueue.clear();
         }
@@ -233,7 +238,8 @@ public class VariableListenerSupport<Solution_> implements SupplyManager {
         SolutionDescriptor<Solution_> solutionDescriptor = scoreDirector.getSolutionDescriptor();
         List<Object> entityList = scoreDirector.getWorkingEntityList();
         for (Object entity : entityList) {
-            EntityDescriptor<Solution_> entityDescriptor = solutionDescriptor.findEntityDescriptorOrFail(entity.getClass());
+            EntityDescriptor<Solution_> entityDescriptor = solutionDescriptor.findEntityDescriptorOrFail(
+                    entity.getClass());
             for (GenuineVariableDescriptor<Solution_> variableDescriptor : entityDescriptor.getGenuineVariableDescriptors()) {
                 beforeVariableChanged(variableDescriptor, entity);
                 // No change
@@ -246,11 +252,10 @@ public class VariableListenerSupport<Solution_> implements SupplyManager {
     public void assertNotificationQueuesAreEmpty() {
         if (!notificationQueuesAreEmpty) {
             throw new IllegalStateException("The notificationQueues might not be empty (" + notificationQueuesAreEmpty
-                    + ") so any shadow variables might be stale so score calculation is unreliable.\n"
-                    + "Maybe a " + ScoreDirector.class.getSimpleName() + ".before*() method was called"
-                    + " without calling " + ScoreDirector.class.getSimpleName() + ".triggerVariableListeners(),"
-                    + " before calling " + ScoreDirector.class.getSimpleName() + ".calculateScore().");
+                                                    + ") so any shadow variables might be stale so score calculation is unreliable.\n"
+                                                    + "Maybe a " + ScoreDirector.class.getSimpleName() + ".before*() method was called"
+                                                    + " without calling " + ScoreDirector.class.getSimpleName() + ".triggerVariableListeners(),"
+                                                    + " before calling " + ScoreDirector.class.getSimpleName() + ".calculateScore().");
         }
     }
-
 }

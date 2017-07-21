@@ -27,5 +27,4 @@ public interface RandomFactory {
      * @return never null
      */
     Random createRandom();
-
 }

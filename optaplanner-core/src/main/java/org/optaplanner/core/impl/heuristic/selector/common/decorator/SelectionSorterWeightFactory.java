@@ -37,5 +37,4 @@ public interface SelectionSorterWeightFactory<Solution_, T> {
      * @return never null, for example a {@link Integer}, {@link Double} or a more complex {@link Comparable}
      */
     Comparable createSorterWeight(Solution_ solution, T selection);
-
 }

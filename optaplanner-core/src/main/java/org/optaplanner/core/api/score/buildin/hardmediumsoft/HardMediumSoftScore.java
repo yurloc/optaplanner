@@ -40,7 +40,7 @@ public final class HardMediumSoftScore extends AbstractScore<HardMediumSoftScore
 
     public static HardMediumSoftScore parseScore(String scoreString) {
         String[] scoreTokens = parseScoreTokens(HardMediumSoftScore.class, scoreString,
-                HARD_LABEL, MEDIUM_LABEL, SOFT_LABEL);
+                                                HARD_LABEL, MEDIUM_LABEL, SOFT_LABEL);
         int initScore = parseInitScore(HardMediumSoftScore.class, scoreString, scoreTokens[0]);
         int hardScore = parseLevelAsInt(HardMediumSoftScore.class, scoreString, scoreTokens[1]);
         int mediumScore = parseLevelAsInt(HardMediumSoftScore.class, scoreString, scoreTokens[2]);
@@ -48,7 +48,8 @@ public final class HardMediumSoftScore extends AbstractScore<HardMediumSoftScore
         return valueOfUninitialized(initScore, hardScore, mediumScore, softScore);
     }
 
-    public static HardMediumSoftScore valueOfUninitialized(int initScore, int hardScore, int mediumScore, int softScore) {
+    public static HardMediumSoftScore valueOfUninitialized(int initScore, int hardScore, int mediumScore,
+                                                           int softScore) {
         return new HardMediumSoftScore(initScore, hardScore, mediumScore, softScore);
     }
 
@@ -251,5 +252,4 @@ public final class HardMediumSoftScore extends AbstractScore<HardMediumSoftScore
     public boolean isCompatibleArithmeticArgument(Score otherScore) {
         return otherScore instanceof HardMediumSoftScore;
     }
-
 }

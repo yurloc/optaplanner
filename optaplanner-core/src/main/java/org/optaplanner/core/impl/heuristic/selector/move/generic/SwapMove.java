@@ -41,7 +41,8 @@ public class SwapMove<Solution_> extends AbstractMove<Solution_> {
     protected final Object leftEntity;
     protected final Object rightEntity;
 
-    public SwapMove(List<GenuineVariableDescriptor<Solution_>> variableDescriptorList, Object leftEntity, Object rightEntity) {
+    public SwapMove(List<GenuineVariableDescriptor<Solution_>> variableDescriptorList, Object leftEntity,
+                    Object rightEntity) {
         this.variableDescriptorList = variableDescriptorList;
         this.leftEntity = leftEntity;
         this.rightEntity = rightEntity;
@@ -190,5 +191,4 @@ public class SwapMove<Solution_> extends AbstractMove<Solution_> {
             first = false;
         }
     }
-
 }

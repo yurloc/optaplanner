@@ -65,5 +65,4 @@ public class VariableListenerNotifiable implements Comparable<VariableListenerNo
     public String toString() {
         return "(" + globalOrder + ") " + variableListener;
     }
-
 }

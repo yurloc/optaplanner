@@ -48,5 +48,4 @@ public class EmptySolverFactory<Solution_> extends AbstractSolverFactory<Solutio
             throw new IllegalArgumentException("The solverConfig (" + solverConfig + ") cannot be null.");
         }
     }
-
 }

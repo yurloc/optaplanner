@@ -27,8 +27,9 @@ import org.optaplanner.core.impl.heuristic.selector.move.MoveSelector;
 import org.optaplanner.core.impl.heuristic.selector.move.decorator.CachingMoveSelector;
 import org.optaplanner.core.impl.heuristic.selector.move.decorator.ShufflingMoveSelector;
 
-import static org.junit.Assert.assertEquals;
-import static org.optaplanner.core.impl.testdata.util.PlannerAssert.*;
+import static org.junit.Assert.*;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.assertInstanceOf;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.assertNotInstanceOf;
 import static org.optaplanner.core.impl.testdata.util.PlannerAssert.assertSame;
 
 public class MoveSelectorConfigTest extends AbstractSelectorConfigTest {
@@ -236,5 +237,4 @@ public class MoveSelectorConfigTest extends AbstractSelectorConfigTest {
                 buildHeuristicConfigPolicy(),
                 SelectionCacheType.JUST_IN_TIME, SelectionOrder.RANDOM);
     }
-
 }

@@ -68,7 +68,7 @@ public enum SelectionOrder {
         if (selectionOrder == null || selectionOrder == INHERIT) {
             if (inheritedSelectionOrder == null) {
                 throw new IllegalArgumentException("The inheritedSelectionOrder (" + inheritedSelectionOrder
-                        + ") cannot be null.");
+                                                           + ") cannot be null.");
             }
             return inheritedSelectionOrder;
         }
@@ -86,7 +86,7 @@ public enum SelectionOrder {
             return false;
         } else {
             throw new IllegalStateException("The selectionOrder (" + this
-                    + ") cannot be casted to a randomSelectionBoolean.");
+                                                    + ") cannot be casted to a randomSelectionBoolean.");
         }
     }
 

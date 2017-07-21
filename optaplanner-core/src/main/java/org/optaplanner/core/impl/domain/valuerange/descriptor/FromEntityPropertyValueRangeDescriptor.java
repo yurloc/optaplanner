@@ -45,5 +45,4 @@ public class FromEntityPropertyValueRangeDescriptor<Solution_>
     public ValueRange<?> extractValueRange(Solution_ solution, Object entity) {
         return readValueRange(entity);
     }
-
 }

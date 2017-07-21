@@ -22,8 +22,8 @@ import org.optaplanner.core.impl.score.director.ScoreDirector;
 public class TestdataReinitializeEntityFilter implements SelectionFilter<TestdataReinitializeSolution, TestdataReinitializeEntity> {
 
     @Override
-    public boolean accept(ScoreDirector<TestdataReinitializeSolution> scoreDirector, TestdataReinitializeEntity entity) {
+    public boolean accept(ScoreDirector<TestdataReinitializeSolution> scoreDirector,
+                          TestdataReinitializeEntity entity) {
         return !entity.isInitialized();
     }
-
 }

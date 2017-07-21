@@ -24,7 +24,8 @@ import org.optaplanner.core.impl.domain.variable.inverserelation.SingletonInvers
 import org.optaplanner.core.impl.domain.variable.supply.Demand;
 import org.optaplanner.core.impl.score.director.InnerScoreDirector;
 
-public class AnchorVariableDemand implements Demand<AnchorVariableSupply>, Serializable {
+public class AnchorVariableDemand implements Demand<AnchorVariableSupply>,
+                                             Serializable {
 
     private static final int CLASS_NAME_HASH_CODE = AnchorVariableDemand.class.getName().hashCode() * 37;
 
@@ -77,5 +78,4 @@ public class AnchorVariableDemand implements Demand<AnchorVariableSupply>, Seria
     public String toString() {
         return getClass().getSimpleName() + "(" + sourceVariableDescriptor.getSimpleEntityAndVariableName() + ")";
     }
-
 }

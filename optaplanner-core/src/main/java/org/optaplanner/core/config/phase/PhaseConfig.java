@@ -65,7 +65,8 @@ public abstract class PhaseConfig<C extends PhaseConfig> extends AbstractConfig<
     // ************************************************************************
 
     public abstract Phase buildPhase(int phaseIndex,
-            HeuristicConfigPolicy solverConfigPolicy, BestSolutionRecaller bestSolutionRecaller, Termination solverTermination);
+                                     HeuristicConfigPolicy solverConfigPolicy,
+                                     BestSolutionRecaller bestSolutionRecaller, Termination solverTermination);
 
     protected Termination buildPhaseTermination(HeuristicConfigPolicy configPolicy, Termination solverTermination) {
         TerminationConfig terminationConfig_ = terminationConfig == null ? new TerminationConfig()
@@ -85,5 +86,4 @@ public abstract class PhaseConfig<C extends PhaseConfig> extends AbstractConfig<
     public String toString() {
         return getClass().getSimpleName();
     }
-
 }

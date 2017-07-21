@@ -54,7 +54,7 @@ public final class FieldMemberAccessor implements MemberAccessor {
             return field.get(bean);
         } catch (IllegalAccessException e) {
             throw new IllegalStateException("Cannot get the field (" + field.getName()
-                    + ") on bean of class (" + bean.getClass() + ").", e);
+                                                    + ") on bean of class (" + bean.getClass() + ").", e);
         }
     }
 
@@ -69,7 +69,7 @@ public final class FieldMemberAccessor implements MemberAccessor {
             field.set(bean, value);
         } catch (IllegalAccessException e) {
             throw new IllegalStateException("Cannot set the field (" + field.getName()
-                    + ") on bean of class (" + bean.getClass() + ").", e);
+                                                    + ") on bean of class (" + bean.getClass() + ").", e);
         }
     }
 
@@ -101,5 +101,4 @@ public final class FieldMemberAccessor implements MemberAccessor {
     public String toString() {
         return "field " + field;
     }
-
 }

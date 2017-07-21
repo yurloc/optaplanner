@@ -30,5 +30,4 @@ public class TestdataChainedAnchor extends TestdataObject implements TestdataCha
     // ************************************************************************
     // Complex methods
     // ************************************************************************
-
 }

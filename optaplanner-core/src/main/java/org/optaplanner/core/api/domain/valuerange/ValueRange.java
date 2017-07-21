@@ -71,5 +71,4 @@ public interface ValueRange<T> {
      * @return never null
      */
     Iterator<T> createRandomIterator(Random workingRandom);
-
 }

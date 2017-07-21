@@ -77,5 +77,4 @@ public class PhaseLifecycleTest {
         solver.solve(solution);
         PlannerAssert.verifyPhaseLifecycle(listener, 0, 0, 0);
     }
-
 }

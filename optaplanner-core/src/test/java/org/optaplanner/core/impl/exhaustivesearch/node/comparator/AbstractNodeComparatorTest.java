@@ -28,21 +28,21 @@ public abstract class AbstractNodeComparatorTest {
 
     protected ExhaustiveSearchNode buildNode(int depth, String score, long parentBreadth, long breadth) {
         return buildNode(depth,
-                SimpleScore.parseScore(score),
-                SimpleScore.parseScore(score).toInitializedScore(),
-                parentBreadth, breadth);
+                         SimpleScore.parseScore(score),
+                         SimpleScore.parseScore(score).toInitializedScore(),
+                         parentBreadth, breadth);
     }
 
     protected ExhaustiveSearchNode buildNode(int depth, String score, int optimisticBound,
-            long parentBreadth, long breadth) {
+                                             long parentBreadth, long breadth) {
         return buildNode(depth,
-                SimpleScore.parseScore(score),
-                SimpleScore.valueOf(optimisticBound),
-                parentBreadth, breadth);
+                         SimpleScore.parseScore(score),
+                         SimpleScore.valueOf(optimisticBound),
+                         parentBreadth, breadth);
     }
 
     protected ExhaustiveSearchNode buildNode(int depth, SimpleScore score, SimpleScore optimisticBound,
-            long parentBreadth, long breadth) {
+                                             long parentBreadth, long breadth) {
         ExhaustiveSearchNode node = mock(ExhaustiveSearchNode.class);
         when(node.getDepth()).thenReturn(depth);
         when(node.getScore()).thenReturn(score);
@@ -54,18 +54,17 @@ public abstract class AbstractNodeComparatorTest {
     }
 
     protected static void assertLesser(Comparator<ExhaustiveSearchNode> comparator,
-            ExhaustiveSearchNode a, ExhaustiveSearchNode b) {
+                                       ExhaustiveSearchNode a, ExhaustiveSearchNode b) {
         assertTrue("Node (" + a + ") must be lesser than node (" + b + ").", comparator.compare(a, b) < 0);
         assertTrue("Node (" + b + ") must be greater than node (" + a + ").", comparator.compare(b, a) > 0);
     }
 
     protected static void assertScoreCompareToOrder(Comparator<ExhaustiveSearchNode> comparator,
-            ExhaustiveSearchNode... nodes) {
+                                                    ExhaustiveSearchNode... nodes) {
         for (int i = 0; i < nodes.length; i++) {
             for (int j = i + 1; j < nodes.length; j++) {
                 assertLesser(comparator, nodes[i], nodes[j]);
             }
         }
     }
-
 }

@@ -151,5 +151,4 @@ public interface Score<S extends Score> extends Comparable<S> {
      * @return never null
      */
     String toShortString();
-
 }

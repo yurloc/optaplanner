@@ -75,5 +75,4 @@ public class HillClimbingAcceptorTest extends AbstractAcceptorTest {
 
         acceptor.phaseEnded(phaseScope);
     }
-
 }

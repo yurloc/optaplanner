@@ -112,5 +112,4 @@ public class PhaseToSolverTerminationBridge extends AbstractTermination {
     public String toString() {
         return "Bridge(" + solverTermination + ")";
     }
-
 }

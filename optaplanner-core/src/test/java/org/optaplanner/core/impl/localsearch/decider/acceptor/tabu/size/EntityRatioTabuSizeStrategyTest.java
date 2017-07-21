@@ -40,5 +40,4 @@ public class EntityRatioTabuSizeStrategyTest {
         assertEquals(1, new EntityRatioTabuSizeStrategy(0.0000001).determineTabuSize(stepScope));
         assertEquals(99, new EntityRatioTabuSizeStrategy(0.9999999).determineTabuSize(stepScope));
     }
-
 }

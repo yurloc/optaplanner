@@ -43,7 +43,7 @@ public class FromSolutionPropertyValueSelector extends AbstractValueSelector
     protected boolean cachedEntityListIsDirty = false;
 
     public FromSolutionPropertyValueSelector(EntityIndependentValueRangeDescriptor valueRangeDescriptor,
-            SelectionCacheType minimumCacheType, boolean randomSelection) {
+                                             SelectionCacheType minimumCacheType, boolean randomSelection) {
         this.valueRangeDescriptor = valueRangeDescriptor;
         this.minimumCacheType = minimumCacheType;
         this.randomSelection = randomSelection;
@@ -147,7 +147,7 @@ public class FromSolutionPropertyValueSelector extends AbstractValueSelector
 
     @Override
     public Iterator<Object> endingIterator(Object entity) {
-       return endingIterator();
+        return endingIterator();
     }
 
     public Iterator<Object> endingIterator() {
@@ -157,7 +157,7 @@ public class FromSolutionPropertyValueSelector extends AbstractValueSelector
     private void checkCachedEntityListIsDirty() {
         if (cachedEntityListIsDirty) {
             throw new IllegalStateException("The selector (" + this + ") with minimumCacheType (" + minimumCacheType
-                    + ")'s workingEntityList became dirty between steps but is still used afterwards.");
+                                                    + ")'s workingEntityList became dirty between steps but is still used afterwards.");
         }
     }
 
@@ -165,5 +165,4 @@ public class FromSolutionPropertyValueSelector extends AbstractValueSelector
     public String toString() {
         return getClass().getSimpleName() + "(" + getVariableDescriptor().getVariableName() + ")";
     }
-
 }

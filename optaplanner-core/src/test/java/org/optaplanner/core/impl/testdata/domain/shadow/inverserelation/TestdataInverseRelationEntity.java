@@ -33,7 +33,8 @@ public class TestdataInverseRelationEntity extends TestdataObject {
 
     public static GenuineVariableDescriptor buildVariableDescriptorForValue() {
         SolutionDescriptor solutionDescriptor = TestdataInverseRelationSolution.buildSolutionDescriptor();
-        EntityDescriptor entityDescriptor = solutionDescriptor.findEntityDescriptorOrFail(TestdataInverseRelationEntity.class);
+        EntityDescriptor entityDescriptor = solutionDescriptor.findEntityDescriptorOrFail(
+                TestdataInverseRelationEntity.class);
         return entityDescriptor.getGenuineVariableDescriptor("value");
     }
 
@@ -66,5 +67,4 @@ public class TestdataInverseRelationEntity extends TestdataObject {
     // ************************************************************************
     // Complex methods
     // ************************************************************************
-
 }

@@ -28,7 +28,9 @@ import org.optaplanner.core.impl.phase.scope.AbstractStepScope;
 import org.optaplanner.core.impl.solver.scope.DefaultSolverScope;
 
 import static org.mockito.Mockito.*;
-import static org.optaplanner.core.impl.testdata.util.PlannerAssert.*;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.assertAllCodesOfMoveSelector;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.assertCodesOfNeverEndingMoveSelector;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.verifyPhaseLifecycle;
 
 public class CachingMoveSelectorTest {
 
@@ -49,7 +51,8 @@ public class CachingMoveSelectorTest {
 
     public void runOriginalSelection(SelectionCacheType cacheType, int timesCalled) {
         MoveSelector childMoveSelector = SelectorTestUtils.mockMoveSelector(DummyMove.class,
-                new DummyMove("a1"), new DummyMove("a2"), new DummyMove("a3"));
+                                                                            new DummyMove("a1"), new DummyMove("a2"),
+                                                                            new DummyMove("a3"));
 
         CachingMoveSelector moveSelector = new CachingMoveSelector(childMoveSelector, cacheType, false);
         verify(childMoveSelector, times(1)).isNeverEnding();
@@ -123,7 +126,8 @@ public class CachingMoveSelectorTest {
 
     public void runRandomSelection(SelectionCacheType cacheType, int timesCalled) {
         MoveSelector childMoveSelector = SelectorTestUtils.mockMoveSelector(DummyMove.class,
-                new DummyMove("a1"), new DummyMove("a2"), new DummyMove("a3"));
+                                                                            new DummyMove("a1"), new DummyMove("a2"),
+                                                                            new DummyMove("a3"));
 
         CachingMoveSelector moveSelector = new CachingMoveSelector(childMoveSelector, cacheType, true);
         verify(childMoveSelector, times(1)).isNeverEnding();
@@ -178,5 +182,4 @@ public class CachingMoveSelectorTest {
         verify(childMoveSelector, times(timesCalled)).iterator();
         verify(childMoveSelector, times(timesCalled)).getSize();
     }
-
 }

@@ -41,13 +41,13 @@ public class MoveListFactoryToMoveSelectorBridge extends AbstractMoveSelector
     protected List<Move> cachedMoveList = null;
 
     public MoveListFactoryToMoveSelectorBridge(MoveListFactory moveListFactory,
-            SelectionCacheType cacheType, boolean randomSelection) {
+                                               SelectionCacheType cacheType, boolean randomSelection) {
         this.moveListFactory = moveListFactory;
         this.cacheType = cacheType;
         this.randomSelection = randomSelection;
         if (cacheType.isNotCached()) {
             throw new IllegalArgumentException("The selector (" + this
-                    + ") does not support the cacheType (" + cacheType + ").");
+                                                       + ") does not support the cacheType (" + cacheType + ").");
         }
         phaseLifecycleSupport.addEventListener(new SelectionCacheLifecycleBridge(cacheType, this));
     }
@@ -65,7 +65,7 @@ public class MoveListFactoryToMoveSelectorBridge extends AbstractMoveSelector
     public void constructCache(DefaultSolverScope solverScope) {
         cachedMoveList = moveListFactory.createMoveList(solverScope.getScoreDirector().getWorkingSolution());
         logger.trace("    Created cachedMoveList: size ({}), moveSelector ({}).",
-                cachedMoveList.size(), this);
+                     cachedMoveList.size(), this);
     }
 
     @Override
@@ -102,5 +102,4 @@ public class MoveListFactoryToMoveSelectorBridge extends AbstractMoveSelector
     public String toString() {
         return "MoveListFactory(" + moveListFactory.getClass() + ")";
     }
-
 }

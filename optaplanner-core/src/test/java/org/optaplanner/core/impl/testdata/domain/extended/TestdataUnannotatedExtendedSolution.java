@@ -45,5 +45,4 @@ public class TestdataUnannotatedExtendedSolution extends TestdataSolution {
     // ************************************************************************
     // Complex methods
     // ************************************************************************
-
 }

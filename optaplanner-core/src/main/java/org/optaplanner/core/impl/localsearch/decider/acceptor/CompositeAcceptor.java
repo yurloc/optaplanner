@@ -97,5 +97,4 @@ public class CompositeAcceptor extends AbstractAcceptor {
             acceptor.solvingEnded(solverScope);
         }
     }
-
 }

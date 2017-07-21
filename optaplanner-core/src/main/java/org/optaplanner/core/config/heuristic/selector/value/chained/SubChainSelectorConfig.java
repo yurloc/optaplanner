@@ -31,7 +31,7 @@ import org.optaplanner.core.impl.heuristic.selector.value.ValueSelector;
 import org.optaplanner.core.impl.heuristic.selector.value.chained.DefaultSubChainSelector;
 import org.optaplanner.core.impl.heuristic.selector.value.chained.SubChainSelector;
 
-import static org.apache.commons.lang3.ObjectUtils.*;
+import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
 
 @XStreamAlias("subChainSelector")
 public class SubChainSelectorConfig extends SelectorConfig<SubChainSelectorConfig> {
@@ -82,7 +82,6 @@ public class SubChainSelectorConfig extends SelectorConfig<SubChainSelectorConfi
     // ************************************************************************
 
     /**
-     *
      * @param configPolicy never null
      * @param entityDescriptor never null
      * @param minimumCacheType never null, If caching is used (different from {@link SelectionCacheType#JUST_IN_TIME}),
@@ -92,29 +91,31 @@ public class SubChainSelectorConfig extends SelectorConfig<SubChainSelectorConfi
      * @return never null
      */
     public SubChainSelector buildSubChainSelector(HeuristicConfigPolicy configPolicy,
-            EntityDescriptor entityDescriptor,
-            SelectionCacheType minimumCacheType, SelectionOrder inheritedSelectionOrder) {
+                                                  EntityDescriptor entityDescriptor,
+                                                  SelectionCacheType minimumCacheType,
+                                                  SelectionOrder inheritedSelectionOrder) {
         if (minimumCacheType.compareTo(SelectionCacheType.STEP) > 0) {
             throw new IllegalArgumentException("The subChainSelectorConfig (" + this
-                    + ")'s minimumCacheType (" + minimumCacheType
-                    + ") must not be higher than " + SelectionCacheType.STEP
-                    + " because the chains change every step.");
+                                                       + ")'s minimumCacheType (" + minimumCacheType
+                                                       + ") must not be higher than " + SelectionCacheType.STEP
+                                                       + " because the chains change every step.");
         }
         ValueSelectorConfig valueSelectorConfig_ = valueSelectorConfig == null ? new ValueSelectorConfig()
                 : valueSelectorConfig;
         // ValueSelector uses SelectionOrder.ORIGINAL because a SubChainSelector STEP caches the values
         ValueSelector valueSelector = valueSelectorConfig_.buildValueSelector(configPolicy,
-                entityDescriptor,
-                minimumCacheType, SelectionOrder.ORIGINAL);
+                                                                              entityDescriptor,
+                                                                              minimumCacheType,
+                                                                              SelectionOrder.ORIGINAL);
         if (!(valueSelector instanceof EntityIndependentValueSelector)) {
             throw new IllegalArgumentException("The minimumCacheType (" + this
-                    + ") needs to be based on an EntityIndependentValueSelector (" + valueSelector + ")."
-                    + " Check your @" + ValueRangeProvider.class.getSimpleName() + " annotations.");
+                                                       + ") needs to be based on an EntityIndependentValueSelector (" + valueSelector + ")."
+                                                       + " Check your @" + ValueRangeProvider.class.getSimpleName() + " annotations.");
         }
         return new DefaultSubChainSelector((EntityIndependentValueSelector) valueSelector,
-                inheritedSelectionOrder.toRandomSelectionBoolean(),
-                defaultIfNull(minimumSubChainSize, DEFAULT_MINIMUM_SUB_CHAIN_SIZE),
-                        defaultIfNull(maximumSubChainSize, DEFAULT_MAXIMUM_SUB_CHAIN_SIZE));
+                                           inheritedSelectionOrder.toRandomSelectionBoolean(),
+                                           defaultIfNull(minimumSubChainSize, DEFAULT_MINIMUM_SUB_CHAIN_SIZE),
+                                           defaultIfNull(maximumSubChainSize, DEFAULT_MAXIMUM_SUB_CHAIN_SIZE));
     }
 
     @Override
@@ -122,14 +123,13 @@ public class SubChainSelectorConfig extends SelectorConfig<SubChainSelectorConfi
         super.inherit(inheritedConfig);
         valueSelectorConfig = ConfigUtils.inheritConfig(valueSelectorConfig, inheritedConfig.getValueSelectorConfig());
         minimumSubChainSize = ConfigUtils.inheritOverwritableProperty(minimumSubChainSize,
-                inheritedConfig.getMinimumSubChainSize());
+                                                                      inheritedConfig.getMinimumSubChainSize());
         maximumSubChainSize = ConfigUtils.inheritOverwritableProperty(maximumSubChainSize,
-                inheritedConfig.getMaximumSubChainSize());
+                                                                      inheritedConfig.getMaximumSubChainSize());
     }
 
     @Override
     public String toString() {
         return getClass().getSimpleName() + "(" + valueSelectorConfig + ")";
     }
-
 }

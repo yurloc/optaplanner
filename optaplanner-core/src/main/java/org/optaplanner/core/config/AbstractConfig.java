@@ -49,8 +49,8 @@ public abstract class AbstractConfig<C extends AbstractConfig> {
             return configClass.newInstance();
         } catch (InstantiationException | IllegalAccessException e) {
             throw new IllegalStateException("The configClass (" + configClass
-                    + ") does not have a public no-arg constructor.\n"
-                    + "This is a bug, please report an issue with this stacktrace.", e);
+                                                    + ") does not have a public no-arg constructor.\n"
+                                                    + "This is a bug, please report an issue with this stacktrace.", e);
         }
     }
 
@@ -65,26 +65,26 @@ public abstract class AbstractConfig<C extends AbstractConfig> {
     // ************************************************************************
 
     protected EntityDescriptor deduceEntityDescriptor(SolutionDescriptor solutionDescriptor,
-            Class<?> entityClass) {
+                                                      Class<?> entityClass) {
         EntityDescriptor entityDescriptor;
         if (entityClass != null) {
             entityDescriptor = solutionDescriptor.getEntityDescriptorStrict(entityClass);
             if (entityDescriptor == null) {
                 throw new IllegalArgumentException("The config (" + this
-                        + ") has an entityClass (" + entityClass + ") that is not a known planning entity.\n"
-                        + "Check your solver configuration. If that class (" + entityClass.getSimpleName()
-                        + ") is not in the entityClassSet (" + solutionDescriptor.getEntityClassSet()
-                        + "), check your " + PlanningSolution.class.getSimpleName()
-                        + " implementation's annotated methods too.");
+                                                           + ") has an entityClass (" + entityClass + ") that is not a known planning entity.\n"
+                                                           + "Check your solver configuration. If that class (" + entityClass.getSimpleName()
+                                                           + ") is not in the entityClassSet (" + solutionDescriptor.getEntityClassSet()
+                                                           + "), check your " + PlanningSolution.class.getSimpleName()
+                                                           + " implementation's annotated methods too.");
             }
         } else {
             Collection<EntityDescriptor> entityDescriptors = solutionDescriptor.getGenuineEntityDescriptors();
             if (entityDescriptors.size() != 1) {
                 throw new IllegalArgumentException("The config (" + this
-                        + ") has no entityClass (" + entityClass
-                        + ") configured and because there are multiple in the entityClassSet ("
-                        + solutionDescriptor.getEntityClassSet()
-                        + "), it can not be deducted automatically.");
+                                                           + ") has no entityClass (" + entityClass
+                                                           + ") configured and because there are multiple in the entityClassSet ("
+                                                           + solutionDescriptor.getEntityClassSet()
+                                                           + "), it can not be deducted automatically.");
             }
             entityDescriptor = entityDescriptors.iterator().next();
         }
@@ -98,21 +98,22 @@ public abstract class AbstractConfig<C extends AbstractConfig> {
             variableDescriptor = entityDescriptor.getGenuineVariableDescriptor(variableName);
             if (variableDescriptor == null) {
                 throw new IllegalArgumentException("The config (" + this
-                        + ") has a variableName (" + variableName
-                        + ") which is not a valid planning variable on entityClass ("
-                        + entityDescriptor.getEntityClass() + ").\n"
-                        + entityDescriptor.buildInvalidVariableNameExceptionMessage(variableName));
+                                                           + ") has a variableName (" + variableName
+                                                           + ") which is not a valid planning variable on entityClass ("
+                                                           + entityDescriptor.getEntityClass() + ").\n"
+                                                           + entityDescriptor.buildInvalidVariableNameExceptionMessage(
+                        variableName));
             }
         } else {
             Collection<GenuineVariableDescriptor> variableDescriptors = entityDescriptor
                     .getGenuineVariableDescriptors();
             if (variableDescriptors.size() != 1) {
                 throw new IllegalArgumentException("The config (" + this
-                        + ") has no configured variableName (" + variableName
-                        + ") for entityClass (" + entityDescriptor.getEntityClass()
-                        + ") and because there are multiple variableNames ("
-                        + entityDescriptor.getGenuineVariableNameSet()
-                        + "), it can not be deducted automatically.");
+                                                           + ") has no configured variableName (" + variableName
+                                                           + ") for entityClass (" + entityDescriptor.getEntityClass()
+                                                           + ") and because there are multiple variableNames ("
+                                                           + entityDescriptor.getGenuineVariableNameSet()
+                                                           + "), it can not be deducted automatically.");
             }
             variableDescriptor = variableDescriptors.iterator().next();
         }
@@ -137,9 +138,9 @@ public abstract class AbstractConfig<C extends AbstractConfig> {
             }
             if (!found) {
                 throw new IllegalArgumentException("The config (" + this
-                        + ") has a variableNameInclude (" + variableNameInclude
-                        + ") which does not exist in the entity (" + entityDescriptor.getEntityClass()
-                        + ")'s variableDescriptorList (" + variableDescriptorList + ").");
+                                                           + ") has a variableNameInclude (" + variableNameInclude
+                                                           + ") which does not exist in the entity (" + entityDescriptor.getEntityClass()
+                                                           + ")'s variableDescriptorList (" + variableDescriptorList + ").");
             }
         }
         return resolvedVariableDescriptorList;
@@ -163,5 +164,4 @@ public abstract class AbstractConfig<C extends AbstractConfig> {
     public String toString() {
         return getClass().getSimpleName() + "()";
     }
-
 }

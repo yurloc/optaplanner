@@ -31,7 +31,8 @@ import org.optaplanner.core.impl.testdata.domain.TestdataEntity;
 import org.optaplanner.core.impl.testdata.domain.TestdataSolution;
 
 import static org.mockito.Mockito.*;
-import static org.optaplanner.core.impl.testdata.util.PlannerAssert.*;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.assertAllCodesOfEntitySelector;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.verifyPhaseLifecycle;
 
 public class FilteringEntitySelectorTest {
 
@@ -57,7 +58,10 @@ public class FilteringEntitySelectorTest {
 
     public void filter(SelectionCacheType cacheType, int timesCalled) {
         EntitySelector childEntitySelector = SelectorTestUtils.mockEntitySelector(TestdataEntity.class,
-                new TestdataEntity("e1"), new TestdataEntity("e2"), new TestdataEntity("e3"), new TestdataEntity("e4"));
+                                                                                  new TestdataEntity("e1"),
+                                                                                  new TestdataEntity("e2"),
+                                                                                  new TestdataEntity("e3"),
+                                                                                  new TestdataEntity("e4"));
 
         SelectionFilter<TestdataSolution, TestdataEntity> filter
                 = (scoreDirector, entity) -> !entity.getCode().equals("e3");
@@ -132,5 +136,4 @@ public class FilteringEntitySelectorTest {
         EntitySelector entitySelector = new FilteringEntitySelector(childEntitySelector, null);
         entitySelector.listIterator(0);
     }
-
 }

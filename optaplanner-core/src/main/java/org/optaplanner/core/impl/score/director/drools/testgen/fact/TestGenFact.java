@@ -35,5 +35,4 @@ public interface TestGenFact {
     List<TestGenFact> getDependencies();
 
     List<Class<?>> getImports();
-
 }

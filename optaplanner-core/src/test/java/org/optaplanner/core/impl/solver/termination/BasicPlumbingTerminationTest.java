@@ -22,7 +22,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.mock;
 
 public class BasicPlumbingTerminationTest {
 
@@ -60,5 +59,4 @@ public class BasicPlumbingTerminationTest {
         assertEquals(false, basicPlumbingTermination.waitForRestartSolverDecision());
         assertEquals(21, count.get());
     }
-
 }

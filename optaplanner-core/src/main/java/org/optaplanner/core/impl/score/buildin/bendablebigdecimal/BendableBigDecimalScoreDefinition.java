@@ -49,17 +49,17 @@ public class BendableBigDecimalScoreDefinition extends AbstractBendableScoreDefi
         BendableBigDecimalScore score = BendableBigDecimalScore.parseScore(scoreString);
         if (score.getHardLevelsSize() != hardLevelsSize) {
             throw new IllegalArgumentException("The scoreString (" + scoreString
-                    + ") for the scoreClass (" + BendableBigDecimalScore.class.getSimpleName()
-                    + ") doesn't follow the correct pattern:"
-                    + " the hardLevelsSize (" + score.getHardLevelsSize()
-                    + ") doesn't match the scoreDefinition's hardLevelsSize (" + hardLevelsSize + ").");
+                                                       + ") for the scoreClass (" + BendableBigDecimalScore.class.getSimpleName()
+                                                       + ") doesn't follow the correct pattern:"
+                                                       + " the hardLevelsSize (" + score.getHardLevelsSize()
+                                                       + ") doesn't match the scoreDefinition's hardLevelsSize (" + hardLevelsSize + ").");
         }
         if (score.getSoftLevelsSize() != softLevelsSize) {
             throw new IllegalArgumentException("The scoreString (" + scoreString
-                    + ") for the scoreClass (" + BendableBigDecimalScore.class.getSimpleName()
-                    + ") doesn't follow the correct pattern:"
-                    + " the softLevelsSize (" + score.getSoftLevelsSize()
-                    + ") doesn't match the scoreDefinition's softLevelsSize (" + softLevelsSize + ").");
+                                                       + ") for the scoreClass (" + BendableBigDecimalScore.class.getSimpleName()
+                                                       + ") doesn't follow the correct pattern:"
+                                                       + " the softLevelsSize (" + score.getSoftLevelsSize()
+                                                       + ") doesn't match the scoreDefinition's softLevelsSize (" + softLevelsSize + ").");
         }
         return score;
     }
@@ -68,7 +68,7 @@ public class BendableBigDecimalScoreDefinition extends AbstractBendableScoreDefi
     public BendableBigDecimalScore fromLevelNumbers(int initScore, Number[] levelNumbers) {
         if (levelNumbers.length != getLevelsSize()) {
             throw new IllegalStateException("The levelNumbers (" + Arrays.toString(levelNumbers)
-                    + ")'s length (" + levelNumbers.length + ") must equal the levelSize (" + getLevelsSize() + ").");
+                                                    + ")'s length (" + levelNumbers.length + ") must equal the levelSize (" + getLevelsSize() + ").");
         }
         BigDecimal[] hardScores = new BigDecimal[hardLevelsSize];
         for (int i = 0; i < hardLevelsSize; i++) {
@@ -89,12 +89,12 @@ public class BendableBigDecimalScoreDefinition extends AbstractBendableScoreDefi
         int levelsSize = hardLevelsSize + softLevelsSize;
         if (scores.length != levelsSize) {
             throw new IllegalArgumentException("The scores (" + Arrays.toString(scores)
-                    + ")'s length (" + scores.length
-                    + ") is not levelsSize (" + levelsSize + ").");
+                                                       + ")'s length (" + scores.length
+                                                       + ") is not levelsSize (" + levelsSize + ").");
         }
         return BendableBigDecimalScore.valueOfUninitialized(initScore,
-                Arrays.copyOfRange(scores, 0, hardLevelsSize),
-                Arrays.copyOfRange(scores, hardLevelsSize, levelsSize));
+                                                            Arrays.copyOfRange(scores, 0, hardLevelsSize),
+                                                            Arrays.copyOfRange(scores, hardLevelsSize, levelsSize));
     }
 
     @Override
@@ -103,17 +103,18 @@ public class BendableBigDecimalScoreDefinition extends AbstractBendableScoreDefi
     }
 
     @Override
-    public BendableBigDecimalScore buildOptimisticBound(InitializingScoreTrend initializingScoreTrend, BendableBigDecimalScore score) {
+    public BendableBigDecimalScore buildOptimisticBound(InitializingScoreTrend initializingScoreTrend,
+                                                        BendableBigDecimalScore score) {
         // TODO https://issues.jboss.org/browse/PLANNER-232
         throw new UnsupportedOperationException("PLANNER-232: BigDecimalScore does not support bounds" +
-                " because a BigDecimal cannot represent infinity.");
+                                                        " because a BigDecimal cannot represent infinity.");
     }
 
     @Override
-    public BendableBigDecimalScore buildPessimisticBound(InitializingScoreTrend initializingScoreTrend, BendableBigDecimalScore score) {
+    public BendableBigDecimalScore buildPessimisticBound(InitializingScoreTrend initializingScoreTrend,
+                                                         BendableBigDecimalScore score) {
         // TODO https://issues.jboss.org/browse/PLANNER-232
         throw new UnsupportedOperationException("PLANNER-232: BigDecimalScore does not support bounds" +
-                " because a BigDecimal cannot represent infinity.");
+                                                        " because a BigDecimal cannot represent infinity.");
     }
-
 }

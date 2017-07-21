@@ -24,5 +24,4 @@ public abstract class ValueRangeIterator<S> implements Iterator<S> {
     public void remove() {
         throw new UnsupportedOperationException("The optional operation remove() is not supported.");
     }
-
 }

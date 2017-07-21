@@ -56,5 +56,4 @@ public class TestdataThirdPartySolutionPojo extends TestdataObject {
     // ************************************************************************
     // Complex methods
     // ************************************************************************
-
 }

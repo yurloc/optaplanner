@@ -26,5 +26,4 @@ public interface FeasibilityScoreDefinition<S extends FeasibilityScore> extends 
      * @return at least 0, at most {@link #getLevelsSize()}
      */
     int getFeasibleLevelsSize();
-
 }

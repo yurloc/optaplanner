@@ -29,9 +29,10 @@ import org.optaplanner.core.impl.testdata.domain.entityproviding.TestdataEntityP
 import org.optaplanner.core.impl.testdata.domain.multivar.TestdataMultiVarEntity;
 import org.optaplanner.core.impl.testdata.domain.multivar.TestdataMultiVarSolution;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
-import static org.optaplanner.core.impl.testdata.util.PlannerAssert.*;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.assertAllCodesOfCollection;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.assertCode;
 
 public class PillarChangeMoveTest {
 
@@ -83,7 +84,8 @@ public class PillarChangeMoveTest {
         ScoreDirector<TestdataEntityProvidingSolution> scoreDirector = mock(ScoreDirector.class);
         GenuineVariableDescriptor<TestdataEntityProvidingSolution> variableDescriptor = TestdataEntityProvidingEntity.buildVariableDescriptorForValue();
 
-        PillarChangeMove<TestdataEntityProvidingSolution> abMove = new PillarChangeMove<>(Arrays.<Object>asList(a, b), variableDescriptor, v2);
+        PillarChangeMove<TestdataEntityProvidingSolution> abMove = new PillarChangeMove<>(Arrays.<Object>asList(a, b),
+                                                                                          variableDescriptor, v2);
 
         a.setValue(v3);
         b.setValue(v3);
@@ -97,7 +99,8 @@ public class PillarChangeMoveTest {
         assertEquals(v2, a.getValue());
         assertEquals(v2, b.getValue());
 
-        PillarChangeMove<TestdataEntityProvidingSolution> abcMove = new PillarChangeMove<>(Arrays.<Object>asList(a, b, c), variableDescriptor, v2);
+        PillarChangeMove<TestdataEntityProvidingSolution> abcMove = new PillarChangeMove<>(
+                Arrays.<Object>asList(a, b, c), variableDescriptor, v2);
 
         a.setValue(v2);
         b.setValue(v2);
@@ -144,11 +147,15 @@ public class PillarChangeMoveTest {
         TestdataEntity e = new TestdataEntity("e", v1);
         GenuineVariableDescriptor<TestdataSolution> variableDescriptor = TestdataEntity.buildVariableDescriptorForValue();
 
-        assertEquals("[a, b] {null -> v1}", new PillarChangeMove<>(Arrays.<Object>asList(a, b), variableDescriptor, v1).toString());
-        assertEquals("[a, b] {null -> v2}", new PillarChangeMove<>(Arrays.<Object>asList(a, b), variableDescriptor, v2).toString());
-        assertEquals("[c, d, e] {v1 -> null}", new PillarChangeMove<>(Arrays.<Object>asList(c, d, e), variableDescriptor, null).toString());
-        assertEquals("[c, d, e] {v1 -> v2}", new PillarChangeMove<>(Arrays.<Object>asList(c, d, e), variableDescriptor, v2).toString());
-        assertEquals("[d] {v1 -> v2}", new PillarChangeMove<>(Arrays.<Object>asList(d), variableDescriptor, v2).toString());
+        assertEquals("[a, b] {null -> v1}",
+                     new PillarChangeMove<>(Arrays.<Object>asList(a, b), variableDescriptor, v1).toString());
+        assertEquals("[a, b] {null -> v2}",
+                     new PillarChangeMove<>(Arrays.<Object>asList(a, b), variableDescriptor, v2).toString());
+        assertEquals("[c, d, e] {v1 -> null}",
+                     new PillarChangeMove<>(Arrays.<Object>asList(c, d, e), variableDescriptor, null).toString());
+        assertEquals("[c, d, e] {v1 -> v2}",
+                     new PillarChangeMove<>(Arrays.<Object>asList(c, d, e), variableDescriptor, v2).toString());
+        assertEquals("[d] {v1 -> v2}",
+                     new PillarChangeMove<>(Arrays.<Object>asList(d), variableDescriptor, v2).toString());
     }
-
 }

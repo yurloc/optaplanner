@@ -123,6 +123,4 @@ public class ExhaustiveSearchNode {
     public String toString() {
         return getTreeId() + " (" + layer.getEntity() + ")";
     }
-
-
 }

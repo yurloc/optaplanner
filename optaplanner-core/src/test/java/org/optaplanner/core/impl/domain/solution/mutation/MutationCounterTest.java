@@ -127,5 +127,4 @@ public class MutationCounterTest {
 
         assertEquals(4, mutationCounter.countMutations(a, b));
     }
-
 }

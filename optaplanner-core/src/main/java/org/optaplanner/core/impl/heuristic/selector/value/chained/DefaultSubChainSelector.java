@@ -41,7 +41,8 @@ import org.optaplanner.core.impl.solver.scope.DefaultSolverScope;
  * This is the common {@link SubChainSelector} implementation.
  */
 public class DefaultSubChainSelector extends AbstractSelector
-        implements SubChainSelector, SelectionCacheLifecycleListener {
+        implements SubChainSelector,
+                   SelectionCacheLifecycleListener {
 
     protected static final SelectionCacheType CACHE_TYPE = SelectionCacheType.STEP;
 
@@ -60,19 +61,19 @@ public class DefaultSubChainSelector extends AbstractSelector
     protected List<SubChain> anchorTrailingChainList = null;
 
     public DefaultSubChainSelector(EntityIndependentValueSelector valueSelector, boolean randomSelection,
-            int minimumSubChainSize, int maximumSubChainSize) {
+                                   int minimumSubChainSize, int maximumSubChainSize) {
         this.valueSelector = valueSelector;
         this.randomSelection = randomSelection;
         if (!valueSelector.getVariableDescriptor().isChained()) {
             throw new IllegalArgumentException("The selector (" + this
-                    + ")'s valueSelector (" + valueSelector
-                    + ") must have a chained variableDescriptor chained ("
-                    + valueSelector.getVariableDescriptor().isChained() + ").");
+                                                       + ")'s valueSelector (" + valueSelector
+                                                       + ") must have a chained variableDescriptor chained ("
+                                                       + valueSelector.getVariableDescriptor().isChained() + ").");
         }
         if (valueSelector.isNeverEnding()) {
             throw new IllegalStateException("The selector (" + this
-                    + ") has a valueSelector (" + valueSelector
-                    + ") with neverEnding (" + valueSelector.isNeverEnding() + ").");
+                                                    + ") has a valueSelector (" + valueSelector
+                                                    + ") with neverEnding (" + valueSelector.isNeverEnding() + ").");
         }
         phaseLifecycleSupport.addEventListener(valueSelector);
         phaseLifecycleSupport.addEventListener(new SelectionCacheLifecycleBridge(CACHE_TYPE, this));
@@ -80,12 +81,12 @@ public class DefaultSubChainSelector extends AbstractSelector
         this.maximumSubChainSize = maximumSubChainSize;
         if (minimumSubChainSize < 1) {
             throw new IllegalStateException("The selector (" + this
-                    + ")'s minimumSubChainSize (" + minimumSubChainSize
-                    + ") must be at least 1.");
+                                                    + ")'s minimumSubChainSize (" + minimumSubChainSize
+                                                    + ") must be at least 1.");
         }
         if (minimumSubChainSize > maximumSubChainSize) {
             throw new IllegalStateException("The minimumSubChainSize (" + minimumSubChainSize
-                    + ") must be at least maximumSubChainSize (" + maximumSubChainSize + ").");
+                                                    + ") must be at least maximumSubChainSize (" + maximumSubChainSize + ").");
         }
     }
 
@@ -125,9 +126,9 @@ public class DefaultSubChainSelector extends AbstractSelector
         // Fail-fast when anchorTrailingChainList.size() could ever be too big
         if (valueSize > (long) Integer.MAX_VALUE) {
             throw new IllegalStateException("The selector (" + this
-                    + ") has a valueSelector (" + valueSelector
-                    + ") with valueSize (" + valueSize
-                    + ") which is higher than Integer.MAX_VALUE.");
+                                                    + ") has a valueSelector (" + valueSelector
+                                                    + ") with valueSize (" + valueSize
+                                                    + ") which is higher than Integer.MAX_VALUE.");
         }
         List<Object> anchorList = new ArrayList<>();
         for (Object value : valueSelector) {
@@ -201,7 +202,7 @@ public class DefaultSubChainSelector extends AbstractSelector
             return new OriginalSubChainIterator(anchorTrailingChainList.listIterator());
         } else {
             throw new IllegalStateException("The selector (" + this
-                    + ") does not support a ListIterator with randomSelection (" + randomSelection + ").");
+                                                    + ") does not support a ListIterator with randomSelection (" + randomSelection + ").");
         }
     }
 
@@ -216,7 +217,7 @@ public class DefaultSubChainSelector extends AbstractSelector
             return it;
         } else {
             throw new IllegalStateException("The selector (" + this
-                    + ") does not support a ListIterator with randomSelection (" + randomSelection + ").");
+                                                    + ") does not support a ListIterator with randomSelection (" + randomSelection + ").");
         }
     }
 
@@ -271,19 +272,19 @@ public class DefaultSubChainSelector extends AbstractSelector
         @Override
         public boolean hasPrevious() {
             throw new UnsupportedOperationException("The operation hasPrevious() is not supported."
-                    + " See https://issues.jboss.org/browse/PLANNER-37");
+                                                            + " See https://issues.jboss.org/browse/PLANNER-37");
         }
 
         @Override
         public SubChain previous() {
             throw new UnsupportedOperationException("The operation previous() is not supported."
-                    + " See https://issues.jboss.org/browse/PLANNER-37");
+                                                            + " See https://issues.jboss.org/browse/PLANNER-37");
         }
 
         @Override
         public int previousIndex() {
             throw new UnsupportedOperationException("The operation previousIndex() is not supported."
-                    + " See https://issues.jboss.org/browse/PLANNER-37");
+                                                            + " See https://issues.jboss.org/browse/PLANNER-37");
         }
 
         @Override
@@ -334,12 +335,10 @@ public class DefaultSubChainSelector extends AbstractSelector
             int anchorTrailingChainListIndex = workingRandom.nextInt(anchorTrailingChainList.size());
             return anchorTrailingChainList.get(anchorTrailingChainListIndex);
         }
-
     }
 
     @Override
     public String toString() {
         return getClass().getSimpleName() + "(" + valueSelector + ")";
     }
-
 }

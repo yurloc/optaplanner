@@ -43,5 +43,4 @@ public class TestdataRichChainedAnchor extends TestdataObject implements Testdat
     // ************************************************************************
     // Complex methods
     // ************************************************************************
-
 }

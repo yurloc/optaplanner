@@ -38,7 +38,8 @@ public class TestdataExtendedShadowedParentEntity extends TestdataObject {
 
     public static GenuineVariableDescriptor buildVariableDescriptorForValue() {
         SolutionDescriptor solutionDescriptor = TestdataExtendedShadowedSolution.buildSolutionDescriptor();
-        EntityDescriptor entityDescriptor = solutionDescriptor.findEntityDescriptorOrFail(TestdataExtendedShadowedParentEntity.class);
+        EntityDescriptor entityDescriptor = solutionDescriptor.findEntityDescriptorOrFail(
+                TestdataExtendedShadowedParentEntity.class);
         return entityDescriptor.getGenuineVariableDescriptor("value");
     }
 
@@ -114,7 +115,6 @@ public class TestdataExtendedShadowedParentEntity extends TestdataObject {
             entity.setFirstShadow((value == null) ? null : value.getCode() + "/firstShadow");
             scoreDirector.afterVariableChanged(entity, "firstShadow");
         }
-
     }
 
     public static class ThirdShadowUpdatingVariableListener extends VariableListenerAdapter<TestdataExtendedShadowedChildEntity> {
@@ -135,7 +135,5 @@ public class TestdataExtendedShadowedParentEntity extends TestdataObject {
             entity.setThirdShadow((secondShadow == null) ? null : secondShadow + "/thirdShadow");
             scoreDirector.afterVariableChanged(entity, "thirdShadow");
         }
-
     }
-
 }

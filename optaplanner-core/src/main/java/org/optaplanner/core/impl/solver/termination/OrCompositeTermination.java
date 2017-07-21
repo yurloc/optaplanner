@@ -118,5 +118,4 @@ public class OrCompositeTermination extends AbstractCompositeTermination {
     public String toString() {
         return "Or(" + terminationList + ")";
     }
-
 }

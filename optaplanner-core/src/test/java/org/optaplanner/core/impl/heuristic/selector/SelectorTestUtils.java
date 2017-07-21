@@ -60,7 +60,7 @@ public class SelectorTestUtils {
     }
 
     public static GenuineVariableDescriptor mockVariableDescriptor(EntityDescriptor entityDescriptor,
-            String variableName) {
+                                                                   String variableName) {
         GenuineVariableDescriptor variableDescriptor = mock(GenuineVariableDescriptor.class);
         when(variableDescriptor.getEntityDescriptor()).thenReturn(entityDescriptor);
         when(variableDescriptor.getVariableName()).thenReturn(variableName);
@@ -73,7 +73,7 @@ public class SelectorTestUtils {
     }
 
     public static EntitySelector mockEntitySelector(EntityDescriptor entityDescriptor,
-            Object... entities) {
+                                                    Object... entities) {
         EntitySelector entitySelector = mock(EntitySelector.class);
         when(entitySelector.getEntityDescriptor()).thenReturn(entityDescriptor);
         final List<Object> entityList = Arrays.<Object>asList(entities);
@@ -96,7 +96,7 @@ public class SelectorTestUtils {
     }
 
     public static ValueSelector mockValueSelector(EntityDescriptor entityDescriptor, String variableName,
-            Object... values) {
+                                                  Object... values) {
         GenuineVariableDescriptor variableDescriptor = mockVariableDescriptor(entityDescriptor, variableName);
         return mockValueSelector(variableDescriptor, values);
     }
@@ -113,19 +113,19 @@ public class SelectorTestUtils {
     }
 
     public static ValueSelector mockValueSelectorForEntity(Class<?> entityClass, Object entity, String variableName,
-            Object... values) {
+                                                           Object... values) {
         return mockValueSelectorForEntity(entityClass, variableName,
-                ImmutableListMultimap.builder().putAll(entity, values).build());
+                                          ImmutableListMultimap.builder().putAll(entity, values).build());
     }
 
     public static ValueSelector mockValueSelectorForEntity(Class<?> entityClass, String variableName,
-            ListMultimap<Object, Object> entityToValues) {
+                                                           ListMultimap<Object, Object> entityToValues) {
         GenuineVariableDescriptor variableDescriptor = mockVariableDescriptor(entityClass, variableName);
         return mockValueSelectorForEntity(variableDescriptor, entityToValues);
     }
 
     public static ValueSelector mockValueSelectorForEntity(GenuineVariableDescriptor variableDescriptor,
-            ListMultimap<Object, Object> entityToValues) {
+                                                           ListMultimap<Object, Object> entityToValues) {
         ValueSelector valueSelector = mock(ValueSelector.class);
         when(valueSelector.getVariableDescriptor()).thenReturn(variableDescriptor);
         for (Map.Entry<Object, Collection<Object>> entry : entityToValues.asMap().entrySet()) {
@@ -141,7 +141,8 @@ public class SelectorTestUtils {
     }
 
     public static EntityIndependentValueSelector mockEntityIndependentValueSelector(Class<?> entityClass,
-            String variableName, Object... values) {
+                                                                                    String variableName,
+                                                                                    Object... values) {
         GenuineVariableDescriptor variableDescriptor = mockVariableDescriptor(entityClass, variableName);
         when(variableDescriptor.isValueRangeEntityIndependent()).thenReturn(true);
         return mockEntityIndependentValueSelector(variableDescriptor, values);
@@ -163,7 +164,7 @@ public class SelectorTestUtils {
     }
 
     public static MoveSelector mockMoveSelector(Class<?> moveClass,
-            Move... moves) {
+                                                Move... moves) {
         MoveSelector moveSelector = mock(MoveSelector.class);
         final List<Move> moveList = Arrays.<Move>asList(moves);
         when(moveSelector.iterator()).thenAnswer(invocation -> moveList.iterator());
@@ -192,10 +193,11 @@ public class SelectorTestUtils {
             TestdataChainedEntity chainedEntity = (TestdataChainedEntity) chainedObjects[i];
             if (!Objects.equals(chainedObject, chainedEntity.getChainedObject())) {
                 fail("Chain assertion failed for chainedEntity (" + chainedEntity + ").\n"
-                        + "Expected: " + chainedObject + "\n"
-                        + "Actual:   "  + chainedEntity.getChainedObject() + "\n"
-                        + "Expected chain: " + Arrays.toString(chainedObjects) + "\n"
-                        + "Actual chain:   " + Arrays.toString(ArrayUtils.subarray(chainedObjects, 0, i)) + " ... [" + chainedEntity.getChainedObject() + ", " + chainedEntity + "] ...");
+                             + "Expected: " + chainedObject + "\n"
+                             + "Actual:   " + chainedEntity.getChainedObject() + "\n"
+                             + "Expected chain: " + Arrays.toString(chainedObjects) + "\n"
+                             + "Actual chain:   " + Arrays.toString(ArrayUtils.subarray(chainedObjects, 0,
+                                                                                        i)) + " ... [" + chainedEntity.getChainedObject() + ", " + chainedEntity + "] ...");
             }
             chainedObject = chainedEntity;
         }
@@ -203,5 +205,4 @@ public class SelectorTestUtils {
 
     private SelectorTestUtils() {
     }
-
 }

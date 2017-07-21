@@ -44,5 +44,4 @@ public class CustomPhaseScope<Solution_> extends AbstractPhaseScope<Solution_> {
     // ************************************************************************
     // Calculated methods
     // ************************************************************************
-
 }

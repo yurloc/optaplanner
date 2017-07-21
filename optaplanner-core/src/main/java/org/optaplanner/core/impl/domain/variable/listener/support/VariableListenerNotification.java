@@ -61,5 +61,4 @@ public class VariableListenerNotification {
         // A direct implementation (instead of HashCodeBuilder) to avoid dependencies
         return (((17 * 37) + System.identityHashCode(entity))) * 37 + type.hashCode();
     }
-
 }

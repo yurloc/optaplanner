@@ -37,7 +37,7 @@ public class DefaultCustomPhase<Solution_> extends AbstractPhase<Solution_> impl
     protected boolean forceUpdateBestSolution;
 
     public DefaultCustomPhase(int phaseIndex, String logIndentation,
-            BestSolutionRecaller<Solution_> bestSolutionRecaller, Termination termination) {
+                              BestSolutionRecaller<Solution_> bestSolutionRecaller, Termination termination) {
         super(phaseIndex, logIndentation, bestSolutionRecaller, termination);
     }
 
@@ -102,12 +102,12 @@ public class DefaultCustomPhase<Solution_> extends AbstractPhase<Solution_> impl
         CustomPhaseScope<Solution_> phaseScope = stepScope.getPhaseScope();
         if (logger.isDebugEnabled()) {
             logger.debug("{}    Custom step ({}), time spent ({}), score ({}), {} best score ({}).",
-                    logIndentation,
-                    stepScope.getStepIndex(),
-                    phaseScope.calculateSolverTimeMillisSpentUpToNow(),
-                    stepScope.getScore(),
-                    bestScoreImproved ? "new" : (forceUpdateBestSolution ? "forced" : "   "),
-                    phaseScope.getBestScore());
+                         logIndentation,
+                         stepScope.getStepIndex(),
+                         phaseScope.calculateSolverTimeMillisSpentUpToNow(),
+                         stepScope.getScore(),
+                         bestScoreImproved ? "new" : (forceUpdateBestSolution ? "forced" : "   "),
+                         phaseScope.getBestScore());
         }
     }
 
@@ -115,13 +115,12 @@ public class DefaultCustomPhase<Solution_> extends AbstractPhase<Solution_> impl
         super.phaseEnded(phaseScope);
         phaseScope.endingNow();
         logger.info("{}Custom phase ({}) ended: time spent ({}), best score ({}),"
-                        + " score calculation speed ({}/sec), step total ({}).",
-                logIndentation,
-                phaseIndex,
-                phaseScope.calculateSolverTimeMillisSpentUpToNow(),
-                phaseScope.getBestScore(),
-                phaseScope.getPhaseScoreCalculationSpeed(),
-                phaseScope.getNextStepIndex());
+                            + " score calculation speed ({}/sec), step total ({}).",
+                    logIndentation,
+                    phaseIndex,
+                    phaseScope.calculateSolverTimeMillisSpentUpToNow(),
+                    phaseScope.getBestScore(),
+                    phaseScope.getPhaseScoreCalculationSpeed(),
+                    phaseScope.getNextStepIndex());
     }
-
 }

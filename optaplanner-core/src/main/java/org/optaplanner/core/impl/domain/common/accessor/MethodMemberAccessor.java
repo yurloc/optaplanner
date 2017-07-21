@@ -39,11 +39,11 @@ public final class MethodMemberAccessor implements MemberAccessor {
         methodName = readMethod.getName();
         if (readMethod.getParameterTypes().length != 0) {
             throw new IllegalArgumentException("The readMethod (" + readMethod + ") must not have any parameters ("
-                    + Arrays.toString(readMethod.getParameterTypes()) + ").");
+                                                       + Arrays.toString(readMethod.getParameterTypes()) + ").");
         }
         if (readMethod.getReturnType() == void.class) {
             throw new IllegalArgumentException("The readMethod (" + readMethod + ") must have a return type ("
-                    + readMethod.getReturnType() + ").");
+                                                       + readMethod.getReturnType() + ").");
         }
     }
 
@@ -68,18 +68,19 @@ public final class MethodMemberAccessor implements MemberAccessor {
             return readMethod.invoke(bean);
         } catch (IllegalAccessException e) {
             throw new IllegalStateException("Cannot call property (" + methodName
-                    + ") getterMethod (" + readMethod + ") on bean of class (" + bean.getClass() + ").", e);
+                                                    + ") getterMethod (" + readMethod + ") on bean of class (" + bean.getClass() + ").",
+                                            e);
         } catch (InvocationTargetException e) {
             throw new IllegalStateException("The property (" + methodName
-                    + ") getterMethod (" + readMethod + ") on bean of class (" + bean.getClass()
-                    + ") throws an exception.",
-                    e.getCause());
+                                                    + ") getterMethod (" + readMethod + ") on bean of class (" + bean.getClass()
+                                                    + ") throws an exception.",
+                                            e.getCause());
         }
     }
 
     @Override
     public boolean supportSetter() {
-        return  false;
+        return false;
     }
 
     @Override
@@ -115,5 +116,4 @@ public final class MethodMemberAccessor implements MemberAccessor {
     public String toString() {
         return "method " + methodName + " on " + readMethod.getDeclaringClass();
     }
-
 }

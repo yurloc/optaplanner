@@ -27,7 +27,7 @@ import org.optaplanner.core.impl.heuristic.move.Move;
  * This {@link Iterator} does not shuffle and is never ending.
  * @param <S> Selection type, for example a {@link Move} class, an entity class or a value class.
  */
-public class CachedListRandomIterator<S> extends SelectionIterator<S>  {
+public class CachedListRandomIterator<S> extends SelectionIterator<S> {
 
     protected final List<S> cachedList;
     protected final Random workingRandom;
@@ -52,5 +52,4 @@ public class CachedListRandomIterator<S> extends SelectionIterator<S>  {
         int index = workingRandom.nextInt(cachedList.size());
         return cachedList.get(index);
     }
-
 }

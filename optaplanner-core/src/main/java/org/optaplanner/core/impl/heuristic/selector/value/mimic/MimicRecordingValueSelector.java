@@ -26,7 +26,8 @@ import org.optaplanner.core.impl.heuristic.selector.value.AbstractValueSelector;
 import org.optaplanner.core.impl.heuristic.selector.value.EntityIndependentValueSelector;
 
 public class MimicRecordingValueSelector extends AbstractValueSelector
-        implements ValueMimicRecorder, EntityIndependentValueSelector {
+        implements ValueMimicRecorder,
+                   EntityIndependentValueSelector {
 
     protected final EntityIndependentValueSelector childValueSelector;
 
@@ -107,7 +108,6 @@ public class MimicRecordingValueSelector extends AbstractValueSelector
             }
             return next;
         }
-
     }
 
     @Override
@@ -120,5 +120,4 @@ public class MimicRecordingValueSelector extends AbstractValueSelector
     public String toString() {
         return "Recording(" + childValueSelector + ")";
     }
-
 }

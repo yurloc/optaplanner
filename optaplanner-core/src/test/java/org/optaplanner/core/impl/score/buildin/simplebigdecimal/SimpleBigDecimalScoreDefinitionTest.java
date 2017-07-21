@@ -33,5 +33,4 @@ public class SimpleBigDecimalScoreDefinitionTest {
     }
 
     // Optimistic and pessimistic bounds are currently not supported for this score definition
-
 }

@@ -38,13 +38,12 @@ public class NoneLookUpStrategy implements LookUpStrategy {
     @Override
     public <E> E lookUpWorkingObject(Map<Object, Object> idToWorkingObjectMap, E externalObject) {
         throw new IllegalArgumentException("The externalObject (" + externalObject
-                + ") cannot be located.\n"
-                + "Maybe give the class (" + externalObject.getClass()
-                + ") a " + PlanningId.class.getSimpleName() + " annotation"
-                + " or change the " + PlanningSolution.class.getSimpleName() + " annotation's "
-                + LookUpStrategyType.class.getSimpleName()
-                + " or don't rely on functionality that depends on "
-                + ScoreDirector.class.getSimpleName() + ".lookUpWorkingObject().");
+                                                   + ") cannot be located.\n"
+                                                   + "Maybe give the class (" + externalObject.getClass()
+                                                   + ") a " + PlanningId.class.getSimpleName() + " annotation"
+                                                   + " or change the " + PlanningSolution.class.getSimpleName() + " annotation's "
+                                                   + LookUpStrategyType.class.getSimpleName()
+                                                   + " or don't rely on functionality that depends on "
+                                                   + ScoreDirector.class.getSimpleName() + ".lookUpWorkingObject().");
     }
-
 }

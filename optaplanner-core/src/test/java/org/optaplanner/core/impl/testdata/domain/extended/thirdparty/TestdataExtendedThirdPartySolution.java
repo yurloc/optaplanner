@@ -31,7 +31,8 @@ import org.optaplanner.core.impl.testdata.domain.TestdataValue;
 public class TestdataExtendedThirdPartySolution extends TestdataThirdPartySolutionPojo {
 
     public static SolutionDescriptor buildSolutionDescriptor() {
-        return SolutionDescriptor.buildSolutionDescriptor(TestdataExtendedThirdPartySolution.class, TestdataExtendedThirdPartyEntity.class);
+        return SolutionDescriptor.buildSolutionDescriptor(TestdataExtendedThirdPartySolution.class,
+                                                          TestdataExtendedThirdPartyEntity.class);
     }
 
     private Object extraObject;
@@ -83,5 +84,4 @@ public class TestdataExtendedThirdPartySolution extends TestdataThirdPartySoluti
     public List<TestdataThirdPartyEntityPojo> getEntityList() {
         return super.getEntityList();
     }
-
 }

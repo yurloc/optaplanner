@@ -68,5 +68,4 @@ public class HighestScoreFinalistPodium extends AbstractFinalistPodium {
         super.phaseEnded(phaseScope);
         finalistScore = null;
     }
-
 }

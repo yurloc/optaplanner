@@ -43,7 +43,7 @@ public enum SelectionCacheType {
         }
         if (cacheType != JUST_IN_TIME && cacheType.compareTo(minimumCacheType) < 0) {
             throw new IllegalArgumentException("The cacheType (" + cacheType
-                    + ") is wasteful because an ancestor has a higher cacheType (" + minimumCacheType + ").");
+                                                       + ") is wasteful because an ancestor has a higher cacheType (" + minimumCacheType + ").");
         }
         return cacheType;
     }

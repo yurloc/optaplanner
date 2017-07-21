@@ -77,5 +77,4 @@ public interface ScoreHolder {
      * @see ScoreDirector#getIndictmentMap()
      */
     Map<Object, Indictment> getIndictmentMap();
-
 }

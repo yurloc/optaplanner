@@ -27,8 +27,9 @@ import org.optaplanner.core.impl.heuristic.selector.value.ValueSelector;
 import org.optaplanner.core.impl.heuristic.selector.value.decorator.ShufflingValueSelector;
 import org.optaplanner.core.impl.testdata.domain.TestdataEntity;
 
-import static org.junit.Assert.assertEquals;
-import static org.optaplanner.core.impl.testdata.util.PlannerAssert.*;
+import static org.junit.Assert.*;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.assertInstanceOf;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.assertNotInstanceOf;
 
 public class ValueSelectorConfigTest extends AbstractSelectorConfigTest {
 
@@ -143,7 +144,7 @@ public class ValueSelectorConfigTest extends AbstractSelectorConfigTest {
                 SelectionCacheType.JUST_IN_TIME, SelectionOrder.RANDOM);
         assertInstanceOf(ShufflingValueSelector.class, valueSelector);
         assertInstanceOf(FromSolutionPropertyValueSelector.class,
-                ((ShufflingValueSelector) valueSelector).getChildValueSelector());
+                         ((ShufflingValueSelector) valueSelector).getChildValueSelector());
         assertEquals(SelectionCacheType.PHASE, valueSelector.getCacheType());
     }
 
@@ -160,7 +161,7 @@ public class ValueSelectorConfigTest extends AbstractSelectorConfigTest {
                 SelectionCacheType.JUST_IN_TIME, SelectionOrder.RANDOM);
         assertInstanceOf(ShufflingValueSelector.class, valueSelector);
         assertInstanceOf(FromSolutionPropertyValueSelector.class,
-                ((ShufflingValueSelector) valueSelector).getChildValueSelector());
+                         ((ShufflingValueSelector) valueSelector).getChildValueSelector());
         assertEquals(SelectionCacheType.STEP, valueSelector.getCacheType());
     }
 
@@ -176,5 +177,4 @@ public class ValueSelectorConfigTest extends AbstractSelectorConfigTest {
                 configPolicy, entityDescriptor,
                 SelectionCacheType.JUST_IN_TIME, SelectionOrder.RANDOM);
     }
-
 }

@@ -33,7 +33,7 @@ public class FilteringValueSelector extends AbstractValueSelector {
     public static ValueSelector create(ValueSelector valueSelector, List<SelectionFilter> filterList) {
         if (valueSelector instanceof EntityIndependentValueSelector) {
             return new EntityIndependentFilteringValueSelector((EntityIndependentValueSelector) valueSelector,
-                    filterList);
+                                                               filterList);
         } else {
             return new FilteringValueSelector(valueSelector, filterList);
         }
@@ -91,7 +91,7 @@ public class FilteringValueSelector extends AbstractValueSelector {
     @Override
     public Iterator<Object> iterator(Object entity) {
         return new JustInTimeFilteringValueIterator(childValueSelector.iterator(entity),
-                determineBailOutSize(entity));
+                                                    determineBailOutSize(entity));
     }
 
     protected class JustInTimeFilteringValueIterator extends UpcomingSelectionIterator<Object> {
@@ -116,7 +116,7 @@ public class FilteringValueSelector extends AbstractValueSelector {
                     // if childValueIterator is neverEnding and nothing is accepted, bail out of the infinite loop
                     if (attemptsBeforeBailOut <= 0L) {
                         logger.warn("Bailing out of neverEnding selector ({}) to avoid infinite loop.",
-                                FilteringValueSelector.this);
+                                    FilteringValueSelector.this);
                         return noUpcomingSelection();
                     }
                     attemptsBeforeBailOut--;
@@ -125,13 +125,12 @@ public class FilteringValueSelector extends AbstractValueSelector {
             } while (!accept(scoreDirector, next));
             return next;
         }
-
     }
 
     @Override
     public Iterator<Object> endingIterator(Object entity) {
         return new JustInTimeFilteringValueIterator(childValueSelector.endingIterator(entity),
-                determineBailOutSize(entity));
+                                                    determineBailOutSize(entity));
     }
 
     protected long determineBailOutSize(Object entity) {
@@ -154,5 +153,4 @@ public class FilteringValueSelector extends AbstractValueSelector {
     public String toString() {
         return "Filtering(" + childValueSelector + ")";
     }
-
 }

@@ -66,7 +66,5 @@ public class QueuedValuePlacer extends AbstractEntityPlacer implements EntityPla
             }
             return new Placement(moveIterator);
         }
-
     }
-
 }

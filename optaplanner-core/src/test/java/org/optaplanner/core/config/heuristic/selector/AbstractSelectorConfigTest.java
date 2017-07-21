@@ -37,5 +37,4 @@ public abstract class AbstractSelectorConfigTest {
         when(scoreDirectorFactory.getScoreDefinition()).thenReturn(new SimpleScoreDefinition());
         return new HeuristicConfigPolicy(EnvironmentMode.REPRODUCIBLE, scoreDirectorFactory);
     }
-
 }

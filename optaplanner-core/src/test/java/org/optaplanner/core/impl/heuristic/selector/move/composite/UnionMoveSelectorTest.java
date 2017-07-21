@@ -31,7 +31,8 @@ import org.optaplanner.core.impl.phase.scope.AbstractStepScope;
 import org.optaplanner.core.impl.solver.scope.DefaultSolverScope;
 
 import static org.mockito.Mockito.*;
-import static org.optaplanner.core.impl.testdata.util.PlannerAssert.*;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.assertAllCodesOfMoveSelector;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.verifyPhaseLifecycle;
 
 public class UnionMoveSelectorTest {
 
@@ -39,9 +40,10 @@ public class UnionMoveSelectorTest {
     public void originSelection() {
         ArrayList<MoveSelector> childMoveSelectorList = new ArrayList<>();
         childMoveSelectorList.add(SelectorTestUtils.mockMoveSelector(DummyMove.class,
-                new DummyMove("a1"), new DummyMove("a2"), new DummyMove("a3")));
+                                                                     new DummyMove("a1"), new DummyMove("a2"),
+                                                                     new DummyMove("a3")));
         childMoveSelectorList.add(SelectorTestUtils.mockMoveSelector(DummyMove.class,
-                new DummyMove("b1"), new DummyMove("b2")));
+                                                                     new DummyMove("b1"), new DummyMove("b2")));
         UnionMoveSelector moveSelector = new UnionMoveSelector(childMoveSelectorList, false);
 
         DefaultSolverScope solverScope = mock(DefaultSolverScope.class);
@@ -94,16 +96,19 @@ public class UnionMoveSelectorTest {
         ArrayList<MoveSelector> childMoveSelectorList = new ArrayList<>();
         Map<MoveSelector, Double> fixedProbabilityWeightMap = new HashMap<>();
         childMoveSelectorList.add(SelectorTestUtils.mockMoveSelector(DummyMove.class,
-                new DummyMove("a1"), new DummyMove("a2"), new DummyMove("a3")));
+                                                                     new DummyMove("a1"), new DummyMove("a2"),
+                                                                     new DummyMove("a3")));
         fixedProbabilityWeightMap.put(childMoveSelectorList.get(0), 1000.0);
         childMoveSelectorList.add(SelectorTestUtils.mockMoveSelector(DummyMove.class,
-                new DummyMove("b1"), new DummyMove("b2")));
+                                                                     new DummyMove("b1"), new DummyMove("b2")));
         fixedProbabilityWeightMap.put(childMoveSelectorList.get(1), 20.0);
         UnionMoveSelector moveSelector = new UnionMoveSelector(childMoveSelectorList, true,
-                new FixedSelectorProbabilityWeightFactory<>(fixedProbabilityWeightMap));
+                                                               new FixedSelectorProbabilityWeightFactory<>(
+                                                                       fixedProbabilityWeightMap));
 
         Random workingRandom = mock(Random.class);
-        when(workingRandom.nextDouble()).thenReturn(1.0 / 1020.0, 1019.0 / 1020.0, 1000.0 / 1020.0, 0.0, 999.0 / 1020.0);
+        when(workingRandom.nextDouble()).thenReturn(1.0 / 1020.0, 1019.0 / 1020.0, 1000.0 / 1020.0, 0.0,
+                                                    999.0 / 1020.0);
 
         DefaultSolverScope solverScope = mock(DefaultSolverScope.class);
         when(solverScope.getWorkingRandom()).thenReturn(workingRandom);
@@ -137,7 +142,8 @@ public class UnionMoveSelectorTest {
         childMoveSelectorList.add(SelectorTestUtils.mockMoveSelector(DummyMove.class));
         fixedProbabilityWeightMap.put(childMoveSelectorList.get(1), 20.0);
         UnionMoveSelector moveSelector = new UnionMoveSelector(childMoveSelectorList, true,
-                new FixedSelectorProbabilityWeightFactory<>(fixedProbabilityWeightMap));
+                                                               new FixedSelectorProbabilityWeightFactory<>(
+                                                                       fixedProbabilityWeightMap));
 
         Random workingRandom = mock(Random.class);
         when(workingRandom.nextDouble()).thenReturn(1.0);
@@ -164,5 +170,4 @@ public class UnionMoveSelectorTest {
         verifyPhaseLifecycle(childMoveSelectorList.get(0), 1, 1, 1);
         verifyPhaseLifecycle(childMoveSelectorList.get(1), 1, 1, 1);
     }
-
 }

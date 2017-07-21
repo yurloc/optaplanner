@@ -37,8 +37,8 @@ public abstract class SelectorConfig<C extends SelectorConfig> extends AbstractC
         switch (resolvedSelectionOrder) {
             case INHERIT:
                 throw new IllegalArgumentException("The moveSelectorConfig (" + this
-                        + ") has a resolvedSelectionOrder (" + resolvedSelectionOrder
-                        + ") which should have been resolved by now.");
+                                                           + ") has a resolvedSelectionOrder (" + resolvedSelectionOrder
+                                                           + ") which should have been resolved by now.");
             case ORIGINAL:
             case RANDOM:
                 break;
@@ -47,13 +47,13 @@ public abstract class SelectorConfig<C extends SelectorConfig> extends AbstractC
             case PROBABILISTIC:
                 if (resolvedCacheType.isNotCached()) {
                     throw new IllegalArgumentException("The moveSelectorConfig (" + this
-                            + ") has a resolvedSelectionOrder (" + resolvedSelectionOrder
-                            + ") which does not support the resolvedCacheType (" + resolvedCacheType + ").");
+                                                               + ") has a resolvedSelectionOrder (" + resolvedSelectionOrder
+                                                               + ") which does not support the resolvedCacheType (" + resolvedCacheType + ").");
                 }
                 break;
             default:
                 throw new IllegalStateException("The resolvedSelectionOrder (" + resolvedSelectionOrder
-                        + ") is not implemented.");
+                                                        + ") is not implemented.");
         }
     }
 
@@ -64,5 +64,4 @@ public abstract class SelectorConfig<C extends SelectorConfig> extends AbstractC
     @Override
     public void inherit(C inheritedConfig) {
     }
-
 }

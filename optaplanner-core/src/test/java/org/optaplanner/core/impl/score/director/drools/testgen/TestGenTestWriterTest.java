@@ -98,7 +98,7 @@ public class TestGenTestWriterTest {
         List<String> actualLines = new BufferedReader(new StringReader(actual)).lines().collect(Collectors.toList());
         for (int i = 0; i < Math.min(expectedLines.size(), actualLines.size()); i++) {
             String expectedLine = StringUtils.replace(expectedLines.get(i),
-                    DRL_FILE_PLACEHOLDER, new File(DRL_FILE_PATH).getAbsolutePath());
+                                                      DRL_FILE_PLACEHOLDER, new File(DRL_FILE_PATH).getAbsolutePath());
             assertEquals("At line " + (i + 1), expectedLine, actualLines.get(i));
         }
 
@@ -107,8 +107,7 @@ public class TestGenTestWriterTest {
 
         // finally check the whole string
         String expectedString = StringUtils.replace(new String(Files.readAllBytes(expected), StandardCharsets.UTF_8),
-                DRL_FILE_PLACEHOLDER, new File(DRL_FILE_PATH).getAbsolutePath());
+                                                    DRL_FILE_PLACEHOLDER, new File(DRL_FILE_PATH).getAbsolutePath());
         assertEquals(expectedString, actual);
     }
-
 }

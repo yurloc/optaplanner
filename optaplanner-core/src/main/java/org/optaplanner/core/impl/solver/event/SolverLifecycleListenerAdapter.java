@@ -34,5 +34,4 @@ public abstract class SolverLifecycleListenerAdapter<Solution_> implements Solve
     public void solvingEnded(DefaultSolverScope<Solution_> solverScope) {
         // Hook method
     }
-
 }

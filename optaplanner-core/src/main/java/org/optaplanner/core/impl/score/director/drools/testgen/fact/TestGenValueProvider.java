@@ -28,5 +28,4 @@ interface TestGenValueProvider<T> {
     List<TestGenFact> getRequiredFacts();
 
     void printSetup(StringBuilder sb);
-
 }

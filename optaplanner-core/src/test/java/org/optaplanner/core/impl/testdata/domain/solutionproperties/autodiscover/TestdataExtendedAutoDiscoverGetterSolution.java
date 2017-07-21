@@ -30,7 +30,8 @@ import org.optaplanner.core.impl.testdata.domain.TestdataValue;
 public class TestdataExtendedAutoDiscoverGetterSolution extends TestdataAutoDiscoverGetterSolution {
 
     public static SolutionDescriptor<TestdataExtendedAutoDiscoverGetterSolution> buildSubclassSolutionDescriptor() {
-        return SolutionDescriptor.buildSolutionDescriptor(TestdataExtendedAutoDiscoverGetterSolution.class, TestdataEntity.class);
+        return SolutionDescriptor.buildSolutionDescriptor(TestdataExtendedAutoDiscoverGetterSolution.class,
+                                                          TestdataEntity.class);
     }
 
     private TestdataObject singleProblemFactFieldOverride;
@@ -47,8 +48,9 @@ public class TestdataExtendedAutoDiscoverGetterSolution extends TestdataAutoDisc
     }
 
     public TestdataExtendedAutoDiscoverGetterSolution(String code, TestdataObject singleProblemFact,
-            List<TestdataValue> problemFactList, List<TestdataEntity> entityList,
-            TestdataEntity otherEntity) {
+                                                      List<TestdataValue> problemFactList,
+                                                      List<TestdataEntity> entityList,
+                                                      TestdataEntity otherEntity) {
         super(code);
         this.singleProblemFactFieldOverride = singleProblemFact;
         this.problemFactListFieldOverride = problemFactList;
@@ -77,5 +79,4 @@ public class TestdataExtendedAutoDiscoverGetterSolution extends TestdataAutoDisc
     public TestdataEntity getOtherEntity() {
         return otherEntityFieldOverride;
     }
-
 }

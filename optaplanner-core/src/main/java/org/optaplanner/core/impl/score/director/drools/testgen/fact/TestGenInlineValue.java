@@ -93,5 +93,4 @@ public class TestGenInlineValue implements TestGenFact {
     public String toString() {
         return valueProvider.toString();
     }
-
 }

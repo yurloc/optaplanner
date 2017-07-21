@@ -32,7 +32,7 @@ import org.optaplanner.core.impl.heuristic.selector.entity.EntitySelector;
 import org.optaplanner.core.impl.heuristic.selector.entity.pillar.DefaultPillarSelector;
 import org.optaplanner.core.impl.heuristic.selector.entity.pillar.PillarSelector;
 
-import static org.apache.commons.lang3.ObjectUtils.*;
+import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
 
 @XStreamAlias("pillarSelector")
 public class PillarSelectorConfig extends SelectorConfig<PillarSelectorConfig> {
@@ -90,50 +90,52 @@ public class PillarSelectorConfig extends SelectorConfig<PillarSelectorConfig> {
      * @return never null
      */
     public PillarSelector buildPillarSelector(HeuristicConfigPolicy configPolicy,
-            SelectionCacheType minimumCacheType, SelectionOrder inheritedSelectionOrder,
-            List<String> variableNameIncludeList) {
+                                              SelectionCacheType minimumCacheType,
+                                              SelectionOrder inheritedSelectionOrder,
+                                              List<String> variableNameIncludeList) {
         if (minimumCacheType.compareTo(SelectionCacheType.STEP) > 0) {
             throw new IllegalArgumentException("The pillarSelectorConfig (" + this
-                    + ")'s minimumCacheType (" + minimumCacheType
-                    + ") must not be higher than " + SelectionCacheType.STEP
-                    + " because the pillars change every step.");
+                                                       + ")'s minimumCacheType (" + minimumCacheType
+                                                       + ") must not be higher than " + SelectionCacheType.STEP
+                                                       + " because the pillars change every step.");
         }
         // EntitySelector uses SelectionOrder.ORIGINAL because a DefaultPillarSelector STEP caches the values
         EntitySelectorConfig entitySelectorConfig_ = entitySelectorConfig == null ? new EntitySelectorConfig()
                 : entitySelectorConfig;
         EntitySelector entitySelector = entitySelectorConfig_.buildEntitySelector(configPolicy,
-                minimumCacheType, SelectionOrder.ORIGINAL);
+                                                                                  minimumCacheType,
+                                                                                  SelectionOrder.ORIGINAL);
         Collection<GenuineVariableDescriptor> variableDescriptors = deduceVariableDescriptorList(
                 entitySelector.getEntityDescriptor(), variableNameIncludeList);
         if (BooleanUtils.isFalse(subPillarEnabled)
                 && (minimumSubPillarSize != null || maximumSubPillarSize != null)) {
             throw new IllegalArgumentException("The pillarSelectorConfig (" + this
-                    + ") must not have subPillarEnabled (" + subPillarEnabled
-                    + ") with minimumSubPillarSize (" + minimumSubPillarSize
-                    + ") and maximumSubPillarSize (" + maximumSubPillarSize + ").");
+                                                       + ") must not have subPillarEnabled (" + subPillarEnabled
+                                                       + ") with minimumSubPillarSize (" + minimumSubPillarSize
+                                                       + ") and maximumSubPillarSize (" + maximumSubPillarSize + ").");
         }
         return new DefaultPillarSelector(entitySelector, variableDescriptors,
-                inheritedSelectionOrder.toRandomSelectionBoolean(),
-                defaultIfNull(subPillarEnabled, true),
-                defaultIfNull(minimumSubPillarSize, 1),
-                defaultIfNull(maximumSubPillarSize, Integer.MAX_VALUE));
+                                         inheritedSelectionOrder.toRandomSelectionBoolean(),
+                                         defaultIfNull(subPillarEnabled, true),
+                                         defaultIfNull(minimumSubPillarSize, 1),
+                                         defaultIfNull(maximumSubPillarSize, Integer.MAX_VALUE));
     }
 
     @Override
     public void inherit(PillarSelectorConfig inheritedConfig) {
         super.inherit(inheritedConfig);
-        entitySelectorConfig = ConfigUtils.inheritConfig(entitySelectorConfig, inheritedConfig.getEntitySelectorConfig());
+        entitySelectorConfig = ConfigUtils.inheritConfig(entitySelectorConfig,
+                                                         inheritedConfig.getEntitySelectorConfig());
         subPillarEnabled = ConfigUtils.inheritOverwritableProperty(subPillarEnabled,
-                inheritedConfig.getSubPillarEnabled());
+                                                                   inheritedConfig.getSubPillarEnabled());
         minimumSubPillarSize = ConfigUtils.inheritOverwritableProperty(minimumSubPillarSize,
-                inheritedConfig.getMinimumSubPillarSize());
+                                                                       inheritedConfig.getMinimumSubPillarSize());
         maximumSubPillarSize = ConfigUtils.inheritOverwritableProperty(maximumSubPillarSize,
-                inheritedConfig.getMaximumSubPillarSize());
+                                                                       inheritedConfig.getMaximumSubPillarSize());
     }
 
     @Override
     public String toString() {
         return getClass().getSimpleName() + "(" + entitySelectorConfig + ")";
     }
-
 }

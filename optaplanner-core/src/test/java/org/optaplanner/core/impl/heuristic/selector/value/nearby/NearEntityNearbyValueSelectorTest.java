@@ -34,7 +34,8 @@ import org.optaplanner.core.impl.testdata.domain.chained.TestdataChainedEntity;
 import org.optaplanner.core.impl.testdata.domain.chained.TestdataChainedObject;
 
 import static org.mockito.Mockito.*;
-import static org.optaplanner.core.impl.testdata.util.PlannerAssert.*;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.assertAllCodesOfValueSelectorForEntity;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.verifyPhaseLifecycle;
 
 public class NearEntityNearbyValueSelectorTest {
 
@@ -93,7 +94,8 @@ public class NearEntityNearbyValueSelectorTest {
                 throw new IllegalStateException("The origin (" + origin + ") is not implemented.");
             }
         };
-        EntitySelector entitySelector = SelectorTestUtils.mockEntitySelector(variableDescriptor.getEntityDescriptor(), africa, europe, oceania);
+        EntitySelector entitySelector = SelectorTestUtils.mockEntitySelector(variableDescriptor.getEntityDescriptor(),
+                                                                             africa, europe, oceania);
         ManualEntityMimicRecorder entityMimicRecorder = new ManualEntityMimicRecorder(entitySelector);
         NearEntityNearbyValueSelector valueSelector = new NearEntityNearbyValueSelector(
                 childValueSelector, new MimicReplayingEntitySelector(entityMimicRecorder), meter, null, false);
@@ -210,7 +212,8 @@ public class NearEntityNearbyValueSelectorTest {
                 throw new IllegalStateException("The origin (" + origin + ") is not implemented.");
             }
         };
-        EntitySelector entitySelector = SelectorTestUtils.mockEntitySelector(variableDescriptor.getEntityDescriptor(), morocco, spain, australia);
+        EntitySelector entitySelector = SelectorTestUtils.mockEntitySelector(variableDescriptor.getEntityDescriptor(),
+                                                                             morocco, spain, australia);
         ManualEntityMimicRecorder entityMimicRecorder = new ManualEntityMimicRecorder(entitySelector);
         NearEntityNearbyValueSelector valueSelector = new NearEntityNearbyValueSelector(
                 childValueSelector, new MimicReplayingEntitySelector(entityMimicRecorder), meter, null, false);
@@ -274,5 +277,4 @@ public class NearEntityNearbyValueSelectorTest {
 //        verify(childValueSelector, times(5)).endingIterator(any());
 //        verify(childValueSelector, times(5)).getSize(any());
     }
-
 }

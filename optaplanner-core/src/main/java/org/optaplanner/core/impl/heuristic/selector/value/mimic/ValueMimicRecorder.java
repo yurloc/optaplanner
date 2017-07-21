@@ -64,5 +64,4 @@ public interface ValueMimicRecorder {
      * @see ValueSelector#endingIterator(Object)
      */
     Iterator<Object> endingIterator(Object entity);
-
 }

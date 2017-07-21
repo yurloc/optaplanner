@@ -46,5 +46,4 @@ public interface MemberAccessor extends AnnotatedElement {
     boolean supportSetter();
 
     void executeSetter(Object bean, Object value);
-
 }

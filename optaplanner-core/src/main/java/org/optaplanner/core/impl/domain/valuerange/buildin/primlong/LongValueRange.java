@@ -49,21 +49,21 @@ public class LongValueRange extends AbstractCountableValueRange<Long> {
         this.incrementUnit = incrementUnit;
         if (to < from) {
             throw new IllegalArgumentException("The " + getClass().getSimpleName()
-                    + " cannot have a from (" + from + ") which is strictly higher than its to (" + to + ").");
+                                                       + " cannot have a from (" + from + ") which is strictly higher than its to (" + to + ").");
         }
         if (incrementUnit <= 0L) {
             throw new IllegalArgumentException("The " + getClass().getSimpleName()
-                    + " must have strictly positive incrementUnit (" + incrementUnit + ").");
+                                                       + " must have strictly positive incrementUnit (" + incrementUnit + ").");
         }
         if ((to - from) < 0L) { // Overflow way to detect if ((to - from) > Long.MAX_VALUE)
             throw new IllegalArgumentException("The " + getClass().getSimpleName()
-                    + " cannot have a from (" + from + ") and to (" + to
-                    + ") with a gap greater than Long.MAX_VALUE (" + Long.MAX_VALUE + ").");
+                                                       + " cannot have a from (" + from + ") and to (" + to
+                                                       + ") with a gap greater than Long.MAX_VALUE (" + Long.MAX_VALUE + ").");
         }
         if ((to - from) % incrementUnit != 0L) {
             throw new IllegalArgumentException("The " + getClass().getSimpleName()
-                    + "'s incrementUnit (" + incrementUnit
-                    + ") must fit an integer number of times between from (" + from + ") and to (" + to + ").");
+                                                       + "'s incrementUnit (" + incrementUnit
+                                                       + ") must fit an integer number of times between from (" + from + ") and to (" + to + ").");
         }
     }
 
@@ -87,7 +87,7 @@ public class LongValueRange extends AbstractCountableValueRange<Long> {
     public Long get(long index) {
         if (index < 0L || index >= getSize()) {
             throw new IndexOutOfBoundsException("The index (" + index + ") must be >= 0 and < size ("
-                    + getSize() + ").");
+                                                        + getSize() + ").");
         }
         return index * incrementUnit + from;
     }
@@ -115,7 +115,6 @@ public class LongValueRange extends AbstractCountableValueRange<Long> {
             upcoming += incrementUnit;
             return next;
         }
-
     }
 
     @Override
@@ -145,12 +144,10 @@ public class LongValueRange extends AbstractCountableValueRange<Long> {
             long index = RandomUtils.nextLong(workingRandom, size);
             return index * incrementUnit + from;
         }
-
     }
 
     @Override
     public String toString() {
         return "[" + from + "-" + to + ")"; // Formatting: interval (mathematics) ISO 31-11
     }
-
 }

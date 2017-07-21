@@ -54,77 +54,77 @@ public class SimpleScoreTest extends AbstractScoreTest {
     @Test
     public void toInitializedScore() {
         assertEquals(SimpleScore.valueOf(-147),
-                SimpleScore.valueOf(-147).toInitializedScore());
+                     SimpleScore.valueOf(-147).toInitializedScore());
         assertEquals(SimpleScore.valueOf(-147),
-                SimpleScore.valueOfUninitialized(-7, -147).toInitializedScore());
+                     SimpleScore.valueOfUninitialized(-7, -147).toInitializedScore());
     }
 
     @Test
     public void withInitScore() {
         assertEquals(SimpleScore.valueOfUninitialized(-7, -147),
-                SimpleScore.valueOf(-147).withInitScore(-7));
+                     SimpleScore.valueOf(-147).withInitScore(-7));
     }
 
     @Test
     public void add() {
         assertEquals(SimpleScore.valueOf(19),
-                SimpleScore.valueOf(20).add(
-                        SimpleScore.valueOf(-1)));
+                     SimpleScore.valueOf(20).add(
+                             SimpleScore.valueOf(-1)));
         assertEquals(SimpleScore.valueOfUninitialized(-77, 19),
-                SimpleScore.valueOfUninitialized(-70, 20).add(
-                        SimpleScore.valueOfUninitialized(-7, -1)));
+                     SimpleScore.valueOfUninitialized(-70, 20).add(
+                             SimpleScore.valueOfUninitialized(-7, -1)));
     }
 
     @Test
     public void subtract() {
         assertEquals(SimpleScore.valueOf(21),
-                SimpleScore.valueOf(20).subtract(
-                        SimpleScore.valueOf(-1)));
+                     SimpleScore.valueOf(20).subtract(
+                             SimpleScore.valueOf(-1)));
         assertEquals(SimpleScore.valueOfUninitialized(-63, 21),
-                SimpleScore.valueOfUninitialized(-70, 20).subtract(
-                        SimpleScore.valueOfUninitialized(-7, -1)));
+                     SimpleScore.valueOfUninitialized(-70, 20).subtract(
+                             SimpleScore.valueOfUninitialized(-7, -1)));
     }
 
     @Test
     public void multiply() {
         assertEquals(SimpleScore.valueOf(6),
-                SimpleScore.valueOf(5).multiply(1.2));
+                     SimpleScore.valueOf(5).multiply(1.2));
         assertEquals(SimpleScore.valueOf(1),
-                SimpleScore.valueOf(1).multiply(1.2));
+                     SimpleScore.valueOf(1).multiply(1.2));
         assertEquals(SimpleScore.valueOf(4),
-                SimpleScore.valueOf(4).multiply(1.2));
+                     SimpleScore.valueOf(4).multiply(1.2));
         assertEquals(SimpleScore.valueOfUninitialized(-14, 8),
-                SimpleScore.valueOfUninitialized(-7, 4).multiply(2.0));
+                     SimpleScore.valueOfUninitialized(-7, 4).multiply(2.0));
     }
 
     @Test
     public void divide() {
         assertEquals(SimpleScore.valueOf(5),
-                SimpleScore.valueOf(25).divide(5.0));
+                     SimpleScore.valueOf(25).divide(5.0));
         assertEquals(SimpleScore.valueOf(4),
-                SimpleScore.valueOf(21).divide(5.0));
+                     SimpleScore.valueOf(21).divide(5.0));
         assertEquals(SimpleScore.valueOf(4),
-                SimpleScore.valueOf(24).divide(5.0));
+                     SimpleScore.valueOf(24).divide(5.0));
         assertEquals(SimpleScore.valueOfUninitialized(-7, 4),
-                SimpleScore.valueOfUninitialized(-14, 8).divide(2.0));
+                     SimpleScore.valueOfUninitialized(-14, 8).divide(2.0));
     }
 
     @Test
     public void power() {
         assertEquals(SimpleScore.valueOf(25),
-                SimpleScore.valueOf(5).power(2.0));
+                     SimpleScore.valueOf(5).power(2.0));
         assertEquals(SimpleScore.valueOf(5),
-                SimpleScore.valueOf(25).power(0.5));
+                     SimpleScore.valueOf(25).power(0.5));
         assertEquals(SimpleScore.valueOfUninitialized(-343, 125),
-                SimpleScore.valueOfUninitialized(-7, 5).power(3.0));
+                     SimpleScore.valueOfUninitialized(-7, 5).power(3.0));
     }
 
     @Test
     public void negate() {
         assertEquals(SimpleScore.valueOf(-5),
-                SimpleScore.valueOf(5).negate());
+                     SimpleScore.valueOf(5).negate());
         assertEquals(SimpleScore.valueOf(5),
-                SimpleScore.valueOf(-5).negate());
+                     SimpleScore.valueOf(-5).negate());
     }
 
     @Test
@@ -178,5 +178,4 @@ public class SimpleScoreTest extends AbstractScoreTest {
                 }
         );
     }
-
 }

@@ -40,7 +40,7 @@ public class SubChainChangeMove<Solution_> extends AbstractMove<Solution_> {
     protected final Object toPlanningValue;
 
     public SubChainChangeMove(SubChain subChain, GenuineVariableDescriptor<Solution_> variableDescriptor,
-            SingletonInverseVariableSupply inverseVariableSupply, Object toPlanningValue) {
+                              SingletonInverseVariableSupply inverseVariableSupply, Object toPlanningValue) {
         this.subChain = subChain;
         this.variableDescriptor = variableDescriptor;
         this.inverseVariableSupply = inverseVariableSupply;
@@ -147,5 +147,4 @@ public class SubChainChangeMove<Solution_> extends AbstractMove<Solution_> {
         Object oldFirstValue = variableDescriptor.getValue(subChain.getFirstEntity());
         return subChain.toDottedString() + " {" + oldFirstValue + " -> " + toPlanningValue + "}";
     }
-
 }

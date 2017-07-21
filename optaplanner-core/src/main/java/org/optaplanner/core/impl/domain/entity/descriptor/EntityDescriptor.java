@@ -52,7 +52,8 @@ import org.optaplanner.core.impl.heuristic.selector.common.decorator.SelectionSo
 import org.optaplanner.core.impl.heuristic.selector.common.decorator.WeightFactorySelectionSorter;
 import org.optaplanner.core.impl.score.director.ScoreDirector;
 
-import static org.optaplanner.core.config.util.ConfigUtils.MemberAccessorType.*;
+import static org.optaplanner.core.config.util.ConfigUtils.MemberAccessorType.FIELD_OR_GETTER_METHOD_WITH_SETTER;
+import static org.optaplanner.core.config.util.ConfigUtils.MemberAccessorType.FIELD_OR_READ_METHOD;
 
 /**
  * @param <Solution_> the solution type, the class with the {@link PlanningSolution} annotation
@@ -96,8 +97,8 @@ public class EntityDescriptor<Solution_> {
         PlanningEntity entityAnnotation = entityClass.getAnnotation(PlanningEntity.class);
         if (entityAnnotation == null) {
             throw new IllegalStateException("The entityClass (" + entityClass
-                    + ") has been specified as a planning entity in the configuration," +
-                    " but does not have a " + PlanningEntity.class.getSimpleName() + " annotation.");
+                                                    + ") has been specified as a planning entity in the configuration," +
+                                                    " but does not have a " + PlanningEntity.class.getSimpleName() + " annotation.");
         }
         processMovable(descriptorPolicy, entityAnnotation);
         processDifficulty(descriptorPolicy, entityAnnotation);
@@ -110,7 +111,8 @@ public class EntityDescriptor<Solution_> {
         }
         if (movableEntitySelectionFilterClass != null) {
             movableEntitySelectionFilter = ConfigUtils.newInstance(this,
-                    "movableEntitySelectionFilterClass", movableEntitySelectionFilterClass);
+                                                                   "movableEntitySelectionFilterClass",
+                                                                   movableEntitySelectionFilterClass);
         }
     }
 
@@ -126,19 +128,21 @@ public class EntityDescriptor<Solution_> {
         }
         if (difficultyComparatorClass != null && difficultyWeightFactoryClass != null) {
             throw new IllegalStateException("The entityClass (" + entityClass
-                    + ") cannot have a difficultyComparatorClass (" + difficultyComparatorClass.getName()
-                    + ") and a difficultyWeightFactoryClass (" + difficultyWeightFactoryClass.getName()
-                    + ") at the same time.");
+                                                    + ") cannot have a difficultyComparatorClass (" + difficultyComparatorClass.getName()
+                                                    + ") and a difficultyWeightFactoryClass (" + difficultyWeightFactoryClass.getName()
+                                                    + ") at the same time.");
         }
         if (difficultyComparatorClass != null) {
             Comparator<Object> difficultyComparator = ConfigUtils.newInstance(this,
-                    "difficultyComparatorClass", difficultyComparatorClass);
+                                                                              "difficultyComparatorClass",
+                                                                              difficultyComparatorClass);
             decreasingDifficultySorter = new ComparatorSelectionSorter<Solution_, Object>(
                     difficultyComparator, SelectionSorterOrder.DESCENDING);
         }
         if (difficultyWeightFactoryClass != null) {
             SelectionSorterWeightFactory<Solution_, Object> difficultyWeightFactory = ConfigUtils.newInstance(this,
-                    "difficultyWeightFactoryClass", difficultyWeightFactoryClass);
+                                                                                                              "difficultyWeightFactoryClass",
+                                                                                                              difficultyWeightFactoryClass);
             decreasingDifficultySorter = new WeightFactorySelectionSorter<>(
                     difficultyWeightFactory, SelectionSorterOrder.DESCENDING);
         }
@@ -175,13 +179,14 @@ public class EntityDescriptor<Solution_> {
         }
         if (noVariableAnnotation) {
             throw new IllegalStateException("The entityClass (" + entityClass
-                    + ") should have at least 1 getter method or 1 field with a "
-                    + PlanningVariable.class.getSimpleName() + " annotation or a shadow variable annotation.");
+                                                    + ") should have at least 1 getter method or 1 field with a "
+                                                    + PlanningVariable.class.getSimpleName() + " annotation or a shadow variable annotation.");
         }
     }
 
     private void registerVariableAccessor(DescriptorPolicy descriptorPolicy,
-            Class<? extends Annotation> variableAnnotationClass, MemberAccessor memberAccessor) {
+                                          Class<? extends Annotation> variableAnnotationClass,
+                                          MemberAccessor memberAccessor) {
         String memberName = memberAccessor.getName();
         if (declaredGenuineVariableDescriptorMap.containsKey(memberName)
                 || declaredShadowVariableDescriptorMap.containsKey(memberName)) {
@@ -190,14 +195,14 @@ public class EntityDescriptor<Solution_> {
                 duplicate = declaredShadowVariableDescriptorMap.get(memberName);
             }
             throw new IllegalStateException("The entityClass (" + entityClass
-                    + ") has a " + variableAnnotationClass.getSimpleName()
-                    + " annotated member (" + memberAccessor
-                    + ") that is duplicated by another member for variableDescriptor (" + duplicate + ").\n"
-                    + "  Verify that the annotation is not defined on both the field and its getter.");
+                                                    + ") has a " + variableAnnotationClass.getSimpleName()
+                                                    + " annotated member (" + memberAccessor
+                                                    + ") that is duplicated by another member for variableDescriptor (" + duplicate + ").\n"
+                                                    + "  Verify that the annotation is not defined on both the field and its getter.");
         }
         if (variableAnnotationClass.equals(PlanningVariable.class)) {
             GenuineVariableDescriptor<Solution_> variableDescriptor = new GenuineVariableDescriptor<>(this,
-                    memberAccessor);
+                                                                                                      memberAccessor);
             declaredGenuineVariableDescriptorMap.put(memberName, variableDescriptor);
             variableDescriptor.processAnnotations(descriptorPolicy);
         } else if (variableAnnotationClass.equals(InverseRelationShadowVariable.class)) {
@@ -217,7 +222,7 @@ public class EntityDescriptor<Solution_> {
             variableDescriptor.processAnnotations(descriptorPolicy);
         } else {
             throw new IllegalStateException("The variableAnnotationClass ("
-                    + variableAnnotationClass + ") is not implemented.");
+                                                    + variableAnnotationClass + ") is not implemented.");
         }
     }
 
@@ -394,7 +399,8 @@ public class EntityDescriptor<Solution_> {
                 + ") for entityClass (" + entityClass
                 + ") exists as a getter or field on that class,"
                 + " but isn't in the planning variables (" + effectiveVariableDescriptorMap.keySet() + ").\n"
-                + (Character.isUpperCase(variableName.charAt(0)) ? "Maybe the variableName (" + variableName + ") should start with a lowercase.\n" : "")
+                + (Character.isUpperCase(variableName.charAt(
+                0)) ? "Maybe the variableName (" + variableName + ") should start with a lowercase.\n" : "")
                 + "Maybe your planning entity's getter or field lacks a " + PlanningVariable.class.getSimpleName()
                 + " annotation or a shadow variable annotation.";
     }
@@ -426,7 +432,6 @@ public class EntityDescriptor<Solution_> {
             maximumValueCount = Math.max(maximumValueCount, variableDescriptor.getValueCount(solution, entity));
         }
         return maximumValueCount;
-
     }
 
     public long getProblemScale(Solution_ solution, Object entity) {
@@ -483,5 +488,4 @@ public class EntityDescriptor<Solution_> {
     public String toString() {
         return getClass().getSimpleName() + "(" + entityClass.getName() + ")";
     }
-
 }

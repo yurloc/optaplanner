@@ -41,5 +41,4 @@ public class TrendBasedScoreBounder implements ScoreBounder {
     public Score calculatePessimisticBound(ScoreDirector scoreDirector, Score score) {
         return scoreDefinition.buildPessimisticBound(initializingScoreTrend, score);
     }
-
 }

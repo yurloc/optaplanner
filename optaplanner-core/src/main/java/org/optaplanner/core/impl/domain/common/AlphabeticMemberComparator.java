@@ -22,7 +22,8 @@ import java.lang.reflect.Member;
 import java.lang.reflect.Method;
 import java.util.Comparator;
 
-public class AlphabeticMemberComparator implements Comparator<Member>, Serializable {
+public class AlphabeticMemberComparator implements Comparator<Member>,
+                                                   Serializable {
 
     @Override
     public int compare(Member a, Member b) {
@@ -71,5 +72,4 @@ public class AlphabeticMemberComparator implements Comparator<Member>, Serializa
         }
         return 0;
     }
-
 }

@@ -25,15 +25,16 @@ import org.optaplanner.core.impl.score.director.ScoreDirector;
 /**
  * @param <Solution_> the solution type, the class with the {@link PlanningSolution} annotation
  */
-public class AnchorVariableListener<Solution_> implements VariableListener<Object>, AnchorVariableSupply {
+public class AnchorVariableListener<Solution_> implements VariableListener<Object>,
+                                                          AnchorVariableSupply {
 
     protected final AnchorShadowVariableDescriptor<Solution_> anchorShadowVariableDescriptor;
     protected final VariableDescriptor<Solution_> previousVariableDescriptor;
     protected final SingletonInverseVariableSupply nextVariableSupply;
 
     public AnchorVariableListener(AnchorShadowVariableDescriptor<Solution_> anchorShadowVariableDescriptor,
-            VariableDescriptor<Solution_> previousVariableDescriptor,
-            SingletonInverseVariableSupply nextVariableSupply) {
+                                  VariableDescriptor<Solution_> previousVariableDescriptor,
+                                  SingletonInverseVariableSupply nextVariableSupply) {
         this.anchorShadowVariableDescriptor = anchorShadowVariableDescriptor;
         this.previousVariableDescriptor = previousVariableDescriptor;
         this.nextVariableSupply = nextVariableSupply;
@@ -92,5 +93,4 @@ public class AnchorVariableListener<Solution_> implements VariableListener<Objec
     public Object getAnchor(Object entity) {
         return anchorShadowVariableDescriptor.getValue(entity);
     }
-
 }

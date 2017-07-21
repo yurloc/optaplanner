@@ -28,9 +28,11 @@ import java.util.Random;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
-import static org.mockito.Matchers.*;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.*;
-import static org.optaplanner.core.impl.testdata.util.PlannerAssert.*;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.assertAllElementsOfIterator;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.assertElementsOfIterator;
 
 public class TemporalValueRangeTest {
 
@@ -139,33 +141,48 @@ public class TemporalValueRangeTest {
     public void getForLocalDateTime() {
         LocalDateTime fromTime = LocalDateTime.of(2016, 1, 1, 1, 1, 1);
         LocalDateTime toTime = LocalDateTime.of(2016, 7, 7, 7, 7, 7);
-        assertEquals(LocalDateTime.of(2016, 1, 1, 1, 1, 1), new TemporalValueRange<>(fromTime, toTime, 1, ChronoUnit.SECONDS).get(0));
-        assertEquals(LocalDateTime.of(2016, 1, 1, 1, 1, 2), new TemporalValueRange<>(fromTime, toTime, 1, ChronoUnit.SECONDS).get(1));
-        assertEquals(LocalDateTime.of(2016, 7, 7, 7, 7, 6), new TemporalValueRange<>(fromTime, toTime, 1, ChronoUnit.SECONDS).get(16265165));
+        assertEquals(LocalDateTime.of(2016, 1, 1, 1, 1, 1),
+                     new TemporalValueRange<>(fromTime, toTime, 1, ChronoUnit.SECONDS).get(0));
+        assertEquals(LocalDateTime.of(2016, 1, 1, 1, 1, 2),
+                     new TemporalValueRange<>(fromTime, toTime, 1, ChronoUnit.SECONDS).get(1));
+        assertEquals(LocalDateTime.of(2016, 7, 7, 7, 7, 6),
+                     new TemporalValueRange<>(fromTime, toTime, 1, ChronoUnit.SECONDS).get(16265165));
 
         fromTime = LocalDateTime.of(2016, 1, 1, 1, 1, 1);
         toTime = LocalDateTime.of(2016, 7, 7, 7, 7, 1);
-        assertEquals(LocalDateTime.of(2016, 1, 1, 1, 1, 1), new TemporalValueRange<>(fromTime, toTime, 1, ChronoUnit.MINUTES).get(0));
-        assertEquals(LocalDateTime.of(2016, 1, 1, 1, 2, 1), new TemporalValueRange<>(fromTime, toTime, 1, ChronoUnit.MINUTES).get(1));
-        assertEquals(LocalDateTime.of(2016, 7, 7, 7, 6, 1), new TemporalValueRange<>(fromTime, toTime, 1, ChronoUnit.MINUTES).get(271085));
+        assertEquals(LocalDateTime.of(2016, 1, 1, 1, 1, 1),
+                     new TemporalValueRange<>(fromTime, toTime, 1, ChronoUnit.MINUTES).get(0));
+        assertEquals(LocalDateTime.of(2016, 1, 1, 1, 2, 1),
+                     new TemporalValueRange<>(fromTime, toTime, 1, ChronoUnit.MINUTES).get(1));
+        assertEquals(LocalDateTime.of(2016, 7, 7, 7, 6, 1),
+                     new TemporalValueRange<>(fromTime, toTime, 1, ChronoUnit.MINUTES).get(271085));
 
         fromTime = LocalDateTime.of(2016, 1, 1, 1, 1, 1);
         toTime = LocalDateTime.of(2016, 7, 7, 7, 1, 1);
-        assertEquals(LocalDateTime.of(2016, 1, 1, 1, 1, 1), new TemporalValueRange<>(fromTime, toTime, 1, ChronoUnit.HOURS).get(0));
-        assertEquals(LocalDateTime.of(2016, 1, 1, 2, 1, 1), new TemporalValueRange<>(fromTime, toTime, 1, ChronoUnit.HOURS).get(1));
-        assertEquals(LocalDateTime.of(2016, 7, 7, 6, 1, 1), new TemporalValueRange<>(fromTime, toTime, 1, ChronoUnit.HOURS).get(4517));
+        assertEquals(LocalDateTime.of(2016, 1, 1, 1, 1, 1),
+                     new TemporalValueRange<>(fromTime, toTime, 1, ChronoUnit.HOURS).get(0));
+        assertEquals(LocalDateTime.of(2016, 1, 1, 2, 1, 1),
+                     new TemporalValueRange<>(fromTime, toTime, 1, ChronoUnit.HOURS).get(1));
+        assertEquals(LocalDateTime.of(2016, 7, 7, 6, 1, 1),
+                     new TemporalValueRange<>(fromTime, toTime, 1, ChronoUnit.HOURS).get(4517));
 
         fromTime = LocalDateTime.of(2016, 1, 1, 1, 1, 1);
         toTime = LocalDateTime.of(2016, 7, 7, 1, 1, 1);
-        assertEquals(LocalDateTime.of(2016, 1, 1, 1, 1, 1), new TemporalValueRange<>(fromTime, toTime, 1, ChronoUnit.DAYS).get(0));
-        assertEquals(LocalDateTime.of(2016, 1, 2, 1, 1, 1), new TemporalValueRange<>(fromTime, toTime, 1, ChronoUnit.DAYS).get(1));
-        assertEquals(LocalDateTime.of(2016, 7, 6, 1, 1, 1), new TemporalValueRange<>(fromTime, toTime, 1, ChronoUnit.DAYS).get(187));
+        assertEquals(LocalDateTime.of(2016, 1, 1, 1, 1, 1),
+                     new TemporalValueRange<>(fromTime, toTime, 1, ChronoUnit.DAYS).get(0));
+        assertEquals(LocalDateTime.of(2016, 1, 2, 1, 1, 1),
+                     new TemporalValueRange<>(fromTime, toTime, 1, ChronoUnit.DAYS).get(1));
+        assertEquals(LocalDateTime.of(2016, 7, 6, 1, 1, 1),
+                     new TemporalValueRange<>(fromTime, toTime, 1, ChronoUnit.DAYS).get(187));
 
         fromTime = LocalDateTime.of(2016, 1, 1, 1, 1, 1);
         toTime = LocalDateTime.of(2016, 7, 1, 1, 1, 1);
-        assertEquals(LocalDateTime.of(2016, 1, 1, 1, 1, 1), new TemporalValueRange<>(fromTime, toTime, 1, ChronoUnit.MONTHS).get(0));
-        assertEquals(LocalDateTime.of(2016, 2, 1, 1, 1, 1), new TemporalValueRange<>(fromTime, toTime, 1, ChronoUnit.MONTHS).get(1));
-        assertEquals(LocalDateTime.of(2016, 6, 1, 1, 1, 1), new TemporalValueRange<>(fromTime, toTime, 1, ChronoUnit.MONTHS).get(5));
+        assertEquals(LocalDateTime.of(2016, 1, 1, 1, 1, 1),
+                     new TemporalValueRange<>(fromTime, toTime, 1, ChronoUnit.MONTHS).get(0));
+        assertEquals(LocalDateTime.of(2016, 2, 1, 1, 1, 1),
+                     new TemporalValueRange<>(fromTime, toTime, 1, ChronoUnit.MONTHS).get(1));
+        assertEquals(LocalDateTime.of(2016, 6, 1, 1, 1, 1),
+                     new TemporalValueRange<>(fromTime, toTime, 1, ChronoUnit.MONTHS).get(5));
     }
 
     @Test
@@ -181,68 +198,107 @@ public class TemporalValueRangeTest {
 
         from = LocalDate.of(2016, 7, 1);
         to = LocalDate.of(2016, 9, 1);
-        assertEquals(false, new TemporalValueRange<>(from, to, 1, ChronoUnit.MONTHS).contains(LocalDate.of(2016, 6, 1)));
+        assertEquals(false,
+                     new TemporalValueRange<>(from, to, 1, ChronoUnit.MONTHS).contains(LocalDate.of(2016, 6, 1)));
         assertEquals(true, new TemporalValueRange<>(from, to, 1, ChronoUnit.MONTHS).contains(LocalDate.of(2016, 7, 1)));
         assertEquals(true, new TemporalValueRange<>(from, to, 1, ChronoUnit.MONTHS).contains(LocalDate.of(2016, 8, 1)));
-        assertEquals(false, new TemporalValueRange<>(from, to, 1, ChronoUnit.MONTHS).contains(LocalDate.of(2016, 9, 1)));
-        assertEquals(false, new TemporalValueRange<>(from, to, 1, ChronoUnit.MONTHS).contains(LocalDate.of(2016, 7, 7)));
+        assertEquals(false,
+                     new TemporalValueRange<>(from, to, 1, ChronoUnit.MONTHS).contains(LocalDate.of(2016, 9, 1)));
+        assertEquals(false,
+                     new TemporalValueRange<>(from, to, 1, ChronoUnit.MONTHS).contains(LocalDate.of(2016, 7, 7)));
 
         from = LocalDate.of(2017, 1, 31);
         to = LocalDate.of(2017, 2, 28);
-        assertEquals(false, new TemporalValueRange<>(from, to, 1, ChronoUnit.MONTHS).contains(LocalDate.of(2017, 1, 30)));
-        assertEquals(true, new TemporalValueRange<>(from, to, 1, ChronoUnit.MONTHS).contains(LocalDate.of(2017, 1, 31)));
-        assertEquals(false, new TemporalValueRange<>(from, to, 1, ChronoUnit.MONTHS).contains(LocalDate.of(2017, 2, 1)));
-        assertEquals(false, new TemporalValueRange<>(from, to, 1, ChronoUnit.MONTHS).contains(LocalDate.of(2017, 2, 27)));
-        assertEquals(false, new TemporalValueRange<>(from, to, 1, ChronoUnit.MONTHS).contains(LocalDate.of(2017, 2, 28)));
-        assertEquals(false, new TemporalValueRange<>(from, to, 1, ChronoUnit.MONTHS).contains(LocalDate.of(2017, 3, 1)));
+        assertEquals(false,
+                     new TemporalValueRange<>(from, to, 1, ChronoUnit.MONTHS).contains(LocalDate.of(2017, 1, 30)));
+        assertEquals(true,
+                     new TemporalValueRange<>(from, to, 1, ChronoUnit.MONTHS).contains(LocalDate.of(2017, 1, 31)));
+        assertEquals(false,
+                     new TemporalValueRange<>(from, to, 1, ChronoUnit.MONTHS).contains(LocalDate.of(2017, 2, 1)));
+        assertEquals(false,
+                     new TemporalValueRange<>(from, to, 1, ChronoUnit.MONTHS).contains(LocalDate.of(2017, 2, 27)));
+        assertEquals(false,
+                     new TemporalValueRange<>(from, to, 1, ChronoUnit.MONTHS).contains(LocalDate.of(2017, 2, 28)));
+        assertEquals(false,
+                     new TemporalValueRange<>(from, to, 1, ChronoUnit.MONTHS).contains(LocalDate.of(2017, 3, 1)));
 
         from = LocalDate.of(2017, 1, 31);
         to = LocalDate.of(2017, 3, 31);
-        assertEquals(false, new TemporalValueRange<>(from, to, 1, ChronoUnit.MONTHS).contains(LocalDate.of(2017, 1, 30)));
-        assertEquals(true, new TemporalValueRange<>(from, to, 1, ChronoUnit.MONTHS).contains(LocalDate.of(2017, 1, 31)));
-        assertEquals(false, new TemporalValueRange<>(from, to, 1, ChronoUnit.MONTHS).contains(LocalDate.of(2017, 2, 1)));
-        assertEquals(false, new TemporalValueRange<>(from, to, 1, ChronoUnit.MONTHS).contains(LocalDate.of(2017, 2, 27)));
-        assertEquals(true, new TemporalValueRange<>(from, to, 1, ChronoUnit.MONTHS).contains(LocalDate.of(2017, 2, 28)));
-        assertEquals(false, new TemporalValueRange<>(from, to, 1, ChronoUnit.MONTHS).contains(LocalDate.of(2017, 3, 1)));
-        assertEquals(false, new TemporalValueRange<>(from, to, 1, ChronoUnit.MONTHS).contains(LocalDate.of(2017, 3, 30)));
-        assertEquals(false, new TemporalValueRange<>(from, to, 1, ChronoUnit.MONTHS).contains(LocalDate.of(2017, 3, 31)));
-        assertEquals(false, new TemporalValueRange<>(from, to, 1, ChronoUnit.MONTHS).contains(LocalDate.of(2017, 4, 1)));
+        assertEquals(false,
+                     new TemporalValueRange<>(from, to, 1, ChronoUnit.MONTHS).contains(LocalDate.of(2017, 1, 30)));
+        assertEquals(true,
+                     new TemporalValueRange<>(from, to, 1, ChronoUnit.MONTHS).contains(LocalDate.of(2017, 1, 31)));
+        assertEquals(false,
+                     new TemporalValueRange<>(from, to, 1, ChronoUnit.MONTHS).contains(LocalDate.of(2017, 2, 1)));
+        assertEquals(false,
+                     new TemporalValueRange<>(from, to, 1, ChronoUnit.MONTHS).contains(LocalDate.of(2017, 2, 27)));
+        assertEquals(true,
+                     new TemporalValueRange<>(from, to, 1, ChronoUnit.MONTHS).contains(LocalDate.of(2017, 2, 28)));
+        assertEquals(false,
+                     new TemporalValueRange<>(from, to, 1, ChronoUnit.MONTHS).contains(LocalDate.of(2017, 3, 1)));
+        assertEquals(false,
+                     new TemporalValueRange<>(from, to, 1, ChronoUnit.MONTHS).contains(LocalDate.of(2017, 3, 30)));
+        assertEquals(false,
+                     new TemporalValueRange<>(from, to, 1, ChronoUnit.MONTHS).contains(LocalDate.of(2017, 3, 31)));
+        assertEquals(false,
+                     new TemporalValueRange<>(from, to, 1, ChronoUnit.MONTHS).contains(LocalDate.of(2017, 4, 1)));
 
         from = LocalDate.of(2017, 1, 31);
         to = LocalDate.of(2017, 4, 30);
-        assertEquals(false, new TemporalValueRange<>(from, to, 1, ChronoUnit.MONTHS).contains(LocalDate.of(2017, 1, 30)));
-        assertEquals(true, new TemporalValueRange<>(from, to, 1, ChronoUnit.MONTHS).contains(LocalDate.of(2017, 1, 31)));
-        assertEquals(false, new TemporalValueRange<>(from, to, 1, ChronoUnit.MONTHS).contains(LocalDate.of(2017, 2, 1)));
-        assertEquals(false, new TemporalValueRange<>(from, to, 1, ChronoUnit.MONTHS).contains(LocalDate.of(2017, 2, 27)));
-        assertEquals(true, new TemporalValueRange<>(from, to, 1, ChronoUnit.MONTHS).contains(LocalDate.of(2017, 2, 28)));
-        assertEquals(false, new TemporalValueRange<>(from, to, 1, ChronoUnit.MONTHS).contains(LocalDate.of(2017, 3, 1)));
-        assertEquals(false, new TemporalValueRange<>(from, to, 1, ChronoUnit.MONTHS).contains(LocalDate.of(2017, 3, 30)));
-        assertEquals(true, new TemporalValueRange<>(from, to, 1, ChronoUnit.MONTHS).contains(LocalDate.of(2017, 3, 31)));
-        assertEquals(false, new TemporalValueRange<>(from, to, 1, ChronoUnit.MONTHS).contains(LocalDate.of(2017, 4, 1)));
+        assertEquals(false,
+                     new TemporalValueRange<>(from, to, 1, ChronoUnit.MONTHS).contains(LocalDate.of(2017, 1, 30)));
+        assertEquals(true,
+                     new TemporalValueRange<>(from, to, 1, ChronoUnit.MONTHS).contains(LocalDate.of(2017, 1, 31)));
+        assertEquals(false,
+                     new TemporalValueRange<>(from, to, 1, ChronoUnit.MONTHS).contains(LocalDate.of(2017, 2, 1)));
+        assertEquals(false,
+                     new TemporalValueRange<>(from, to, 1, ChronoUnit.MONTHS).contains(LocalDate.of(2017, 2, 27)));
+        assertEquals(true,
+                     new TemporalValueRange<>(from, to, 1, ChronoUnit.MONTHS).contains(LocalDate.of(2017, 2, 28)));
+        assertEquals(false,
+                     new TemporalValueRange<>(from, to, 1, ChronoUnit.MONTHS).contains(LocalDate.of(2017, 3, 1)));
+        assertEquals(false,
+                     new TemporalValueRange<>(from, to, 1, ChronoUnit.MONTHS).contains(LocalDate.of(2017, 3, 30)));
+        assertEquals(true,
+                     new TemporalValueRange<>(from, to, 1, ChronoUnit.MONTHS).contains(LocalDate.of(2017, 3, 31)));
+        assertEquals(false,
+                     new TemporalValueRange<>(from, to, 1, ChronoUnit.MONTHS).contains(LocalDate.of(2017, 4, 1)));
     }
 
     @Test
     public void containsForLocalDateTime() {
         LocalDateTime fromTime = LocalDateTime.of(2016, 7, 7, 1, 1, 1);
         LocalDateTime toTime = LocalDateTime.of(2016, 7, 7, 7, 1, 1);
-        assertEquals(false, new TemporalValueRange<>(fromTime, toTime, 1, ChronoUnit.HOURS).contains(LocalDateTime.of(2016, 7, 6, 23, 59, 59)));
-        assertEquals(true, new TemporalValueRange<>(fromTime, toTime, 1, ChronoUnit.HOURS).contains(LocalDateTime.of(2016, 7, 7, 1, 1, 1)));
-        assertEquals(true, new TemporalValueRange<>(fromTime, toTime, 1, ChronoUnit.HOURS).contains(LocalDateTime.of(2016, 7, 7, 6, 1, 1)));
-        assertEquals(false, new TemporalValueRange<>(fromTime, toTime, 1, ChronoUnit.HOURS).contains(LocalDateTime.of(2016, 7, 7, 7, 7, 7)));
+        assertEquals(false, new TemporalValueRange<>(fromTime, toTime, 1, ChronoUnit.HOURS).contains(
+                LocalDateTime.of(2016, 7, 6, 23, 59, 59)));
+        assertEquals(true, new TemporalValueRange<>(fromTime, toTime, 1, ChronoUnit.HOURS).contains(
+                LocalDateTime.of(2016, 7, 7, 1, 1, 1)));
+        assertEquals(true, new TemporalValueRange<>(fromTime, toTime, 1, ChronoUnit.HOURS).contains(
+                LocalDateTime.of(2016, 7, 7, 6, 1, 1)));
+        assertEquals(false, new TemporalValueRange<>(fromTime, toTime, 1, ChronoUnit.HOURS).contains(
+                LocalDateTime.of(2016, 7, 7, 7, 7, 7)));
 
         fromTime = LocalDateTime.of(2016, 7, 7, 1, 1, 1);
         toTime = LocalDateTime.of(2016, 7, 7, 7, 7, 1);
-        assertEquals(false, new TemporalValueRange<>(fromTime, toTime, 1, ChronoUnit.MINUTES).contains(LocalDateTime.of(2016, 7, 7, 0, 59, 59)));
-        assertEquals(true, new TemporalValueRange<>(fromTime, toTime, 1, ChronoUnit.MINUTES).contains(LocalDateTime.of(2016, 7, 7, 1, 1, 1)));
-        assertEquals(true, new TemporalValueRange<>(fromTime, toTime, 1, ChronoUnit.MINUTES).contains(LocalDateTime.of(2016, 7, 7, 7, 6, 1)));
-        assertEquals(false, new TemporalValueRange<>(fromTime, toTime, 1, ChronoUnit.MINUTES).contains(LocalDateTime.of(2016, 7, 7, 7, 7, 1)));
+        assertEquals(false, new TemporalValueRange<>(fromTime, toTime, 1, ChronoUnit.MINUTES).contains(
+                LocalDateTime.of(2016, 7, 7, 0, 59, 59)));
+        assertEquals(true, new TemporalValueRange<>(fromTime, toTime, 1, ChronoUnit.MINUTES).contains(
+                LocalDateTime.of(2016, 7, 7, 1, 1, 1)));
+        assertEquals(true, new TemporalValueRange<>(fromTime, toTime, 1, ChronoUnit.MINUTES).contains(
+                LocalDateTime.of(2016, 7, 7, 7, 6, 1)));
+        assertEquals(false, new TemporalValueRange<>(fromTime, toTime, 1, ChronoUnit.MINUTES).contains(
+                LocalDateTime.of(2016, 7, 7, 7, 7, 1)));
 
         fromTime = LocalDateTime.of(2016, 7, 7, 1, 1, 1);
         toTime = LocalDateTime.of(2016, 7, 7, 7, 7, 7);
-        assertEquals(false, new TemporalValueRange<>(fromTime, toTime, 1, ChronoUnit.SECONDS).contains(LocalDateTime.of(2016, 7, 7, 1, 0, 59)));
-        assertEquals(true, new TemporalValueRange<>(fromTime, toTime, 1, ChronoUnit.SECONDS).contains(LocalDateTime.of(2016, 7, 7, 1, 1, 1)));
-        assertEquals(true, new TemporalValueRange<>(fromTime, toTime, 1, ChronoUnit.SECONDS).contains(LocalDateTime.of(2016, 7, 7, 7, 7, 6)));
-        assertEquals(false, new TemporalValueRange<>(fromTime, toTime, 1, ChronoUnit.SECONDS).contains(LocalDateTime.of(2016, 7, 7, 7, 7, 7)));
+        assertEquals(false, new TemporalValueRange<>(fromTime, toTime, 1, ChronoUnit.SECONDS).contains(
+                LocalDateTime.of(2016, 7, 7, 1, 0, 59)));
+        assertEquals(true, new TemporalValueRange<>(fromTime, toTime, 1, ChronoUnit.SECONDS).contains(
+                LocalDateTime.of(2016, 7, 7, 1, 1, 1)));
+        assertEquals(true, new TemporalValueRange<>(fromTime, toTime, 1, ChronoUnit.SECONDS).contains(
+                LocalDateTime.of(2016, 7, 7, 7, 7, 6)));
+        assertEquals(false, new TemporalValueRange<>(fromTime, toTime, 1, ChronoUnit.SECONDS).contains(
+                LocalDateTime.of(2016, 7, 7, 7, 7, 7)));
     }
 
     @Test
@@ -250,50 +306,52 @@ public class TemporalValueRangeTest {
         LocalDate from = LocalDate.of(2016, 7, 1);
         LocalDate to = LocalDate.of(2016, 7, 10);
         assertAllElementsOfIterator(new TemporalValueRange<>(from, to, 1, ChronoUnit.DAYS).createOriginalIterator(),
-                LocalDate.of(2016, 7, 1),
-                LocalDate.of(2016, 7, 2),
-                LocalDate.of(2016, 7, 3),
-                LocalDate.of(2016, 7, 4),
-                LocalDate.of(2016, 7, 5),
-                LocalDate.of(2016, 7, 6),
-                LocalDate.of(2016, 7, 7),
-                LocalDate.of(2016, 7, 8),
-                LocalDate.of(2016, 7, 9));
+                                    LocalDate.of(2016, 7, 1),
+                                    LocalDate.of(2016, 7, 2),
+                                    LocalDate.of(2016, 7, 3),
+                                    LocalDate.of(2016, 7, 4),
+                                    LocalDate.of(2016, 7, 5),
+                                    LocalDate.of(2016, 7, 6),
+                                    LocalDate.of(2016, 7, 7),
+                                    LocalDate.of(2016, 7, 8),
+                                    LocalDate.of(2016, 7, 9));
         assertAllElementsOfIterator(new TemporalValueRange<>(from, to, 3, ChronoUnit.DAYS).createOriginalIterator(),
-                LocalDate.of(2016, 7, 1),
-                LocalDate.of(2016, 7, 4),
-                LocalDate.of(2016, 7, 7));
+                                    LocalDate.of(2016, 7, 1),
+                                    LocalDate.of(2016, 7, 4),
+                                    LocalDate.of(2016, 7, 7));
 
         from = LocalDate.of(2016, 9, 3);
         to = LocalDate.of(2017, 3, 3);
         assertAllElementsOfIterator(new TemporalValueRange<>(from, to, 1, ChronoUnit.MONTHS).createOriginalIterator(),
-                LocalDate.of(2016, 9, 3),
-                LocalDate.of(2016, 10, 3),
-                LocalDate.of(2016, 11, 3),
-                LocalDate.of(2016, 12, 3),
-                LocalDate.of(2017, 1, 3),
-                LocalDate.of(2017, 2, 3));
+                                    LocalDate.of(2016, 9, 3),
+                                    LocalDate.of(2016, 10, 3),
+                                    LocalDate.of(2016, 11, 3),
+                                    LocalDate.of(2016, 12, 3),
+                                    LocalDate.of(2017, 1, 3),
+                                    LocalDate.of(2017, 2, 3));
 
         from = LocalDate.of(1999, 9, 3);
         to = LocalDate.of(2003, 9, 3);
         assertAllElementsOfIterator(new TemporalValueRange<>(from, to, 1, ChronoUnit.YEARS).createOriginalIterator(),
-                LocalDate.of(1999, 9, 3),
-                LocalDate.of(2000, 9, 3),
-                LocalDate.of(2001, 9, 3),
-                LocalDate.of(2002, 9, 3));
+                                    LocalDate.of(1999, 9, 3),
+                                    LocalDate.of(2000, 9, 3),
+                                    LocalDate.of(2001, 9, 3),
+                                    LocalDate.of(2002, 9, 3));
     }
 
     @Test
     public void createOriginalIteratorForLocalDateTime() {
         LocalDateTime fromTime = LocalDateTime.of(2016, 7, 1, 4, 5, 12);
         LocalDateTime toTime = LocalDateTime.of(2016, 7, 3, 4, 5, 12);
-        assertAllElementsOfIterator(new TemporalValueRange<>(fromTime, toTime, 1, ChronoUnit.DAYS).createOriginalIterator(),
+        assertAllElementsOfIterator(
+                new TemporalValueRange<>(fromTime, toTime, 1, ChronoUnit.DAYS).createOriginalIterator(),
                 LocalDateTime.of(2016, 7, 1, 4, 5, 12),
                 LocalDateTime.of(2016, 7, 2, 4, 5, 12));
 
         fromTime = LocalDateTime.of(2016, 7, 1, 23, 5, 12);
         toTime = LocalDateTime.of(2016, 7, 2, 5, 5, 12);
-        assertAllElementsOfIterator(new TemporalValueRange<>(fromTime, toTime, 1, ChronoUnit.HOURS).createOriginalIterator(),
+        assertAllElementsOfIterator(
+                new TemporalValueRange<>(fromTime, toTime, 1, ChronoUnit.HOURS).createOriginalIterator(),
                 LocalDateTime.of(2016, 7, 1, 23, 5, 12),
                 LocalDateTime.of(2016, 7, 2, 0, 5, 12),
                 LocalDateTime.of(2016, 7, 2, 1, 5, 12),
@@ -309,13 +367,16 @@ public class TemporalValueRangeTest {
         LocalDate from = LocalDate.of(2016, 7, 1);
         LocalDate to = LocalDate.of(2016, 7, 11);
         when(workingRandom.nextInt(anyInt())).thenReturn(3, 0);
-        assertElementsOfIterator(new TemporalValueRange<>(from, to, 1, ChronoUnit.DAYS).createRandomIterator(workingRandom),
+        assertElementsOfIterator(
+                new TemporalValueRange<>(from, to, 1, ChronoUnit.DAYS).createRandomIterator(workingRandom),
                 LocalDate.of(2016, 7, 4));
         when(workingRandom.nextInt(anyInt())).thenReturn(0, 0);
-        assertElementsOfIterator(new TemporalValueRange<>(from, to, 1, ChronoUnit.DAYS).createRandomIterator(workingRandom),
+        assertElementsOfIterator(
+                new TemporalValueRange<>(from, to, 1, ChronoUnit.DAYS).createRandomIterator(workingRandom),
                 LocalDate.of(2016, 7, 1));
         when(workingRandom.nextInt(anyInt())).thenReturn(1, 0);
-        assertElementsOfIterator(new TemporalValueRange<>(from, to, 5, ChronoUnit.DAYS).createRandomIterator(workingRandom),
+        assertElementsOfIterator(
+                new TemporalValueRange<>(from, to, 5, ChronoUnit.DAYS).createRandomIterator(workingRandom),
                 LocalDate.of(2016, 7, 6));
     }
 
@@ -326,7 +387,8 @@ public class TemporalValueRangeTest {
         LocalDateTime fromTime = LocalDateTime.of(2016, 7, 1, 4, 5, 12);
         LocalDateTime toTime = LocalDateTime.of(2016, 7, 3, 12, 15, 12);
         when(workingRandom.nextInt(anyInt())).thenReturn(3, 0);
-        assertElementsOfIterator(new TemporalValueRange<>(fromTime, toTime, 10, ChronoUnit.MINUTES).createRandomIterator(workingRandom),
+        assertElementsOfIterator(
+                new TemporalValueRange<>(fromTime, toTime, 10, ChronoUnit.MINUTES).createRandomIterator(workingRandom),
                 LocalDateTime.of(2016, 7, 1, 4, 35, 12));
     }
 
@@ -351,12 +413,12 @@ public class TemporalValueRangeTest {
         assertEquals(LocalDate.of(2016, 5, 31), temporalValueRange.get(4));
         assertEquals(LocalDate.of(2016, 6, 30), temporalValueRange.get(5));
         assertAllElementsOfIterator(temporalValueRange.createOriginalIterator(),
-                LocalDate.of(2016, 1, 31),
-                LocalDate.of(2016, 2, 29),
-                LocalDate.of(2016, 3, 31),
-                LocalDate.of(2016, 4, 30),
-                LocalDate.of(2016, 5, 31),
-                LocalDate.of(2016, 6, 30));
+                                    LocalDate.of(2016, 1, 31),
+                                    LocalDate.of(2016, 2, 29),
+                                    LocalDate.of(2016, 3, 31),
+                                    LocalDate.of(2016, 4, 30),
+                                    LocalDate.of(2016, 5, 31),
+                                    LocalDate.of(2016, 6, 30));
     }
 
     @Test
@@ -470,7 +532,8 @@ public class TemporalValueRangeTest {
         range.get(1);
     }
 
-    private static interface TemporalMock extends Temporal, Comparable<Temporal> {
+    private static interface TemporalMock extends Temporal,
+                                                  Comparable<Temporal> {
 
     }
 }

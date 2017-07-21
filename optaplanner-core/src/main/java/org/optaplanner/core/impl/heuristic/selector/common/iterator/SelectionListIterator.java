@@ -34,5 +34,4 @@ public abstract class SelectionListIterator<S> implements ListIterator<S> {
     public void add(Object o) {
         throw new UnsupportedOperationException("The optional operation add(...) is not supported.");
     }
-
 }

@@ -46,23 +46,23 @@ public class TailChainSwapMoveSelector extends GenericMoveSelector {
     protected AnchorVariableSupply anchorVariableSupply;
 
     public TailChainSwapMoveSelector(EntitySelector entitySelector, ValueSelector valueSelector,
-            boolean randomSelection) {
+                                     boolean randomSelection) {
         this.entitySelector = entitySelector;
         this.valueSelector = valueSelector;
         this.randomSelection = randomSelection;
         GenuineVariableDescriptor variableDescriptor = valueSelector.getVariableDescriptor();
         if (!variableDescriptor.isChained()) {
             throw new IllegalStateException("The selector (" + this
-                    + ")'s valueSelector's  variableDescriptor (" + variableDescriptor
-                    + ") must be chained (" + variableDescriptor.isChained() + ").");
+                                                    + ")'s valueSelector's  variableDescriptor (" + variableDescriptor
+                                                    + ") must be chained (" + variableDescriptor.isChained() + ").");
         }
         if (!variableDescriptor.getEntityDescriptor().getEntityClass().isAssignableFrom(
                 entitySelector.getEntityDescriptor().getEntityClass())) {
             throw new IllegalStateException("The selector (" + this
-                    + ") has a valueSelector with a entityClass ("
-                    + variableDescriptor.getEntityDescriptor().getEntityClass()
-                    + ") which is not equal or a superclass to the entitySelector's entityClass ("
-                    + entitySelector.getEntityDescriptor().getEntityClass() + ").");
+                                                    + ") has a valueSelector with a entityClass ("
+                                                    + variableDescriptor.getEntityDescriptor().getEntityClass()
+                                                    + ") which is not equal or a superclass to the entitySelector's entityClass ("
+                                                    + entitySelector.getEntityDescriptor().getEntityClass() + ").");
         }
         phaseLifecycleSupport.addEventListener(entitySelector);
         phaseLifecycleSupport.addEventListener(valueSelector);
@@ -105,7 +105,7 @@ public class TailChainSwapMoveSelector extends GenericMoveSelector {
         } else {
             long size = 0;
             for (Iterator it = entitySelector.endingIterator(); it.hasNext(); ) {
-                Object entity =  it.next();
+                Object entity = it.next();
                 size += valueSelector.getSize(entity);
             }
             return size;
@@ -120,7 +120,7 @@ public class TailChainSwapMoveSelector extends GenericMoveSelector {
                 @Override
                 protected Move newChangeSelection(Object entity, Object toValue) {
                     return new TailChainSwapMove(variableDescriptor, inverseVariableSupply, anchorVariableSupply,
-                            entity, toValue);
+                                                 entity, toValue);
                 }
             };
         } else {
@@ -128,7 +128,7 @@ public class TailChainSwapMoveSelector extends GenericMoveSelector {
                 @Override
                 protected Move newChangeSelection(Object entity, Object toValue) {
                     return new TailChainSwapMove(variableDescriptor, inverseVariableSupply, anchorVariableSupply,
-                            entity, toValue);
+                                                 entity, toValue);
                 }
             };
         }
@@ -138,5 +138,4 @@ public class TailChainSwapMoveSelector extends GenericMoveSelector {
     public String toString() {
         return getClass().getSimpleName() + "(" + entitySelector + ", " + valueSelector + ")";
     }
-
 }

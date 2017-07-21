@@ -63,5 +63,4 @@ public class TestGenHeadCuttingMutator<T> {
     public List<T> getResult() {
         return list.subList(totalCutSize, list.size());
     }
-
 }

@@ -32,7 +32,8 @@ import org.optaplanner.core.impl.testdata.domain.TestdataValue;
 public class TestdataImmovableSolution extends TestdataObject {
 
     public static SolutionDescriptor buildSolutionDescriptor() {
-        return SolutionDescriptor.buildSolutionDescriptor(TestdataImmovableSolution.class, TestdataImmovableEntity.class);
+        return SolutionDescriptor.buildSolutionDescriptor(TestdataImmovableSolution.class,
+                                                          TestdataImmovableEntity.class);
     }
 
     private List<TestdataValue> valueList;
@@ -78,5 +79,4 @@ public class TestdataImmovableSolution extends TestdataObject {
     // ************************************************************************
     // Complex methods
     // ************************************************************************
-
 }

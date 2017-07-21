@@ -31,7 +31,7 @@ public class BestScoreFeasibleTermination extends AbstractTermination {
     private final double[] timeGradientWeightFeasibleNumbers;
 
     public BestScoreFeasibleTermination(FeasibilityScoreDefinition scoreDefinition,
-            double[] timeGradientWeightFeasibleNumbers) {
+                                        double[] timeGradientWeightFeasibleNumbers) {
         feasibleLevelsSize = scoreDefinition.getFeasibleLevelsSize();
         this.timeGradientWeightFeasibleNumbers = timeGradientWeightFeasibleNumbers;
         if (timeGradientWeightFeasibleNumbers.length != feasibleLevelsSize - 1) {
@@ -60,7 +60,8 @@ public class BestScoreFeasibleTermination extends AbstractTermination {
     @Override
     public double calculateSolverTimeGradient(DefaultSolverScope solverScope) {
         return calculateFeasibilityTimeGradient(
-                (FeasibilityScore) solverScope.getStartingInitializedScore(), (FeasibilityScore) solverScope.getBestScore());
+                (FeasibilityScore) solverScope.getStartingInitializedScore(),
+                (FeasibilityScore) solverScope.getBestScore());
     }
 
     @Override
@@ -79,10 +80,10 @@ public class BestScoreFeasibleTermination extends AbstractTermination {
         Number[] scoreDiffNumbers = scoreDiff.toLevelNumbers();
         if (scoreDiffNumbers.length != totalDiffNumbers.length) {
             throw new IllegalStateException("The startScore (" + startScore + ") and score (" + score
-                    + ") don't have the same levelsSize.");
+                                                    + ") don't have the same levelsSize.");
         }
         return ScoreUtils.calculateTimeGradient(totalDiffNumbers, scoreDiffNumbers, timeGradientWeightFeasibleNumbers,
-                feasibleLevelsSize);
+                                                feasibleLevelsSize);
     }
 
     // ************************************************************************
@@ -93,12 +94,11 @@ public class BestScoreFeasibleTermination extends AbstractTermination {
     public Termination createChildThreadTermination(DefaultSolverScope solverScope, ChildThreadType childThreadType) {
         // TODO FIXME through some sort of solverlistener and async behaviour...
         throw new UnsupportedOperationException("This terminationClass (" + getClass()
-                + ") does not yet support being used in child threads of type (" + childThreadType + ").");
+                                                        + ") does not yet support being used in child threads of type (" + childThreadType + ").");
     }
 
     @Override
     public String toString() {
         return "BestScoreFeasible()";
     }
-
 }

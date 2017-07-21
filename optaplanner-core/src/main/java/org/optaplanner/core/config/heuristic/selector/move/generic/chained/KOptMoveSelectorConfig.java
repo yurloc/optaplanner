@@ -70,19 +70,22 @@ public class KOptMoveSelectorConfig extends MoveSelectorConfig<KOptMoveSelectorC
 
     @Override
     public MoveSelector buildBaseMoveSelector(HeuristicConfigPolicy configPolicy,
-            SelectionCacheType minimumCacheType, boolean randomSelection) {
+                                              SelectionCacheType minimumCacheType, boolean randomSelection) {
         EntitySelectorConfig entitySelectorConfig_ = entitySelectorConfig == null ? new EntitySelectorConfig()
                 : entitySelectorConfig;
         EntitySelector entitySelector = entitySelectorConfig_.buildEntitySelector(configPolicy,
-                minimumCacheType, SelectionOrder.fromRandomSelectionBoolean(randomSelection));
+                                                                                  minimumCacheType,
+                                                                                  SelectionOrder.fromRandomSelectionBoolean(
+                                                                                          randomSelection));
         ValueSelectorConfig valueSelectorConfig_ = valueSelectorConfig == null ? new ValueSelectorConfig()
                 : valueSelectorConfig;
         ValueSelector[] valueSelectors = new ValueSelector[K - 1];
         for (int i = 0; i < valueSelectors.length; i++) {
             valueSelectors[i] = valueSelectorConfig_.buildValueSelector(configPolicy,
-                    entitySelector.getEntityDescriptor(),
-                    minimumCacheType, SelectionOrder.fromRandomSelectionBoolean(randomSelection));
-
+                                                                        entitySelector.getEntityDescriptor(),
+                                                                        minimumCacheType,
+                                                                        SelectionOrder.fromRandomSelectionBoolean(
+                                                                                randomSelection));
         }
         return new KOptMoveSelector(entitySelector, valueSelectors, randomSelection);
     }
@@ -90,7 +93,8 @@ public class KOptMoveSelectorConfig extends MoveSelectorConfig<KOptMoveSelectorC
     @Override
     public void inherit(KOptMoveSelectorConfig inheritedConfig) {
         super.inherit(inheritedConfig);
-        entitySelectorConfig = ConfigUtils.inheritConfig(entitySelectorConfig, inheritedConfig.getEntitySelectorConfig());
+        entitySelectorConfig = ConfigUtils.inheritConfig(entitySelectorConfig,
+                                                         inheritedConfig.getEntitySelectorConfig());
         valueSelectorConfig = ConfigUtils.inheritConfig(valueSelectorConfig, inheritedConfig.getValueSelectorConfig());
     }
 
@@ -98,5 +102,4 @@ public class KOptMoveSelectorConfig extends MoveSelectorConfig<KOptMoveSelectorC
     public String toString() {
         return getClass().getSimpleName() + "(" + entitySelectorConfig + ", " + valueSelectorConfig + ")";
     }
-
 }

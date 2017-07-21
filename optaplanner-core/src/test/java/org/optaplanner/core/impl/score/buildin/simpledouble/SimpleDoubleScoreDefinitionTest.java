@@ -74,5 +74,4 @@ public class SimpleDoubleScoreDefinitionTest {
         assertEquals(0, pessimisticBound.getInitScore());
         assertEquals(Double.NEGATIVE_INFINITY, pessimisticBound.getScore(), 0.0);
     }
-
 }

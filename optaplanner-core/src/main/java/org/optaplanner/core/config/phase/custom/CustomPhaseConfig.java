@@ -81,7 +81,7 @@ public class CustomPhaseConfig extends PhaseConfig<CustomPhaseConfig> {
 
     @Override
     public CustomPhase buildPhase(int phaseIndex, HeuristicConfigPolicy solverConfigPolicy,
-            BestSolutionRecaller bestSolutionRecaller, Termination solverTermination) {
+                                  BestSolutionRecaller bestSolutionRecaller, Termination solverTermination) {
         HeuristicConfigPolicy phaseConfigPolicy = solverConfigPolicy.createPhaseConfigPolicy();
         DefaultCustomPhase phase = new DefaultCustomPhase(
                 phaseIndex, solverConfigPolicy.getLogIndentation(), bestSolutionRecaller,
@@ -93,7 +93,8 @@ public class CustomPhaseConfig extends PhaseConfig<CustomPhaseConfig> {
         List<CustomPhaseCommand> customPhaseCommandList = new ArrayList<>(customPhaseCommandClassList.size());
         for (Class<? extends CustomPhaseCommand> customPhaseCommandClass : customPhaseCommandClassList) {
             CustomPhaseCommand customPhaseCommand = ConfigUtils.newInstance(this,
-                    "customPhaseCommandClass", customPhaseCommandClass);
+                                                                            "customPhaseCommandClass",
+                                                                            customPhaseCommandClass);
             ConfigUtils.applyCustomProperties(customPhaseCommand, "customPhaseCommandClass", customProperties);
             customPhaseCommandList.add(customPhaseCommand);
         }
@@ -114,7 +115,6 @@ public class CustomPhaseConfig extends PhaseConfig<CustomPhaseConfig> {
         customProperties = ConfigUtils.inheritMergeableMapProperty(
                 customProperties, inheritedConfig.getCustomProperties());
         forceUpdateBestSolution = ConfigUtils.inheritOverwritableProperty(forceUpdateBestSolution,
-                inheritedConfig.getForceUpdateBestSolution());
+                                                                          inheritedConfig.getForceUpdateBestSolution());
     }
-
 }

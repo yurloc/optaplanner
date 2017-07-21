@@ -76,8 +76,8 @@ public class ExhaustiveSearchStepScope<Solution_> extends AbstractStepScope<Solu
     public long getBreadth() {
         return expandingNode.getBreadth();
     }
+
     public String getTreeId() {
         return expandingNode.getTreeId();
     }
-
 }

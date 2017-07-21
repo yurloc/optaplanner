@@ -119,5 +119,4 @@ public interface ScoreDefinition<S extends Score> {
      * @return never null
      */
     S buildPessimisticBound(InitializingScoreTrend initializingScoreTrend, S score);
-
 }

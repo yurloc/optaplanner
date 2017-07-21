@@ -19,5 +19,4 @@ package org.optaplanner.core.impl.testdata.util;
 public interface CodeAssertable {
 
     String getCode();
-
 }

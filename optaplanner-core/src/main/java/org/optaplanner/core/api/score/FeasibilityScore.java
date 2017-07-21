@@ -34,5 +34,4 @@ public interface FeasibilityScore<S extends FeasibilityScore> extends Score<S> {
      * @return true if the hard score is 0 or higher and the {@link #getInitScore()} is 0.
      */
     boolean isFeasible();
-
 }

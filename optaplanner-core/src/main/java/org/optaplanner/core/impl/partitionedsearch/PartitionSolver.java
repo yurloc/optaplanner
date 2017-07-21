@@ -40,7 +40,7 @@ public class PartitionSolver<Solution_> extends AbstractSolver<Solution_> {
     // ************************************************************************
 
     public PartitionSolver(Termination termination, BestSolutionRecaller<Solution_> bestSolutionRecaller,
-            List<Phase<Solution_>> phaseList, DefaultSolverScope<Solution_> solverScope) {
+                           List<Phase<Solution_>> phaseList, DefaultSolverScope<Solution_> solverScope) {
         super(termination, bestSolutionRecaller, phaseList);
         this.solverScope = solverScope;
     }
@@ -134,5 +134,4 @@ public class PartitionSolver<Solution_> extends AbstractSolver<Solution_> {
         solverScope.getScoreDirector().dispose();
         // TODO log?
     }
-
 }

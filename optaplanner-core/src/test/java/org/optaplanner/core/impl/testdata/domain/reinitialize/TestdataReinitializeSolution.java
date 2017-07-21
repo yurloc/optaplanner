@@ -32,7 +32,8 @@ import org.optaplanner.core.impl.testdata.domain.TestdataValue;
 public class TestdataReinitializeSolution extends TestdataObject {
 
     public static SolutionDescriptor buildSolutionDescriptor() {
-        return SolutionDescriptor.buildSolutionDescriptor(TestdataReinitializeSolution.class, TestdataReinitializeEntity.class);
+        return SolutionDescriptor.buildSolutionDescriptor(TestdataReinitializeSolution.class,
+                                                          TestdataReinitializeEntity.class);
     }
 
     private List<TestdataValue> valueList;
@@ -78,5 +79,4 @@ public class TestdataReinitializeSolution extends TestdataObject {
     // ************************************************************************
     // Complex methods
     // ************************************************************************
-
 }

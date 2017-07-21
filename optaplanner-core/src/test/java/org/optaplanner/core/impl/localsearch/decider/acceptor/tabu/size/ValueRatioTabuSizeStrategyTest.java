@@ -40,5 +40,4 @@ public class ValueRatioTabuSizeStrategyTest {
         assertEquals(1, new ValueRatioTabuSizeStrategy(0.0000001).determineTabuSize(stepScope));
         assertEquals(99, new ValueRatioTabuSizeStrategy(0.9999999).determineTabuSize(stepScope));
     }
-
 }

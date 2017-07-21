@@ -34,5 +34,4 @@ public interface PillarSelector extends ListIterableSelector<List<Object>> {
      * @return never null
      */
     EntityDescriptor getEntityDescriptor();
-
 }

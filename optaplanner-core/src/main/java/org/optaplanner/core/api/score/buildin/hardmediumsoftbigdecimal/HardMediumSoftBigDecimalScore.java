@@ -36,26 +36,31 @@ import org.optaplanner.core.api.score.Score;
 public final class HardMediumSoftBigDecimalScore extends AbstractScore<HardMediumSoftBigDecimalScore>
         implements FeasibilityScore<HardMediumSoftBigDecimalScore> {
 
-    public static final HardMediumSoftBigDecimalScore ZERO = new HardMediumSoftBigDecimalScore(0, BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO);
+    public static final HardMediumSoftBigDecimalScore ZERO = new HardMediumSoftBigDecimalScore(0, BigDecimal.ZERO,
+                                                                                               BigDecimal.ZERO,
+                                                                                               BigDecimal.ZERO);
     private static final String HARD_LABEL = "hard";
     private static final String MEDIUM_LABEL = "medium";
     private static final String SOFT_LABEL = "soft";
 
     public static HardMediumSoftBigDecimalScore parseScore(String scoreString) {
         String[] scoreTokens = parseScoreTokens(HardMediumSoftBigDecimalScore.class, scoreString,
-                HARD_LABEL, MEDIUM_LABEL, SOFT_LABEL);
+                                                HARD_LABEL, MEDIUM_LABEL, SOFT_LABEL);
         int initScore = parseInitScore(HardMediumSoftBigDecimalScore.class, scoreString, scoreTokens[0]);
         BigDecimal hardScore = parseLevelAsBigDecimal(HardMediumSoftBigDecimalScore.class, scoreString, scoreTokens[1]);
-        BigDecimal mediumScore = parseLevelAsBigDecimal(HardMediumSoftBigDecimalScore.class, scoreString, scoreTokens[2]);
+        BigDecimal mediumScore = parseLevelAsBigDecimal(HardMediumSoftBigDecimalScore.class, scoreString,
+                                                        scoreTokens[2]);
         BigDecimal softScore = parseLevelAsBigDecimal(HardMediumSoftBigDecimalScore.class, scoreString, scoreTokens[3]);
         return valueOfUninitialized(initScore, hardScore, mediumScore, softScore);
     }
 
-    public static HardMediumSoftBigDecimalScore valueOfUninitialized(int initScore, BigDecimal hardScore, BigDecimal mediumScore, BigDecimal softScore) {
+    public static HardMediumSoftBigDecimalScore valueOfUninitialized(int initScore, BigDecimal hardScore,
+                                                                     BigDecimal mediumScore, BigDecimal softScore) {
         return new HardMediumSoftBigDecimalScore(initScore, hardScore, mediumScore, softScore);
     }
 
-    public static HardMediumSoftBigDecimalScore valueOf(BigDecimal hardScore, BigDecimal mediumScore, BigDecimal softScore) {
+    public static HardMediumSoftBigDecimalScore valueOf(BigDecimal hardScore, BigDecimal mediumScore,
+                                                        BigDecimal softScore) {
         return new HardMediumSoftBigDecimalScore(0, hardScore, mediumScore, softScore);
     }
 
@@ -80,7 +85,8 @@ public final class HardMediumSoftBigDecimalScore extends AbstractScore<HardMediu
         softScore = null;
     }
 
-    private HardMediumSoftBigDecimalScore(int initScore, BigDecimal hardScore, BigDecimal mediumScore, BigDecimal softScore) {
+    private HardMediumSoftBigDecimalScore(int initScore, BigDecimal hardScore, BigDecimal mediumScore,
+                                          BigDecimal softScore) {
         super(initScore);
         this.hardScore = hardScore;
         this.mediumScore = mediumScore;
@@ -202,7 +208,8 @@ public final class HardMediumSoftBigDecimalScore extends AbstractScore<HardMediu
 
     @Override
     public HardMediumSoftBigDecimalScore negate() {
-        return new HardMediumSoftBigDecimalScore(-initScore, hardScore.negate(), mediumScore.negate(), softScore.negate());
+        return new HardMediumSoftBigDecimalScore(-initScore, hardScore.negate(), mediumScore.negate(),
+                                                 softScore.negate());
     }
 
     @Override
@@ -255,7 +262,7 @@ public final class HardMediumSoftBigDecimalScore extends AbstractScore<HardMediu
     @Override
     public String toShortString() {
         return buildShortString((n) -> ((BigDecimal) n).compareTo(BigDecimal.ZERO) != 0,
-                HARD_LABEL, MEDIUM_LABEL, SOFT_LABEL);
+                                HARD_LABEL, MEDIUM_LABEL, SOFT_LABEL);
     }
 
     @Override
@@ -267,5 +274,4 @@ public final class HardMediumSoftBigDecimalScore extends AbstractScore<HardMediu
     public boolean isCompatibleArithmeticArgument(Score otherScore) {
         return otherScore instanceof HardMediumSoftBigDecimalScore;
     }
-
 }

@@ -77,5 +77,4 @@ public class TestdataDuplicateProblemFactCollectionPropertySolution extends Test
     public void setScore(SimpleScore score) {
         this.score = score;
     }
-
 }

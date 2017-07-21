@@ -57,7 +57,7 @@ public class LateAcceptanceAcceptor extends AbstractAcceptor {
     private void validate() {
         if (lateAcceptanceSize <= 0) {
             throw new IllegalArgumentException("The lateAcceptanceSize (" + lateAcceptanceSize
-                    + ") cannot be negative or zero.");
+                                                       + ") cannot be negative or zero.");
         }
     }
 
@@ -90,5 +90,4 @@ public class LateAcceptanceAcceptor extends AbstractAcceptor {
         previousScores = null;
         lateScoreIndex = -1;
     }
-
 }

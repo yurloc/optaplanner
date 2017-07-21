@@ -33,5 +33,4 @@ public interface Acceptor extends LocalSearchPhaseLifecycleListener {
      * @return true if accepted
      */
     boolean isAccepted(LocalSearchMoveScope moveScope);
-
 }

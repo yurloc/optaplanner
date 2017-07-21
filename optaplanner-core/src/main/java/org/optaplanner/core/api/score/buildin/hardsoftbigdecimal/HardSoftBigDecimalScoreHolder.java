@@ -53,8 +53,8 @@ public class HardSoftBigDecimalScoreHolder extends AbstractScoreHolder {
     public void addHardConstraintMatch(RuleContext kcontext, BigDecimal hardWeight) {
         hardScore = (hardScore == null) ? hardWeight : hardScore.add(hardWeight);
         registerConstraintMatch(kcontext,
-                () -> hardScore = hardScore.subtract(hardWeight),
-                () -> HardSoftBigDecimalScore.valueOf(hardWeight, BigDecimal.ZERO));
+                                () -> hardScore = hardScore.subtract(hardWeight),
+                                () -> HardSoftBigDecimalScore.valueOf(hardWeight, BigDecimal.ZERO));
     }
 
     /**
@@ -64,8 +64,8 @@ public class HardSoftBigDecimalScoreHolder extends AbstractScoreHolder {
     public void addSoftConstraintMatch(RuleContext kcontext, BigDecimal softWeight) {
         softScore = (softScore == null) ? softWeight : softScore.add(softWeight);
         registerConstraintMatch(kcontext,
-                () -> softScore = softScore.subtract(softWeight),
-                () -> HardSoftBigDecimalScore.valueOf(BigDecimal.ZERO, softWeight));
+                                () -> softScore = softScore.subtract(softWeight),
+                                () -> HardSoftBigDecimalScore.valueOf(BigDecimal.ZERO, softWeight));
     }
 
     /**
@@ -77,18 +77,17 @@ public class HardSoftBigDecimalScoreHolder extends AbstractScoreHolder {
         hardScore = (hardScore == null) ? hardWeight : hardScore.add(hardWeight);
         softScore = (softScore == null) ? softWeight : softScore.add(softWeight);
         registerConstraintMatch(kcontext,
-                () -> {
-                    hardScore = hardScore.subtract(hardWeight);
-                    softScore = softScore.subtract(softWeight);
-                },
-                () -> HardSoftBigDecimalScore.valueOf(hardWeight, softWeight));
+                                () -> {
+                                    hardScore = hardScore.subtract(hardWeight);
+                                    softScore = softScore.subtract(softWeight);
+                                },
+                                () -> HardSoftBigDecimalScore.valueOf(hardWeight, softWeight));
     }
 
     @Override
     public Score extractScore(int initScore) {
         return HardSoftBigDecimalScore.valueOfUninitialized(initScore,
-                hardScore == null ? BigDecimal.ZERO : hardScore,
-                softScore == null ? BigDecimal.ZERO : softScore);
+                                                            hardScore == null ? BigDecimal.ZERO : hardScore,
+                                                            softScore == null ? BigDecimal.ZERO : softScore);
     }
-
 }

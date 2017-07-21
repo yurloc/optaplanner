@@ -22,8 +22,9 @@ import java.lang.annotation.Target;
 import org.optaplanner.core.api.domain.entity.PlanningEntity;
 import org.optaplanner.core.api.solver.Solver;
 
-import static java.lang.annotation.ElementType.*;
-import static java.lang.annotation.RetentionPolicy.*;
+import static java.lang.annotation.ElementType.FIELD;
+import static java.lang.annotation.ElementType.METHOD;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
  * Specifies that a bean property (or a field) is the anchor of a chained {@link PlanningVariable}, which implies it's a shadow variable.
@@ -45,5 +46,4 @@ public @interface AnchorShadowVariable {
      * @return the variable property name on this entity class that leads to the anchor
      */
     String sourceVariableName();
-
 }

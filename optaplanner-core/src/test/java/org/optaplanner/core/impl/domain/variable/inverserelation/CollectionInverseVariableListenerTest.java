@@ -28,7 +28,7 @@ import org.optaplanner.core.impl.testdata.domain.shadow.inverserelation.Testdata
 import org.optaplanner.core.impl.testdata.domain.shadow.inverserelation.TestdataInverseRelationValue;
 
 import static org.mockito.Mockito.*;
-import static org.optaplanner.core.impl.testdata.util.PlannerAssert.*;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.assertCollectionContainsExactly;
 
 public class CollectionInverseVariableListenerTest {
 
@@ -36,9 +36,12 @@ public class CollectionInverseVariableListenerTest {
     public void normal() {
         ScoreDirector scoreDirector = mock(ScoreDirector.class);
         SolutionDescriptor solutionDescriptor = TestdataInverseRelationSolution.buildSolutionDescriptor();
-        EntityDescriptor entityDescriptor = solutionDescriptor.findEntityDescriptorOrFail(TestdataInverseRelationEntity.class);
-        EntityDescriptor shadowEntityDescriptor = solutionDescriptor.findEntityDescriptorOrFail(TestdataInverseRelationValue.class);
-        ShadowVariableDescriptor entitiesVariableDescriptor = shadowEntityDescriptor.getShadowVariableDescriptor("entities");
+        EntityDescriptor entityDescriptor = solutionDescriptor.findEntityDescriptorOrFail(
+                TestdataInverseRelationEntity.class);
+        EntityDescriptor shadowEntityDescriptor = solutionDescriptor.findEntityDescriptorOrFail(
+                TestdataInverseRelationValue.class);
+        ShadowVariableDescriptor entitiesVariableDescriptor = shadowEntityDescriptor.getShadowVariableDescriptor(
+                "entities");
         CollectionInverseVariableListener variableListener = new CollectionInverseVariableListener(
                 (InverseRelationShadowVariableDescriptor) entitiesVariableDescriptor,
                 entityDescriptor.getGenuineVariableDescriptor("value"));
@@ -67,5 +70,4 @@ public class CollectionInverseVariableListenerTest {
         assertCollectionContainsExactly(val2.getEntities(), c);
         assertCollectionContainsExactly(val3.getEntities(), d);
     }
-
 }

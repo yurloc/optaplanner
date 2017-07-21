@@ -72,5 +72,4 @@ public class DummyMove extends AbstractMove<TestdataSolution> implements CodeAss
     public String toString() {
         return code;
     }
-
 }

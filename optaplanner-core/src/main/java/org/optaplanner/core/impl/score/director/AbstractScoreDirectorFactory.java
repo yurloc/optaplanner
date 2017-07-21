@@ -103,5 +103,4 @@ public abstract class AbstractScoreDirectorFactory<Solution_> implements InnerSc
                             + uncorruptedScore + ").");
         }
     }
-
 }

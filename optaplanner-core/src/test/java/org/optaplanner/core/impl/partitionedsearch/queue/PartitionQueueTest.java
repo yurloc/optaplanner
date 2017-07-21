@@ -149,5 +149,4 @@ public class PartitionQueueTest {
     public PartitionChangeMove<TestdataSolution> buildMove() {
         return new PartitionChangeMove<>(null);
     }
-
 }

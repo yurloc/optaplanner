@@ -55,7 +55,7 @@ public class SolverConfigContext {
      * <p>
      * Must be null if {@link #getKieContainer()} is not null.
      * @return sometimes null, the {@link ClassLoader} to use for loading all resources and {@link Class}es,
-     *      if this is null and {@link #getKieContainer()} is also null, then the default {@link ClassLoader} is used
+     * if this is null and {@link #getKieContainer()} is also null, then the default {@link ClassLoader} is used
      */
     public ClassLoader getClassLoader() {
         return classLoader;
@@ -93,9 +93,8 @@ public class SolverConfigContext {
     public void validate() {
         if (classLoader != null && kieContainer != null) {
             throw new IllegalStateException("The classLoader (" + classLoader + ") and kieContainer (" + kieContainer
-                    + ") cannot both be configured because the " + KieContainer.class.getSimpleName()
-                    + " already has a " + ClassLoader.class.getSimpleName() + ".");
+                                                    + ") cannot both be configured because the " + KieContainer.class.getSimpleName()
+                                                    + " already has a " + ClassLoader.class.getSimpleName() + ".");
         }
     }
-
 }

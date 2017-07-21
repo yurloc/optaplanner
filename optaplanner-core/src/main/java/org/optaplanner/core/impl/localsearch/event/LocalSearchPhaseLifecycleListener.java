@@ -34,5 +34,4 @@ public interface LocalSearchPhaseLifecycleListener<Solution_> extends SolverLife
     void stepEnded(LocalSearchStepScope<Solution_> stepScope);
 
     void phaseEnded(LocalSearchPhaseScope<Solution_> phaseScope);
-
 }

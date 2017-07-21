@@ -33,8 +33,8 @@ import org.optaplanner.core.impl.testdata.domain.multientity.TestdataLeadEntity;
 import org.optaplanner.core.impl.testdata.domain.multientity.TestdataMultiEntitySolution;
 import org.optaplanner.core.impl.testdata.domain.multivar.TestdataMultiVarSolution;
 
-import static org.junit.Assert.assertEquals;
-import static org.optaplanner.core.impl.testdata.util.PlannerAssert.*;
+import static org.junit.Assert.*;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.assertInstanceOf;
 
 public class SwapMoveSelectorConfigTest extends AbstractSelectorConfigTest {
 
@@ -127,5 +127,4 @@ public class SwapMoveSelectorConfigTest extends AbstractSelectorConfigTest {
         assertInstanceOf(UnionMoveSelector.class, moveSelector);
         assertEquals(2, ((UnionMoveSelector) moveSelector).getChildMoveSelectorList().size());
     }
-
 }

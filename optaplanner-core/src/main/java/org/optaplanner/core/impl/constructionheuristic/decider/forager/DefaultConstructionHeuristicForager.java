@@ -109,5 +109,4 @@ public class DefaultConstructionHeuristicForager extends AbstractConstructionHeu
             return maxScoreMoveScope;
         }
     }
-
 }

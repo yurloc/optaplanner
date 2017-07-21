@@ -25,5 +25,4 @@ public interface SubChainSelector extends ListIterableSelector<SubChain> {
      * @return never null
      */
     GenuineVariableDescriptor getVariableDescriptor();
-
 }

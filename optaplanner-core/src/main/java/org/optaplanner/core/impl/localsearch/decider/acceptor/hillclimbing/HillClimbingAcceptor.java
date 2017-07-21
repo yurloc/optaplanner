@@ -32,5 +32,4 @@ public class HillClimbingAcceptor extends AbstractAcceptor {
         Score lastStepScore = moveScope.getStepScope().getPhaseScope().getLastCompletedStepScope().getScore();
         return moveScore.compareTo(lastStepScore) >= 0;
     }
-
 }

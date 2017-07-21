@@ -54,5 +54,4 @@ public class MoveTabuAcceptor extends AbstractTabuAcceptor {
         }
         return Collections.singletonList(tabuMove);
     }
-
 }

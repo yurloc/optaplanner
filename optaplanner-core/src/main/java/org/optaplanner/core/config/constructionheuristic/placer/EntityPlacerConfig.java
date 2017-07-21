@@ -20,7 +20,6 @@ import com.thoughtworks.xstream.annotations.XStreamInclude;
 import org.optaplanner.core.config.AbstractConfig;
 import org.optaplanner.core.config.heuristic.policy.HeuristicConfigPolicy;
 import org.optaplanner.core.impl.constructionheuristic.placer.EntityPlacer;
-import org.optaplanner.core.impl.solver.termination.Termination;
 
 /**
  * General superclass for {@link QueuedEntityPlacerConfig} and {@link PooledEntityPlacerConfig}.
@@ -41,5 +40,4 @@ public abstract class EntityPlacerConfig<C extends EntityPlacerConfig> extends A
     @Override
     public void inherit(C inheritedConfig) {
     }
-
 }

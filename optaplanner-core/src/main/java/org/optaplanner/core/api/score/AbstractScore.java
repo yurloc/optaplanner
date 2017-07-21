@@ -30,12 +30,13 @@ import org.optaplanner.core.api.score.buildin.hardsoft.HardSoftScore;
  * @see Score
  * @see HardSoftScore
  */
-public abstract class AbstractScore<S extends Score> implements Score<S>, Serializable {
+public abstract class AbstractScore<S extends Score> implements Score<S>,
+                                                                Serializable {
 
     protected static final String INIT_LABEL = "init";
 
     protected static String[] parseScoreTokens(Class<? extends Score> scoreClass,
-            String scoreString, String... levelSuffixes) {
+                                               String scoreString, String... levelSuffixes) {
         String[] scoreTokens = new String[levelSuffixes.length + 1];
         String[] suffixedScoreTokens = scoreString.split("/");
         int startIndex;
@@ -43,10 +44,11 @@ public abstract class AbstractScore<S extends Score> implements Score<S>, Serial
             String suffixedScoreToken = suffixedScoreTokens[0];
             if (!suffixedScoreToken.endsWith(INIT_LABEL)) {
                 throw new IllegalArgumentException("The scoreString (" + scoreString
-                        + ") for the scoreClass (" + scoreClass.getSimpleName()
-                        + ") doesn't follow the correct pattern (" + buildScorePattern(false, levelSuffixes) + "):"
-                        + " the suffixedScoreToken (" + suffixedScoreToken
-                        + ") does not end with levelSuffix (" + INIT_LABEL + ").");
+                                                           + ") for the scoreClass (" + scoreClass.getSimpleName()
+                                                           + ") doesn't follow the correct pattern (" + buildScorePattern(
+                        false, levelSuffixes) + "):"
+                                                           + " the suffixedScoreToken (" + suffixedScoreToken
+                                                           + ") does not end with levelSuffix (" + INIT_LABEL + ").");
             }
             scoreTokens[0] = suffixedScoreToken.substring(0, suffixedScoreToken.length() - INIT_LABEL.length());
             startIndex = 1;
@@ -55,21 +57,23 @@ public abstract class AbstractScore<S extends Score> implements Score<S>, Serial
             startIndex = 0;
         } else {
             throw new IllegalArgumentException("The scoreString (" + scoreString
-                    + ") for the scoreClass (" + scoreClass.getSimpleName()
-                    + ") doesn't follow the correct pattern (" + buildScorePattern(false, levelSuffixes) + "):"
-                    + " the suffixedScoreTokens length (" + suffixedScoreTokens.length
-                    + ") differs from the levelSuffixes length ("
-                    + levelSuffixes.length + " or " + (levelSuffixes.length + 1) + ").");
+                                                       + ") for the scoreClass (" + scoreClass.getSimpleName()
+                                                       + ") doesn't follow the correct pattern (" + buildScorePattern(
+                    false, levelSuffixes) + "):"
+                                                       + " the suffixedScoreTokens length (" + suffixedScoreTokens.length
+                                                       + ") differs from the levelSuffixes length ("
+                                                       + levelSuffixes.length + " or " + (levelSuffixes.length + 1) + ").");
         }
         for (int i = 0; i < levelSuffixes.length; i++) {
             String suffixedScoreToken = suffixedScoreTokens[startIndex + i];
             String levelSuffix = levelSuffixes[i];
             if (!suffixedScoreToken.endsWith(levelSuffix)) {
                 throw new IllegalArgumentException("The scoreString (" + scoreString
-                        + ") for the scoreClass (" + scoreClass.getSimpleName()
-                        + ") doesn't follow the correct pattern (" + buildScorePattern(false, levelSuffixes) + "):"
-                        + " the suffixedScoreToken (" + suffixedScoreToken
-                        + ") does not end with levelSuffix (" + levelSuffix + ").");
+                                                           + ") for the scoreClass (" + scoreClass.getSimpleName()
+                                                           + ") doesn't follow the correct pattern (" + buildScorePattern(
+                        false, levelSuffixes) + "):"
+                                                           + " the suffixedScoreToken (" + suffixedScoreToken
+                                                           + ") does not end with levelSuffix (" + levelSuffix + ").");
             }
             scoreTokens[1 + i] = suffixedScoreToken.substring(0, suffixedScoreToken.length() - levelSuffix.length());
         }
@@ -77,57 +81,57 @@ public abstract class AbstractScore<S extends Score> implements Score<S>, Serial
     }
 
     protected static int parseInitScore(Class<? extends Score> scoreClass,
-            String scoreString, String initScoreString) {
+                                        String scoreString, String initScoreString) {
         try {
             return Integer.parseInt(initScoreString);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("The scoreString (" + scoreString
-                    + ") for the scoreClass (" + scoreClass.getSimpleName() + ") has a initScoreString ("
-                    + initScoreString + ") which is not a valid integer.", e);
+                                                       + ") for the scoreClass (" + scoreClass.getSimpleName() + ") has a initScoreString ("
+                                                       + initScoreString + ") which is not a valid integer.", e);
         }
     }
 
     protected static int parseLevelAsInt(Class<? extends Score> scoreClass,
-            String scoreString, String levelString) {
+                                         String scoreString, String levelString) {
         try {
             return Integer.parseInt(levelString);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("The scoreString (" + scoreString
-                    + ") for the scoreClass (" + scoreClass.getSimpleName() + ") has a levelString (" + levelString
-                    + ") which is not a valid integer.", e);
+                                                       + ") for the scoreClass (" + scoreClass.getSimpleName() + ") has a levelString (" + levelString
+                                                       + ") which is not a valid integer.", e);
         }
     }
 
     protected static long parseLevelAsLong(Class<? extends Score> scoreClass,
-            String scoreString, String levelString) {
+                                           String scoreString, String levelString) {
         try {
             return Long.parseLong(levelString);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("The scoreString (" + scoreString
-                    + ") for the scoreClass (" + scoreClass.getSimpleName() + ") has a levelString (" + levelString
-                    + ") which is not a valid long.", e);
+                                                       + ") for the scoreClass (" + scoreClass.getSimpleName() + ") has a levelString (" + levelString
+                                                       + ") which is not a valid long.", e);
         }
     }
 
     protected static double parseLevelAsDouble(Class<? extends Score> scoreClass,
-            String scoreString, String levelString) {
+                                               String scoreString, String levelString) {
         try {
             return Double.parseDouble(levelString);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("The scoreString (" + scoreString
-                    + ") for the scoreClass (" + scoreClass.getSimpleName() + ") has a levelString (" + levelString
-                    + ") which is not a valid double.", e);
+                                                       + ") for the scoreClass (" + scoreClass.getSimpleName() + ") has a levelString (" + levelString
+                                                       + ") which is not a valid double.", e);
         }
     }
 
     protected static BigDecimal parseLevelAsBigDecimal(Class<? extends Score> scoreClass,
-            String scoreString, String levelString) {
+                                                       String scoreString, String levelString) {
         try {
             return new BigDecimal(levelString);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("The scoreString (" + scoreString
-                    + ") for the scoreClass (" + scoreClass.getSimpleName() + ") has a levelString (" + levelString
-                    + ") which is not a valid BigDecimal.", e);
+                                                       + ") for the scoreClass (" + scoreClass.getSimpleName() + ") has a levelString (" + levelString
+                                                       + ") which is not a valid BigDecimal.", e);
         }
     }
 
@@ -181,9 +185,9 @@ public abstract class AbstractScore<S extends Score> implements Score<S>, Serial
     protected void assertNoInitScore() {
         if (initScore != 0) {
             throw new IllegalStateException("The score (" + this + ")'s initScore (" + initScore
-                    + ") should be 0.\n"
-                    + "Maybe the score calculator is calculating the initScore too,"
-                    + " although it's the score director's responsibility.");
+                                                    + ") should be 0.\n"
+                                                    + "Maybe the score calculator is calculating the initScore too,"
+                                                    + " although it's the score director's responsibility.");
         }
     }
 
@@ -215,5 +219,4 @@ public abstract class AbstractScore<S extends Score> implements Score<S>, Serial
         }
         return shortString.toString();
     }
-
 }

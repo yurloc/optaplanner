@@ -48,7 +48,8 @@ public class ConfigUtilsTest {
         a = Integer.valueOf(1);
         assertEquals(Integer.valueOf(1), ConfigUtils.meldProperty(a, b));
         b = Integer.valueOf(10);
-        assertEquals(ConfigUtils.mergeProperty(Integer.valueOf(1), Integer.valueOf(10)), ConfigUtils.meldProperty(a, b));
+        assertEquals(ConfigUtils.mergeProperty(Integer.valueOf(1), Integer.valueOf(10)),
+                     ConfigUtils.meldProperty(a, b));
         a = null;
         assertEquals(Integer.valueOf(10), ConfigUtils.meldProperty(a, b));
     }
@@ -180,7 +181,5 @@ public class ConfigUtilsTest {
         public void setString(String string) {
             this.string = string;
         }
-
     }
-
 }

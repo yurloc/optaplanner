@@ -50,5 +50,4 @@ abstract class TestGenAbstractValueProvider<T> implements TestGenValueProvider<T
     public void printSetup(StringBuilder sb) {
         // no setup required
     }
-
 }

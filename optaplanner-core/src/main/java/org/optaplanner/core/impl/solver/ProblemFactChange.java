@@ -45,5 +45,4 @@ public interface ProblemFactChange<Solution_> {
      * Also needs to get notified of those changes.
      */
     void doChange(ScoreDirector<Solution_> scoreDirector);
-
 }

@@ -41,5 +41,4 @@ public class BeanPropertyMemberAccessorTest {
         memberAccessor.executeSetter(e1, v2);
         assertSame(v2, e1.getValue());
     }
-
 }

@@ -26,10 +26,10 @@ public class InitializingScoreTrendTest {
     @Test
     public void parseTrend() {
         assertArrayEquals(new InitializingScoreTrendLevel[]{
-                InitializingScoreTrendLevel.ONLY_DOWN,
-                InitializingScoreTrendLevel.ANY,
-                InitializingScoreTrendLevel.ONLY_UP},
-                InitializingScoreTrend.parseTrend("ONLY_DOWN/ANY/ONLY_UP", 3).getTrendLevels());
+                                  InitializingScoreTrendLevel.ONLY_DOWN,
+                                  InitializingScoreTrendLevel.ANY,
+                                  InitializingScoreTrendLevel.ONLY_UP},
+                          InitializingScoreTrend.parseTrend("ONLY_DOWN/ANY/ONLY_UP", 3).getTrendLevels());
     }
 
     @Test
@@ -45,5 +45,4 @@ public class InitializingScoreTrendTest {
         assertEquals(false, InitializingScoreTrend.parseTrend("ONLY_DOWN/ANY/ONLY_DOWN", 3).isOnlyDown());
         assertEquals(false, InitializingScoreTrend.parseTrend("ONLY_DOWN/ONLY_DOWN/ONLY_UP", 3).isOnlyDown());
     }
-
 }

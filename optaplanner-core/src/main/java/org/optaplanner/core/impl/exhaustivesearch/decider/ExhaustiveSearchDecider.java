@@ -49,9 +49,9 @@ public class ExhaustiveSearchDecider<Solution_> implements ExhaustiveSearchPhase
     protected boolean assertExpectedUndoMoveScore = false;
 
     public ExhaustiveSearchDecider(String logIndentation,
-            BestSolutionRecaller<Solution_> bestSolutionRecaller, Termination termination,
-            ManualEntityMimicRecorder manualEntityMimicRecorder, MoveSelector moveSelector,
-            boolean scoreBounderEnabled, ScoreBounder scoreBounder) {
+                                   BestSolutionRecaller<Solution_> bestSolutionRecaller, Termination termination,
+                                   ManualEntityMimicRecorder manualEntityMimicRecorder, MoveSelector moveSelector,
+                                   boolean scoreBounderEnabled, ScoreBounder scoreBounder) {
         this.logIndentation = logIndentation;
         this.bestSolutionRecaller = bestSolutionRecaller;
         this.termination = termination;
@@ -158,8 +158,8 @@ public class ExhaustiveSearchDecider<Solution_> implements ExhaustiveSearchPhase
             }
         }
         logger.trace("{}        Move treeId ({}), score ({}), expandable ({}), move ({}).",
-                logIndentation,
-                moveNode.getTreeId(), moveNode.getScore(), moveNode.isExpandable(), moveNode.getMove());
+                     logIndentation,
+                     moveNode.getTreeId(), moveNode.getScore(), moveNode.isExpandable(), moveNode.getMove());
     }
 
     private void processMove(ExhaustiveSearchStepScope<Solution_> stepScope, ExhaustiveSearchNode moveNode) {
@@ -199,5 +199,4 @@ public class ExhaustiveSearchDecider<Solution_> implements ExhaustiveSearchPhase
             }
         }
     }
-
 }

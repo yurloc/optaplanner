@@ -27,7 +27,9 @@ import org.optaplanner.core.impl.testdata.domain.TestdataEntity;
 import org.optaplanner.core.impl.testdata.domain.TestdataValue;
 
 import static org.mockito.Mockito.*;
-import static org.optaplanner.core.impl.testdata.util.PlannerAssert.*;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.assertAllCodesOfValueSelector;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.assertAllCodesOfValueSelectorForEntity;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.verifyPhaseLifecycle;
 
 public class SelectedCountLimitValueSelectorTest {
 
@@ -90,7 +92,6 @@ public class SelectedCountLimitValueSelectorTest {
         verify(childValueSelector, times(5)).iterator();
         verify(childValueSelector, times(5)).getSize();
     }
-
 
     @Test
     public void selectSizeLimitHigherThanSelectorSize() {
@@ -155,8 +156,12 @@ public class SelectedCountLimitValueSelectorTest {
     public void selectSizeLimitLowerThanSelectorSizeEntityDependent() {
         TestdataEntity entity = new TestdataEntity("e1");
         ValueSelector childValueSelector = SelectorTestUtils.mockValueSelectorForEntity(TestdataValue.class,
-                entity, "value",
-                new TestdataValue("v1"), new TestdataValue("v2"), new TestdataValue("v3"), new TestdataValue("v4"), new TestdataValue("v5"));
+                                                                                        entity, "value",
+                                                                                        new TestdataValue("v1"),
+                                                                                        new TestdataValue("v2"),
+                                                                                        new TestdataValue("v3"),
+                                                                                        new TestdataValue("v4"),
+                                                                                        new TestdataValue("v5"));
         ValueSelector valueSelector = new SelectedCountLimitValueSelector(childValueSelector, 3L);
 
         DefaultSolverScope solverScope = mock(DefaultSolverScope.class);
@@ -211,13 +216,14 @@ public class SelectedCountLimitValueSelectorTest {
         verify(childValueSelector, times(5)).getSize(entity);
     }
 
-
     @Test
     public void selectSizeLimitHigherThanSelectorSizeEntityDependent() {
         TestdataEntity entity = new TestdataEntity("e1");
         ValueSelector childValueSelector = SelectorTestUtils.mockValueSelectorForEntity(TestdataValue.class,
-                entity, "value",
-                new TestdataValue("v1"), new TestdataValue("v2"), new TestdataValue("v3"));
+                                                                                        entity, "value",
+                                                                                        new TestdataValue("v1"),
+                                                                                        new TestdataValue("v2"),
+                                                                                        new TestdataValue("v3"));
         ValueSelector valueSelector = new SelectedCountLimitValueSelector(childValueSelector, 5L);
 
         DefaultSolverScope solverScope = mock(DefaultSolverScope.class);
@@ -271,5 +277,4 @@ public class SelectedCountLimitValueSelectorTest {
         verify(childValueSelector, times(5)).iterator(entity);
         verify(childValueSelector, times(5)).getSize(entity);
     }
-
 }

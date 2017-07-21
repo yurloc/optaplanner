@@ -34,7 +34,8 @@ public class TestdataFieldAnnotatedEntity extends TestdataObject {
 
     public static GenuineVariableDescriptor buildVariableDescriptorForValue() {
         SolutionDescriptor solutionDescriptor = TestdataFieldAnnotatedSolution.buildSolutionDescriptor();
-        EntityDescriptor entityDescriptor = solutionDescriptor.findEntityDescriptorOrFail(TestdataFieldAnnotatedEntity.class);
+        EntityDescriptor entityDescriptor = solutionDescriptor.findEntityDescriptorOrFail(
+                TestdataFieldAnnotatedEntity.class);
         return entityDescriptor.getGenuineVariableDescriptor("value");
     }
 
@@ -60,5 +61,4 @@ public class TestdataFieldAnnotatedEntity extends TestdataObject {
     // ************************************************************************
     // Complex methods
     // ************************************************************************
-
 }

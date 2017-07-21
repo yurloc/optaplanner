@@ -32,9 +32,10 @@ import org.optaplanner.core.impl.testdata.domain.multivar.TestdataMultiVarEntity
 import org.optaplanner.core.impl.testdata.domain.multivar.TestdataMultiVarSolution;
 import org.optaplanner.core.impl.testdata.domain.multivar.TestdataOtherValue;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
-import static org.optaplanner.core.impl.testdata.util.PlannerAssert.*;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.assertCode;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.assertCollectionContainsExactly;
 
 public class SwapMoveTest {
 
@@ -53,7 +54,8 @@ public class SwapMoveTest {
         ScoreDirector<TestdataEntityProvidingSolution> scoreDirector = mock(ScoreDirector.class);
         EntityDescriptor<TestdataEntityProvidingSolution> entityDescriptor = TestdataEntityProvidingEntity.buildEntityDescriptor();
 
-        SwapMove<TestdataEntityProvidingSolution> abMove = new SwapMove<>(entityDescriptor.getGenuineVariableDescriptorList(), a, b);
+        SwapMove<TestdataEntityProvidingSolution> abMove = new SwapMove<>(
+                entityDescriptor.getGenuineVariableDescriptorList(), a, b);
         a.setValue(v1);
         b.setValue(v2);
         assertEquals(false, abMove.isMoveDoable(scoreDirector));
@@ -73,7 +75,8 @@ public class SwapMoveTest {
         b.setValue(v4);
         assertEquals(false, abMove.isMoveDoable(scoreDirector));
 
-        SwapMove<TestdataEntityProvidingSolution> acMove = new SwapMove<>(entityDescriptor.getGenuineVariableDescriptorList(), a, c);
+        SwapMove<TestdataEntityProvidingSolution> acMove = new SwapMove<>(
+                entityDescriptor.getGenuineVariableDescriptorList(), a, c);
         a.setValue(v1);
         c.setValue(v4);
         assertEquals(false, acMove.isMoveDoable(scoreDirector));
@@ -81,7 +84,8 @@ public class SwapMoveTest {
         c.setValue(v5);
         assertEquals(false, acMove.isMoveDoable(scoreDirector));
 
-        SwapMove<TestdataEntityProvidingSolution> bcMove = new SwapMove<>(entityDescriptor.getGenuineVariableDescriptorList(), b, c);
+        SwapMove<TestdataEntityProvidingSolution> bcMove = new SwapMove<>(
+                entityDescriptor.getGenuineVariableDescriptorList(), b, c);
         b.setValue(v2);
         c.setValue(v4);
         assertEquals(false, bcMove.isMoveDoable(scoreDirector));
@@ -110,7 +114,8 @@ public class SwapMoveTest {
         ScoreDirector<TestdataEntityProvidingSolution> scoreDirector = mock(ScoreDirector.class);
         EntityDescriptor<TestdataEntityProvidingSolution> entityDescriptor = TestdataEntityProvidingEntity.buildEntityDescriptor();
 
-        SwapMove<TestdataEntityProvidingSolution> abMove = new SwapMove<>(entityDescriptor.getGenuineVariableDescriptorList(), a, b);
+        SwapMove<TestdataEntityProvidingSolution> abMove = new SwapMove<>(
+                entityDescriptor.getGenuineVariableDescriptorList(), a, b);
 
         a.setValue(v1);
         b.setValue(v1);
@@ -133,7 +138,8 @@ public class SwapMoveTest {
         assertEquals(v2, a.getValue());
         assertEquals(v3, b.getValue());
 
-        SwapMove<TestdataEntityProvidingSolution> acMove = new SwapMove<>(entityDescriptor.getGenuineVariableDescriptorList(), a, c);
+        SwapMove<TestdataEntityProvidingSolution> acMove = new SwapMove<>(
+                entityDescriptor.getGenuineVariableDescriptorList(), a, c);
 
         a.setValue(v2);
         c.setValue(v2);
@@ -156,7 +162,8 @@ public class SwapMoveTest {
         assertEquals(v3, a.getValue());
         assertEquals(v4, c.getValue());
 
-        SwapMove<TestdataEntityProvidingSolution> bcMove = new SwapMove<>(entityDescriptor.getGenuineVariableDescriptorList(), b, c);
+        SwapMove<TestdataEntityProvidingSolution> bcMove = new SwapMove<>(
+                entityDescriptor.getGenuineVariableDescriptorList(), b, c);
 
         b.setValue(v2);
         c.setValue(v2);
@@ -185,13 +192,13 @@ public class SwapMoveTest {
         GenuineVariableDescriptor<TestdataMultiVarSolution> primaryDescriptor = TestdataMultiVarEntity.buildVariableDescriptorForPrimaryValue();
         GenuineVariableDescriptor<TestdataMultiVarSolution> secondaryDescriptor = TestdataMultiVarEntity.buildVariableDescriptorForSecondaryValue();
         SwapMove move = new SwapMove<>(Arrays.asList(primaryDescriptor),
-                new TestdataMultiVarEntity("a"), new TestdataMultiVarEntity("b"));
+                                       new TestdataMultiVarEntity("a"), new TestdataMultiVarEntity("b"));
         assertCollectionContainsExactly(move.getVariableNameList(), "primaryValue");
         assertCode("a", move.getLeftEntity());
         assertCode("b", move.getRightEntity());
 
         move = new SwapMove<>(Arrays.asList(primaryDescriptor, secondaryDescriptor),
-                new TestdataMultiVarEntity("c"), new TestdataMultiVarEntity("d"));
+                              new TestdataMultiVarEntity("c"), new TestdataMultiVarEntity("d"));
         assertCollectionContainsExactly(move.getVariableNameList(), "primaryValue", "secondaryValue");
         assertCode("c", move.getLeftEntity());
         assertCode("d", move.getRightEntity());
@@ -228,11 +235,13 @@ public class SwapMoveTest {
         EntityDescriptor<TestdataMultiVarSolution> entityDescriptor = TestdataMultiVarEntity.buildEntityDescriptor();
         List<GenuineVariableDescriptor<TestdataMultiVarSolution>> variableDescriptorList = entityDescriptor.getGenuineVariableDescriptorList();
 
-        assertEquals("a {null, null, null} <-> a {null, null, null}", new SwapMove<>(variableDescriptorList, a, a).toString());
-        assertEquals("a {null, null, null} <-> b {v1, v3, w1}", new SwapMove<>(variableDescriptorList, a, b).toString());
-        assertEquals("a {null, null, null} <-> c {v2, v4, w2}", new SwapMove<>(variableDescriptorList, a, c).toString());
+        assertEquals("a {null, null, null} <-> a {null, null, null}",
+                     new SwapMove<>(variableDescriptorList, a, a).toString());
+        assertEquals("a {null, null, null} <-> b {v1, v3, w1}",
+                     new SwapMove<>(variableDescriptorList, a, b).toString());
+        assertEquals("a {null, null, null} <-> c {v2, v4, w2}",
+                     new SwapMove<>(variableDescriptorList, a, c).toString());
         assertEquals("b {v1, v3, w1} <-> c {v2, v4, w2}", new SwapMove<>(variableDescriptorList, b, c).toString());
         assertEquals("c {v2, v4, w2} <-> b {v1, v3, w1}", new SwapMove<>(variableDescriptorList, c, b).toString());
     }
-
 }

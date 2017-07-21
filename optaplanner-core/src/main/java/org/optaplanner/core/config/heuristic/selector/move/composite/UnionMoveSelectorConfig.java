@@ -60,7 +60,8 @@ public class UnionMoveSelectorConfig extends MoveSelectorConfig<UnionMoveSelecto
         return selectorProbabilityWeightFactoryClass;
     }
 
-    public void setSelectorProbabilityWeightFactoryClass(Class<? extends SelectionProbabilityWeightFactory> selectorProbabilityWeightFactoryClass) {
+    public void setSelectorProbabilityWeightFactoryClass(
+            Class<? extends SelectionProbabilityWeightFactory> selectorProbabilityWeightFactoryClass) {
         this.selectorProbabilityWeightFactoryClass = selectorProbabilityWeightFactoryClass;
     }
 
@@ -70,23 +71,25 @@ public class UnionMoveSelectorConfig extends MoveSelectorConfig<UnionMoveSelecto
 
     @Override
     public MoveSelector buildBaseMoveSelector(HeuristicConfigPolicy configPolicy,
-            SelectionCacheType minimumCacheType, boolean randomSelection) {
+                                              SelectionCacheType minimumCacheType, boolean randomSelection) {
         List<MoveSelector> moveSelectorList = new ArrayList<>(moveSelectorConfigList.size());
         for (MoveSelectorConfig moveSelectorConfig : moveSelectorConfigList) {
             moveSelectorList.add(
                     moveSelectorConfig.buildMoveSelector(configPolicy,
-                            minimumCacheType, SelectionOrder.fromRandomSelectionBoolean(randomSelection)));
+                                                         minimumCacheType,
+                                                         SelectionOrder.fromRandomSelectionBoolean(randomSelection)));
         }
 
         SelectionProbabilityWeightFactory selectorProbabilityWeightFactory;
         if (selectorProbabilityWeightFactoryClass != null) {
             if (!randomSelection) {
                 throw new IllegalArgumentException("The moveSelectorConfig (" + this
-                        + ") with selectorProbabilityWeightFactoryClass (" + selectorProbabilityWeightFactoryClass
-                        + ") has non-random randomSelection (" + randomSelection + ").");
+                                                           + ") with selectorProbabilityWeightFactoryClass (" + selectorProbabilityWeightFactoryClass
+                                                           + ") has non-random randomSelection (" + randomSelection + ").");
             }
             selectorProbabilityWeightFactory = ConfigUtils.newInstance(this,
-                    "selectorProbabilityWeightFactoryClass", selectorProbabilityWeightFactoryClass);
+                                                                       "selectorProbabilityWeightFactoryClass",
+                                                                       selectorProbabilityWeightFactoryClass);
         } else if (randomSelection) {
             Map<MoveSelector, Double> fixedProbabilityWeightMap = new HashMap<>(
                     moveSelectorConfigList.size());
@@ -105,7 +108,7 @@ public class UnionMoveSelectorConfig extends MoveSelectorConfig<UnionMoveSelecto
             selectorProbabilityWeightFactory = null;
         }
         return new UnionMoveSelector(moveSelectorList, randomSelection,
-                selectorProbabilityWeightFactory);
+                                     selectorProbabilityWeightFactory);
     }
 
     @Override
@@ -128,5 +131,4 @@ public class UnionMoveSelectorConfig extends MoveSelectorConfig<UnionMoveSelecto
     public String toString() {
         return getClass().getSimpleName() + "(" + moveSelectorConfigList + ")";
     }
-
 }

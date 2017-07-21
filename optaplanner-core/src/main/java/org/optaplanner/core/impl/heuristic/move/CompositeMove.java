@@ -169,5 +169,4 @@ public class CompositeMove<Solution_> implements Move<Solution_> {
     public String toString() {
         return Arrays.toString(moves);
     }
-
 }

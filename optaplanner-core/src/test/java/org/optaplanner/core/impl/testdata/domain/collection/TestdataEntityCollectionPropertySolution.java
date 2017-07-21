@@ -33,7 +33,7 @@ public class TestdataEntityCollectionPropertySolution extends TestdataObject {
 
     public static SolutionDescriptor buildSolutionDescriptor() {
         return SolutionDescriptor.buildSolutionDescriptor(TestdataEntityCollectionPropertySolution.class,
-                TestdataEntityCollectionPropertyEntity.class);
+                                                          TestdataEntityCollectionPropertyEntity.class);
     }
 
     private List<TestdataValue> valueList;
@@ -79,5 +79,4 @@ public class TestdataEntityCollectionPropertySolution extends TestdataObject {
     // ************************************************************************
     // Complex methods
     // ************************************************************************
-
 }

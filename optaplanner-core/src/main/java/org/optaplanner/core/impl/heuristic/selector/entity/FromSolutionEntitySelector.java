@@ -41,7 +41,7 @@ public class FromSolutionEntitySelector extends AbstractEntitySelector {
     protected boolean cachedEntityListIsDirty = false;
 
     public FromSolutionEntitySelector(EntityDescriptor entityDescriptor,
-            SelectionCacheType minimumCacheType, boolean randomSelection) {
+                                      SelectionCacheType minimumCacheType, boolean randomSelection) {
         this.entityDescriptor = entityDescriptor;
         this.minimumCacheType = minimumCacheType;
         this.randomSelection = randomSelection;
@@ -134,7 +134,7 @@ public class FromSolutionEntitySelector extends AbstractEntitySelector {
             return cachedEntityList.listIterator();
         } else {
             throw new IllegalStateException("The selector (" + this
-                    + ") does not support a ListIterator with randomSelection (" + randomSelection + ").");
+                                                    + ") does not support a ListIterator with randomSelection (" + randomSelection + ").");
         }
     }
 
@@ -145,7 +145,7 @@ public class FromSolutionEntitySelector extends AbstractEntitySelector {
             return cachedEntityList.listIterator(index);
         } else {
             throw new IllegalStateException("The selector (" + this
-                    + ") does not support a ListIterator with randomSelection (" + randomSelection + ").");
+                                                    + ") does not support a ListIterator with randomSelection (" + randomSelection + ").");
         }
     }
 
@@ -158,7 +158,7 @@ public class FromSolutionEntitySelector extends AbstractEntitySelector {
     private void checkCachedEntityListIsDirty() {
         if (cachedEntityListIsDirty) {
             throw new IllegalStateException("The selector (" + this + ") with minimumCacheType (" + minimumCacheType
-                    + ")'s workingEntityList became dirty between steps but is still used afterwards.");
+                                                    + ")'s workingEntityList became dirty between steps but is still used afterwards.");
         }
     }
 
@@ -166,5 +166,4 @@ public class FromSolutionEntitySelector extends AbstractEntitySelector {
     public String toString() {
         return getClass().getSimpleName() + "(" + entityDescriptor.getEntityClass().getSimpleName() + ")";
     }
-
 }

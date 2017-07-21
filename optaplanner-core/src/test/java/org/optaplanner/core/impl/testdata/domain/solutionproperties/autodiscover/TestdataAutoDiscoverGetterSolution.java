@@ -31,7 +31,8 @@ import org.optaplanner.core.impl.testdata.domain.TestdataValue;
 public class TestdataAutoDiscoverGetterSolution extends TestdataObject {
 
     public static SolutionDescriptor<TestdataAutoDiscoverGetterSolution> buildSolutionDescriptor() {
-        return SolutionDescriptor.buildSolutionDescriptor(TestdataAutoDiscoverGetterSolution.class, TestdataEntity.class);
+        return SolutionDescriptor.buildSolutionDescriptor(TestdataAutoDiscoverGetterSolution.class,
+                                                          TestdataEntity.class);
     }
 
     private TestdataObject singleProblemFactField;
@@ -50,8 +51,8 @@ public class TestdataAutoDiscoverGetterSolution extends TestdataObject {
     }
 
     public TestdataAutoDiscoverGetterSolution(String code, TestdataObject singleProblemFact,
-            List<TestdataValue> problemFactList, List<TestdataEntity> entityList,
-            TestdataEntity otherEntity) {
+                                              List<TestdataValue> problemFactList, List<TestdataEntity> entityList,
+                                              TestdataEntity otherEntity) {
         super(code);
         this.singleProblemFactField = singleProblemFact;
         this.problemFactListField = problemFactList;
@@ -83,5 +84,4 @@ public class TestdataAutoDiscoverGetterSolution extends TestdataObject {
     public void setScore(SimpleScore score) {
         this.score = score;
     }
-
 }

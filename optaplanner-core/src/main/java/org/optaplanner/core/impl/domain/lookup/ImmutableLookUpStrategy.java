@@ -35,5 +35,4 @@ public class ImmutableLookUpStrategy implements LookUpStrategy {
         // Because it is immutable, we can use the same one.
         return externalObject;
     }
-
 }

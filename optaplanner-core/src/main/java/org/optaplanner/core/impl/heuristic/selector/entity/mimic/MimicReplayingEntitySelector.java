@@ -115,8 +115,8 @@ public class MimicReplayingEntitySelector extends AbstractEntitySelector {
         public boolean hasNext() {
             if (!hasRecordingCreated) {
                 throw new IllegalStateException("Replay must occur after record."
-                        + " The recordingEntitySelector (" + entityMimicRecorder
-                        + ")'s hasNext() has not been called yet. ");
+                                                        + " The recordingEntitySelector (" + entityMimicRecorder
+                                                        + ")'s hasNext() has not been called yet. ");
             }
             return hasRecording && !recordingAlreadyReturned;
         }
@@ -125,12 +125,12 @@ public class MimicReplayingEntitySelector extends AbstractEntitySelector {
         public Object next() {
             if (!recordingCreated) {
                 throw new IllegalStateException("Replay must occur after record."
-                        + " The recordingEntitySelector (" + entityMimicRecorder
-                        + ")'s next() has not been called yet. ");
+                                                        + " The recordingEntitySelector (" + entityMimicRecorder
+                                                        + ")'s next() has not been called yet. ");
             }
             if (recordingAlreadyReturned) {
                 throw new NoSuchElementException("The recordingAlreadyReturned (" + recordingAlreadyReturned
-                        + ") is impossible. Check if hasNext() returns true before this call.");
+                                                         + ") is impossible. Check if hasNext() returns true before this call.");
             }
             // Until the recorder records something, this iterator has no next.
             recordingAlreadyReturned = true;
@@ -144,7 +144,6 @@ public class MimicReplayingEntitySelector extends AbstractEntitySelector {
             }
             return "Next replay (" + (recordingCreated ? recording : "?") + ")";
         }
-
     }
 
     @Override
@@ -169,5 +168,4 @@ public class MimicReplayingEntitySelector extends AbstractEntitySelector {
     public String toString() {
         return "Replaying(" + entityMimicRecorder + ")";
     }
-
 }

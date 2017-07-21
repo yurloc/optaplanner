@@ -26,5 +26,4 @@ public class DummySimpleScoreEasyScoreCalculator<Solution_> implements EasyScore
     public Score calculateScore(Solution_ solution_) {
         return SimpleScore.valueOf(0);
     }
-
 }

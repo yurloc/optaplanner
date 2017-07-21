@@ -130,7 +130,5 @@ public class TestdataManyToManyShadowedEntity extends TestdataObject {
             entity.setReverseComposedCode(reverseComposedValue);
             scoreDirector.afterVariableChanged(entity, "reverseComposedCode");
         }
-
     }
-
 }

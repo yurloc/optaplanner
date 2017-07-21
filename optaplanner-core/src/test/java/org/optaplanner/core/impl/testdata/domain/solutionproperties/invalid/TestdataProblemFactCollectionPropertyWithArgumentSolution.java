@@ -87,5 +87,4 @@ public class TestdataProblemFactCollectionPropertyWithArgumentSolution extends T
     public Collection<Object> getProblemFacts(int invalidArgument) {
         return Collections.<Object>emptyList();
     }
-
 }

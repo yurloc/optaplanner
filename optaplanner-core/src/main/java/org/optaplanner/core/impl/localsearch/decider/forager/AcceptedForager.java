@@ -45,13 +45,13 @@ public class AcceptedForager extends AbstractForager {
     protected LocalSearchMoveScope earlyPickedMoveScope;
 
     public AcceptedForager(FinalistPodium finalistPodium,
-            LocalSearchPickEarlyType pickEarlyType, int acceptedCountLimit, boolean breakTieRandomly) {
+                           LocalSearchPickEarlyType pickEarlyType, int acceptedCountLimit, boolean breakTieRandomly) {
         this.finalistPodium = finalistPodium;
         this.pickEarlyType = pickEarlyType;
         this.acceptedCountLimit = acceptedCountLimit;
         if (acceptedCountLimit < 1) {
             throw new IllegalArgumentException("The acceptedCountLimit (" + acceptedCountLimit
-                    + ") cannot be negative or zero.");
+                                                       + ") cannot be negative or zero.");
         }
         this.breakTieRandomly = breakTieRandomly;
     }
@@ -167,5 +167,4 @@ public class AcceptedForager extends AbstractForager {
     public String toString() {
         return getClass().getSimpleName() + "(" + pickEarlyType + ", " + acceptedCountLimit + ")";
     }
-
 }

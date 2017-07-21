@@ -36,9 +36,7 @@ public interface FinalistPodium extends LocalSearchPhaseLifecycleListener {
     void addMove(LocalSearchMoveScope moveScope);
 
     /**
-     *
      * @return never null, sometimes empty
      */
     List<LocalSearchMoveScope> getFinalistList();
-
 }

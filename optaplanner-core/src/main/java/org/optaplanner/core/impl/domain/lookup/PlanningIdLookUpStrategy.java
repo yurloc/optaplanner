@@ -38,7 +38,7 @@ public class PlanningIdLookUpStrategy implements LookUpStrategy {
         Object oldAddedObject = idToWorkingObjectMap.put(planningId, workingObject);
         if (oldAddedObject != null) {
             throw new IllegalStateException("The workingObjects (" + oldAddedObject + ", " + workingObject
-                    + ") have the same planningId (" + planningId + "). Working objects must be unique.");
+                                                    + ") have the same planningId (" + planningId + "). Working objects must be unique.");
         }
     }
 
@@ -48,7 +48,7 @@ public class PlanningIdLookUpStrategy implements LookUpStrategy {
         Object removedObject = idToWorkingObjectMap.remove(planningId);
         if (workingObject != removedObject) {
             throw new IllegalStateException("The workingObject (" + workingObject
-                    + ") differs from the removedObject (" + removedObject + ") for planningId (" + planningId + ").");
+                                                    + ") differs from the removedObject (" + removedObject + ") for planningId (" + planningId + ").");
         }
     }
 
@@ -62,15 +62,14 @@ public class PlanningIdLookUpStrategy implements LookUpStrategy {
         Object planningId = planningIdMemberAccessor.executeGetter(externalObject);
         if (planningId == null) {
             throw new IllegalArgumentException("The planningId (" + planningId
-                    + ") of the member (" + planningIdMemberAccessor + ") of the class (" + externalObject.getClass()
-                    + ") on externalObject (" + externalObject
-                    + ") must not be null.\n"
-                    + "Maybe initialize the planningId of the original object before solving" +
-                    " or remove the " + PlanningId.class.getSimpleName() + " annotation"
-                    + " or change the " + PlanningSolution.class.getSimpleName() + " annotation's "
-                    + LookUpStrategyType.class.getSimpleName() + ".");
+                                                       + ") of the member (" + planningIdMemberAccessor + ") of the class (" + externalObject.getClass()
+                                                       + ") on externalObject (" + externalObject
+                                                       + ") must not be null.\n"
+                                                       + "Maybe initialize the planningId of the original object before solving" +
+                                                       " or remove the " + PlanningId.class.getSimpleName() + " annotation"
+                                                       + " or change the " + PlanningSolution.class.getSimpleName() + " annotation's "
+                                                       + LookUpStrategyType.class.getSimpleName() + ".");
         }
         return Pair.of(externalObject.getClass(), planningId);
     }
-
 }

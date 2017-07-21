@@ -40,28 +40,28 @@ public class SubChainChangeMoveSelector extends GenericMoveSelector {
     protected SingletonInverseVariableSupply inverseVariableSupply = null;
 
     public SubChainChangeMoveSelector(SubChainSelector subChainSelector, EntityIndependentValueSelector valueSelector,
-            boolean randomSelection, boolean selectReversingMoveToo) {
+                                      boolean randomSelection, boolean selectReversingMoveToo) {
         this.subChainSelector = subChainSelector;
         this.valueSelector = valueSelector;
         this.randomSelection = randomSelection;
         this.selectReversingMoveToo = selectReversingMoveToo;
         if (subChainSelector.getVariableDescriptor() != valueSelector.getVariableDescriptor()) {
             throw new IllegalStateException("The selector (" + this
-                    + ") has a subChainSelector (" + subChainSelector
-                    + ") with variableDescriptor (" + subChainSelector.getVariableDescriptor()
-                    + ") which is not the same as the valueSelector (" + valueSelector
-                    + ")'s variableDescriptor(" + valueSelector.getVariableDescriptor() + ").");
+                                                    + ") has a subChainSelector (" + subChainSelector
+                                                    + ") with variableDescriptor (" + subChainSelector.getVariableDescriptor()
+                                                    + ") which is not the same as the valueSelector (" + valueSelector
+                                                    + ")'s variableDescriptor(" + valueSelector.getVariableDescriptor() + ").");
         }
         if (!randomSelection) {
             if (subChainSelector.isNeverEnding()) {
                 throw new IllegalStateException("The selector (" + this
-                        + ") has a subChainSelector (" + subChainSelector
-                        + ") with neverEnding (" + subChainSelector.isNeverEnding() + ").");
+                                                        + ") has a subChainSelector (" + subChainSelector
+                                                        + ") with neverEnding (" + subChainSelector.isNeverEnding() + ").");
             }
             if (valueSelector.isNeverEnding()) {
                 throw new IllegalStateException("The selector (" + this
-                        + ") has a valueSelector (" + valueSelector
-                        + ") with neverEnding (" + valueSelector.isNeverEnding() + ").");
+                                                        + ") has a valueSelector (" + valueSelector
+                                                        + ") with neverEnding (" + valueSelector.isNeverEnding() + ").");
             }
         }
         phaseLifecycleSupport.addEventListener(subChainSelector);
@@ -72,7 +72,8 @@ public class SubChainChangeMoveSelector extends GenericMoveSelector {
     public void solvingStarted(DefaultSolverScope solverScope) {
         super.solvingStarted(solverScope);
         SupplyManager supplyManager = solverScope.getScoreDirector().getSupplyManager();
-        inverseVariableSupply = supplyManager.demand(new SingletonInverseVariableDemand(valueSelector.getVariableDescriptor()));
+        inverseVariableSupply = supplyManager.demand(
+                new SingletonInverseVariableDemand(valueSelector.getVariableDescriptor()));
     }
 
     @Override
@@ -153,7 +154,6 @@ public class SubChainChangeMoveSelector extends GenericMoveSelector {
             }
             return upcomingSelection;
         }
-
     }
 
     private class RandomSubChainChangeMoveIterator extends UpcomingSelectionIterator<Move> {
@@ -194,15 +194,15 @@ public class SubChainChangeMoveSelector extends GenericMoveSelector {
 
             boolean reversing = selectReversingMoveToo && workingRandom.nextBoolean();
             return reversing
-                    ? new SubChainReversingChangeMove(subChain, valueSelector.getVariableDescriptor(), inverseVariableSupply, toValue)
-                    : new SubChainChangeMove(subChain, valueSelector.getVariableDescriptor(), inverseVariableSupply, toValue);
+                    ? new SubChainReversingChangeMove(subChain, valueSelector.getVariableDescriptor(),
+                                                      inverseVariableSupply, toValue)
+                    : new SubChainChangeMove(subChain, valueSelector.getVariableDescriptor(), inverseVariableSupply,
+                                             toValue);
         }
-
     }
 
     @Override
     public String toString() {
         return getClass().getSimpleName() + "(" + subChainSelector + ", " + valueSelector + ")";
     }
-
 }

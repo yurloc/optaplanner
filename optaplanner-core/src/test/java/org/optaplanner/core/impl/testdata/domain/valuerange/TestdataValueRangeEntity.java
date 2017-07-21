@@ -40,7 +40,8 @@ public class TestdataValueRangeEntity extends TestdataObject {
 
     public static GenuineVariableDescriptor buildVariableDescriptorForValue() {
         SolutionDescriptor solutionDescriptor = TestdataValueRangeSolution.buildSolutionDescriptor();
-        EntityDescriptor entityDescriptor = solutionDescriptor.findEntityDescriptorOrFail(TestdataValueRangeEntity.class);
+        EntityDescriptor entityDescriptor = solutionDescriptor.findEntityDescriptorOrFail(
+                TestdataValueRangeEntity.class);
         return entityDescriptor.getGenuineVariableDescriptor("value");
     }
 
@@ -135,5 +136,4 @@ public class TestdataValueRangeEntity extends TestdataObject {
     // ************************************************************************
     // Complex methods
     // ************************************************************************
-
 }

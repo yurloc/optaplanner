@@ -30,9 +30,10 @@ import org.optaplanner.core.impl.testdata.domain.TestdataEntity;
 import org.optaplanner.core.impl.testdata.domain.TestdataObject;
 import org.optaplanner.core.impl.testdata.domain.TestdataSolution;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
-import static org.optaplanner.core.impl.testdata.util.PlannerAssert.*;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.assertAllCodesOfEntitySelector;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.verifyPhaseLifecycle;
 
 public class SortingEntitySelectorTest {
 
@@ -58,8 +59,12 @@ public class SortingEntitySelectorTest {
 
     public void runCacheType(SelectionCacheType cacheType, int timesCalled) {
         EntitySelector childEntitySelector = SelectorTestUtils.mockEntitySelector(TestdataEntity.class,
-                new TestdataEntity("jan"), new TestdataEntity("feb"), new TestdataEntity("mar"),
-                new TestdataEntity("apr"), new TestdataEntity("may"), new TestdataEntity("jun"));
+                                                                                  new TestdataEntity("jan"),
+                                                                                  new TestdataEntity("feb"),
+                                                                                  new TestdataEntity("mar"),
+                                                                                  new TestdataEntity("apr"),
+                                                                                  new TestdataEntity("may"),
+                                                                                  new TestdataEntity("jun"));
 
         SelectionSorter<TestdataSolution, TestdataEntity> sorter = (scoreDirector, selectionList)
                 -> selectionList.sort(Comparator.comparing(TestdataObject::getCode));
@@ -120,15 +125,14 @@ public class SortingEntitySelectorTest {
     @Test
     public void isNeverEnding() {
         EntitySelector entitySelector = new SortingEntitySelector(mock(EntitySelector.class), SelectionCacheType.PHASE,
-                mock(SelectionSorter.class));
+                                                                  mock(SelectionSorter.class));
         assertEquals(false, entitySelector.isNeverEnding());
     }
 
     @Test
     public void isCountable() {
         EntitySelector entitySelector = new SortingEntitySelector(mock(EntitySelector.class), SelectionCacheType.PHASE,
-                mock(SelectionSorter.class));
+                                                                  mock(SelectionSorter.class));
         assertEquals(true, entitySelector.isCountable());
     }
-
 }

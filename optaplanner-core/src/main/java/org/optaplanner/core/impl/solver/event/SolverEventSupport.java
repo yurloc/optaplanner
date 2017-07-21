@@ -43,11 +43,12 @@ public class SolverEventSupport<Solution_> extends AbstractEventSupport<SolverEv
         Score bestScore = solverScope.getBestScore();
         if (it.hasNext()) {
             final BestSolutionChangedEvent<Solution_> event = new BestSolutionChangedEvent<>(solver,
-                    timeMillisSpent, newBestSolution, bestScore);
+                                                                                             timeMillisSpent,
+                                                                                             newBestSolution,
+                                                                                             bestScore);
             do {
                 it.next().bestSolutionChanged(event);
             } while (it.hasNext());
         }
     }
-
 }

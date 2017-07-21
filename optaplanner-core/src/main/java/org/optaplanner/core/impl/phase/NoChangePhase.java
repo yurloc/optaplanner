@@ -30,7 +30,7 @@ import org.optaplanner.core.impl.solver.termination.Termination;
 public class NoChangePhase<Solution_> extends AbstractPhase<Solution_> {
 
     public NoChangePhase(int phaseIndex, String logIndentation,
-            BestSolutionRecaller<Solution_> bestSolutionRecaller, Termination termination) {
+                         BestSolutionRecaller<Solution_> bestSolutionRecaller, Termination termination) {
         super(phaseIndex, logIndentation, bestSolutionRecaller, termination);
     }
 
@@ -46,8 +46,7 @@ public class NoChangePhase<Solution_> extends AbstractPhase<Solution_> {
     @Override
     public void solve(DefaultSolverScope<Solution_> solverScope) {
         logger.info("{}No Change phase ({}) ended.",
-                logIndentation,
-                phaseIndex);
+                    logIndentation,
+                    phaseIndex);
     }
-
 }

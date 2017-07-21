@@ -31,12 +31,13 @@ public class BestScoreTermination extends AbstractTermination {
     private final Score bestScoreLimit;
     private final double[] timeGradientWeightNumbers;
 
-    public BestScoreTermination(ScoreDefinition scoreDefinition, Score bestScoreLimit, double[] timeGradientWeightNumbers) {
+    public BestScoreTermination(ScoreDefinition scoreDefinition, Score bestScoreLimit,
+                                double[] timeGradientWeightNumbers) {
         levelsSize = scoreDefinition.getLevelsSize();
         this.bestScoreLimit = bestScoreLimit;
         if (bestScoreLimit == null) {
             throw new IllegalArgumentException("The bestScoreLimit (" + bestScoreLimit
-                    + ") cannot be null.");
+                                                       + ") cannot be null.");
         }
         this.timeGradientWeightNumbers = timeGradientWeightNumbers;
         if (timeGradientWeightNumbers.length != levelsSize - 1) {
@@ -90,10 +91,10 @@ public class BestScoreTermination extends AbstractTermination {
         Number[] scoreDiffNumbers = scoreDiff.toLevelNumbers();
         if (scoreDiffNumbers.length != totalDiffNumbers.length) {
             throw new IllegalStateException("The startScore (" + startScore + "), endScore (" + endScore
-                    + ") and score (" + score + ") don't have the same levelsSize.");
+                                                    + ") and score (" + score + ") don't have the same levelsSize.");
         }
         return ScoreUtils.calculateTimeGradient(totalDiffNumbers, scoreDiffNumbers, timeGradientWeightNumbers,
-                levelsSize);
+                                                levelsSize);
     }
 
     // ************************************************************************
@@ -104,12 +105,11 @@ public class BestScoreTermination extends AbstractTermination {
     public Termination createChildThreadTermination(DefaultSolverScope solverScope, ChildThreadType childThreadType) {
         // TODO FIXME through some sort of solverlistener and async behaviour...
         throw new UnsupportedOperationException("This terminationClass (" + getClass()
-                + ") does not yet support being used in child threads of type (" + childThreadType + ").");
+                                                        + ") does not yet support being used in child threads of type (" + childThreadType + ").");
     }
 
     @Override
     public String toString() {
         return "BestScore(" + bestScoreLimit + ")";
     }
-
 }

@@ -80,7 +80,8 @@ public abstract class AbstractTabuAcceptor extends AbstractAcceptor {
         LocalSearchStepScope lastCompletedStepScope = phaseScope.getLastCompletedStepScope();
         // Tabu sizes do not change during stepStarted(), because they must be in sync with the tabuSequenceList.size()
         workingTabuSize = tabuSizeStrategy == null ? 0 : tabuSizeStrategy.determineTabuSize(lastCompletedStepScope);
-        workingFadingTabuSize = fadingTabuSizeStrategy == null ? 0 : fadingTabuSizeStrategy.determineTabuSize(lastCompletedStepScope);
+        workingFadingTabuSize = fadingTabuSizeStrategy == null ? 0 : fadingTabuSizeStrategy.determineTabuSize(
+                lastCompletedStepScope);
         int totalTabuListSize = workingTabuSize + workingFadingTabuSize; // is at least 1
         tabuToStepIndexMap = new HashMap<>(totalTabuListSize);
         tabuSequenceDeque = new ArrayDeque<>();
@@ -100,20 +101,21 @@ public abstract class AbstractTabuAcceptor extends AbstractAcceptor {
         super.stepEnded(stepScope);
         // Tabu sizes do not change during stepStarted(), because they must be in sync with the tabuSequenceList.size()
         workingTabuSize = tabuSizeStrategy == null ? 0 : tabuSizeStrategy.determineTabuSize(stepScope);
-        workingFadingTabuSize = fadingTabuSizeStrategy == null ? 0 : fadingTabuSizeStrategy.determineTabuSize(stepScope);
+        workingFadingTabuSize = fadingTabuSizeStrategy == null ? 0 : fadingTabuSizeStrategy.determineTabuSize(
+                stepScope);
         adjustTabuList(stepScope.getStepIndex(), findNewTabu(stepScope));
     }
 
     protected void adjustTabuList(int tabuStepIndex, Collection<? extends Object> tabus) {
         int totalTabuListSize = workingTabuSize + workingFadingTabuSize; // is at least 1
         // Remove the oldest tabu(s)
-        for (Iterator<Object> it = tabuSequenceDeque.iterator(); it.hasNext();) {
+        for (Iterator<Object> it = tabuSequenceDeque.iterator(); it.hasNext(); ) {
             Object oldTabu = it.next();
             Integer oldTabuStepIndexInteger = tabuToStepIndexMap.get(oldTabu);
             if (oldTabuStepIndexInteger == null) {
                 throw new IllegalStateException("HashCode stability violation: the hashCode() of tabu ("
-                        + oldTabu + ") of class (" + oldTabu.getClass()
-                        + ") changed during planning, since it was inserted in the tabu Map or Set.");
+                                                        + oldTabu + ") of class (" + oldTabu.getClass()
+                                                        + ") changed during planning, since it was inserted in the tabu Map or Set.");
             }
             int oldTabuStepCount = tabuStepIndex - oldTabuStepIndexInteger; // at least 1
             if (oldTabuStepCount < totalTabuListSize) {
@@ -146,27 +148,27 @@ public abstract class AbstractTabuAcceptor extends AbstractAcceptor {
             if (moveScope.getScore().compareTo(
                     moveScope.getStepScope().getPhaseScope().getBestScore()) > 0) {
                 logger.trace("{}        Proposed move ({}) is tabu, but is accepted anyway due to aspiration.",
-                        logIndentation,
-                        moveScope.getMove());
+                             logIndentation,
+                             moveScope.getMove());
                 return true;
             }
         }
         int tabuStepCount = moveScope.getStepScope().getStepIndex() - maximumTabuStepIndex; // at least 1
         if (tabuStepCount <= workingTabuSize) {
             logger.trace("{}        Proposed move ({}) is tabu and is therefore not accepted.",
-                    logIndentation, moveScope.getMove());
+                         logIndentation, moveScope.getMove());
             return false;
         }
         double acceptChance = calculateFadingTabuAcceptChance(tabuStepCount - workingTabuSize);
         boolean accepted = moveScope.getWorkingRandom().nextDouble() < acceptChance;
         if (accepted) {
             logger.trace("{}        Proposed move ({}) is fading tabu with acceptChance ({}) and is accepted.",
-                    logIndentation,
-                    moveScope.getMove(), acceptChance);
+                         logIndentation,
+                         moveScope.getMove(), acceptChance);
         } else {
             logger.trace("{}        Proposed move ({}) is fading tabu with acceptChance ({}) and is not accepted.",
-                    logIndentation,
-                    moveScope.getMove(), acceptChance);
+                         logIndentation,
+                         moveScope.getMove(), acceptChance);
         }
         return accepted;
     }
@@ -185,14 +187,14 @@ public abstract class AbstractTabuAcceptor extends AbstractAcceptor {
                     if (tabu != null && tabu.equals(checkingTabu)) {
                         if (tabu.hashCode() != checkingTabu.hashCode()) {
                             throw new IllegalStateException("HashCode/equals contract violation: tabu (" + tabu
-                                    + ") of class (" + tabu.getClass()
-                                    + ") and checkingTabu (" + checkingTabu
-                                    + ") are equals() but have a different hashCode().");
+                                                                    + ") of class (" + tabu.getClass()
+                                                                    + ") and checkingTabu (" + checkingTabu
+                                                                    + ") are equals() but have a different hashCode().");
                         }
                         if (tabuStepIndexInteger == null) {
                             throw new IllegalStateException("HashCode stability violation: the hashCode() of tabu ("
-                                    + tabu + ") of class (" + tabu.getClass()
-                                    + ") changed during planning, since it was inserted in the tabu Map or Set.");
+                                                                    + tabu + ") of class (" + tabu.getClass()
+                                                                    + ") changed during planning, since it was inserted in the tabu Map or Set.");
                         }
                     }
                 }
@@ -214,5 +216,4 @@ public abstract class AbstractTabuAcceptor extends AbstractAcceptor {
     protected abstract Collection<? extends Object> findTabu(LocalSearchMoveScope moveScope);
 
     protected abstract Collection<? extends Object> findNewTabu(LocalSearchStepScope stepScope);
-
 }

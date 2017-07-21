@@ -30,7 +30,7 @@ import org.optaplanner.core.impl.heuristic.selector.entity.mimic.MimicReplayingE
  * (which breaks {@link MimicReplayingEntitySelector}).
  * @param <S> Selection type, for example a {@link Move} class, an entity class or a value class.
  */
-public abstract class UpcomingSelectionIterator<S> extends SelectionIterator<S>  {
+public abstract class UpcomingSelectionIterator<S> extends SelectionIterator<S> {
 
     protected boolean upcomingCreated = false;
     protected boolean hasUpcomingSelection = true;
@@ -74,5 +74,4 @@ public abstract class UpcomingSelectionIterator<S> extends SelectionIterator<S> 
             return "Next upcoming (" + upcomingSelection + ")";
         }
     }
-
 }

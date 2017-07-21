@@ -40,5 +40,4 @@ public class ValueTabuAcceptor extends AbstractTabuAcceptor {
     protected Collection<? extends Object> findNewTabu(LocalSearchStepScope stepScope) {
         return stepScope.getStep().getPlanningValues();
     }
-
 }

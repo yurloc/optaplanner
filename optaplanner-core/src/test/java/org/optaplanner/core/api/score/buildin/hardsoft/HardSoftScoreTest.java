@@ -28,7 +28,8 @@ public class HardSoftScoreTest extends AbstractScoreTest {
     @Test
     public void parseScore() {
         assertEquals(HardSoftScore.valueOf(-147, -258), HardSoftScore.parseScore("-147hard/-258soft"));
-        assertEquals(HardSoftScore.valueOfUninitialized(-7, -147, -258), HardSoftScore.parseScore("-7init/-147hard/-258soft"));
+        assertEquals(HardSoftScore.valueOfUninitialized(-7, -147, -258),
+                     HardSoftScore.parseScore("-7init/-147hard/-258soft"));
     }
 
     @Test
@@ -57,15 +58,15 @@ public class HardSoftScoreTest extends AbstractScoreTest {
     @Test
     public void toInitializedScore() {
         assertEquals(HardSoftScore.valueOf(-147, -258),
-                HardSoftScore.valueOf(-147, -258).toInitializedScore());
+                     HardSoftScore.valueOf(-147, -258).toInitializedScore());
         assertEquals(HardSoftScore.valueOf(-147, -258),
-                HardSoftScore.valueOfUninitialized(-7, -147, -258).toInitializedScore());
+                     HardSoftScore.valueOfUninitialized(-7, -147, -258).toInitializedScore());
     }
 
     @Test
     public void withInitScore() {
         assertEquals(HardSoftScore.valueOfUninitialized(-7, -147, -258),
-                HardSoftScore.valueOf(-147, -258).withInitScore(-7));
+                     HardSoftScore.valueOf(-147, -258).withInitScore(-7));
     }
 
     @Test
@@ -85,63 +86,63 @@ public class HardSoftScoreTest extends AbstractScoreTest {
     @Test
     public void add() {
         assertEquals(HardSoftScore.valueOf(19, -320),
-                HardSoftScore.valueOf(20, -20).add(
-                        HardSoftScore.valueOf(-1, -300)));
+                     HardSoftScore.valueOf(20, -20).add(
+                             HardSoftScore.valueOf(-1, -300)));
         assertEquals(HardSoftScore.valueOfUninitialized(-77, 19, -320),
-                HardSoftScore.valueOfUninitialized(-70, 20, -20).add(
-                        HardSoftScore.valueOfUninitialized(-7, -1, -300)));
+                     HardSoftScore.valueOfUninitialized(-70, 20, -20).add(
+                             HardSoftScore.valueOfUninitialized(-7, -1, -300)));
     }
 
     @Test
     public void subtract() {
         assertEquals(HardSoftScore.valueOf(21, 280),
-                HardSoftScore.valueOf(20, -20).subtract(
-                        HardSoftScore.valueOf(-1, -300)));
+                     HardSoftScore.valueOf(20, -20).subtract(
+                             HardSoftScore.valueOf(-1, -300)));
         assertEquals(HardSoftScore.valueOfUninitialized(-63, 21, 280),
-                HardSoftScore.valueOfUninitialized(-70, 20, -20).subtract(
-                        HardSoftScore.valueOfUninitialized(-7, -1, -300)));
+                     HardSoftScore.valueOfUninitialized(-70, 20, -20).subtract(
+                             HardSoftScore.valueOfUninitialized(-7, -1, -300)));
     }
 
     @Test
     public void multiply() {
         assertEquals(HardSoftScore.valueOf(6, -6),
-                HardSoftScore.valueOf(5, -5).multiply(1.2));
+                     HardSoftScore.valueOf(5, -5).multiply(1.2));
         assertEquals(HardSoftScore.valueOf(1, -2),
-                HardSoftScore.valueOf(1, -1).multiply(1.2));
+                     HardSoftScore.valueOf(1, -1).multiply(1.2));
         assertEquals(HardSoftScore.valueOf(4, -5),
-                HardSoftScore.valueOf(4, -4).multiply(1.2));
+                     HardSoftScore.valueOf(4, -4).multiply(1.2));
         assertEquals(HardSoftScore.valueOfUninitialized(-14, 8, -10),
-                HardSoftScore.valueOfUninitialized(-7, 4, -5).multiply(2.0));
+                     HardSoftScore.valueOfUninitialized(-7, 4, -5).multiply(2.0));
     }
 
     @Test
     public void divide() {
         assertEquals(HardSoftScore.valueOf(5, -5),
-                HardSoftScore.valueOf(25, -25).divide(5.0));
+                     HardSoftScore.valueOf(25, -25).divide(5.0));
         assertEquals(HardSoftScore.valueOf(4, -5),
-                HardSoftScore.valueOf(21, -21).divide(5.0));
+                     HardSoftScore.valueOf(21, -21).divide(5.0));
         assertEquals(HardSoftScore.valueOf(4, -5),
-                HardSoftScore.valueOf(24, -24).divide(5.0));
+                     HardSoftScore.valueOf(24, -24).divide(5.0));
         assertEquals(HardSoftScore.valueOfUninitialized(-7, 4, -5),
-                HardSoftScore.valueOfUninitialized(-14, 8, -10).divide(2.0));
+                     HardSoftScore.valueOfUninitialized(-14, 8, -10).divide(2.0));
     }
 
     @Test
     public void power() {
         assertEquals(HardSoftScore.valueOf(16, 25),
-                HardSoftScore.valueOf(-4, 5).power(2.0));
+                     HardSoftScore.valueOf(-4, 5).power(2.0));
         assertEquals(HardSoftScore.valueOf(4, 5),
-                HardSoftScore.valueOf(16, 25).power(0.5));
+                     HardSoftScore.valueOf(16, 25).power(0.5));
         assertEquals(HardSoftScore.valueOfUninitialized(-343, 64, 125),
-                HardSoftScore.valueOfUninitialized(-7, 4, 5).power(3.0));
+                     HardSoftScore.valueOfUninitialized(-7, 4, 5).power(3.0));
     }
 
     @Test
     public void negate() {
         assertEquals(HardSoftScore.valueOf(4, -5),
-                HardSoftScore.valueOf(-4, 5).negate());
+                     HardSoftScore.valueOf(-4, 5).negate());
         assertEquals(HardSoftScore.valueOf(-4, 5),
-                HardSoftScore.valueOf(4, -5).negate());
+                     HardSoftScore.valueOf(4, -5).negate());
     }
 
     @Test
@@ -200,5 +201,4 @@ public class HardSoftScoreTest extends AbstractScoreTest {
                 }
         );
     }
-
 }

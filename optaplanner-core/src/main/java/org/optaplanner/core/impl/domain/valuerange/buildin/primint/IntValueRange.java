@@ -49,16 +49,16 @@ public class IntValueRange extends AbstractCountableValueRange<Integer> {
         this.incrementUnit = incrementUnit;
         if (to < from) {
             throw new IllegalArgumentException("The " + getClass().getSimpleName()
-                    + " cannot have a from (" + from + ") which is strictly higher than its to (" + to + ").");
+                                                       + " cannot have a from (" + from + ") which is strictly higher than its to (" + to + ").");
         }
         if (incrementUnit <= 0) {
             throw new IllegalArgumentException("The " + getClass().getSimpleName()
-                    + " must have strictly positive incrementUnit (" + incrementUnit + ").");
+                                                       + " must have strictly positive incrementUnit (" + incrementUnit + ").");
         }
         if (((long) to - (long) from) % incrementUnit != 0L) {
             throw new IllegalArgumentException("The " + getClass().getSimpleName()
-                    + "'s incrementUnit (" + incrementUnit
-                    + ") must fit an integer number of times between from (" + from + ") and to (" + to + ").");
+                                                       + "'s incrementUnit (" + incrementUnit
+                                                       + ") must fit an integer number of times between from (" + from + ") and to (" + to + ").");
         }
     }
 
@@ -82,7 +82,7 @@ public class IntValueRange extends AbstractCountableValueRange<Integer> {
     public Integer get(long index) {
         if (index < 0L || index >= getSize()) {
             throw new IndexOutOfBoundsException("The index (" + index + ") must be >= 0 and < size ("
-                    + getSize() + ").");
+                                                        + getSize() + ").");
         }
         return (int) (index * incrementUnit + from);
     }
@@ -110,7 +110,6 @@ public class IntValueRange extends AbstractCountableValueRange<Integer> {
             upcoming += incrementUnit;
             return next;
         }
-
     }
 
     @Override
@@ -140,12 +139,10 @@ public class IntValueRange extends AbstractCountableValueRange<Integer> {
             long index = RandomUtils.nextLong(workingRandom, size);
             return (int) (index * incrementUnit + from);
         }
-
     }
 
     @Override
     public String toString() {
         return "[" + from + "-" + to + ")"; // Formatting: interval (mathematics) ISO 31-11
     }
-
 }

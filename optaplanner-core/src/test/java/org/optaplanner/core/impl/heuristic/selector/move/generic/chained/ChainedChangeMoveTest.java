@@ -47,7 +47,8 @@ public class ChainedChangeMoveTest {
         SingletonInverseVariableSupply inverseVariableSupply = SelectorTestUtils.mockSingletonInverseVariableSupply(
                 new TestdataChainedEntity[]{a1, a2, a3, b1});
 
-        ChainedChangeMove<TestdataChainedSolution> move = new ChainedChangeMove<>(a3, variableDescriptor, inverseVariableSupply, b1);
+        ChainedChangeMove<TestdataChainedSolution> move = new ChainedChangeMove<>(a3, variableDescriptor,
+                                                                                  inverseVariableSupply, b1);
         ChainedChangeMove<TestdataChainedSolution> undoMove = move.createUndoMove(scoreDirector);
         move.doMove(scoreDirector);
 
@@ -78,7 +79,8 @@ public class ChainedChangeMoveTest {
         SingletonInverseVariableSupply inverseVariableSupply = SelectorTestUtils.mockSingletonInverseVariableSupply(
                 new TestdataChainedEntity[]{a1, a2, a3, b1});
 
-        ChainedChangeMove<TestdataChainedSolution> move = new ChainedChangeMove<>(a2, variableDescriptor, inverseVariableSupply, b0);
+        ChainedChangeMove<TestdataChainedSolution> move = new ChainedChangeMove<>(a2, variableDescriptor,
+                                                                                  inverseVariableSupply, b0);
         ChainedChangeMove<TestdataChainedSolution> undoMove = move.createUndoMove(scoreDirector);
         move.doMove(scoreDirector);
 
@@ -109,7 +111,8 @@ public class ChainedChangeMoveTest {
         SingletonInverseVariableSupply inverseVariableSupply = SelectorTestUtils.mockSingletonInverseVariableSupply(
                 new TestdataChainedEntity[]{a1, a2, a3, a4});
 
-        ChainedChangeMove<TestdataChainedSolution> move = new ChainedChangeMove<>(a2, variableDescriptor, inverseVariableSupply, a3);
+        ChainedChangeMove<TestdataChainedSolution> move = new ChainedChangeMove<>(a2, variableDescriptor,
+                                                                                  inverseVariableSupply, a3);
         ChainedChangeMove<TestdataChainedSolution> undoMove = move.createUndoMove(scoreDirector);
         move.doMove(scoreDirector);
 
@@ -122,5 +125,4 @@ public class ChainedChangeMoveTest {
         undoMove.doMove(scoreDirector);
         SelectorTestUtils.assertChain(a0, a1, a2, a3, a4);
     }
-
 }

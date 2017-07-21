@@ -38,7 +38,8 @@ public class TestdataDeepCloningEntity extends TestdataObject {
 
     public static GenuineVariableDescriptor buildVariableDescriptorForValue() {
         SolutionDescriptor solutionDescriptor = TestdataDeepCloningSolution.buildSolutionDescriptor();
-        EntityDescriptor entityDescriptor = solutionDescriptor.findEntityDescriptorOrFail(TestdataDeepCloningEntity.class);
+        EntityDescriptor entityDescriptor = solutionDescriptor.findEntityDescriptorOrFail(
+                TestdataDeepCloningEntity.class);
         return entityDescriptor.getGenuineVariableDescriptor("value");
     }
 
@@ -88,5 +89,4 @@ public class TestdataDeepCloningEntity extends TestdataObject {
     // ************************************************************************
     // Complex methods
     // ************************************************************************
-
 }

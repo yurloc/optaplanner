@@ -28,5 +28,4 @@ public interface CollectionInverseVariableSupply extends Supply {
      * @return never null, a {@link Collection} of entities for which the planning variable is the planningValue.
      */
     Collection<?> getInverseCollection(Object planningValue);
-
 }

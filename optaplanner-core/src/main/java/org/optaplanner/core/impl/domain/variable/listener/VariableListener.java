@@ -77,5 +77,4 @@ public interface VariableListener<Entity_> extends Supply {
      * @param entity never null
      */
     void afterEntityRemoved(ScoreDirector scoreDirector, Entity_ entity);
-
 }

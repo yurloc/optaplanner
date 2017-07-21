@@ -86,5 +86,4 @@ public class TestdataReadMethodProblemFactCollectionPropertySolution extends Tes
     public List<String> createProblemFacts() {
         return Arrays.asList("a", "b", "c");
     }
-
 }

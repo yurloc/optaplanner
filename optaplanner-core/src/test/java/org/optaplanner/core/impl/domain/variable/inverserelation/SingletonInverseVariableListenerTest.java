@@ -36,8 +36,10 @@ public class SingletonInverseVariableListenerTest {
     @Test
     public void chainedEntity() {
         SolutionDescriptor solutionDescriptor = TestdataRichChainedSolution.buildSolutionDescriptor();
-        EntityDescriptor entityDescriptor = solutionDescriptor.findEntityDescriptorOrFail(TestdataRichChainedEntity.class);
-        ShadowVariableDescriptor nextEntityVariableDescriptor = entityDescriptor.getShadowVariableDescriptor("nextEntity");
+        EntityDescriptor entityDescriptor = solutionDescriptor.findEntityDescriptorOrFail(
+                TestdataRichChainedEntity.class);
+        ShadowVariableDescriptor nextEntityVariableDescriptor = entityDescriptor.getShadowVariableDescriptor(
+                "nextEntity");
         SingletonInverseVariableListener variableListener = new SingletonInverseVariableListener(
                 (InverseRelationShadowVariableDescriptor) nextEntityVariableDescriptor,
                 entityDescriptor.getGenuineVariableDescriptor("chainedObject"));
@@ -75,5 +77,4 @@ public class SingletonInverseVariableListenerTest {
         inOrder.verify(scoreDirector).afterVariableChanged(nextEntityVariableDescriptor, b1);
         inOrder.verifyNoMoreInteractions();
     }
-
 }

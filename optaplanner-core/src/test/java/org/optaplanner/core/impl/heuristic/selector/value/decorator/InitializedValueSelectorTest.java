@@ -31,7 +31,8 @@ import org.optaplanner.core.impl.testdata.domain.nullable.TestdataNullableEntity
 import org.optaplanner.core.impl.testdata.util.PlannerAssert;
 
 import static org.mockito.Mockito.*;
-import static org.optaplanner.core.impl.testdata.util.PlannerAssert.*;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.assertAllCodesOfValueSelectorForEntity;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.verifyPhaseLifecycle;
 
 public class InitializedValueSelectorTest {
 
@@ -45,7 +46,7 @@ public class InitializedValueSelectorTest {
         TestdataValue v2 = null;
         TestdataValue v3 = new TestdataValue("v3");
         ValueSelector childValueSelector = SelectorTestUtils.mockValueSelector(variableDescriptor,
-                v1, v2, v3);
+                                                                               v1, v2, v3);
 
         ValueSelector valueSelector = new InitializedValueSelector(childValueSelector);
         verify(childValueSelector, times(1)).isNeverEnding();
@@ -80,7 +81,7 @@ public class InitializedValueSelectorTest {
         TestdataChainedEntity a1 = new TestdataChainedEntity("a1");
         TestdataChainedEntity a2 = new TestdataChainedEntity("a2");
         ValueSelector childValueSelector = SelectorTestUtils.mockValueSelector(variableDescriptor,
-                a0, a1, a2);
+                                                                               a0, a1, a2);
 
         ValueSelector valueSelector = new InitializedValueSelector(childValueSelector);
         verify(childValueSelector, times(1)).isNeverEnding();
@@ -131,5 +132,4 @@ public class InitializedValueSelectorTest {
         verifyPhaseLifecycle(childValueSelector, 1, 2, 4);
         verify(childValueSelector, times(4)).iterator(any());
     }
-
 }

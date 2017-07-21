@@ -33,5 +33,4 @@ public abstract class AbstractAcceptorTest {
         moveScope.setScore(SimpleScore.valueOf(score));
         return moveScope;
     }
-
 }

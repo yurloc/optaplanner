@@ -26,7 +26,7 @@ public class ValueRatioTabuSizeStrategy extends AbstractTabuSizeStrategy {
         this.tabuRatio = tabuRatio;
         if (tabuRatio <= 0.0 || tabuRatio >= 1.0) {
             throw new IllegalArgumentException("The tabuRatio (" + tabuRatio
-                    + ") must be between 0.0 and 1.0.");
+                                                       + ") must be between 0.0 and 1.0.");
         }
     }
 
@@ -37,5 +37,4 @@ public class ValueRatioTabuSizeStrategy extends AbstractTabuSizeStrategy {
         int tabuSize = (int) Math.round(valueCount * tabuRatio);
         return protectTabuSizeCornerCases(valueCount, tabuSize);
     }
-
 }

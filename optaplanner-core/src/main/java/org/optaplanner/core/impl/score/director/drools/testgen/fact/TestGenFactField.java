@@ -36,7 +36,7 @@ public class TestGenFactField implements Comparable<TestGenFactField> {
         setter = ReflectionHelper.getSetterMethod(fact.getInstance().getClass(), propertyName);
         if (setter == null) {
             throw new IllegalStateException("Setter for '" + fact.getInstance().getClass().getSimpleName() + "."
-                    + propertyName + "' not found!");
+                                                    + propertyName + "' not found!");
         }
     }
 
@@ -46,7 +46,7 @@ public class TestGenFactField implements Comparable<TestGenFactField> {
             setter.invoke(fact.getInstance(), value);
         } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
             throw new RuntimeException("Failed to reset " + fact.getInstance().getClass().getSimpleName() + "."
-                    + propertyName, ex);
+                                               + propertyName, ex);
         }
     }
 
@@ -72,7 +72,7 @@ public class TestGenFactField implements Comparable<TestGenFactField> {
             // null original value means the field is uninitialized so there's no need to .set(null);
             if (valueProvider.get() != null) {
                 sb.append(String.format("        %s.%s(%s);\n",
-                        fact.getVariableName(), setter.getName(), valueProvider.toString()));
+                                        fact.getVariableName(), setter.getName(), valueProvider.toString()));
             }
         }
     }
@@ -81,5 +81,4 @@ public class TestGenFactField implements Comparable<TestGenFactField> {
     public int compareTo(TestGenFactField o) {
         return propertyName.compareTo(o.propertyName);
     }
-
 }

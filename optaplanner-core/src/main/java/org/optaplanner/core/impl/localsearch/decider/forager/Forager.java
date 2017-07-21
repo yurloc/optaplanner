@@ -48,5 +48,4 @@ public interface Forager extends LocalSearchPhaseLifecycleListener {
      * @return sometimes null, for example if no move is selected
      */
     LocalSearchMoveScope pickMove(LocalSearchStepScope stepScope);
-
 }

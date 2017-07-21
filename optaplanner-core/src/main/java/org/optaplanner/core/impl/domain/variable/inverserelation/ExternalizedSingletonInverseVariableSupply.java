@@ -28,7 +28,8 @@ import org.optaplanner.core.impl.score.director.ScoreDirector;
 /**
  * Alternative to {@link SingletonInverseVariableListener}.
  */
-public class ExternalizedSingletonInverseVariableSupply implements StatefulVariableListener<Object>, SingletonInverseVariableSupply {
+public class ExternalizedSingletonInverseVariableSupply implements StatefulVariableListener<Object>,
+                                                                   SingletonInverseVariableSupply {
 
     protected final VariableDescriptor sourceVariableDescriptor;
 
@@ -96,10 +97,10 @@ public class ExternalizedSingletonInverseVariableSupply implements StatefulVaria
         Object oldInverseEntity = inverseEntityMap.put(value, entity);
         if (oldInverseEntity != null) {
             throw new IllegalStateException("The supply (" + this + ") is corrupted,"
-                    + " because the entity (" + entity
-                    + ") for sourceVariable (" + sourceVariableDescriptor.getVariableName()
-                    + ") cannot be inserted: another entity (" + oldInverseEntity
-                    + ") already has that value (" + value + ").");
+                                                    + " because the entity (" + entity
+                                                    + ") for sourceVariable (" + sourceVariableDescriptor.getVariableName()
+                                                    + ") cannot be inserted: another entity (" + oldInverseEntity
+                                                    + ") already has that value (" + value + ").");
         }
     }
 
@@ -111,9 +112,9 @@ public class ExternalizedSingletonInverseVariableSupply implements StatefulVaria
         Object oldInverseEntity = inverseEntityMap.remove(value);
         if (oldInverseEntity != entity) {
             throw new IllegalStateException("The supply (" + this + ") is corrupted,"
-                    + " because the entity (" + entity
-                    + ") for sourceVariable (" + sourceVariableDescriptor.getVariableName()
-                    + ") cannot be retracted: the entity was never inserted for that value (" + value + ").");
+                                                    + " because the entity (" + entity
+                                                    + ") for sourceVariable (" + sourceVariableDescriptor.getVariableName()
+                                                    + ") cannot be retracted: the entity was never inserted for that value (" + value + ").");
         }
     }
 
@@ -126,5 +127,4 @@ public class ExternalizedSingletonInverseVariableSupply implements StatefulVaria
     public String toString() {
         return getClass().getSimpleName() + "(" + sourceVariableDescriptor.getVariableName() + ")";
     }
-
 }

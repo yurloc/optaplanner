@@ -33,7 +33,7 @@ public class TestdataManyToManyShadowedSolution extends TestdataObject {
 
     public static SolutionDescriptor buildSolutionDescriptor() {
         return SolutionDescriptor.buildSolutionDescriptor(TestdataManyToManyShadowedSolution.class,
-                TestdataManyToManyShadowedEntity.class);
+                                                          TestdataManyToManyShadowedEntity.class);
     }
 
     private List<TestdataValue> valueList;
@@ -79,5 +79,4 @@ public class TestdataManyToManyShadowedSolution extends TestdataObject {
     // ************************************************************************
     // Complex methods
     // ************************************************************************
-
 }

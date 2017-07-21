@@ -32,7 +32,8 @@ public class HardSoftDoubleScoreDefinitionTest {
 
     @Test
     public void getLevelLabels() {
-        assertArrayEquals(new String[]{"hard score", "soft score"}, new HardSoftDoubleScoreDefinition().getLevelLabels());
+        assertArrayEquals(new String[]{"hard score", "soft score"},
+                          new HardSoftDoubleScoreDefinition().getLevelLabels());
     }
 
     @Test
@@ -83,5 +84,4 @@ public class HardSoftDoubleScoreDefinitionTest {
         assertEquals(Double.NEGATIVE_INFINITY, pessimisticBound.getHardScore(), 0.0);
         assertEquals(Double.NEGATIVE_INFINITY, pessimisticBound.getSoftScore(), 0.0);
     }
-
 }

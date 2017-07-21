@@ -95,5 +95,4 @@ public abstract class AbstractStepScope<Solution_> {
     public String toString() {
         return getClass().getSimpleName() + "(" + stepIndex + ")";
     }
-
 }

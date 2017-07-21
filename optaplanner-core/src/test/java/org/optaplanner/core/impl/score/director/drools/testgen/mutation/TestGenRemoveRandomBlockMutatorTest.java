@@ -75,5 +75,4 @@ public class TestGenRemoveRandomBlockMutatorTest {
             assertTrue(removed.contains(list.get(i)));
         }
     }
-
 }

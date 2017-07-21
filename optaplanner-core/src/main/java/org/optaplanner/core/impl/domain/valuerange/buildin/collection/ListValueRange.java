@@ -64,5 +64,4 @@ public class ListValueRange<T> extends AbstractCountableValueRange<T> {
         // Formatting: interval (mathematics) ISO 31-11
         return list.isEmpty() ? "[]" : "[" + list.get(0) + "-" + list.get(list.size() - 1) + "]";
     }
-
 }

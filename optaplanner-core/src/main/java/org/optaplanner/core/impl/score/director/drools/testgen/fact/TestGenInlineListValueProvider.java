@@ -61,5 +61,4 @@ class TestGenInlineListValueProvider extends TestGenAbstractValueProvider<List<?
         sb.append(")");
         return sb.toString();
     }
-
 }

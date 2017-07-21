@@ -39,13 +39,13 @@ public abstract class AbstractCachingMoveSelector extends AbstractMoveSelector i
         this.cacheType = cacheType;
         if (childMoveSelector.isNeverEnding()) {
             throw new IllegalStateException("The selector (" + this
-                    + ") has a childMoveSelector (" + childMoveSelector
-                    + ") with neverEnding (" + childMoveSelector.isNeverEnding() + ").");
+                                                    + ") has a childMoveSelector (" + childMoveSelector
+                                                    + ") with neverEnding (" + childMoveSelector.isNeverEnding() + ").");
         }
         phaseLifecycleSupport.addEventListener(childMoveSelector);
         if (cacheType.isNotCached()) {
             throw new IllegalArgumentException("The selector (" + this
-                    + ") does not support the cacheType (" + cacheType + ").");
+                                                       + ") does not support the cacheType (" + cacheType + ").");
         }
         phaseLifecycleSupport.addEventListener(new SelectionCacheLifecycleBridge(cacheType, this));
     }
@@ -68,14 +68,14 @@ public abstract class AbstractCachingMoveSelector extends AbstractMoveSelector i
         long childSize = childMoveSelector.getSize();
         if (childSize > (long) Integer.MAX_VALUE) {
             throw new IllegalStateException("The selector (" + this
-                    + ") has a childMoveSelector (" + childMoveSelector
-                    + ") with childSize (" + childSize
-                    + ") which is higher than Integer.MAX_VALUE.");
+                                                    + ") has a childMoveSelector (" + childMoveSelector
+                                                    + ") with childSize (" + childSize
+                                                    + ") which is higher than Integer.MAX_VALUE.");
         }
         cachedMoveList = new ArrayList<>((int) childSize);
         childMoveSelector.iterator().forEachRemaining(cachedMoveList::add);
         logger.trace("    Created cachedMoveList: size ({}), moveSelector ({}).",
-                cachedMoveList.size(), this);
+                     cachedMoveList.size(), this);
     }
 
     @Override
@@ -92,5 +92,4 @@ public abstract class AbstractCachingMoveSelector extends AbstractMoveSelector i
     public long getSize() {
         return cachedMoveList.size();
     }
-
 }

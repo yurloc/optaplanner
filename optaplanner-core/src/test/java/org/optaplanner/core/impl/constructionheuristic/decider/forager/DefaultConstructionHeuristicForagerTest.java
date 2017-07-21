@@ -34,7 +34,8 @@ public class DefaultConstructionHeuristicForagerTest<Solution_> {
     public void checkPickEarlyNever() {
         DefaultConstructionHeuristicForager forager = new DefaultConstructionHeuristicForager(
                 ConstructionHeuristicPickEarlyType.NEVER);
-        ConstructionHeuristicStepScope<Solution_> stepScope = buildStepScope(SimpleScore.valueOfUninitialized(-8, -100));
+        ConstructionHeuristicStepScope<Solution_> stepScope = buildStepScope(
+                SimpleScore.valueOfUninitialized(-8, -100));
         forager.checkPickEarly(buildMoveScope(stepScope, SimpleScore.valueOfUninitialized(-7, -110)));
         assertEquals(false, forager.isQuitEarly());
         forager.checkPickEarly(buildMoveScope(stepScope, SimpleScore.valueOfUninitialized(-7, -100)));
@@ -47,7 +48,8 @@ public class DefaultConstructionHeuristicForagerTest<Solution_> {
     public void checkPickEarlyFirstNonDeterioratingScore() {
         DefaultConstructionHeuristicForager forager = new DefaultConstructionHeuristicForager(
                 ConstructionHeuristicPickEarlyType.FIRST_NON_DETERIORATING_SCORE);
-        ConstructionHeuristicStepScope<Solution_> stepScope = buildStepScope(SimpleScore.valueOfUninitialized(-8, -100));
+        ConstructionHeuristicStepScope<Solution_> stepScope = buildStepScope(
+                SimpleScore.valueOfUninitialized(-8, -100));
         forager.checkPickEarly(buildMoveScope(stepScope, SimpleScore.valueOfUninitialized(-7, -110)));
         assertEquals(false, forager.isQuitEarly());
         forager.checkPickEarly(buildMoveScope(stepScope, SimpleScore.valueOfUninitialized(-7, -100)));
@@ -58,7 +60,8 @@ public class DefaultConstructionHeuristicForagerTest<Solution_> {
     public void checkPickEarlyFirstFeasibleScore() {
         DefaultConstructionHeuristicForager forager = new DefaultConstructionHeuristicForager(
                 ConstructionHeuristicPickEarlyType.FIRST_FEASIBLE_SCORE);
-        ConstructionHeuristicStepScope<Solution_> stepScope = buildStepScope(HardSoftScore.valueOfUninitialized(-8, 0, -100));
+        ConstructionHeuristicStepScope<Solution_> stepScope = buildStepScope(
+                HardSoftScore.valueOfUninitialized(-8, 0, -100));
         forager.checkPickEarly(buildMoveScope(stepScope, HardSoftScore.valueOfUninitialized(-7, -1, -110)));
         assertEquals(false, forager.isQuitEarly());
         forager.checkPickEarly(buildMoveScope(stepScope, HardSoftScore.valueOfUninitialized(-7, -1, -90)));
@@ -71,7 +74,8 @@ public class DefaultConstructionHeuristicForagerTest<Solution_> {
     public void checkPickEarlyFirstFeasibleScoreOrNonDeterioratingHard() {
         DefaultConstructionHeuristicForager forager = new DefaultConstructionHeuristicForager(
                 ConstructionHeuristicPickEarlyType.FIRST_FEASIBLE_SCORE_OR_NON_DETERIORATING_HARD);
-        ConstructionHeuristicStepScope<Solution_> stepScope = buildStepScope(HardSoftScore.valueOfUninitialized(-8, -10, -100));
+        ConstructionHeuristicStepScope<Solution_> stepScope = buildStepScope(
+                HardSoftScore.valueOfUninitialized(-8, -10, -100));
         forager.checkPickEarly(buildMoveScope(stepScope, HardSoftScore.valueOfUninitialized(-7, -11, -110)));
         assertEquals(false, forager.isQuitEarly());
         forager.checkPickEarly(buildMoveScope(stepScope, HardSoftScore.valueOfUninitialized(-7, -11, -90)));
@@ -79,7 +83,6 @@ public class DefaultConstructionHeuristicForagerTest<Solution_> {
         forager.checkPickEarly(buildMoveScope(stepScope, HardSoftScore.valueOfUninitialized(-7, -10, -110)));
         assertEquals(true, forager.isQuitEarly());
     }
-
 
     protected ConstructionHeuristicStepScope<Solution_> buildStepScope(Score lastStepScore) {
         ConstructionHeuristicPhaseScope<Solution_> phaseScope = mock(ConstructionHeuristicPhaseScope.class);
@@ -93,11 +96,11 @@ public class DefaultConstructionHeuristicForagerTest<Solution_> {
         return stepScope;
     }
 
-    protected ConstructionHeuristicMoveScope<Solution_> buildMoveScope(ConstructionHeuristicStepScope<Solution_> stepScope, Score score) {
+    protected ConstructionHeuristicMoveScope<Solution_> buildMoveScope(
+            ConstructionHeuristicStepScope<Solution_> stepScope, Score score) {
         ConstructionHeuristicMoveScope<Solution_> moveScope = mock(ConstructionHeuristicMoveScope.class);
         when(moveScope.getStepScope()).thenReturn(stepScope);
         when(moveScope.getScore()).thenReturn(score);
         return moveScope;
     }
-
 }

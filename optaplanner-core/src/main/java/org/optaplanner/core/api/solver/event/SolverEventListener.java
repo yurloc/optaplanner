@@ -44,5 +44,4 @@ public interface SolverEventListener<Solution_> extends EventListener {
      * @param event never null
      */
     void bestSolutionChanged(BestSolutionChangedEvent<Solution_> event);
-
 }

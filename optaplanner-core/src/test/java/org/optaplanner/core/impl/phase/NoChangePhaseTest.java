@@ -28,9 +28,8 @@ import org.optaplanner.core.impl.testdata.domain.TestdataSolution;
 import org.optaplanner.core.impl.testdata.domain.TestdataValue;
 import org.optaplanner.core.impl.testdata.util.PlannerTestUtils;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.optaplanner.core.impl.testdata.util.PlannerAssert.*;
+import static org.junit.Assert.*;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.assertCode;
 
 public class NoChangePhaseTest {
 
@@ -65,5 +64,4 @@ public class NoChangePhaseTest {
         assertEquals(v1, solvedE3.getValue());
         assertEquals(-1, solution.getScore().getInitScore());
     }
-
 }

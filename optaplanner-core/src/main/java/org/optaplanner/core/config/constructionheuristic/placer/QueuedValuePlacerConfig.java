@@ -38,14 +38,14 @@ import org.optaplanner.core.impl.domain.variable.descriptor.GenuineVariableDescr
 import org.optaplanner.core.impl.heuristic.selector.move.MoveSelector;
 import org.optaplanner.core.impl.heuristic.selector.value.EntityIndependentValueSelector;
 import org.optaplanner.core.impl.heuristic.selector.value.ValueSelector;
-import org.optaplanner.core.impl.solver.termination.Termination;
 
 @XStreamAlias("queuedValuePlacer")
 public class QueuedValuePlacerConfig extends EntityPlacerConfig<QueuedValuePlacerConfig> {
 
-    public static QueuedValuePlacerConfig unfoldNew(HeuristicConfigPolicy configPolicy, MoveSelectorConfig templateMoveSelectorConfig) {
+    public static QueuedValuePlacerConfig unfoldNew(HeuristicConfigPolicy configPolicy,
+                                                    MoveSelectorConfig templateMoveSelectorConfig) {
         throw new UnsupportedOperationException("The <constructionHeuristic> contains a moveSelector ("
-                + templateMoveSelectorConfig + ") and the <queuedValuePlacer> does not support unfolding those yet.");
+                                                        + templateMoveSelectorConfig + ") and the <queuedValuePlacer> does not support unfolding those yet.");
     }
 
     protected Class<?> entityClass = null;
@@ -93,35 +93,36 @@ public class QueuedValuePlacerConfig extends EntityPlacerConfig<QueuedValuePlace
         configPolicy.setReinitializeVariableFilterEnabled(false);
         ValueSelectorConfig valueSelectorConfig_ = buildValueSelectorConfig(configPolicy, entityDescriptor);
         ValueSelector valueSelector = valueSelectorConfig_.buildValueSelector(configPolicy, entityDescriptor,
-                SelectionCacheType.PHASE, SelectionOrder.ORIGINAL);
+                                                                              SelectionCacheType.PHASE,
+                                                                              SelectionOrder.ORIGINAL);
         configPolicy.setReinitializeVariableFilterEnabled(reinitializeVariableFilterEnabled);
 
         MoveSelectorConfig moveSelectorConfig;
         if (ConfigUtils.isEmptyCollection(moveSelectorConfigList)) {
             moveSelectorConfig = buildChangeMoveSelectorConfig(configPolicy,
-                    valueSelectorConfig_.getId(), valueSelector.getVariableDescriptor());
+                                                               valueSelectorConfig_.getId(),
+                                                               valueSelector.getVariableDescriptor());
         } else if (moveSelectorConfigList.size() == 1) {
             moveSelectorConfig = moveSelectorConfigList.get(0);
         } else {
             // TODO moveSelectorConfigList is only a List because of XStream limitations.
             throw new IllegalArgumentException("The moveSelectorConfigList (" + moveSelectorConfigList
-                    + ") must be a singleton or empty. Use a single " + UnionMoveSelectorConfig.class.getSimpleName()
-                    + " or " + CartesianProductMoveSelectorConfig.class.getSimpleName()
-                    + " element to nest multiple MoveSelectors.");
+                                                       + ") must be a singleton or empty. Use a single " + UnionMoveSelectorConfig.class.getSimpleName()
+                                                       + " or " + CartesianProductMoveSelectorConfig.class.getSimpleName()
+                                                       + " element to nest multiple MoveSelectors.");
         }
         MoveSelector moveSelector = moveSelectorConfig.buildMoveSelector(
                 configPolicy, SelectionCacheType.JUST_IN_TIME, SelectionOrder.ORIGINAL);
         if (!(valueSelector instanceof EntityIndependentValueSelector)) {
             throw new IllegalArgumentException("The queuedValuePlacer (" + this
-                    + ") needs to be based on an EntityIndependentValueSelector (" + valueSelector + ")."
-                    + " Check your @" + ValueRangeProvider.class.getSimpleName() + " annotations.");
-
+                                                       + ") needs to be based on an EntityIndependentValueSelector (" + valueSelector + ")."
+                                                       + " Check your @" + ValueRangeProvider.class.getSimpleName() + " annotations.");
         }
         return new QueuedValuePlacer((EntityIndependentValueSelector) valueSelector, moveSelector);
     }
 
     private ValueSelectorConfig buildValueSelectorConfig(HeuristicConfigPolicy configPolicy,
-            EntityDescriptor entityDescriptor) {
+                                                         EntityDescriptor entityDescriptor) {
         ValueSelectorConfig valueSelectorConfig_;
         if (valueSelectorConfig == null) {
             valueSelectorConfig_ = new ValueSelectorConfig();
@@ -140,15 +141,16 @@ public class QueuedValuePlacerConfig extends EntityPlacerConfig<QueuedValuePlace
         if (valueSelectorConfig_.getCacheType() != null
                 && valueSelectorConfig_.getCacheType().compareTo(SelectionCacheType.PHASE) < 0) {
             throw new IllegalArgumentException("The queuedValuePlacer (" + this
-                    + ") cannot have a valueSelectorConfig ("  + valueSelectorConfig_
-                    + ") with a cacheType (" + valueSelectorConfig_.getCacheType()
-                    + ") lower than " + SelectionCacheType.PHASE + ".");
+                                                       + ") cannot have a valueSelectorConfig (" + valueSelectorConfig_
+                                                       + ") with a cacheType (" + valueSelectorConfig_.getCacheType()
+                                                       + ") lower than " + SelectionCacheType.PHASE + ".");
         }
         return valueSelectorConfig_;
     }
 
     private ChangeMoveSelectorConfig buildChangeMoveSelectorConfig(HeuristicConfigPolicy configPolicy,
-            String valueSelectorConfigId, GenuineVariableDescriptor variableDescriptor) {
+                                                                   String valueSelectorConfigId,
+                                                                   GenuineVariableDescriptor variableDescriptor) {
         ChangeMoveSelectorConfig changeMoveSelectorConfig = new ChangeMoveSelectorConfig();
         EntitySelectorConfig changeEntitySelectorConfig = new EntitySelectorConfig();
         EntityDescriptor entityDescriptor = variableDescriptor.getEntityDescriptor();
@@ -178,5 +180,4 @@ public class QueuedValuePlacerConfig extends EntityPlacerConfig<QueuedValuePlace
     public String toString() {
         return getClass().getSimpleName() + "(" + valueSelectorConfig + ", " + moveSelectorConfigList + ")";
     }
-
 }

@@ -28,8 +28,8 @@ import org.optaplanner.core.impl.domain.solution.descriptor.SolutionDescriptor;
 import org.optaplanner.core.impl.testdata.domain.TestdataEntity;
 import org.optaplanner.core.impl.testdata.domain.TestdataValue;
 
-import static org.junit.Assert.assertEquals;
-import static org.optaplanner.core.impl.testdata.util.PlannerAssert.*;
+import static org.junit.Assert.*;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.assertCollectionContainsExactly;
 
 public class AbstractSolutionTest {
 
@@ -82,7 +82,8 @@ public class AbstractSolutionTest {
     public static class TestdataAbstractSolutionBasedSolution extends AbstractSolution<SimpleScore> {
 
         public static SolutionDescriptor buildSolutionDescriptor() {
-            return SolutionDescriptor.buildSolutionDescriptor(TestdataAbstractSolutionBasedSolution.class, TestdataEntity.class);
+            return SolutionDescriptor.buildSolutionDescriptor(TestdataAbstractSolutionBasedSolution.class,
+                                                              TestdataEntity.class);
         }
 
         private TestdataValue singleValue;
@@ -124,7 +125,5 @@ public class AbstractSolutionTest {
         public void setSingleEntity(TestdataEntity singleEntity) {
             this.singleEntity = singleEntity;
         }
-
     }
-
 }

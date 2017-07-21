@@ -50,17 +50,17 @@ public class BigIntegerValueRange extends AbstractCountableValueRange<BigInteger
         this.incrementUnit = incrementUnit;
         if (to.compareTo(from) < 0) {
             throw new IllegalArgumentException("The " + getClass().getSimpleName()
-                    + " cannot have a from (" + from + ") which is strictly higher than its to (" + to + ").");
+                                                       + " cannot have a from (" + from + ") which is strictly higher than its to (" + to + ").");
         }
         if (incrementUnit.compareTo(BigInteger.ZERO) <= 0) {
             throw new IllegalArgumentException("The " + getClass().getSimpleName()
-                    + " must have strictly positive incrementUnit (" + incrementUnit + ").");
+                                                       + " must have strictly positive incrementUnit (" + incrementUnit + ").");
         }
 
         if (!to.subtract(from).remainder(incrementUnit).equals(BigInteger.ZERO)) {
             throw new IllegalArgumentException("The " + getClass().getSimpleName()
-                    + "'s incrementUnit (" + incrementUnit
-                    + ") must fit an integer number of times between from (" + from + ") and to (" + to + ").");
+                                                       + "'s incrementUnit (" + incrementUnit
+                                                       + ") must fit an integer number of times between from (" + from + ") and to (" + to + ").");
         }
     }
 
@@ -73,7 +73,7 @@ public class BigIntegerValueRange extends AbstractCountableValueRange<BigInteger
     public BigInteger get(long index) {
         if (index < 0L || index >= getSize()) {
             throw new IndexOutOfBoundsException("The index (" + index + ") must be >= 0 and < size ("
-                    + getSize() + ").");
+                                                        + getSize() + ").");
         }
         return incrementUnit.multiply(BigInteger.valueOf(index)).add(from);
     }
@@ -109,7 +109,6 @@ public class BigIntegerValueRange extends AbstractCountableValueRange<BigInteger
             upcoming = upcoming.add(incrementUnit);
             return next;
         }
-
     }
 
     @Override
@@ -139,12 +138,10 @@ public class BigIntegerValueRange extends AbstractCountableValueRange<BigInteger
             long index = RandomUtils.nextLong(workingRandom, size);
             return incrementUnit.multiply(BigInteger.valueOf(index)).add(from);
         }
-
     }
 
     @Override
     public String toString() {
         return "[" + from + "-" + to + ")"; // Formatting: interval (mathematics) ISO 31-11
     }
-
 }

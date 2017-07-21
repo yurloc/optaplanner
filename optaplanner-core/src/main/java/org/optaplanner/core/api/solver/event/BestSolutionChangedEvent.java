@@ -42,7 +42,7 @@ public class BestSolutionChangedEvent<Solution_> extends EventObject {
      * @param newBestSolution never null
      */
     public BestSolutionChangedEvent(Solver<Solution_> solver, long timeMillisSpent,
-            Solution_ newBestSolution, Score newBestScore) {
+                                    Solution_ newBestSolution, Score newBestScore) {
         super(solver);
         this.solver = solver;
         this.timeMillisSpent = timeMillisSpent;
@@ -61,10 +61,10 @@ public class BestSolutionChangedEvent<Solution_> extends EventObject {
     /**
      * Note that:
      * <ul>
-     *     <li>In real-time planning, not all {@link ProblemFactChange}s might be processed:
-     *     check {@link #isEveryProblemFactChangeProcessed()}.</li>
-     *     <li>this {@link PlanningSolution} might be uninitialized: check {@link Score#isSolutionInitialized()}.</li>
-     *     <li>this {@link PlanningSolution} might be infeasible: check {@link FeasibilityScore#isFeasible()}.</li>
+     * <li>In real-time planning, not all {@link ProblemFactChange}s might be processed:
+     * check {@link #isEveryProblemFactChangeProcessed()}.</li>
+     * <li>this {@link PlanningSolution} might be uninitialized: check {@link Score#isSolutionInitialized()}.</li>
+     * <li>this {@link PlanningSolution} might be infeasible: check {@link FeasibilityScore#isFeasible()}.</li>
      * </ul>
      * @return never null
      */
@@ -99,5 +99,4 @@ public class BestSolutionChangedEvent<Solution_> extends EventObject {
     public boolean isNewBestSolutionInitialized() {
         return newBestScore.isSolutionInitialized();
     }
-
 }

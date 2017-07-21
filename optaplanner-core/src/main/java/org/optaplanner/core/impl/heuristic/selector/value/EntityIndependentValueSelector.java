@@ -21,6 +21,7 @@ import org.optaplanner.core.impl.heuristic.selector.IterableSelector;
 /**
  * @see FromSolutionPropertyValueSelector
  */
-public interface EntityIndependentValueSelector extends ValueSelector, IterableSelector<Object> {
+public interface EntityIndependentValueSelector extends ValueSelector,
+                                                        IterableSelector<Object> {
 
 }

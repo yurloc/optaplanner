@@ -95,6 +95,7 @@ public class NearbyDistanceMatrixTest {
     }
 
     private static class MatrixTestdataObject extends TestdataObject {
+
         private int index;
         private double[] distances;
 
@@ -103,7 +104,5 @@ public class NearbyDistanceMatrixTest {
             this.index = index;
             this.distances = distances;
         }
-
     }
-
 }

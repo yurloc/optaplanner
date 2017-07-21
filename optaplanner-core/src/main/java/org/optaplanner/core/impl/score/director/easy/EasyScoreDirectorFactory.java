@@ -47,5 +47,4 @@ public class EasyScoreDirectorFactory<Solution_> extends AbstractScoreDirectorFa
             boolean lookUpEnabled, boolean constraintMatchEnabledPreference) {
         return new EasyScoreDirector<>(this, lookUpEnabled, constraintMatchEnabledPreference, easyScoreCalculator);
     }
-
 }

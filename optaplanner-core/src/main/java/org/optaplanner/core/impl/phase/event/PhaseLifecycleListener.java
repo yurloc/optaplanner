@@ -34,5 +34,4 @@ public interface PhaseLifecycleListener<Solution_> extends SolverLifecycleListen
     void stepEnded(AbstractStepScope<Solution_> stepScope);
 
     void phaseEnded(AbstractPhaseScope<Solution_> phaseScope);
-
 }

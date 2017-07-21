@@ -115,5 +115,4 @@ public class TestdataAccessModifierSolution extends TestdataObject {
     // ************************************************************************
     // Complex methods
     // ************************************************************************
-
 }

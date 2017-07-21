@@ -57,5 +57,4 @@ public interface EntityMimicRecorder {
      * @see EntitySelector#endingIterator()
      */
     Iterator<Object> endingIterator();
-
 }

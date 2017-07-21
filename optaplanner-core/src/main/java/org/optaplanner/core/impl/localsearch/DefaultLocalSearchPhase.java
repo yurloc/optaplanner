@@ -32,12 +32,12 @@ import org.optaplanner.core.impl.solver.termination.Termination;
  * @param <Solution_> the solution type, the class with the {@link PlanningSolution} annotation
  */
 public class DefaultLocalSearchPhase<Solution_> extends AbstractPhase<Solution_> implements LocalSearchPhase<Solution_>,
-        LocalSearchPhaseLifecycleListener<Solution_> {
+                                                                                            LocalSearchPhaseLifecycleListener<Solution_> {
 
     protected LocalSearchDecider<Solution_> decider;
 
     public DefaultLocalSearchPhase(int phaseIndex, String logIndentation,
-            BestSolutionRecaller<Solution_> bestSolutionRecaller, Termination termination) {
+                                   BestSolutionRecaller<Solution_> bestSolutionRecaller, Termination termination) {
         super(phaseIndex, logIndentation, bestSolutionRecaller, termination);
     }
 
@@ -71,20 +71,20 @@ public class DefaultLocalSearchPhase<Solution_> extends AbstractPhase<Solution_>
             if (stepScope.getStep() == null) {
                 if (termination.isPhaseTerminated(phaseScope)) {
                     logger.trace("{}    Step index ({}), time spent ({}) terminated without picking a nextStep.",
-                            logIndentation,
-                            stepScope.getStepIndex(),
-                            stepScope.getPhaseScope().calculateSolverTimeMillisSpentUpToNow());
+                                 logIndentation,
+                                 stepScope.getStepIndex(),
+                                 stepScope.getPhaseScope().calculateSolverTimeMillisSpentUpToNow());
                 } else if (stepScope.getSelectedMoveCount() == 0L) {
                     logger.warn("{}    No doable selected move at step index ({}), time spent ({})."
-                            + " Terminating phase early.",
-                            logIndentation,
-                            stepScope.getStepIndex(),
-                            stepScope.getPhaseScope().calculateSolverTimeMillisSpentUpToNow());
+                                        + " Terminating phase early.",
+                                logIndentation,
+                                stepScope.getStepIndex(),
+                                stepScope.getPhaseScope().calculateSolverTimeMillisSpentUpToNow());
                 } else {
                     throw new IllegalStateException("The step index (" + stepScope.getStepIndex()
-                            + ") has accepted/selected move count (" + stepScope.getAcceptedMoveCount() + "/"
-                            + stepScope.getSelectedMoveCount()
-                            + ") but failed to pick a nextStep (" + stepScope.getStep() + ").");
+                                                            + ") has accepted/selected move count (" + stepScope.getAcceptedMoveCount() + "/"
+                                                            + stepScope.getSelectedMoveCount()
+                                                            + ") but failed to pick a nextStep (" + stepScope.getStep() + ").");
                 }
                 // Although stepStarted has been called, stepEnded is not called for this step
                 break;
@@ -130,15 +130,15 @@ public class DefaultLocalSearchPhase<Solution_> extends AbstractPhase<Solution_>
         LocalSearchPhaseScope phaseScope = stepScope.getPhaseScope();
         if (logger.isDebugEnabled()) {
             logger.debug("{}    LS step ({}), time spent ({}), score ({}), {} best score ({})," +
-                    " accepted/selected move count ({}/{}), picked move ({}).",
-                    logIndentation,
-                    stepScope.getStepIndex(),
-                    phaseScope.calculateSolverTimeMillisSpentUpToNow(),
-                    stepScope.getScore(),
-                    (stepScope.getBestScoreImproved() ? "new" : "   "), phaseScope.getBestScore(),
-                    stepScope.getAcceptedMoveCount(),
-                    stepScope.getSelectedMoveCount(),
-                    stepScope.getStepString());
+                                 " accepted/selected move count ({}/{}), picked move ({}).",
+                         logIndentation,
+                         stepScope.getStepIndex(),
+                         phaseScope.calculateSolverTimeMillisSpentUpToNow(),
+                         stepScope.getScore(),
+                         (stepScope.getBestScoreImproved() ? "new" : "   "), phaseScope.getBestScore(),
+                         stepScope.getAcceptedMoveCount(),
+                         stepScope.getSelectedMoveCount(),
+                         stepScope.getStepString());
         }
     }
 
@@ -148,13 +148,13 @@ public class DefaultLocalSearchPhase<Solution_> extends AbstractPhase<Solution_>
         decider.phaseEnded(phaseScope);
         phaseScope.endingNow();
         logger.info("{}Local Search phase ({}) ended: time spent ({}), best score ({}),"
-                        + " score calculation speed ({}/sec), step total ({}).",
-                logIndentation,
-                phaseIndex,
-                phaseScope.calculateSolverTimeMillisSpentUpToNow(),
-                phaseScope.getBestScore(),
-                phaseScope.getPhaseScoreCalculationSpeed(),
-                phaseScope.getNextStepIndex());
+                            + " score calculation speed ({}/sec), step total ({}).",
+                    logIndentation,
+                    phaseIndex,
+                    phaseScope.calculateSolverTimeMillisSpentUpToNow(),
+                    phaseScope.getBestScore(),
+                    phaseScope.getPhaseScoreCalculationSpeed(),
+                    phaseScope.getNextStepIndex());
     }
 
     @Override
@@ -162,5 +162,4 @@ public class DefaultLocalSearchPhase<Solution_> extends AbstractPhase<Solution_>
         super.solvingEnded(solverScope);
         decider.solvingEnded(solverScope);
     }
-
 }

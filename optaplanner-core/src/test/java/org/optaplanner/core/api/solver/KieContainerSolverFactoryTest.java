@@ -65,25 +65,28 @@ public class KieContainerSolverFactoryTest extends CommonTestMethodBase {
         ReleaseId releaseId = kieServices.newReleaseId("org.optaplanner.core.test", artifactId, "1.0.0");
 
         String kmodule = readResourceToString(kmodulePath);
-        Resource valueClass = buildResource("org/optaplanner/core/impl/testdata/domain/classloaded/ClassloadedTestdataValue.java",
+        Resource valueClass = buildResource(
+                "org/optaplanner/core/impl/testdata/domain/classloaded/ClassloadedTestdataValue.java",
                 "testdata/kjar/ClassloadedTestdataValue.java");
-        Resource entityClass = buildResource("org/optaplanner/core/impl/testdata/domain/classloaded/ClassloadedTestdataEntity.java",
+        Resource entityClass = buildResource(
+                "org/optaplanner/core/impl/testdata/domain/classloaded/ClassloadedTestdataEntity.java",
                 "testdata/kjar/ClassloadedTestdataEntity.java");
-        Resource solutionClass = buildResource("org/optaplanner/core/impl/testdata/domain/classloaded/ClassloadedTestdataSolution.java",
+        Resource solutionClass = buildResource(
+                "org/optaplanner/core/impl/testdata/domain/classloaded/ClassloadedTestdataSolution.java",
                 "testdata/kjar/ClassloadedTestdataSolution.java");
         Resource scoreRules = buildResource("org/optaplanner/core/api/solver/kieContainerTestdataScoreRules.drl",
-                "testdata/kjar/scoreRules.drl");
-        if (solverConfigPath  != null) {
+                                            "testdata/kjar/scoreRules.drl");
+        if (solverConfigPath != null) {
             Resource solverConfig = buildResource(solverConfigPath,
-                    "testdata/kjar/solverConfig.solver");
+                                                  "testdata/kjar/solverConfig.solver");
 
             createAndDeployJar(kieServices, kmodule, releaseId,
-                    valueClass, entityClass, solutionClass,
-                    scoreRules, solverConfig);
+                               valueClass, entityClass, solutionClass,
+                               scoreRules, solverConfig);
         } else {
             createAndDeployJar(kieServices, kmodule, releaseId,
-                    valueClass, entityClass, solutionClass,
-                    scoreRules);
+                               valueClass, entityClass, solutionClass,
+                               scoreRules);
         }
         return releaseId;
     }
@@ -182,5 +185,4 @@ public class KieContainerSolverFactoryTest extends CommonTestMethodBase {
         DroolsScoreDirectorFactory scoreDirectorFactory = (DroolsScoreDirectorFactory<TestdataSolution>) solver.getScoreDirectorFactory();
         scoreDirectorFactory.newKieSession();
     }
-
 }

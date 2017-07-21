@@ -61,10 +61,10 @@ public class LookUpManager {
     /**
      * As defined by {@link ScoreDirector#lookUpWorkingObject(Object)}.
      * @param externalObject sometimes null
+     * @param <E> the object type
      * @return null if externalObject is null or if there is no workingObject for externalObject
      * @throws IllegalArgumentException if it cannot be located or if the externalObject's class is not supported
      * @throws IllegalStateException if it cannot be located
-     * @param <E> the object type
      */
     public <E> E lookUpWorkingObject(E externalObject) {
         if (externalObject == null) {
@@ -73,5 +73,4 @@ public class LookUpManager {
         LookUpStrategy lookUpStrategy = lookUpStrategyResolver.determineLookUpStrategy(externalObject);
         return lookUpStrategy.lookUpWorkingObject(idToWorkingObjectMap, externalObject);
     }
-
 }

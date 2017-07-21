@@ -145,16 +145,14 @@ public class PartitionQueue<Solution_> implements Iterable<PartitionChangeMove<S
                         }
                     case EXCEPTION_THROWN:
                         throw new IllegalStateException("The partition child thread with partIndex ("
-                                + triggerEvent.getPartIndex() + ") has thrown an exception."
-                                + " Relayed here in the parent thread.",
-                                triggerEvent.getThrowable());
+                                                                + triggerEvent.getPartIndex() + ") has thrown an exception."
+                                                                + " Relayed here in the parent thread.",
+                                                        triggerEvent.getThrowable());
                     default:
                         throw new IllegalStateException("The partitionChangedEventType ("
-                                + triggerEvent.getType() + ") is not implemented.");
+                                                                + triggerEvent.getType() + ") is not implemented.");
                 }
             }
         }
-
     }
-
 }

@@ -56,5 +56,4 @@ public interface Phase<Solution_> extends PhaseLifecycleListener<Solution_> {
     void removePhaseLifecycleListener(PhaseLifecycleListener<Solution_> phaseLifecycleListener);
 
     void solve(DefaultSolverScope<Solution_> solverScope);
-
 }

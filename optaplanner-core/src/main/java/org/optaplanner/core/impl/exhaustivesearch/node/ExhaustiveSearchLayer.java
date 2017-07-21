@@ -55,5 +55,4 @@ public class ExhaustiveSearchLayer {
     public String toString() {
         return depth + (isLastLayer() ? " last layer" : " (" + entity + ")");
     }
-
 }

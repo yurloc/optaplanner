@@ -47,5 +47,4 @@ public abstract class PhaseLifecycleListenerAdapter<Solution_> extends SolverLif
     public void phaseEnded(AbstractPhaseScope<Solution_> phaseScope) {
         // Hook method
     }
-
 }

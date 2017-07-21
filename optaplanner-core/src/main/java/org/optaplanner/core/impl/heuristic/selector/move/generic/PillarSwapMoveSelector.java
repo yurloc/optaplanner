@@ -33,7 +33,7 @@ public class PillarSwapMoveSelector extends GenericMoveSelector {
     protected final boolean randomSelection;
 
     public PillarSwapMoveSelector(PillarSelector leftPillarSelector, PillarSelector rightPillarSelector,
-            List<GenuineVariableDescriptor> variableDescriptorList, boolean randomSelection) {
+                                  List<GenuineVariableDescriptor> variableDescriptorList, boolean randomSelection) {
         this.leftPillarSelector = leftPillarSelector;
         this.rightPillarSelector = rightPillarSelector;
         this.variableDescriptorList = variableDescriptorList;
@@ -41,26 +41,26 @@ public class PillarSwapMoveSelector extends GenericMoveSelector {
         Class<?> leftEntityClass = leftPillarSelector.getEntityDescriptor().getEntityClass();
         if (!leftEntityClass.equals(rightPillarSelector.getEntityDescriptor().getEntityClass())) {
             throw new IllegalStateException("The selector (" + this
-                    + ") has a leftPillarSelector's entityClass (" + leftEntityClass
-                    + ") which is not equal to the rightPillarSelector's entityClass ("
-                    + rightPillarSelector.getEntityDescriptor().getEntityClass() + ").");
+                                                    + ") has a leftPillarSelector's entityClass (" + leftEntityClass
+                                                    + ") which is not equal to the rightPillarSelector's entityClass ("
+                                                    + rightPillarSelector.getEntityDescriptor().getEntityClass() + ").");
         }
         if (variableDescriptorList.isEmpty()) {
             throw new IllegalStateException("The selector (" + this
-                    + ")'s variableDescriptors (" + variableDescriptorList + ") is empty.");
+                                                    + ")'s variableDescriptors (" + variableDescriptorList + ") is empty.");
         }
         for (GenuineVariableDescriptor variableDescriptor : variableDescriptorList) {
             if (!leftEntityClass.equals(
                     variableDescriptor.getEntityDescriptor().getEntityClass())) {
                 throw new IllegalStateException("The selector (" + this
-                        + ") has a variableDescriptor (" + variableDescriptor
-                        + ") with a entityClass (" + variableDescriptor.getEntityDescriptor().getEntityClass()
-                        + ") which is not equal to the leftPillarSelector's entityClass (" + leftEntityClass + ").");
+                                                        + ") has a variableDescriptor (" + variableDescriptor
+                                                        + ") with a entityClass (" + variableDescriptor.getEntityDescriptor().getEntityClass()
+                                                        + ") which is not equal to the leftPillarSelector's entityClass (" + leftEntityClass + ").");
             }
             if (variableDescriptor.isChained()) {
                 throw new IllegalStateException("The selector (" + this
-                        + ") has a variableDescriptor (" + variableDescriptor
-                        + ") which is chained (" + variableDescriptor.isChained() + ").");
+                                                        + ") has a variableDescriptor (" + variableDescriptor
+                                                        + ") which is chained (" + variableDescriptor.isChained() + ").");
             }
         }
         phaseLifecycleSupport.addEventListener(leftPillarSelector);
@@ -111,5 +111,4 @@ public class PillarSwapMoveSelector extends GenericMoveSelector {
     public String toString() {
         return getClass().getSimpleName() + "(" + leftPillarSelector + ", " + rightPillarSelector + ")";
     }
-
 }

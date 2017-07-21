@@ -37,7 +37,7 @@ public class CompositeCountableValueRange<T> extends AbstractCountableValueRange
         this.childValueRangeList = childValueRangeList;
         long size = 0L;
         for (CountableValueRange<T> childValueRange : childValueRangeList) {
-            size +=  childValueRange.getSize();
+            size += childValueRange.getSize();
         }
         this.size = size;
     }
@@ -113,9 +113,7 @@ public class CompositeCountableValueRange<T> extends AbstractCountableValueRange
                 remainingIndex -= childSize;
             }
             throw new IllegalStateException("Impossible state because index (" + index
-                    + ") is always less than the size (" + size + ").");
+                                                    + ") is always less than the size (" + size + ").");
         }
-
     }
-
 }

@@ -25,7 +25,8 @@ import org.optaplanner.core.impl.domain.valuerange.util.ValueRangeIterator;
 
 public class BooleanValueRange extends AbstractCountableValueRange<Boolean> {
 
-    public BooleanValueRange() {}
+    public BooleanValueRange() {
+    }
 
     @Override
     public long getSize() {
@@ -76,7 +77,6 @@ public class BooleanValueRange extends AbstractCountableValueRange<Boolean> {
             }
             return next;
         }
-
     }
 
     @Override
@@ -101,12 +101,10 @@ public class BooleanValueRange extends AbstractCountableValueRange<Boolean> {
         public Boolean next() {
             return Boolean.valueOf(workingRandom.nextBoolean());
         }
-
     }
 
     @Override
     public String toString() {
         return "[false, true]"; // Formatting: interval (mathematics) ISO 31-11
     }
-
 }

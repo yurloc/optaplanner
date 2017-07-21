@@ -34,7 +34,7 @@ public class SelectedCountLimitMoveSelector extends AbstractMoveSelector {
         this.selectedCountLimit = selectedCountLimit;
         if (selectedCountLimit < 0L) {
             throw new IllegalArgumentException("The selector (" + this
-                    + ") has a negative selectedCountLimit (" + selectedCountLimit + ").");
+                                                       + ") has a negative selectedCountLimit (" + selectedCountLimit + ").");
         }
         phaseLifecycleSupport.addEventListener(childMoveSelector);
     }
@@ -87,12 +87,10 @@ public class SelectedCountLimitMoveSelector extends AbstractMoveSelector {
             selectedSize++;
             return childMoveIterator.next();
         }
-
     }
 
     @Override
     public String toString() {
         return "SelectedCountLimit(" + childMoveSelector + ")";
     }
-
 }

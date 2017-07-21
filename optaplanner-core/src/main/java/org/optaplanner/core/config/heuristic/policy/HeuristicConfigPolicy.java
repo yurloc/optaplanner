@@ -51,7 +51,8 @@ public class HeuristicConfigPolicy {
         this(environmentMode, "", scoreDirectorFactory);
     }
 
-    public HeuristicConfigPolicy(EnvironmentMode environmentMode, String logIndentation, InnerScoreDirectorFactory scoreDirectorFactory) {
+    public HeuristicConfigPolicy(EnvironmentMode environmentMode, String logIndentation,
+                                 InnerScoreDirectorFactory scoreDirectorFactory) {
         this.environmentMode = environmentMode;
         this.logIndentation = logIndentation;
         this.scoreDirectorFactory = scoreDirectorFactory;
@@ -145,7 +146,7 @@ public class HeuristicConfigPolicy {
         EntityMimicRecorder put = entityMimicRecorderMap.put(id, mimicRecordingEntitySelector);
         if (put != null) {
             throw new IllegalStateException("Multiple " + EntityMimicRecorder.class.getSimpleName() + "s (usually "
-                    + EntitySelector.class.getSimpleName() + "s) have the same id (" + id + ").");
+                                                    + EntitySelector.class.getSimpleName() + "s) have the same id (" + id + ").");
         }
     }
 
@@ -157,7 +158,7 @@ public class HeuristicConfigPolicy {
         ValueMimicRecorder put = valueMimicRecorderMap.put(id, mimicRecordingValueSelector);
         if (put != null) {
             throw new IllegalStateException("Multiple " + ValueMimicRecorder.class.getSimpleName() + "s (usually "
-                    + ValueSelector.class.getSimpleName() + "s) have the same id (" + id + ").");
+                                                    + ValueSelector.class.getSimpleName() + "s) have the same id (" + id + ").");
         }
     }
 

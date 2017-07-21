@@ -51,19 +51,19 @@ public class ClassAndPlanningIdComparator implements Comparator<Object> {
             return aClass.getName().compareTo(bClass.getName());
         }
         MemberAccessor aMemberAccessor = decisionCache.computeIfAbsent(aClass,
-                ConfigUtils::findPlanningIdMemberAccessor);
+                                                                       ConfigUtils::findPlanningIdMemberAccessor);
         MemberAccessor bMemberAccessor = decisionCache.computeIfAbsent(bClass,
-                ConfigUtils::findPlanningIdMemberAccessor);
+                                                                       ConfigUtils::findPlanningIdMemberAccessor);
         if (failFastIfNoPlanningId) {
             if (aMemberAccessor == null) {
                 throw new IllegalArgumentException("The class (" + aClass
-                        + ") does not have a " + PlanningId.class.getSimpleName() + " annotation.\n"
-                        + "Maybe add the " + PlanningId.class.getSimpleName() + " annotation.");
+                                                           + ") does not have a " + PlanningId.class.getSimpleName() + " annotation.\n"
+                                                           + "Maybe add the " + PlanningId.class.getSimpleName() + " annotation.");
             }
             if (bMemberAccessor == null) {
                 throw new IllegalArgumentException("The class (" + bClass
-                        + ") does not have a " + PlanningId.class.getSimpleName() + " annotation.\n"
-                        + "Maybe add the " + PlanningId.class.getSimpleName() + " annotation.");
+                                                           + ") does not have a " + PlanningId.class.getSimpleName() + " annotation.\n"
+                                                           + "Maybe add the " + PlanningId.class.getSimpleName() + " annotation.");
             }
         } else {
             if (aMemberAccessor == null) {
@@ -77,18 +77,17 @@ public class ClassAndPlanningIdComparator implements Comparator<Object> {
         Comparable bPlanningId = (Comparable) bMemberAccessor.executeGetter(b);
         if (aPlanningId == null) {
             throw new IllegalArgumentException("The planningId (" + aPlanningId
-                    + ") of the member (" + aMemberAccessor + ") of the class (" + aClass
-                    + ") on object (" + a + ") must not be null.\n"
-                    + "Maybe initialize the planningId of the original object before solving..");
+                                                       + ") of the member (" + aMemberAccessor + ") of the class (" + aClass
+                                                       + ") on object (" + a + ") must not be null.\n"
+                                                       + "Maybe initialize the planningId of the original object before solving..");
         }
         if (bPlanningId == null) {
             throw new IllegalArgumentException("The planningId (" + bPlanningId
-                    + ") of the member (" + bMemberAccessor + ") of the class (" + bClass
-                    + ") on object (" + a + ") must not be null.\n"
-                    + "Maybe initialize the planningId of the original object before solving..");
+                                                       + ") of the member (" + bMemberAccessor + ") of the class (" + bClass
+                                                       + ") on object (" + a + ") must not be null.\n"
+                                                       + "Maybe initialize the planningId of the original object before solving..");
         }
         // If a and b are different classes, this method would have already returned.
         return aPlanningId.compareTo(bPlanningId);
     }
-
 }

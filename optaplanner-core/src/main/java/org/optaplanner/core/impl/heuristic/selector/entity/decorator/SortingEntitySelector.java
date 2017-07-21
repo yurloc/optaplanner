@@ -29,7 +29,7 @@ public class SortingEntitySelector extends AbstractCachingEntitySelector {
     protected final SelectionSorter sorter;
 
     public SortingEntitySelector(EntitySelector childEntitySelector, SelectionCacheType cacheType,
-            SelectionSorter sorter) {
+                                 SelectionSorter sorter) {
         super(childEntitySelector, cacheType);
         this.sorter = sorter;
     }
@@ -43,7 +43,7 @@ public class SortingEntitySelector extends AbstractCachingEntitySelector {
         super.constructCache(solverScope);
         sorter.sort(solverScope.getScoreDirector(), cachedEntityList);
         logger.trace("    Sorted cachedEntityList: size ({}), entitySelector ({}).",
-                cachedEntityList.size(), this);
+                     cachedEntityList.size(), this);
     }
 
     @Override
@@ -70,5 +70,4 @@ public class SortingEntitySelector extends AbstractCachingEntitySelector {
     public String toString() {
         return "Sorting(" + childEntitySelector + ")";
     }
-
 }

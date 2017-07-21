@@ -29,7 +29,7 @@ public class SortingMoveSelector extends AbstractCachingMoveSelector {
     protected final SelectionSorter sorter;
 
     public SortingMoveSelector(MoveSelector childMoveSelector, SelectionCacheType cacheType,
-            SelectionSorter sorter) {
+                               SelectionSorter sorter) {
         super(childMoveSelector, cacheType);
         this.sorter = sorter;
     }
@@ -43,7 +43,7 @@ public class SortingMoveSelector extends AbstractCachingMoveSelector {
         super.constructCache(solverScope);
         sorter.sort(solverScope.getScoreDirector(), cachedMoveList);
         logger.trace("    Sorted cachedMoveList: size ({}), moveSelector ({}).",
-                cachedMoveList.size(), this);
+                     cachedMoveList.size(), this);
     }
 
     @Override
@@ -60,5 +60,4 @@ public class SortingMoveSelector extends AbstractCachingMoveSelector {
     public String toString() {
         return "Sorting(" + childMoveSelector + ")";
     }
-
 }

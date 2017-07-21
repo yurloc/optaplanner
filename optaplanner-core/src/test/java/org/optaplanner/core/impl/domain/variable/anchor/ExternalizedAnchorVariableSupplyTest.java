@@ -35,8 +35,10 @@ public class ExternalizedAnchorVariableSupplyTest {
     public void chainedEntity() {
         GenuineVariableDescriptor variableDescriptor = TestdataChainedEntity.buildVariableDescriptorForChainedObject();
         ScoreDirector scoreDirector = mock(ScoreDirector.class);
-        ExternalizedSingletonInverseVariableSupply nextVariableSupply = new ExternalizedSingletonInverseVariableSupply(variableDescriptor);
-        ExternalizedAnchorVariableSupply supply = new ExternalizedAnchorVariableSupply(variableDescriptor, nextVariableSupply);
+        ExternalizedSingletonInverseVariableSupply nextVariableSupply = new ExternalizedSingletonInverseVariableSupply(
+                variableDescriptor);
+        ExternalizedAnchorVariableSupply supply = new ExternalizedAnchorVariableSupply(variableDescriptor,
+                                                                                       nextVariableSupply);
 
         TestdataChainedAnchor a0 = new TestdataChainedAnchor("a0");
         TestdataChainedEntity a1 = new TestdataChainedEntity("a1", a0);
@@ -73,5 +75,4 @@ public class ExternalizedAnchorVariableSupplyTest {
         nextVariableSupply.clearWorkingSolution(scoreDirector);
         supply.clearWorkingSolution(scoreDirector);
     }
-
 }

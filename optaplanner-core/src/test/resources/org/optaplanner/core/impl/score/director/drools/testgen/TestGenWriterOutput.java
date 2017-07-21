@@ -1,6 +1,7 @@
 package org.optaplanner.testgen;
 
 import java.io.File;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.kie.api.KieServices;
@@ -19,11 +20,11 @@ public class TestGenWriterOutput {
         KieServices kieServices = KieServices.Factory.get();
         KieFileSystem kfs = kieServices.newKieFileSystem();
         kfs.write(kieServices.getResources()
-                .newFileSystemResource(new File("SCORE_DRL_ABSOLUTE_PATH"), "UTF-8"));
+                          .newFileSystemResource(new File("SCORE_DRL_ABSOLUTE_PATH"), "UTF-8"));
         kfs.write(kieServices.getResources()
-                .newClassPathResource("x"));
+                          .newClassPathResource("x"));
         kfs.write(kieServices.getResources()
-                .newClassPathResource("y"));
+                          .newClassPathResource("y"));
         kieServices.newKieBuilder(kfs).buildAll();
         KieContainer kieContainer = kieServices.newKieContainer(kieServices.getRepository().getDefaultReleaseId());
         KieSession kieSession = kieContainer.newKieSession();

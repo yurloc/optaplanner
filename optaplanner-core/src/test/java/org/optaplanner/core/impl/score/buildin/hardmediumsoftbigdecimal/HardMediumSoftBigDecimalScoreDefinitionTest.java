@@ -29,7 +29,8 @@ public class HardMediumSoftBigDecimalScoreDefinitionTest {
 
     @Test
     public void getLevelLabels() {
-        assertArrayEquals(new String[]{"hard score", "medium score", "soft score"}, new HardMediumSoftBigDecimalScoreDefinition().getLevelLabels());
+        assertArrayEquals(new String[]{"hard score", "medium score", "soft score"},
+                          new HardMediumSoftBigDecimalScoreDefinition().getLevelLabels());
     }
 
     @Test
@@ -38,5 +39,4 @@ public class HardMediumSoftBigDecimalScoreDefinitionTest {
     }
 
     // Optimistic and pessimistic bounds are currently not supported for this score definition
-
 }

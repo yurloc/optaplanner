@@ -22,8 +22,8 @@ import org.optaplanner.core.impl.score.director.ScoreDirector;
 public class TestdataImmovableChainedEntityFilter implements SelectionFilter<TestdataImmovableChainedSolution, TestdataImmovableChainedEntity> {
 
     @Override
-    public boolean accept(ScoreDirector<TestdataImmovableChainedSolution> scoreDirector, TestdataImmovableChainedEntity entity) {
+    public boolean accept(ScoreDirector<TestdataImmovableChainedSolution> scoreDirector,
+                          TestdataImmovableChainedEntity entity) {
         return !entity.isLocked();
     }
-
 }

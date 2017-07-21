@@ -69,12 +69,13 @@ public final class BeanPropertyMemberAccessor implements MemberAccessor {
             return getterMethod.invoke(bean);
         } catch (IllegalAccessException e) {
             throw new IllegalStateException("Cannot call property (" + propertyName
-                    + ") getterMethod (" + getterMethod + ") on bean of class (" + bean.getClass() + ").", e);
+                                                    + ") getterMethod (" + getterMethod + ") on bean of class (" + bean.getClass() + ").",
+                                            e);
         } catch (InvocationTargetException e) {
             throw new IllegalStateException("The property (" + propertyName
-                    + ") getterMethod (" + getterMethod + ") on bean of class (" + bean.getClass()
-                    + ") throws an exception.",
-                    e.getCause());
+                                                    + ") getterMethod (" + getterMethod + ") on bean of class (" + bean.getClass()
+                                                    + ") throws an exception.",
+                                            e.getCause());
         }
     }
 
@@ -89,13 +90,13 @@ public final class BeanPropertyMemberAccessor implements MemberAccessor {
             setterMethod.invoke(bean, value);
         } catch (IllegalAccessException e) {
             throw new IllegalStateException("Cannot call property (" + propertyName
-                    + ") setterMethod (" + setterMethod + ") on bean of class (" + bean.getClass()
-                    + ") for value (" + value + ").", e);
+                                                    + ") setterMethod (" + setterMethod + ") on bean of class (" + bean.getClass()
+                                                    + ") for value (" + value + ").", e);
         } catch (InvocationTargetException e) {
             throw new IllegalStateException("The property (" + propertyName
-                    + ") setterMethod (" + setterMethod + ") on bean of class (" + bean.getClass()
-                    + ") throws an exception for value (" + value + ").",
-                    e.getCause());
+                                                    + ") setterMethod (" + setterMethod + ") on bean of class (" + bean.getClass()
+                                                    + ") throws an exception for value (" + value + ").",
+                                            e.getCause());
         }
     }
 
@@ -127,5 +128,4 @@ public final class BeanPropertyMemberAccessor implements MemberAccessor {
     public String toString() {
         return "bean property " + propertyName + " on " + getterMethod.getDeclaringClass();
     }
-
 }

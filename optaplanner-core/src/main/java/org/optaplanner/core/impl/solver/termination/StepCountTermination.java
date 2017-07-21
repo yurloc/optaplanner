@@ -28,7 +28,7 @@ public class StepCountTermination extends AbstractTermination {
         this.stepCountLimit = stepCountLimit;
         if (stepCountLimit < 0) {
             throw new IllegalArgumentException("The stepCountLimit (" + stepCountLimit
-                    + ") cannot be negative.");
+                                                       + ") cannot be negative.");
         }
     }
 
@@ -83,5 +83,4 @@ public class StepCountTermination extends AbstractTermination {
     public String toString() {
         return "StepCount(" + stepCountLimit + ")";
     }
-
 }

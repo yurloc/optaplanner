@@ -37,7 +37,8 @@ public class TestdataSevenNonCyclicShadowedEntity extends TestdataObject {
 
     public static GenuineVariableDescriptor buildVariableDescriptorForValue() {
         SolutionDescriptor solutionDescriptor = TestdataSevenNonCyclicShadowedSolution.buildSolutionDescriptor();
-        EntityDescriptor entityDescriptor = solutionDescriptor.findEntityDescriptorOrFail(TestdataSevenNonCyclicShadowedEntity.class);
+        EntityDescriptor entityDescriptor = solutionDescriptor.findEntityDescriptorOrFail(
+                TestdataSevenNonCyclicShadowedEntity.class);
         return entityDescriptor.getGenuineVariableDescriptor("value");
     }
 
@@ -145,5 +146,4 @@ public class TestdataSevenNonCyclicShadowedEntity extends TestdataObject {
     // ************************************************************************
     // Complex methods
     // ************************************************************************
-
 }

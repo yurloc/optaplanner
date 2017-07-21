@@ -55,7 +55,8 @@ import org.slf4j.LoggerFactory;
  * @see ScoreDirector
  */
 public abstract class AbstractScoreDirector<Solution_, Factory_ extends AbstractScoreDirectorFactory<Solution_>>
-        implements InnerScoreDirector<Solution_>, Cloneable {
+        implements InnerScoreDirector<Solution_>,
+                   Cloneable {
 
     protected final transient Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -74,7 +75,7 @@ public abstract class AbstractScoreDirector<Solution_, Factory_ extends Abstract
     protected long calculationCount = 0L;
 
     protected AbstractScoreDirector(Factory_ scoreDirectorFactory,
-            boolean lookUpEnabled, boolean constraintMatchEnabledPreference) {
+                                    boolean lookUpEnabled, boolean constraintMatchEnabledPreference) {
         this.scoreDirectorFactory = scoreDirectorFactory;
         this.lookUpEnabled = lookUpEnabled;
         lookUpManager = lookUpEnabled
@@ -154,7 +155,7 @@ public abstract class AbstractScoreDirector<Solution_, Factory_ extends Abstract
     public void setWorkingSolution(Solution_ workingSolution) {
         this.workingSolution = workingSolution;
         SolutionDescriptor<Solution_> solutionDescriptor = getSolutionDescriptor();
-        workingInitScore = - solutionDescriptor.countUninitializedVariables(workingSolution);
+        workingInitScore = -solutionDescriptor.countUninitializedVariables(workingSolution);
         if (lookUpEnabled) {
             lookUpManager.resetWorkingObjects(solutionDescriptor.getAllFacts(workingSolution));
         }
@@ -185,9 +186,9 @@ public abstract class AbstractScoreDirector<Solution_, Factory_ extends Abstract
         if (scoreDirectorFactory.isAssertClonedSolution()) {
             if (!Objects.equals(originalScore, cloneScore)) {
                 throw new IllegalStateException("Cloning corruption: "
-                        + "the original's score (" + originalScore
-                        + ") is different from the clone's score (" + cloneScore + ").\n"
-                        + "Check the " + SolutionCloner.class.getSimpleName() + ".");
+                                                        + "the original's score (" + originalScore
+                                                        + ") is different from the clone's score (" + cloneScore + ").\n"
+                                                        + "Check the " + SolutionCloner.class.getSimpleName() + ".");
             }
             List<Object> originalEntityList = solutionDescriptor.getEntityList(originalSolution);
             Map<Object, Object> originalEntityMap = new IdentityHashMap<>(originalEntityList.size());
@@ -197,11 +198,11 @@ public abstract class AbstractScoreDirector<Solution_, Factory_ extends Abstract
             for (Object cloneEntity : solutionDescriptor.getEntityList(cloneSolution)) {
                 if (originalEntityMap.containsKey(cloneEntity)) {
                     throw new IllegalStateException("Cloning corruption: "
-                            + "the same entity (" + cloneEntity
-                            + ") is present in both the original and the clone.\n"
-                            + "So when a planning variable in the original solution changes, "
-                            + "the cloned solution will change too.\n"
-                            + "Check the " + SolutionCloner.class.getSimpleName() + ".");
+                                                            + "the same entity (" + cloneEntity
+                                                            + ") is present in both the original and the clone.\n"
+                                                            + "So when a planning variable in the original solution changes, "
+                                                            + "the cloned solution will change too.\n"
+                                                            + "Check the " + SolutionCloner.class.getSimpleName() + ".");
                 }
             }
         }
@@ -402,7 +403,7 @@ public abstract class AbstractScoreDirector<Solution_, Factory_ extends Abstract
     public <E> E lookUpWorkingObject(E externalObject) {
         if (!lookUpEnabled) {
             throw new IllegalStateException("When lookUpEnabled (" + lookUpEnabled
-                    + ") is disabled in the constructor, this method should not be called.");
+                                                    + ") is disabled in the constructor, this method should not be called.");
         }
         return lookUpManager.lookUpWorkingObject(externalObject);
     }
@@ -417,8 +418,8 @@ public abstract class AbstractScoreDirector<Solution_, Factory_ extends Abstract
         if (!expectedWorkingScore.equals(workingScore)) {
             throw new IllegalStateException(
                     "Score corruption: the expectedWorkingScore (" + expectedWorkingScore
-                    + ") is not the workingScore (" + workingScore
-                    + ") after completedAction (" + completedAction + ").");
+                            + ") is not the workingScore (" + workingScore
+                            + ") after completedAction (" + completedAction + ").");
         }
     }
 
@@ -426,7 +427,7 @@ public abstract class AbstractScoreDirector<Solution_, Factory_ extends Abstract
     public void assertShadowVariablesAreNotStale(Score expectedWorkingScore, Object completedAction) {
         SolutionDescriptor<Solution_> solutionDescriptor = getSolutionDescriptor();
         Map<Object, Map<ShadowVariableDescriptor, Object>> entityToShadowVariableValuesMap = new IdentityHashMap<>();
-        for (Iterator<Object> it = solutionDescriptor.extractAllEntitiesIterator(workingSolution); it.hasNext();) {
+        for (Iterator<Object> it = solutionDescriptor.extractAllEntitiesIterator(workingSolution); it.hasNext(); ) {
             Object entity = it.next();
             EntityDescriptor<Solution_> entityDescriptor
                     = solutionDescriptor.findEntityDescriptorOrFail(entity.getClass());
@@ -440,7 +441,7 @@ public abstract class AbstractScoreDirector<Solution_, Factory_ extends Abstract
             entityToShadowVariableValuesMap.put(entity, shadowVariableValuesMap);
         }
         variableListenerSupport.triggerAllVariableListeners();
-        for (Iterator<Object> it = solutionDescriptor.extractAllEntitiesIterator(workingSolution); it.hasNext();) {
+        for (Iterator<Object> it = solutionDescriptor.extractAllEntitiesIterator(workingSolution); it.hasNext(); ) {
             Object entity = it.next();
             EntityDescriptor<Solution_> entityDescriptor
                     = solutionDescriptor.findEntityDescriptorOrFail(entity.getClass());
@@ -451,27 +452,27 @@ public abstract class AbstractScoreDirector<Solution_, Factory_ extends Abstract
                 Object originalValue = shadowVariableValuesMap.get(shadowVariableDescriptor);
                 if (!Objects.equals(originalValue, newValue)) {
                     throw new IllegalStateException(VariableListener.class.getSimpleName() + " corruption:"
-                            + " the entity (" + entity
-                            + ")'s shadow variable (" + shadowVariableDescriptor.getSimpleEntityAndVariableName()
-                            + ")'s corrupted value (" + originalValue + ") changed to uncorrupted value (" + newValue
-                            + ") after all " + VariableListener.class.getSimpleName()
-                            + "s were triggered without changes to the genuine variables.\n"
-                            + "Maybe the " + VariableListener.class.getSimpleName() + " class ("
-                            + shadowVariableDescriptor.getVariableListenerClass().getSimpleName()
-                            + ") for that shadow variable (" + shadowVariableDescriptor.getSimpleEntityAndVariableName()
-                            + ") forgot to update it when one of its sources changed"
-                            + " after completedAction (" + completedAction + ").");
+                                                            + " the entity (" + entity
+                                                            + ")'s shadow variable (" + shadowVariableDescriptor.getSimpleEntityAndVariableName()
+                                                            + ")'s corrupted value (" + originalValue + ") changed to uncorrupted value (" + newValue
+                                                            + ") after all " + VariableListener.class.getSimpleName()
+                                                            + "s were triggered without changes to the genuine variables.\n"
+                                                            + "Maybe the " + VariableListener.class.getSimpleName() + " class ("
+                                                            + shadowVariableDescriptor.getVariableListenerClass().getSimpleName()
+                                                            + ") for that shadow variable (" + shadowVariableDescriptor.getSimpleEntityAndVariableName()
+                                                            + ") forgot to update it when one of its sources changed"
+                                                            + " after completedAction (" + completedAction + ").");
                 }
             }
         }
         Score workingScore = calculateScore();
         if (!expectedWorkingScore.equals(workingScore)) {
             throw new IllegalStateException("Impossible " + VariableListener.class.getSimpleName() + " corruption:"
-                    + " the expectedWorkingScore (" + expectedWorkingScore
-                    + ") is not the workingScore (" + workingScore
-                    + ") after all " + VariableListener.class.getSimpleName()
-                    + "s were triggered without changes to the genuine variables.\n"
-                    + "But all the shadow variable values are still the same, so this is impossible.");
+                                                    + " the expectedWorkingScore (" + expectedWorkingScore
+                                                    + ") is not the workingScore (" + workingScore
+                                                    + ") after all " + VariableListener.class.getSimpleName()
+                                                    + "s were triggered without changes to the genuine variables.\n"
+                                                    + "But all the shadow variable values are still the same, so this is impossible.");
         }
     }
 
@@ -491,8 +492,8 @@ public abstract class AbstractScoreDirector<Solution_, Factory_ extends Abstract
             uncorruptedScoreDirector.dispose();
             throw new IllegalStateException(
                     "Score corruption: the workingScore (" + workingScore + ") is not the uncorruptedScore ("
-                    + uncorruptedScore + ") after completedAction (" + completedAction
-                    + "):\n" + scoreCorruptionAnalysis);
+                            + uncorruptedScore + ") after completedAction (" + completedAction
+                            + "):\n" + scoreCorruptionAnalysis);
         } else {
             uncorruptedScoreDirector.dispose();
         }
@@ -569,7 +570,7 @@ public abstract class AbstractScoreDirector<Solution_, Factory_ extends Abstract
         }
         if (excessMap.isEmpty() && missingMap.isEmpty()) {
             analysis.append("  The corrupted scoreDirector has no ConstraintMatch(s) in excess or missing."
-                    + " That could be a bug in this class (").append(getClass()).append(").\n");
+                                    + " That could be a bug in this class (").append(getClass()).append(").\n");
         }
         analysis.append("  Check your score constraints.");
         return analysis.toString();
@@ -589,8 +590,8 @@ public abstract class AbstractScoreDirector<Solution_, Factory_ extends Abstract
                         constraintMatch);
                 if (previousConstraintMatch != null) {
                     throw new IllegalStateException("Score corruption because the constraintMatch (" + constraintMatch
-                            + ") was added twice for constraintMatchTotal (" + constraintMatchTotal
-                            + ") without removal.");
+                                                            + ") was added twice for constraintMatchTotal (" + constraintMatchTotal
+                                                            + ") without removal.");
                 }
             }
         }
@@ -601,5 +602,4 @@ public abstract class AbstractScoreDirector<Solution_, Factory_ extends Abstract
     public String toString() {
         return getClass().getSimpleName() + "(" + calculationCount + ")";
     }
-
 }

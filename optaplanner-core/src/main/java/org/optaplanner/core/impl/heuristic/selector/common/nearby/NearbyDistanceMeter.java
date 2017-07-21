@@ -30,5 +30,4 @@ public interface NearbyDistanceMeter<O, D> {
      * @return Preferably always {@code >= 0.0}. If origin == destination, it usually returns 0.0.
      */
     double getNearbyDistance(O origin, D destination);
-
 }

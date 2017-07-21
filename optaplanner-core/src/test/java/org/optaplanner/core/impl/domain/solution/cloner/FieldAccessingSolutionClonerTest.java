@@ -25,5 +25,4 @@ public class FieldAccessingSolutionClonerTest extends AbstractSolutionClonerTest
             SolutionDescriptor solutionDescriptor) {
         return new FieldAccessingSolutionCloner<>(solutionDescriptor);
     }
-
 }

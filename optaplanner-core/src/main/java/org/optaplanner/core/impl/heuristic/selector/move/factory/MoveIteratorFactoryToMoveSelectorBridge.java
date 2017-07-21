@@ -70,8 +70,8 @@ public class MoveIteratorFactoryToMoveSelectorBridge extends AbstractMoveSelecto
         long size = moveIteratorFactory.getSize(scoreDirector);
         if (size < 0L) {
             throw new IllegalStateException("The moveIteratorFactoryClass (" + moveIteratorFactory.getClass()
-                    + ") has size (" + size
-                    + ") which is negative, but a correct size is required in this Solver configuration.");
+                                                    + ") has size (" + size
+                                                    + ") which is negative, but a correct size is required in this Solver configuration.");
         }
         return size;
     }
@@ -89,5 +89,4 @@ public class MoveIteratorFactoryToMoveSelectorBridge extends AbstractMoveSelecto
     public String toString() {
         return "MoveIteratorFactory(" + moveIteratorFactory.getClass() + ")";
     }
-
 }

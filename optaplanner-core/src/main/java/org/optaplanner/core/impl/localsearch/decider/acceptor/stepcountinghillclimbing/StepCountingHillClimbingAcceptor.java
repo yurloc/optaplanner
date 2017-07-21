@@ -32,16 +32,16 @@ public class StepCountingHillClimbingAcceptor extends AbstractAcceptor {
     protected int count = -1;
 
     public StepCountingHillClimbingAcceptor(int stepCountingHillClimbingSize,
-            StepCountingHillClimbingType stepCountingHillClimbingType) {
+                                            StepCountingHillClimbingType stepCountingHillClimbingType) {
         this.stepCountingHillClimbingSize = stepCountingHillClimbingSize;
         this.stepCountingHillClimbingType = stepCountingHillClimbingType;
         if (stepCountingHillClimbingSize <= 0) {
             throw new IllegalArgumentException("The stepCountingHillClimbingSize (" + stepCountingHillClimbingSize
-                    + ") cannot be negative or zero.");
+                                                       + ") cannot be negative or zero.");
         }
         if (stepCountingHillClimbingType == null) {
             throw new IllegalArgumentException("The stepCountingHillClimbingType (" + stepCountingHillClimbingType
-                    + ") cannot be null.");
+                                                       + ") cannot be null.");
         }
     }
 
@@ -94,7 +94,7 @@ public class StepCountingHillClimbingAcceptor extends AbstractAcceptor {
                         stepScope.getPhaseScope().getLastCompletedStepScope().getScore()) > 0 ? 1 : 0;
             default:
                 throw new IllegalStateException("The stepCountingHillClimbingType (" + stepCountingHillClimbingType
-                        + ") is not implemented.");
+                                                        + ") is not implemented.");
         }
     }
 
@@ -104,5 +104,4 @@ public class StepCountingHillClimbingAcceptor extends AbstractAcceptor {
         thresholdScore = null;
         count = -1;
     }
-
 }

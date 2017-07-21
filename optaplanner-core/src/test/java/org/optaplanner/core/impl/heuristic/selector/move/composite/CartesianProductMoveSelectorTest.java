@@ -35,7 +35,12 @@ import org.optaplanner.core.impl.testdata.domain.TestdataValue;
 import org.optaplanner.core.impl.testdata.domain.multivar.TestdataMultiVarEntity;
 
 import static org.mockito.Mockito.*;
-import static org.optaplanner.core.impl.testdata.util.PlannerAssert.*;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.DO_NOT_ASSERT_SIZE;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.assertAllCodesOfMoveSelector;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.assertCodesOfNeverEndingMoveSelector;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.assertEmptyNeverEndingMoveSelector;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.assertTrue;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.verifyPhaseLifecycle;
 
 public class CartesianProductMoveSelectorTest {
 
@@ -52,11 +57,12 @@ public class CartesianProductMoveSelectorTest {
     public void originSelection(boolean ignoreEmptyChildIterators) {
         ArrayList<MoveSelector> childMoveSelectorList = new ArrayList<>();
         childMoveSelectorList.add(SelectorTestUtils.mockMoveSelector(DummyMove.class,
-                new DummyMove("a1"), new DummyMove("a2"), new DummyMove("a3")));
+                                                                     new DummyMove("a1"), new DummyMove("a2"),
+                                                                     new DummyMove("a3")));
         childMoveSelectorList.add(SelectorTestUtils.mockMoveSelector(DummyMove.class,
-                new DummyMove("b1"), new DummyMove("b2")));
+                                                                     new DummyMove("b1"), new DummyMove("b2")));
         CartesianProductMoveSelector moveSelector = new CartesianProductMoveSelector(childMoveSelectorList,
-                ignoreEmptyChildIterators, false);
+                                                                                     ignoreEmptyChildIterators, false);
 
         DefaultSolverScope solverScope = mock(DefaultSolverScope.class);
         moveSelector.solvingStarted(solverScope);
@@ -68,9 +74,9 @@ public class CartesianProductMoveSelectorTest {
         moveSelector.stepStarted(stepScopeA1);
 
         assertAllCodesOfMoveSelector(moveSelector,
-                "a1+b1", "a1+b2",
-                "a2+b1", "a2+b2",
-                "a3+b1", "a3+b2");
+                                     "a1+b1", "a1+b2",
+                                     "a2+b1", "a2+b2",
+                                     "a3+b1", "a3+b2");
 
         moveSelector.stepEnded(stepScopeA1);
         moveSelector.phaseEnded(phaseScopeA);
@@ -113,14 +119,18 @@ public class CartesianProductMoveSelectorTest {
     public void emptyOriginSelection(boolean ignoreEmptyChildIterators, boolean emptyFirst, boolean emptySecond) {
         assertTrue(emptyFirst || emptySecond);
         MoveSelector nonEmptyChildMoveSelector = SelectorTestUtils.mockMoveSelector(DummyMove.class,
-                new DummyMove("a1"), new DummyMove("a2"), new DummyMove("a3")); // One side is not empty
+                                                                                    new DummyMove("a1"),
+                                                                                    new DummyMove("a2"), new DummyMove(
+                        "a3")); // One side is not empty
         ArrayList<MoveSelector> childMoveSelectorList = new ArrayList<>();
         childMoveSelectorList.add(emptyFirst
-                ? SelectorTestUtils.mockMoveSelector(DummyMove.class) : nonEmptyChildMoveSelector);
+                                          ? SelectorTestUtils.mockMoveSelector(
+                DummyMove.class) : nonEmptyChildMoveSelector);
         childMoveSelectorList.add(emptySecond
-                ? SelectorTestUtils.mockMoveSelector(DummyMove.class) : nonEmptyChildMoveSelector);
+                                          ? SelectorTestUtils.mockMoveSelector(
+                DummyMove.class) : nonEmptyChildMoveSelector);
         CartesianProductMoveSelector moveSelector = new CartesianProductMoveSelector(childMoveSelectorList,
-                ignoreEmptyChildIterators, false);
+                                                                                     ignoreEmptyChildIterators, false);
 
         DefaultSolverScope solverScope = mock(DefaultSolverScope.class);
         moveSelector.solvingStarted(solverScope);
@@ -158,13 +168,13 @@ public class CartesianProductMoveSelectorTest {
     public void originSelection3ChildMoveSelectors(boolean ignoreEmptyChildIterators) {
         ArrayList<MoveSelector> childMoveSelectorList = new ArrayList<>();
         childMoveSelectorList.add(SelectorTestUtils.mockMoveSelector(DummyMove.class,
-                new DummyMove("a1"), new DummyMove("a2")));
+                                                                     new DummyMove("a1"), new DummyMove("a2")));
         childMoveSelectorList.add(SelectorTestUtils.mockMoveSelector(DummyMove.class,
-                new DummyMove("b1"), new DummyMove("b2")));
+                                                                     new DummyMove("b1"), new DummyMove("b2")));
         childMoveSelectorList.add(SelectorTestUtils.mockMoveSelector(DummyMove.class,
-                new DummyMove("c1"), new DummyMove("c2")));
+                                                                     new DummyMove("c1"), new DummyMove("c2")));
         CartesianProductMoveSelector moveSelector = new CartesianProductMoveSelector(childMoveSelectorList,
-                ignoreEmptyChildIterators, false);
+                                                                                     ignoreEmptyChildIterators, false);
 
         DefaultSolverScope solverScope = mock(DefaultSolverScope.class);
         moveSelector.solvingStarted(solverScope);
@@ -176,8 +186,8 @@ public class CartesianProductMoveSelectorTest {
         moveSelector.stepStarted(stepScopeA1);
 
         assertAllCodesOfMoveSelector(moveSelector,
-                "a1+b1+c1", "a1+b1+c2", "a1+b2+c1", "a1+b2+c2",
-                "a2+b1+c1", "a2+b1+c2", "a2+b2+c1", "a2+b2+c2");
+                                     "a1+b1+c1", "a1+b1+c2", "a1+b2+c1", "a1+b2+c2",
+                                     "a2+b1+c1", "a2+b1+c2", "a2+b2+c1", "a2+b2+c2");
 
         moveSelector.stepEnded(stepScopeA1);
         moveSelector.phaseEnded(phaseScopeA);
@@ -200,12 +210,12 @@ public class CartesianProductMoveSelectorTest {
     public void emptyOriginSelection3ChildMoveSelectors(boolean ignoreEmptyChildIterators) {
         ArrayList<MoveSelector> childMoveSelectorList = new ArrayList<>();
         childMoveSelectorList.add(SelectorTestUtils.mockMoveSelector(DummyMove.class,
-                new DummyMove("a1"), new DummyMove("a2")));
+                                                                     new DummyMove("a1"), new DummyMove("a2")));
         childMoveSelectorList.add(SelectorTestUtils.mockMoveSelector(DummyMove.class));
         childMoveSelectorList.add(SelectorTestUtils.mockMoveSelector(DummyMove.class,
-                new DummyMove("c1"), new DummyMove("c2")));
+                                                                     new DummyMove("c1"), new DummyMove("c2")));
         CartesianProductMoveSelector moveSelector = new CartesianProductMoveSelector(childMoveSelectorList,
-                ignoreEmptyChildIterators, false);
+                                                                                     ignoreEmptyChildIterators, false);
 
         DefaultSolverScope solverScope = mock(DefaultSolverScope.class);
         moveSelector.solvingStarted(solverScope);
@@ -218,7 +228,7 @@ public class CartesianProductMoveSelectorTest {
 
         if (ignoreEmptyChildIterators) {
             assertAllCodesOfMoveSelector(moveSelector,
-                    "a1+c1", "a1+c2", "a2+c1", "a2+c2");
+                                         "a1+c1", "a1+c2", "a2+c1", "a2+c2");
         } else {
             assertAllCodesOfMoveSelector(moveSelector);
         }
@@ -244,11 +254,12 @@ public class CartesianProductMoveSelectorTest {
     public void classicRandomSelection(boolean ignoreEmptyChildIterators) {
         ArrayList<MoveSelector> childMoveSelectorList = new ArrayList<>();
         childMoveSelectorList.add(SelectorTestUtils.mockMoveSelector(DummyMove.class,
-                new DummyMove("a1"), new DummyMove("a2"), new DummyMove("a3")));
+                                                                     new DummyMove("a1"), new DummyMove("a2"),
+                                                                     new DummyMove("a3")));
         childMoveSelectorList.add(SelectorTestUtils.mockMoveSelector(DummyMove.class,
-                new DummyMove("b1"), new DummyMove("b2")));
+                                                                     new DummyMove("b1"), new DummyMove("b2")));
         CartesianProductMoveSelector moveSelector = new CartesianProductMoveSelector(childMoveSelectorList,
-                ignoreEmptyChildIterators, true);
+                                                                                     ignoreEmptyChildIterators, true);
 
         DefaultSolverScope solverScope = mock(DefaultSolverScope.class);
         moveSelector.solvingStarted(solverScope);
@@ -283,9 +294,10 @@ public class CartesianProductMoveSelectorTest {
         ArrayList<MoveSelector> childMoveSelectorList = new ArrayList<>();
         childMoveSelectorList.add(SelectorTestUtils.mockMoveSelector(DummyMove.class));
         childMoveSelectorList.add(SelectorTestUtils.mockMoveSelector(DummyMove.class,
-                new DummyMove("b1"), new DummyMove("b2"))); // One side is not empty
+                                                                     new DummyMove("b1"),
+                                                                     new DummyMove("b2"))); // One side is not empty
         CartesianProductMoveSelector moveSelector = new CartesianProductMoveSelector(childMoveSelectorList,
-                ignoreEmptyChildIterators, true);
+                                                                                     ignoreEmptyChildIterators, true);
 
         DefaultSolverScope solverScope = mock(DefaultSolverScope.class);
         moveSelector.solvingStarted(solverScope);
@@ -323,13 +335,13 @@ public class CartesianProductMoveSelectorTest {
     public void randomSelection3ChildMoveSelectors(boolean ignoreEmptyChildIterators) {
         ArrayList<MoveSelector> childMoveSelectorList = new ArrayList<>();
         childMoveSelectorList.add(SelectorTestUtils.mockMoveSelector(DummyMove.class,
-                new DummyMove("a1"), new DummyMove("a2")));
+                                                                     new DummyMove("a1"), new DummyMove("a2")));
         childMoveSelectorList.add(SelectorTestUtils.mockMoveSelector(DummyMove.class,
-                new DummyMove("b1"), new DummyMove("b2")));
+                                                                     new DummyMove("b1"), new DummyMove("b2")));
         childMoveSelectorList.add(SelectorTestUtils.mockMoveSelector(DummyMove.class,
-                new DummyMove("c1"), new DummyMove("c2")));
+                                                                     new DummyMove("c1"), new DummyMove("c2")));
         CartesianProductMoveSelector moveSelector = new CartesianProductMoveSelector(childMoveSelectorList,
-                ignoreEmptyChildIterators, true);
+                                                                                     ignoreEmptyChildIterators, true);
 
         DefaultSolverScope solverScope = mock(DefaultSolverScope.class);
         moveSelector.solvingStarted(solverScope);
@@ -364,11 +376,12 @@ public class CartesianProductMoveSelectorTest {
         ArrayList<MoveSelector> childMoveSelectorList = new ArrayList<>();
         childMoveSelectorList.add(SelectorTestUtils.mockMoveSelector(DummyMove.class));
         childMoveSelectorList.add(SelectorTestUtils.mockMoveSelector(DummyMove.class,
-                new DummyMove("b1"), new DummyMove("b2")));
+                                                                     new DummyMove("b1"), new DummyMove("b2")));
         childMoveSelectorList.add(SelectorTestUtils.mockMoveSelector(DummyMove.class,
-                new DummyMove("c1"), new DummyMove("c2"), new DummyMove("c3")));
+                                                                     new DummyMove("c1"), new DummyMove("c2"),
+                                                                     new DummyMove("c3")));
         CartesianProductMoveSelector moveSelector = new CartesianProductMoveSelector(childMoveSelectorList,
-                ignoreEmptyChildIterators, true);
+                                                                                     ignoreEmptyChildIterators, true);
 
         DefaultSolverScope solverScope = mock(DefaultSolverScope.class);
         moveSelector.solvingStarted(solverScope);
@@ -409,7 +422,8 @@ public class CartesianProductMoveSelectorTest {
 
     public void originalMimic(boolean ignoreEmptyChildIterators) {
         EntitySelector entitySelector = SelectorTestUtils.mockEntitySelector(TestdataMultiVarEntity.class,
-                new TestdataMultiVarEntity("a"), new TestdataMultiVarEntity("b"));
+                                                                             new TestdataMultiVarEntity("a"),
+                                                                             new TestdataMultiVarEntity("b"));
         MimicRecordingEntitySelector recordingEntitySelector = new MimicRecordingEntitySelector(
                 entitySelector);
         ValueSelector primaryValueSelector = SelectorTestUtils.mockValueSelector(
@@ -429,7 +443,7 @@ public class CartesianProductMoveSelectorTest {
                 secondaryValueSelector,
                 false));
         MoveSelector moveSelector = new CartesianProductMoveSelector(moveSelectorList,
-                ignoreEmptyChildIterators, false);
+                                                                     ignoreEmptyChildIterators, false);
 
         DefaultSolverScope solverScope = mock(DefaultSolverScope.class);
         moveSelector.solvingStarted(solverScope);
@@ -442,16 +456,16 @@ public class CartesianProductMoveSelectorTest {
         when(stepScopeA1.getPhaseScope()).thenReturn(phaseScopeA);
         moveSelector.stepStarted(stepScopeA1);
         assertAllCodesOfMoveSelector(moveSelector, DO_NOT_ASSERT_SIZE,
-                "a->1+a->8", "a->1+a->9", "a->2+a->8", "a->2+a->9", "a->3+a->8", "a->3+a->9",
-                "b->1+b->8", "b->1+b->9", "b->2+b->8", "b->2+b->9", "b->3+b->8", "b->3+b->9");
+                                     "a->1+a->8", "a->1+a->9", "a->2+a->8", "a->2+a->9", "a->3+a->8", "a->3+a->9",
+                                     "b->1+b->8", "b->1+b->9", "b->2+b->8", "b->2+b->9", "b->3+b->8", "b->3+b->9");
         moveSelector.stepEnded(stepScopeA1);
 
         AbstractStepScope stepScopeA2 = mock(AbstractStepScope.class);
         when(stepScopeA2.getPhaseScope()).thenReturn(phaseScopeA);
         moveSelector.stepStarted(stepScopeA2);
         assertAllCodesOfMoveSelector(moveSelector, DO_NOT_ASSERT_SIZE,
-                "a->1+a->8", "a->1+a->9", "a->2+a->8", "a->2+a->9", "a->3+a->8", "a->3+a->9",
-                "b->1+b->8", "b->1+b->9", "b->2+b->8", "b->2+b->9", "b->3+b->8", "b->3+b->9");
+                                     "a->1+a->8", "a->1+a->9", "a->2+a->8", "a->2+a->9", "a->3+a->8", "a->3+a->9",
+                                     "b->1+b->8", "b->1+b->9", "b->2+b->8", "b->2+b->9", "b->3+b->8", "b->3+b->9");
         moveSelector.stepEnded(stepScopeA2);
 
         moveSelector.phaseEnded(phaseScopeA);
@@ -475,7 +489,8 @@ public class CartesianProductMoveSelectorTest {
 
     public void randomMimic(boolean ignoreEmptyChildIterators) {
         EntitySelector entitySelector = SelectorTestUtils.mockEntitySelector(TestdataMultiVarEntity.class,
-                new TestdataMultiVarEntity("a"), new TestdataMultiVarEntity("b"));
+                                                                             new TestdataMultiVarEntity("a"),
+                                                                             new TestdataMultiVarEntity("b"));
         MimicRecordingEntitySelector recordingEntitySelector = new MimicRecordingEntitySelector(
                 entitySelector);
         ValueSelector primaryValueSelector = SelectorTestUtils.mockValueSelector(
@@ -495,7 +510,7 @@ public class CartesianProductMoveSelectorTest {
                 secondaryValueSelector,
                 false));
         MoveSelector moveSelector = new CartesianProductMoveSelector(moveSelectorList,
-                ignoreEmptyChildIterators, true);
+                                                                     ignoreEmptyChildIterators, true);
 
         DefaultSolverScope solverScope = mock(DefaultSolverScope.class);
         moveSelector.solvingStarted(solverScope);
@@ -508,7 +523,8 @@ public class CartesianProductMoveSelectorTest {
         when(stepScopeA1.getPhaseScope()).thenReturn(phaseScopeA);
         moveSelector.stepStarted(stepScopeA1);
         assertCodesOfNeverEndingMoveSelector(moveSelector, 24L,
-                "a->1+a->8", "a->2+a->9", "a->3+a->8", "b->1+a->9", "b->2+b->8", "b->3+b->9");
+                                             "a->1+a->8", "a->2+a->9", "a->3+a->8", "b->1+a->9", "b->2+b->8",
+                                             "b->3+b->9");
         moveSelector.stepEnded(stepScopeA1);
 
         moveSelector.phaseEnded(phaseScopeA);
@@ -519,5 +535,4 @@ public class CartesianProductMoveSelectorTest {
         verifyPhaseLifecycle(primaryValueSelector, 1, 1, 1);
         verifyPhaseLifecycle(secondaryValueSelector, 1, 1, 1);
     }
-
 }

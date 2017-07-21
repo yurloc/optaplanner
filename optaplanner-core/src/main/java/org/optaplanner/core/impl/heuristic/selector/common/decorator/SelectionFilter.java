@@ -39,5 +39,4 @@ public interface SelectionFilter<Solution_, T> {
      * @return true if the selection is accepted, false if the selection should be discarded
      */
     boolean accept(ScoreDirector<Solution_> scoreDirector, T selection);
-
 }

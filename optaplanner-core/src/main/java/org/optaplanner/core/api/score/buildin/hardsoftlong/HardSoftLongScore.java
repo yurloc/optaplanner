@@ -218,5 +218,4 @@ public final class HardSoftLongScore extends AbstractScore<HardSoftLongScore>
     public boolean isCompatibleArithmeticArgument(Score otherScore) {
         return otherScore instanceof HardSoftLongScore;
     }
-
 }

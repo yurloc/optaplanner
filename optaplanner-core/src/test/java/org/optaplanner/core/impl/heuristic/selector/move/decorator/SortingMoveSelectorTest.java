@@ -30,7 +30,8 @@ import org.optaplanner.core.impl.solver.scope.DefaultSolverScope;
 import org.optaplanner.core.impl.testdata.domain.TestdataSolution;
 
 import static org.mockito.Mockito.*;
-import static org.optaplanner.core.impl.testdata.util.PlannerAssert.*;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.assertAllCodesOfMoveSelector;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.verifyPhaseLifecycle;
 
 public class SortingMoveSelectorTest {
 
@@ -56,8 +57,10 @@ public class SortingMoveSelectorTest {
 
     public void runCacheType(SelectionCacheType cacheType, int timesCalled) {
         MoveSelector childMoveSelector = SelectorTestUtils.mockMoveSelector(DummyMove.class,
-                new DummyMove("jan"), new DummyMove("feb"), new DummyMove("mar"),
-                new DummyMove("apr"), new DummyMove("may"), new DummyMove("jun"));
+                                                                            new DummyMove("jan"), new DummyMove("feb"),
+                                                                            new DummyMove("mar"),
+                                                                            new DummyMove("apr"), new DummyMove("may"),
+                                                                            new DummyMove("jun"));
 
         SelectionSorter<TestdataSolution, DummyMove> sorter = (scoreDirector, selectionList)
                 -> selectionList.sort(Comparator.comparing(DummyMove::getCode));
@@ -114,5 +117,4 @@ public class SortingMoveSelectorTest {
         verify(childMoveSelector, times(timesCalled)).iterator();
         verify(childMoveSelector, times(timesCalled)).getSize();
     }
-
 }

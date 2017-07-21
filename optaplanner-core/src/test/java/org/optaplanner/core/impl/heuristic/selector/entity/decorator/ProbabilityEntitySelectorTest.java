@@ -30,17 +30,20 @@ import org.optaplanner.core.impl.solver.scope.DefaultSolverScope;
 import org.optaplanner.core.impl.testdata.domain.TestdataEntity;
 import org.optaplanner.core.impl.testdata.domain.TestdataSolution;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
-import static org.optaplanner.core.impl.testdata.util.PlannerAssert.*;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.assertCode;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.verifyPhaseLifecycle;
 
 public class ProbabilityEntitySelectorTest {
 
     @Test
     public void randomSelection() {
         EntitySelector childEntitySelector = SelectorTestUtils.mockEntitySelector(TestdataEntity.class,
-                new TestdataEntity("e1"), new TestdataEntity("e2"), new TestdataEntity("e3"), new TestdataEntity("e4"));
+                                                                                  new TestdataEntity("e1"),
+                                                                                  new TestdataEntity("e2"),
+                                                                                  new TestdataEntity("e3"),
+                                                                                  new TestdataEntity("e4"));
 
         SelectionProbabilityWeightFactory<TestdataSolution, TestdataEntity> probabilityWeightFactory
                 = (scoreDirector, entity) -> {
@@ -58,10 +61,11 @@ public class ProbabilityEntitySelectorTest {
             }
         };
         EntitySelector entitySelector = new ProbabilityEntitySelector(childEntitySelector, SelectionCacheType.STEP,
-                probabilityWeightFactory);
+                                                                      probabilityWeightFactory);
 
         Random workingRandom = mock(Random.class);
-        when(workingRandom.nextDouble()).thenReturn(1222.0 / 1234.0, 111.0 / 1234.0, 0.0, 1230.0 / 1234.0, 1199.0 / 1234.0);
+        when(workingRandom.nextDouble()).thenReturn(1222.0 / 1234.0, 111.0 / 1234.0, 0.0, 1230.0 / 1234.0,
+                                                    1199.0 / 1234.0);
 
         DefaultSolverScope solverScope = mock(DefaultSolverScope.class);
         when(solverScope.getWorkingRandom()).thenReturn(workingRandom);
@@ -102,21 +106,26 @@ public class ProbabilityEntitySelectorTest {
     @Test
     public void isCountable() {
         EntitySelector childEntitySelector = SelectorTestUtils.mockEntitySelector(TestdataEntity.class);
-        EntitySelector entitySelector = new ProbabilityEntitySelector(childEntitySelector, SelectionCacheType.STEP, null);
+        EntitySelector entitySelector = new ProbabilityEntitySelector(childEntitySelector, SelectionCacheType.STEP,
+                                                                      null);
         assertTrue(entitySelector.isCountable());
     }
 
     @Test
     public void isNeverEnding() {
         EntitySelector childEntitySelector = SelectorTestUtils.mockEntitySelector(TestdataEntity.class);
-        EntitySelector entitySelector = new ProbabilityEntitySelector(childEntitySelector, SelectionCacheType.STEP, null);
+        EntitySelector entitySelector = new ProbabilityEntitySelector(childEntitySelector, SelectionCacheType.STEP,
+                                                                      null);
         assertTrue(entitySelector.isNeverEnding());
     }
 
     @Test
     public void getSize() {
         EntitySelector childEntitySelector = SelectorTestUtils.mockEntitySelector(TestdataEntity.class,
-                new TestdataEntity("e1"), new TestdataEntity("e2"), new TestdataEntity("e3"), new TestdataEntity("e4"));
+                                                                                  new TestdataEntity("e1"),
+                                                                                  new TestdataEntity("e2"),
+                                                                                  new TestdataEntity("e3"),
+                                                                                  new TestdataEntity("e4"));
         SelectionProbabilityWeightFactory<TestdataSolution, TestdataEntity> probabilityWeightFactory
                 = (scoreDirector, entity) -> {
             switch (entity.getCode()) {
@@ -132,8 +141,9 @@ public class ProbabilityEntitySelectorTest {
                     throw new IllegalStateException("Unknown entity (" + entity + ").");
             }
         };
-        ProbabilityEntitySelector entitySelector = new ProbabilityEntitySelector(childEntitySelector, SelectionCacheType.STEP,
-                probabilityWeightFactory);
+        ProbabilityEntitySelector entitySelector = new ProbabilityEntitySelector(childEntitySelector,
+                                                                                 SelectionCacheType.STEP,
+                                                                                 probabilityWeightFactory);
         entitySelector.constructCache(mock(DefaultSolverScope.class));
         assertEquals(4, entitySelector.getSize());
     }
@@ -143,14 +153,15 @@ public class ProbabilityEntitySelectorTest {
         EntitySelector childEntitySelector = SelectorTestUtils.mockEntitySelector(TestdataEntity.class);
         when(childEntitySelector.isNeverEnding()).thenReturn(true);
         SelectionProbabilityWeightFactory prob = mock(SelectionProbabilityWeightFactory.class);
-        ProbabilityEntitySelector entitySelector = new ProbabilityEntitySelector(childEntitySelector, SelectionCacheType.STEP, prob);
+        ProbabilityEntitySelector entitySelector = new ProbabilityEntitySelector(childEntitySelector,
+                                                                                 SelectionCacheType.STEP, prob);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void withoutCachedSelectionType() {
         EntitySelector childEntitySelector = SelectorTestUtils.mockEntitySelector(TestdataEntity.class);
         SelectionProbabilityWeightFactory prob = mock(SelectionProbabilityWeightFactory.class);
-        ProbabilityEntitySelector entitySelector = new ProbabilityEntitySelector(childEntitySelector, SelectionCacheType.JUST_IN_TIME, prob);
+        ProbabilityEntitySelector entitySelector = new ProbabilityEntitySelector(childEntitySelector,
+                                                                                 SelectionCacheType.JUST_IN_TIME, prob);
     }
-
 }

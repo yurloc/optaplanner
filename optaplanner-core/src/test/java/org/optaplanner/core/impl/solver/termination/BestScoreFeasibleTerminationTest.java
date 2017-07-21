@@ -93,7 +93,7 @@ public class BestScoreFeasibleTerminationTest {
         FeasibilityScoreDefinition scoreDefinition = mock(FeasibilityScoreDefinition.class);
         when(scoreDefinition.getFeasibleLevelsSize()).thenReturn(2);
         BestScoreFeasibleTermination termination = new BestScoreFeasibleTermination(scoreDefinition,
-                new double[]{0.75});
+                                                                                    new double[]{0.75});
 
         // Normal cases
         // Smack in the middle
@@ -101,5 +101,4 @@ public class BestScoreFeasibleTerminationTest {
                 BendableScore.valueOf(new int[]{-10, -100}, new int[]{-50, -60, -70}),
                 BendableScore.valueOf(new int[]{-4, -40}, new int[]{-50, -60, -70})), 0.0);
     }
-
 }

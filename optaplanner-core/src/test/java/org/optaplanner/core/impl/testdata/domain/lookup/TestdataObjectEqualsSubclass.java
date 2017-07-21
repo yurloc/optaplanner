@@ -20,5 +20,4 @@ public class TestdataObjectEqualsSubclass extends TestdataObjectEquals {
     public TestdataObjectEqualsSubclass(Integer id) {
         super(id);
     }
-
 }

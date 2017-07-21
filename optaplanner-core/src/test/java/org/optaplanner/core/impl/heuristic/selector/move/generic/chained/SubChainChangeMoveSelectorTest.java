@@ -26,7 +26,6 @@ import org.optaplanner.core.impl.testdata.domain.TestdataEntity;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
-
 public class SubChainChangeMoveSelectorTest {
 
     @Test(expected = IllegalStateException.class)
@@ -110,5 +109,4 @@ public class SubChainChangeMoveSelectorTest {
         when(valueSelector.getSize()).thenReturn(200L);
         assertEquals(20000, testedSelector.getSize());
     }
-
 }

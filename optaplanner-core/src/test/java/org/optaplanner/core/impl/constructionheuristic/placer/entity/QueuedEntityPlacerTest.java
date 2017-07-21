@@ -39,29 +39,31 @@ import org.optaplanner.core.impl.testdata.domain.TestdataEntity;
 import org.optaplanner.core.impl.testdata.domain.TestdataValue;
 import org.optaplanner.core.impl.testdata.domain.multivar.TestdataMultiVarEntity;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
-import static org.optaplanner.core.impl.testdata.util.PlannerAssert.*;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.assertAllCodesOfIterator;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.verifyPhaseLifecycle;
 
 public class QueuedEntityPlacerTest extends AbstractEntityPlacerTest {
 
     @Test
     public void oneMoveSelector() {
         EntitySelector entitySelector = SelectorTestUtils.mockEntitySelector(TestdataEntity.class,
-                new TestdataEntity("a"), new TestdataEntity("b"), new TestdataEntity("c"));
+                                                                             new TestdataEntity("a"),
+                                                                             new TestdataEntity("b"),
+                                                                             new TestdataEntity("c"));
         MimicRecordingEntitySelector recordingEntitySelector = new MimicRecordingEntitySelector(
                 entitySelector);
         ValueSelector valueSelector = SelectorTestUtils.mockValueSelector(TestdataEntity.class, "value",
-                new TestdataValue("1"), new TestdataValue("2"));
+                                                                          new TestdataValue("1"),
+                                                                          new TestdataValue("2"));
 
         MoveSelector moveSelector = new ChangeMoveSelector(
                 new MimicReplayingEntitySelector(recordingEntitySelector),
                 valueSelector,
                 false);
-        QueuedEntityPlacer placer = new QueuedEntityPlacer(recordingEntitySelector, Collections.singletonList(moveSelector));
+        QueuedEntityPlacer placer = new QueuedEntityPlacer(recordingEntitySelector,
+                                                           Collections.singletonList(moveSelector));
 
         DefaultSolverScope solverScope = mock(DefaultSolverScope.class);
         placer.solvingStarted(solverScope);
@@ -118,7 +120,8 @@ public class QueuedEntityPlacerTest extends AbstractEntityPlacerTest {
     @Test
     public void multiQueuedMoveSelector() {
         EntitySelector entitySelector = SelectorTestUtils.mockEntitySelector(TestdataMultiVarEntity.class,
-                new TestdataMultiVarEntity("a"), new TestdataMultiVarEntity("b"));
+                                                                             new TestdataMultiVarEntity("a"),
+                                                                             new TestdataMultiVarEntity("b"));
         MimicRecordingEntitySelector recordingEntitySelector = new MimicRecordingEntitySelector(
                 entitySelector);
         ValueSelector primaryValueSelector = SelectorTestUtils.mockValueSelector(
@@ -188,7 +191,8 @@ public class QueuedEntityPlacerTest extends AbstractEntityPlacerTest {
     @Test
     public void cartesianProductMoveSelector() {
         EntitySelector entitySelector = SelectorTestUtils.mockEntitySelector(TestdataMultiVarEntity.class,
-                new TestdataMultiVarEntity("a"), new TestdataMultiVarEntity("b"));
+                                                                             new TestdataMultiVarEntity("a"),
+                                                                             new TestdataMultiVarEntity("b"));
         MimicRecordingEntitySelector recordingEntitySelector = new MimicRecordingEntitySelector(
                 entitySelector);
         ValueSelector primaryValueSelector = SelectorTestUtils.mockValueSelector(
@@ -209,7 +213,7 @@ public class QueuedEntityPlacerTest extends AbstractEntityPlacerTest {
                 false));
         MoveSelector moveSelector = new CartesianProductMoveSelector(moveSelectorList, true, false);
         QueuedEntityPlacer placer = new QueuedEntityPlacer(recordingEntitySelector,
-                Collections.singletonList(moveSelector));
+                                                           Collections.singletonList(moveSelector));
 
         DefaultSolverScope solverScope = mock(DefaultSolverScope.class);
         placer.solvingStarted(solverScope);
@@ -224,7 +228,7 @@ public class QueuedEntityPlacerTest extends AbstractEntityPlacerTest {
         when(stepScopeA1.getPhaseScope()).thenReturn(phaseScopeA);
         placer.stepStarted(stepScopeA1);
         assertAllCodesOfIterator(placementIterator.next().iterator(),
-                "a->1+a->8", "a->1+a->9", "a->2+a->8", "a->2+a->9", "a->3+a->8", "a->3+a->9");
+                                 "a->1+a->8", "a->1+a->9", "a->2+a->8", "a->2+a->9", "a->3+a->8", "a->3+a->9");
         placer.stepEnded(stepScopeA1);
 
         assertEquals(true, placementIterator.hasNext());
@@ -232,7 +236,7 @@ public class QueuedEntityPlacerTest extends AbstractEntityPlacerTest {
         when(stepScopeA2.getPhaseScope()).thenReturn(phaseScopeA);
         placer.stepStarted(stepScopeA2);
         assertAllCodesOfIterator(placementIterator.next().iterator(),
-                "b->1+b->8", "b->1+b->9", "b->2+b->8", "b->2+b->9", "b->3+b->8", "b->3+b->9");
+                                 "b->1+b->8", "b->1+b->9", "b->2+b->8", "b->2+b->9", "b->3+b->8", "b->3+b->9");
         placer.stepEnded(stepScopeA2);
 
         assertEquals(false, placementIterator.hasNext());
@@ -244,5 +248,4 @@ public class QueuedEntityPlacerTest extends AbstractEntityPlacerTest {
         verifyPhaseLifecycle(primaryValueSelector, 1, 1, 2);
         verifyPhaseLifecycle(secondaryValueSelector, 1, 1, 2);
     }
-
 }

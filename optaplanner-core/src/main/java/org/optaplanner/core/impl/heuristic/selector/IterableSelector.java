@@ -18,7 +18,8 @@ package org.optaplanner.core.impl.heuristic.selector;
 
 import org.optaplanner.core.impl.heuristic.selector.common.decorator.SelectionProbabilityWeightFactory;
 
-public interface IterableSelector<T> extends Selector, Iterable<T> {
+public interface IterableSelector<T> extends Selector,
+                                             Iterable<T> {
 
     /**
      * A random JIT {@link Selector} with {@link #isNeverEnding()} true should return a size
@@ -29,5 +30,4 @@ public interface IterableSelector<T> extends Selector, Iterable<T> {
      * but not if only {@link #isNeverEnding()} returns true
      */
     long getSize();
-
 }

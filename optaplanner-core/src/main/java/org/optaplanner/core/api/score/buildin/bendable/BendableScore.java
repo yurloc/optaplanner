@@ -278,10 +278,10 @@ public final class BendableScore extends AbstractBendableScore<BendableScore>
         int[] newHardScores = new int[hardScores.length];
         int[] newSoftScores = new int[softScores.length];
         for (int i = 0; i < newHardScores.length; i++) {
-            newHardScores[i] = - hardScores[i];
+            newHardScores[i] = -hardScores[i];
         }
         for (int i = 0; i < newSoftScores.length; i++) {
-            newSoftScores[i] = - softScores[i];
+            newSoftScores[i] = -softScores[i];
         }
         return new BendableScore(-initScore, newHardScores, newSoftScores);
     }
@@ -393,15 +393,15 @@ public final class BendableScore extends AbstractBendableScore<BendableScore>
     public void validateCompatible(BendableScore other) {
         if (getHardLevelsSize() != other.getHardLevelsSize()) {
             throw new IllegalArgumentException("The score (" + this
-                    + ") with hardScoreSize (" + getHardLevelsSize()
-                    + ") is not compatible with the other score (" + other
-                    + ") with hardScoreSize (" + other.getHardLevelsSize() + ").");
+                                                       + ") with hardScoreSize (" + getHardLevelsSize()
+                                                       + ") is not compatible with the other score (" + other
+                                                       + ") with hardScoreSize (" + other.getHardLevelsSize() + ").");
         }
         if (getSoftLevelsSize() != other.getSoftLevelsSize()) {
             throw new IllegalArgumentException("The score (" + this
-                    + ") with softScoreSize (" + getSoftLevelsSize()
-                    + ") is not compatible with the other score (" + other
-                    + ") with softScoreSize (" + other.getSoftLevelsSize() + ").");
+                                                       + ") with softScoreSize (" + getSoftLevelsSize()
+                                                       + ") is not compatible with the other score (" + other
+                                                       + ") with softScoreSize (" + other.getSoftLevelsSize() + ").");
         }
     }
 
@@ -414,5 +414,4 @@ public final class BendableScore extends AbstractBendableScore<BendableScore>
         return hardScores.length == otherBendableScore.hardScores.length
                 && softScores.length == otherBendableScore.softScores.length;
     }
-
 }

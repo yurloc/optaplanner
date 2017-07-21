@@ -32,13 +32,13 @@ public class SelectedCountLimitEntitySelector extends AbstractEntitySelector {
     protected final long selectedCountLimit;
 
     public SelectedCountLimitEntitySelector(EntitySelector childEntitySelector, boolean randomSelection,
-            long selectedCountLimit) {
+                                            long selectedCountLimit) {
         this.childEntitySelector = childEntitySelector;
         this.randomSelection = randomSelection;
         this.selectedCountLimit = selectedCountLimit;
         if (selectedCountLimit < 0L) {
             throw new IllegalArgumentException("The selector (" + this
-                    + ") has a negative selectedCountLimit (" + selectedCountLimit + ").");
+                                                       + ") has a negative selectedCountLimit (" + selectedCountLimit + ").");
         }
         phaseLifecycleSupport.addEventListener(childEntitySelector);
     }
@@ -119,12 +119,10 @@ public class SelectedCountLimitEntitySelector extends AbstractEntitySelector {
             selectedSize++;
             return childEntityIterator.next();
         }
-
     }
 
     @Override
     public String toString() {
         return "SelectedCountLimit(" + childEntitySelector + ")";
     }
-
 }

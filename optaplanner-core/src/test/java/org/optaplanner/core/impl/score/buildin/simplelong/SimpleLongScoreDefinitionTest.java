@@ -74,5 +74,4 @@ public class SimpleLongScoreDefinitionTest {
         assertEquals(0, pessimisticBound.getInitScore());
         assertEquals(Long.MIN_VALUE, pessimisticBound.getScore());
     }
-
 }

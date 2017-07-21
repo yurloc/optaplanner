@@ -40,7 +40,7 @@ public class MovableChainedTrailingValueFilter<Solution_> implements SelectionFi
     @Override
     public boolean accept(ScoreDirector<Solution_> scoreDirector, Object value) {
         if (value == null) {
-             return true;
+            return true;
         }
         SingletonInverseVariableSupply supply = retrieveSingletonInverseVariableSupply(scoreDirector);
         Object trailingEntity = supply.getInverseSingleton(value);
@@ -51,11 +51,11 @@ public class MovableChainedTrailingValueFilter<Solution_> implements SelectionFi
         return entityDescriptor.getMovableEntitySelectionFilter().accept(scoreDirector, trailingEntity);
     }
 
-    protected SingletonInverseVariableSupply retrieveSingletonInverseVariableSupply(ScoreDirector<Solution_> scoreDirector) {
+    protected SingletonInverseVariableSupply retrieveSingletonInverseVariableSupply(
+            ScoreDirector<Solution_> scoreDirector) {
         // TODO Performance loss because the supply is retrieved for every accept
         // A SelectionFilter should be optionally made aware of lifecycle events, so it can cache the supply
         SupplyManager supplyManager = ((InnerScoreDirector<Solution_>) scoreDirector).getSupplyManager();
         return supplyManager.demand(new SingletonInverseVariableDemand(variableDescriptor));
     }
-
 }

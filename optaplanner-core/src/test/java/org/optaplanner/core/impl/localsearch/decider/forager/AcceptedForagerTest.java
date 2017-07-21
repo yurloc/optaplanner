@@ -41,7 +41,7 @@ public class AcceptedForagerTest {
     public void pickMoveMaxScoreAccepted() {
         // Setup
         Forager forager = new AcceptedForager(new HighestScoreFinalistPodium(),
-                LocalSearchPickEarlyType.NEVER, Integer.MAX_VALUE, true);
+                                              LocalSearchPickEarlyType.NEVER, Integer.MAX_VALUE, true);
         LocalSearchPhaseScope<TestdataSolution> phaseScope = createPhaseScope();
         forager.phaseStarted(phaseScope);
         LocalSearchStepScope<TestdataSolution> stepScope = new LocalSearchStepScope<>(phaseScope);
@@ -73,7 +73,7 @@ public class AcceptedForagerTest {
     public void pickMoveMaxScoreUnaccepted() {
         // Setup
         Forager forager = new AcceptedForager(new HighestScoreFinalistPodium(),
-                LocalSearchPickEarlyType.NEVER, Integer.MAX_VALUE, true);
+                                              LocalSearchPickEarlyType.NEVER, Integer.MAX_VALUE, true);
         LocalSearchPhaseScope<TestdataSolution> phaseScope = createPhaseScope();
         forager.phaseStarted(phaseScope);
         LocalSearchStepScope<TestdataSolution> stepScope = new LocalSearchStepScope<>(phaseScope);
@@ -105,7 +105,8 @@ public class AcceptedForagerTest {
     public void pickMoveFirstBestScoreImproving() {
         // Setup
         Forager forager = new AcceptedForager(new HighestScoreFinalistPodium(),
-                LocalSearchPickEarlyType.FIRST_BEST_SCORE_IMPROVING, Integer.MAX_VALUE, true);
+                                              LocalSearchPickEarlyType.FIRST_BEST_SCORE_IMPROVING, Integer.MAX_VALUE,
+                                              true);
         LocalSearchPhaseScope<TestdataSolution> phaseScope = createPhaseScope();
         forager.phaseStarted(phaseScope);
         LocalSearchStepScope<TestdataSolution> stepScope = new LocalSearchStepScope<>(phaseScope);
@@ -134,7 +135,8 @@ public class AcceptedForagerTest {
     public void pickMoveFirstLastStepScoreImproving() {
         // Setup
         Forager forager = new AcceptedForager(new HighestScoreFinalistPodium(),
-                LocalSearchPickEarlyType.FIRST_LAST_STEP_SCORE_IMPROVING, Integer.MAX_VALUE, true);
+                                              LocalSearchPickEarlyType.FIRST_LAST_STEP_SCORE_IMPROVING,
+                                              Integer.MAX_VALUE, true);
         LocalSearchPhaseScope<TestdataSolution> phaseScope = createPhaseScope();
         forager.phaseStarted(phaseScope);
         LocalSearchStepScope<TestdataSolution> stepScope = new LocalSearchStepScope<>(phaseScope);
@@ -163,7 +165,7 @@ public class AcceptedForagerTest {
     public void pickMoveAcceptedBreakTieRandomly() {
         // Setup
         Forager forager = new AcceptedForager(new HighestScoreFinalistPodium(),
-                LocalSearchPickEarlyType.NEVER, 4, true);
+                                              LocalSearchPickEarlyType.NEVER, 4, true);
         LocalSearchPhaseScope<TestdataSolution> phaseScope = createPhaseScope();
         forager.phaseStarted(phaseScope);
         LocalSearchStepScope<TestdataSolution> stepScope = new LocalSearchStepScope<>(phaseScope);
@@ -195,7 +197,7 @@ public class AcceptedForagerTest {
     public void pickMoveAcceptedBreakTieFirst() {
         // Setup
         Forager forager = new AcceptedForager(new HighestScoreFinalistPodium(),
-                LocalSearchPickEarlyType.NEVER, 4, false);
+                                              LocalSearchPickEarlyType.NEVER, 4, false);
         LocalSearchPhaseScope<TestdataSolution> phaseScope = createPhaseScope();
         forager.phaseStarted(phaseScope);
         LocalSearchStepScope<TestdataSolution> stepScope = new LocalSearchStepScope<>(phaseScope);
@@ -241,12 +243,11 @@ public class AcceptedForagerTest {
     }
 
     public LocalSearchMoveScope<TestdataSolution> createMoveScope(LocalSearchStepScope<TestdataSolution> stepScope,
-            Score score, boolean accepted) {
+                                                                  Score score, boolean accepted) {
         LocalSearchMoveScope<TestdataSolution> moveScope = new LocalSearchMoveScope<>(stepScope);
         moveScope.setMove(new DummyMove());
         moveScope.setScore(score);
         moveScope.setAccepted(accepted);
         return moveScope;
     }
-
 }

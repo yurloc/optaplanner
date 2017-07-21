@@ -80,5 +80,4 @@ public class ManualEntityMimicRecorder implements EntityMimicRecorder {
     public String toString() {
         return "Manual(" + sourceEntitySelector + ")";
     }
-
 }

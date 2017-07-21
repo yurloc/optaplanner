@@ -22,7 +22,8 @@ import org.optaplanner.core.impl.domain.variable.descriptor.VariableDescriptor;
 import org.optaplanner.core.impl.domain.variable.supply.Demand;
 import org.optaplanner.core.impl.score.director.InnerScoreDirector;
 
-public class SingletonInverseVariableDemand implements Demand<SingletonInverseVariableSupply>, Serializable {
+public class SingletonInverseVariableDemand implements Demand<SingletonInverseVariableSupply>,
+                                                       Serializable {
 
     private static final int CLASS_NAME_HASH_CODE = SingletonInverseVariableDemand.class.getName().hashCode() * 37;
 
@@ -73,5 +74,4 @@ public class SingletonInverseVariableDemand implements Demand<SingletonInverseVa
     public String toString() {
         return getClass().getSimpleName() + "(" + sourceVariableDescriptor.getSimpleEntityAndVariableName() + ")";
     }
-
 }

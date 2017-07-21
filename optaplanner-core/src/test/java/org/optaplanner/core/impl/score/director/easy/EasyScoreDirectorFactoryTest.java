@@ -51,5 +51,4 @@ public class EasyScoreDirectorFactoryTest {
         director.setWorkingSolution(solution);
         assertEquals(SimpleScore.valueOfUninitialized(0, -10), director.calculateScore());
     }
-
 }

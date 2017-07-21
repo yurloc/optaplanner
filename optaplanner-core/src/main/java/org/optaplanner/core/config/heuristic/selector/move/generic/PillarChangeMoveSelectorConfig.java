@@ -62,26 +62,32 @@ public class PillarChangeMoveSelectorConfig extends MoveSelectorConfig<PillarCha
 
     @Override
     public MoveSelector buildBaseMoveSelector(HeuristicConfigPolicy configPolicy,
-            SelectionCacheType minimumCacheType, boolean randomSelection) {
+                                              SelectionCacheType minimumCacheType, boolean randomSelection) {
         PillarSelectorConfig pillarSelectorConfig_ = pillarSelectorConfig == null ? new PillarSelectorConfig()
                 : pillarSelectorConfig;
         List<String> variableNameIncludeList = valueSelectorConfig == null ? null
                 : valueSelectorConfig.getVariableName() == null ? null
                 : Collections.singletonList(valueSelectorConfig.getVariableName());
         PillarSelector pillarSelector = pillarSelectorConfig_.buildPillarSelector(configPolicy,
-                minimumCacheType, SelectionOrder.fromRandomSelectionBoolean(randomSelection), variableNameIncludeList);
+                                                                                  minimumCacheType,
+                                                                                  SelectionOrder.fromRandomSelectionBoolean(
+                                                                                          randomSelection),
+                                                                                  variableNameIncludeList);
         ValueSelectorConfig valueSelectorConfig_ = valueSelectorConfig == null ? new ValueSelectorConfig()
                 : valueSelectorConfig;
         ValueSelector valueSelector = valueSelectorConfig_.buildValueSelector(configPolicy,
-                pillarSelector.getEntityDescriptor(),
-                minimumCacheType, SelectionOrder.fromRandomSelectionBoolean(randomSelection));
+                                                                              pillarSelector.getEntityDescriptor(),
+                                                                              minimumCacheType,
+                                                                              SelectionOrder.fromRandomSelectionBoolean(
+                                                                                      randomSelection));
         return new PillarChangeMoveSelector(pillarSelector, valueSelector, randomSelection);
     }
 
     @Override
     public void inherit(PillarChangeMoveSelectorConfig inheritedConfig) {
         super.inherit(inheritedConfig);
-        pillarSelectorConfig = ConfigUtils.inheritConfig(pillarSelectorConfig, inheritedConfig.getPillarSelectorConfig());
+        pillarSelectorConfig = ConfigUtils.inheritConfig(pillarSelectorConfig,
+                                                         inheritedConfig.getPillarSelectorConfig());
         valueSelectorConfig = ConfigUtils.inheritConfig(valueSelectorConfig, inheritedConfig.getValueSelectorConfig());
     }
 
@@ -89,5 +95,4 @@ public class PillarChangeMoveSelectorConfig extends MoveSelectorConfig<PillarCha
     public String toString() {
         return getClass().getSimpleName() + "(" + pillarSelectorConfig + ", " + valueSelectorConfig + ")";
     }
-
 }

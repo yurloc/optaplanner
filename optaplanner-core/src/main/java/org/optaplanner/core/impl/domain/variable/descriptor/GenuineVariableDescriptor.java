@@ -61,7 +61,7 @@ public class GenuineVariableDescriptor<Solution_> extends VariableDescriptor<Sol
     private SelectionSorter decreasingStrengthSorter;
 
     public GenuineVariableDescriptor(EntityDescriptor<Solution_> entityDescriptor,
-            MemberAccessor variableMemberAccessor) {
+                                     MemberAccessor variableMemberAccessor) {
         super(entityDescriptor, variableMemberAccessor);
     }
 
@@ -81,9 +81,9 @@ public class GenuineVariableDescriptor<Solution_> extends VariableDescriptor<Sol
         nullable = planningVariableAnnotation.nullable();
         if (nullable && variableMemberAccessor.getType().isPrimitive()) {
             throw new IllegalArgumentException("The entityClass (" + entityDescriptor.getEntityClass()
-                    + ") has a PlanningVariable annotated property (" + variableMemberAccessor.getName()
-                    + ") with nullable (" + nullable + "), which is not compatible with the primitive propertyType ("
-                    + variableMemberAccessor.getType() + ").");
+                                                       + ") has a PlanningVariable annotated property (" + variableMemberAccessor.getName()
+                                                       + ") with nullable (" + nullable + "), which is not compatible with the primitive propertyType ("
+                                                       + variableMemberAccessor.getType() + ").");
         }
         Class<? extends SelectionFilter> reinitializeVariableEntityFilterClass
                 = planningVariableAnnotation.reinitializeVariableEntityFilter();
@@ -92,7 +92,8 @@ public class GenuineVariableDescriptor<Solution_> extends VariableDescriptor<Sol
         }
         if (reinitializeVariableEntityFilterClass != null) {
             reinitializeVariableEntityFilter = ConfigUtils.newInstance(this,
-                    "reinitializeVariableEntityFilterClass", reinitializeVariableEntityFilterClass);
+                                                                       "reinitializeVariableEntityFilterClass",
+                                                                       reinitializeVariableEntityFilterClass);
         } else {
             reinitializeVariableEntityFilter = new NullValueReinitializeVariableEntityFilter(this);
         }
@@ -103,17 +104,17 @@ public class GenuineVariableDescriptor<Solution_> extends VariableDescriptor<Sol
         if (chained && !variableMemberAccessor.getType().isAssignableFrom(
                 entityDescriptor.getEntityClass())) {
             throw new IllegalArgumentException("The entityClass (" + entityDescriptor.getEntityClass()
-                    + ") has a PlanningVariable annotated property (" + variableMemberAccessor.getName()
-                    + ") with chained (" + chained + ") and propertyType (" + variableMemberAccessor.getType()
-                    + ") which is not a superclass/interface of or the same as the entityClass ("
-                    + entityDescriptor.getEntityClass() + ").\n"
-                    + "If an entity's chained planning variable cannot point to another entity of the same class,"
-                    + " then it is impossible to make chain longer than 1 entity and therefore chaining is useless.");
+                                                       + ") has a PlanningVariable annotated property (" + variableMemberAccessor.getName()
+                                                       + ") with chained (" + chained + ") and propertyType (" + variableMemberAccessor.getType()
+                                                       + ") which is not a superclass/interface of or the same as the entityClass ("
+                                                       + entityDescriptor.getEntityClass() + ").\n"
+                                                       + "If an entity's chained planning variable cannot point to another entity of the same class,"
+                                                       + " then it is impossible to make chain longer than 1 entity and therefore chaining is useless.");
         }
         if (chained && nullable) {
             throw new IllegalArgumentException("The entityClass (" + entityDescriptor.getEntityClass()
-                    + ") has a PlanningVariable annotated property (" + variableMemberAccessor.getName()
-                    + ") with chained (" + chained + "), which is not compatible with nullable (" + nullable + ").");
+                                                       + ") has a PlanningVariable annotated property (" + variableMemberAccessor.getName()
+                                                       + ") with chained (" + chained + "), which is not compatible with nullable (" + nullable + ").");
         }
         if (chained && entityDescriptor.hasMovableEntitySelectionFilter()) {
             movableChainedTrailingValueFilter = new MovableChainedTrailingValueFilter(this);
@@ -126,14 +127,16 @@ public class GenuineVariableDescriptor<Solution_> extends VariableDescriptor<Sol
         String[] valueRangeProviderRefs = planningVariableAnnotation.valueRangeProviderRefs();
         if (ArrayUtils.isEmpty(valueRangeProviderRefs)) {
             throw new IllegalArgumentException("The entityClass (" + entityDescriptor.getEntityClass()
-                    + ") has a " + PlanningVariable.class.getSimpleName()
-                    + " annotated property (" + variableMemberAccessor.getName()
-                    + ") that has no valueRangeProviderRefs (" + Arrays.toString(valueRangeProviderRefs) + ").");
+                                                       + ") has a " + PlanningVariable.class.getSimpleName()
+                                                       + " annotated property (" + variableMemberAccessor.getName()
+                                                       + ") that has no valueRangeProviderRefs (" + Arrays.toString(
+                    valueRangeProviderRefs) + ").");
         }
         List<ValueRangeDescriptor<Solution_>> valueRangeDescriptorList = new ArrayList<>(valueRangeProviderRefs.length);
         boolean addNullInValueRange = nullable && valueRangeProviderRefs.length == 1;
         for (String valueRangeProviderRef : valueRangeProviderRefs) {
-            valueRangeDescriptorList.add(buildValueRangeDescriptor(descriptorPolicy, valueRangeProviderRef, addNullInValueRange));
+            valueRangeDescriptorList.add(
+                    buildValueRangeDescriptor(descriptorPolicy, valueRangeProviderRef, addNullInValueRange));
         }
         if (valueRangeDescriptorList.size() == 1) {
             valueRangeDescriptor = valueRangeDescriptorList.get(0);
@@ -143,7 +146,8 @@ public class GenuineVariableDescriptor<Solution_> extends VariableDescriptor<Sol
     }
 
     private ValueRangeDescriptor<Solution_> buildValueRangeDescriptor(DescriptorPolicy descriptorPolicy,
-            String valueRangeProviderRef, boolean addNullInValueRange) {
+                                                                      String valueRangeProviderRef,
+                                                                      boolean addNullInValueRange) {
         if (descriptorPolicy.hasFromSolutionValueRangeProvider(valueRangeProviderRef)) {
             MemberAccessor memberAccessor = descriptorPolicy.getFromSolutionValueRangeProvider(valueRangeProviderRef);
             return new FromSolutionPropertyValueRangeDescriptor<>(this, addNullInValueRange, memberAccessor);
@@ -153,16 +157,16 @@ public class GenuineVariableDescriptor<Solution_> extends VariableDescriptor<Sol
         } else {
             Collection<String> providerIds = descriptorPolicy.getValueRangeProviderIds();
             throw new IllegalArgumentException("The entityClass (" + entityDescriptor.getEntityClass()
-                    + ") has a @" + PlanningVariable.class.getSimpleName()
-                    + " property (" + variableMemberAccessor.getName()
-                    + ") with a valueRangeProviderRef (" + valueRangeProviderRef
-                    + ") that does not exist in a @" + ValueRangeProvider.class.getSimpleName()
-                    + " on the solution class ("
-                    + entityDescriptor.getSolutionDescriptor().getSolutionClass().getSimpleName()
-                    + ") or on that entityClass.\n"
-                    + "The valueRangeProviderRef (" + valueRangeProviderRef
-                    + ") does not appear in the valueRangeProvideIds (" + providerIds
-                    + ")." + (!providerIds.isEmpty() ? "" : "\nMaybe a @" + ValueRangeProvider.class.getSimpleName()
+                                                       + ") has a @" + PlanningVariable.class.getSimpleName()
+                                                       + " property (" + variableMemberAccessor.getName()
+                                                       + ") with a valueRangeProviderRef (" + valueRangeProviderRef
+                                                       + ") that does not exist in a @" + ValueRangeProvider.class.getSimpleName()
+                                                       + " on the solution class ("
+                                                       + entityDescriptor.getSolutionDescriptor().getSolutionClass().getSimpleName()
+                                                       + ") or on that entityClass.\n"
+                                                       + "The valueRangeProviderRef (" + valueRangeProviderRef
+                                                       + ") does not appear in the valueRangeProvideIds (" + providerIds
+                                                       + ")." + (!providerIds.isEmpty() ? "" : "\nMaybe a @" + ValueRangeProvider.class.getSimpleName()
                     + " annotation is missing on a method in the solution class ("
                     + entityDescriptor.getSolutionDescriptor().getSolutionClass().getSimpleName() + ")."));
         }
@@ -180,14 +184,15 @@ public class GenuineVariableDescriptor<Solution_> extends VariableDescriptor<Sol
         }
         if (strengthComparatorClass != null && strengthWeightFactoryClass != null) {
             throw new IllegalStateException("The entityClass (" + entityDescriptor.getEntityClass()
-                    + ") property (" + variableMemberAccessor.getName()
-                    + ") cannot have a strengthComparatorClass (" + strengthComparatorClass.getName()
-                    + ") and a strengthWeightFactoryClass (" + strengthWeightFactoryClass.getName()
-                    + ") at the same time.");
+                                                    + ") property (" + variableMemberAccessor.getName()
+                                                    + ") cannot have a strengthComparatorClass (" + strengthComparatorClass.getName()
+                                                    + ") and a strengthWeightFactoryClass (" + strengthWeightFactoryClass.getName()
+                                                    + ") at the same time.");
         }
         if (strengthComparatorClass != null) {
             Comparator<Object> strengthComparator = ConfigUtils.newInstance(this,
-                    "strengthComparatorClass", strengthComparatorClass);
+                                                                            "strengthComparatorClass",
+                                                                            strengthComparatorClass);
             increasingStrengthSorter = new ComparatorSelectionSorter(
                     strengthComparator, SelectionSorterOrder.ASCENDING);
             decreasingStrengthSorter = new ComparatorSelectionSorter(
@@ -195,7 +200,8 @@ public class GenuineVariableDescriptor<Solution_> extends VariableDescriptor<Sol
         }
         if (strengthWeightFactoryClass != null) {
             SelectionSorterWeightFactory strengthWeightFactory = ConfigUtils.newInstance(this,
-                    "strengthWeightFactoryClass", strengthWeightFactoryClass);
+                                                                                         "strengthWeightFactoryClass",
+                                                                                         strengthWeightFactoryClass);
             increasingStrengthSorter = new WeightFactorySelectionSorter(
                     strengthWeightFactory, SelectionSorterOrder.ASCENDING);
             decreasingStrengthSorter = new WeightFactorySelectionSorter(
@@ -282,5 +288,4 @@ public class GenuineVariableDescriptor<Solution_> extends VariableDescriptor<Sol
     public String toString() {
         return getSimpleEntityAndVariableName() + " variable";
     }
-
 }

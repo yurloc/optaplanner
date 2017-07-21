@@ -31,7 +31,7 @@ class TestGenListValueProvider extends TestGenAbstractValueProvider<List<?>> {
     private final List<TestGenFact> requiredFacts;
 
     public TestGenListValueProvider(List<?> value, String identifier, Type genericType,
-            Map<Object, TestGenFact> existingInstances) {
+                                    Map<Object, TestGenFact> existingInstances) {
         super(value);
         this.identifier = identifier;
         this.typeArgument = genericType;
@@ -68,5 +68,4 @@ class TestGenListValueProvider extends TestGenAbstractValueProvider<List<?>> {
     public String toString() {
         return identifier;
     }
-
 }

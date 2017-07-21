@@ -26,8 +26,8 @@ import org.optaplanner.core.impl.heuristic.selector.common.decorator.SelectionFi
 import org.optaplanner.core.impl.heuristic.selector.common.decorator.SelectionSorterWeightFactory;
 import org.optaplanner.core.impl.score.director.ScoreDirector;
 
-import static java.lang.annotation.ElementType.*;
-import static java.lang.annotation.RetentionPolicy.*;
+import static java.lang.annotation.ElementType.TYPE;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
  * Specifies that the class is a planning entity.
@@ -54,8 +54,12 @@ public @interface PlanningEntity {
     Class<? extends SelectionFilter> movableEntitySelectionFilter()
             default NullMovableEntitySelectionFilter.class;
 
-    /** Workaround for annotation limitation in {@link #movableEntitySelectionFilter()}. */
-    interface NullMovableEntitySelectionFilter extends SelectionFilter {}
+    /**
+     * Workaround for annotation limitation in {@link #movableEntitySelectionFilter()}.
+     */
+    interface NullMovableEntitySelectionFilter extends SelectionFilter {
+
+    }
 
     /**
      * Allows a collection of planning entities to be sorted by difficulty.
@@ -73,8 +77,12 @@ public @interface PlanningEntity {
      */
     Class<? extends Comparator> difficultyComparatorClass() default NullDifficultyComparator.class;
 
-    /** Workaround for annotation limitation in {@link #difficultyComparatorClass()}. */
-    interface NullDifficultyComparator extends Comparator {}
+    /**
+     * Workaround for annotation limitation in {@link #difficultyComparatorClass()}.
+     */
+    interface NullDifficultyComparator extends Comparator {
+
+    }
 
     /**
      * The {@link SelectionSorterWeightFactory} alternative for {@link #difficultyComparatorClass()}.
@@ -86,7 +94,10 @@ public @interface PlanningEntity {
     Class<? extends SelectionSorterWeightFactory> difficultyWeightFactoryClass()
             default NullDifficultyWeightFactory.class;
 
-    /** Workaround for annotation limitation in {@link #difficultyWeightFactoryClass()}. */
-    interface NullDifficultyWeightFactory extends SelectionSorterWeightFactory {}
+    /**
+     * Workaround for annotation limitation in {@link #difficultyWeightFactoryClass()}.
+     */
+    interface NullDifficultyWeightFactory extends SelectionSorterWeightFactory {
 
+    }
 }

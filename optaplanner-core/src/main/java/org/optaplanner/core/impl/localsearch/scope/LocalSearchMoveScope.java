@@ -104,5 +104,4 @@ public class LocalSearchMoveScope<Solution_> {
     public String toString() {
         return getClass().getSimpleName() + "(" + stepScope.getStepIndex() + "/" + moveIndex + ")";
     }
-
 }

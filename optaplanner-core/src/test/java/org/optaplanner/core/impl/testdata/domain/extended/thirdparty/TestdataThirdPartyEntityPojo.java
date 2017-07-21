@@ -50,5 +50,4 @@ public class TestdataThirdPartyEntityPojo extends TestdataObject {
     // ************************************************************************
     // Complex methods
     // ************************************************************************
-
 }

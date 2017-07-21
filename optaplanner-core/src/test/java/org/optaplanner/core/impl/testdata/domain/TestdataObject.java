@@ -44,5 +44,4 @@ public class TestdataObject implements CodeAssertable {
     public String toString() {
         return code;
     }
-
 }

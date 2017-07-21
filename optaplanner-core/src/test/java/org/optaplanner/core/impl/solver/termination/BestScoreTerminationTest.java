@@ -99,7 +99,7 @@ public class BestScoreTerminationTest {
         ScoreDefinition scoreDefinition = mock(ScoreDefinition.class);
         when(scoreDefinition.getLevelsSize()).thenReturn(1);
         BestScoreTermination termination = new BestScoreTermination(scoreDefinition,
-                SimpleScore.valueOf(10), new double[]{});
+                                                                    SimpleScore.valueOf(10), new double[]{});
 
         assertEquals(0.0, termination.calculateTimeGradient(
                 SimpleScore.valueOf(0), SimpleScore.valueOf(10), SimpleScore.valueOf(0)), 0.0);
@@ -121,25 +121,32 @@ public class BestScoreTerminationTest {
         ScoreDefinition scoreDefinition = mock(ScoreDefinition.class);
         when(scoreDefinition.getLevelsSize()).thenReturn(1);
         BestScoreTermination termination = new BestScoreTermination(scoreDefinition,
-                SimpleBigDecimalScore.valueOf(new BigDecimal("10.00")), new double[]{});
+                                                                    SimpleBigDecimalScore.valueOf(
+                                                                            new BigDecimal("10.00")), new double[]{});
 
         assertEquals(0.0, termination.calculateTimeGradient(
-                SimpleBigDecimalScore.valueOf(new BigDecimal("0.00")), SimpleBigDecimalScore.valueOf(new BigDecimal("10.00")),
+                SimpleBigDecimalScore.valueOf(new BigDecimal("0.00")),
+                SimpleBigDecimalScore.valueOf(new BigDecimal("10.00")),
                 SimpleBigDecimalScore.valueOf(new BigDecimal("0.00"))), 0.0);
         assertEquals(0.6, termination.calculateTimeGradient(
-                SimpleBigDecimalScore.valueOf(new BigDecimal("0.00")), SimpleBigDecimalScore.valueOf(new BigDecimal("10.00")),
+                SimpleBigDecimalScore.valueOf(new BigDecimal("0.00")),
+                SimpleBigDecimalScore.valueOf(new BigDecimal("10.00")),
                 SimpleBigDecimalScore.valueOf(new BigDecimal("6.00"))), 0.0);
         assertEquals(1.0, termination.calculateTimeGradient(
-                SimpleBigDecimalScore.valueOf(new BigDecimal("0.00")), SimpleBigDecimalScore.valueOf(new BigDecimal("10.00")),
+                SimpleBigDecimalScore.valueOf(new BigDecimal("0.00")),
+                SimpleBigDecimalScore.valueOf(new BigDecimal("10.00")),
                 SimpleBigDecimalScore.valueOf(new BigDecimal("10.00"))), 0.0);
         assertEquals(1.0, termination.calculateTimeGradient(
-                SimpleBigDecimalScore.valueOf(new BigDecimal("0.00")), SimpleBigDecimalScore.valueOf(new BigDecimal("10.00")),
+                SimpleBigDecimalScore.valueOf(new BigDecimal("0.00")),
+                SimpleBigDecimalScore.valueOf(new BigDecimal("10.00")),
                 SimpleBigDecimalScore.valueOf(new BigDecimal("11.00"))), 0.0);
         assertEquals(0.25, termination.calculateTimeGradient(
-                SimpleBigDecimalScore.valueOf(new BigDecimal("-10.00")), SimpleBigDecimalScore.valueOf(new BigDecimal("30.00")),
+                SimpleBigDecimalScore.valueOf(new BigDecimal("-10.00")),
+                SimpleBigDecimalScore.valueOf(new BigDecimal("30.00")),
                 SimpleBigDecimalScore.valueOf(new BigDecimal("0.00"))), 0.0);
         assertEquals(0.33333, termination.calculateTimeGradient(
-                SimpleBigDecimalScore.valueOf(new BigDecimal("10.00")), SimpleBigDecimalScore.valueOf(new BigDecimal("40.00")),
+                SimpleBigDecimalScore.valueOf(new BigDecimal("10.00")),
+                SimpleBigDecimalScore.valueOf(new BigDecimal("40.00")),
                 SimpleBigDecimalScore.valueOf(new BigDecimal("20.00"))), 0.00001);
     }
 
@@ -148,7 +155,8 @@ public class BestScoreTerminationTest {
         ScoreDefinition scoreDefinition = mock(ScoreDefinition.class);
         when(scoreDefinition.getLevelsSize()).thenReturn(2);
         BestScoreTermination termination = new BestScoreTermination(scoreDefinition,
-                HardSoftScore.valueOf(-10, -300), new double[]{0.75});
+                                                                    HardSoftScore.valueOf(-10, -300),
+                                                                    new double[]{0.75});
 
         // Normal cases
         // Smack in the middle
@@ -211,7 +219,10 @@ public class BestScoreTerminationTest {
         ScoreDefinition scoreDefinition = mock(ScoreDefinition.class);
         when(scoreDefinition.getLevelsSize()).thenReturn(2);
         BestScoreTermination termination = new BestScoreTermination(scoreDefinition,
-                HardSoftBigDecimalScore.valueOf(new BigDecimal("10.00"), new BigDecimal("10.00")), new double[]{0.75});
+                                                                    HardSoftBigDecimalScore.valueOf(
+                                                                            new BigDecimal("10.00"),
+                                                                            new BigDecimal("10.00")),
+                                                                    new double[]{0.75});
 
         // hard == soft
         assertEquals(0.0, termination.calculateTimeGradient(
@@ -245,61 +256,77 @@ public class BestScoreTerminationTest {
         ScoreDefinition scoreDefinition = mock(ScoreDefinition.class);
         when(scoreDefinition.getLevelsSize()).thenReturn(2);
         BestScoreTermination termination = new BestScoreTermination(scoreDefinition,
-                BendableScore.valueOf(new int[]{-10}, new int[]{-300}), new double[]{0.75});
+                                                                    BendableScore.valueOf(new int[]{-10},
+                                                                                          new int[]{-300}),
+                                                                    new double[]{0.75});
 
         // Normal cases
         // Smack in the middle
         assertEquals(0.6, termination.calculateTimeGradient(
-                BendableScore.valueOf(new int[]{-20}, new int[]{-400}), BendableScore.valueOf(new int[]{-10}, new int[]{-300}),
+                BendableScore.valueOf(new int[]{-20}, new int[]{-400}),
+                BendableScore.valueOf(new int[]{-10}, new int[]{-300}),
                 BendableScore.valueOf(new int[]{-14}, new int[]{-340})), 0.0);
         // No hard broken, total soft broken
         assertEquals(0.75, termination.calculateTimeGradient(
-                BendableScore.valueOf(new int[]{-20}, new int[]{-400}), BendableScore.valueOf(new int[]{-10}, new int[]{-300}),
+                BendableScore.valueOf(new int[]{-20}, new int[]{-400}),
+                BendableScore.valueOf(new int[]{-10}, new int[]{-300}),
                 BendableScore.valueOf(new int[]{-10}, new int[]{-400})), 0.0);
         // Total hard broken, no soft broken
         assertEquals(0.25, termination.calculateTimeGradient(
-                BendableScore.valueOf(new int[]{-20}, new int[]{-400}), BendableScore.valueOf(new int[]{-10}, new int[]{-300}),
+                BendableScore.valueOf(new int[]{-20}, new int[]{-400}),
+                BendableScore.valueOf(new int[]{-10}, new int[]{-300}),
                 BendableScore.valueOf(new int[]{-20}, new int[]{-300})), 0.0);
         // No hard broken, more than total soft broken
         assertEquals(0.75, termination.calculateTimeGradient(
-                BendableScore.valueOf(new int[]{-20}, new int[]{-400}), BendableScore.valueOf(new int[]{-10}, new int[]{-300}),
+                BendableScore.valueOf(new int[]{-20}, new int[]{-400}),
+                BendableScore.valueOf(new int[]{-10}, new int[]{-300}),
                 BendableScore.valueOf(new int[]{-10}, new int[]{-900})), 0.0);
         // More than total hard broken, no soft broken
         assertEquals(0.0, termination.calculateTimeGradient(
-                BendableScore.valueOf(new int[]{-20}, new int[]{-400}), BendableScore.valueOf(new int[]{-10}, new int[]{-300}),
+                BendableScore.valueOf(new int[]{-20}, new int[]{-400}),
+                BendableScore.valueOf(new int[]{-10}, new int[]{-300}),
                 BendableScore.valueOf(new int[]{-90}, new int[]{-300})), 0.0);
 
         // Perfect min/max cases
         assertEquals(1.0, termination.calculateTimeGradient(
-                BendableScore.valueOf(new int[]{-10}, new int[]{-300}), BendableScore.valueOf(new int[]{-10}, new int[]{-300}),
+                BendableScore.valueOf(new int[]{-10}, new int[]{-300}),
+                BendableScore.valueOf(new int[]{-10}, new int[]{-300}),
                 BendableScore.valueOf(new int[]{-10}, new int[]{-300})), 0.0);
         assertEquals(0.0, termination.calculateTimeGradient(
-                BendableScore.valueOf(new int[]{-20}, new int[]{-400}), BendableScore.valueOf(new int[]{-10}, new int[]{-300}),
+                BendableScore.valueOf(new int[]{-20}, new int[]{-400}),
+                BendableScore.valueOf(new int[]{-10}, new int[]{-300}),
                 BendableScore.valueOf(new int[]{-20}, new int[]{-400})), 0.0);
         assertEquals(1.0, termination.calculateTimeGradient(
-                BendableScore.valueOf(new int[]{-20}, new int[]{-400}), BendableScore.valueOf(new int[]{-10}, new int[]{-300}),
+                BendableScore.valueOf(new int[]{-20}, new int[]{-400}),
+                BendableScore.valueOf(new int[]{-10}, new int[]{-300}),
                 BendableScore.valueOf(new int[]{-10}, new int[]{-300})), 0.0);
 
         // Hard total delta is 0
         assertEquals(0.75 + (0.6 * 0.25), termination.calculateTimeGradient(
-                BendableScore.valueOf(new int[]{-10}, new int[]{-400}), BendableScore.valueOf(new int[]{-10}, new int[]{-300}),
+                BendableScore.valueOf(new int[]{-10}, new int[]{-400}),
+                BendableScore.valueOf(new int[]{-10}, new int[]{-300}),
                 BendableScore.valueOf(new int[]{-10}, new int[]{-340})), 0.0);
         assertEquals(0.0, termination.calculateTimeGradient(
-                BendableScore.valueOf(new int[]{-10}, new int[]{-400}), BendableScore.valueOf(new int[]{-10}, new int[]{-300}),
+                BendableScore.valueOf(new int[]{-10}, new int[]{-400}),
+                BendableScore.valueOf(new int[]{-10}, new int[]{-300}),
                 BendableScore.valueOf(new int[]{-20}, new int[]{-340})), 0.0);
         assertEquals(1.0, termination.calculateTimeGradient(
-                BendableScore.valueOf(new int[]{-10}, new int[]{-400}), BendableScore.valueOf(new int[]{-10}, new int[]{-300}),
+                BendableScore.valueOf(new int[]{-10}, new int[]{-400}),
+                BendableScore.valueOf(new int[]{-10}, new int[]{-300}),
                 BendableScore.valueOf(new int[]{-0}, new int[]{-340})), 0.0);
 
         // Soft total delta is 0
         assertEquals((0.6 * 0.75) + 0.25, termination.calculateTimeGradient(
-                BendableScore.valueOf(new int[]{-20}, new int[]{-300}), BendableScore.valueOf(new int[]{-10}, new int[]{-300}),
+                BendableScore.valueOf(new int[]{-20}, new int[]{-300}),
+                BendableScore.valueOf(new int[]{-10}, new int[]{-300}),
                 BendableScore.valueOf(new int[]{-14}, new int[]{-300})), 0.0);
         assertEquals(0.6 * 0.75, termination.calculateTimeGradient(
-                BendableScore.valueOf(new int[]{-20}, new int[]{-300}), BendableScore.valueOf(new int[]{-10}, new int[]{-300}),
+                BendableScore.valueOf(new int[]{-20}, new int[]{-300}),
+                BendableScore.valueOf(new int[]{-10}, new int[]{-300}),
                 BendableScore.valueOf(new int[]{-14}, new int[]{-400})), 0.0);
         assertEquals((0.6 * 0.75) + 0.25, termination.calculateTimeGradient(
-                BendableScore.valueOf(new int[]{-20}, new int[]{-300}), BendableScore.valueOf(new int[]{-10}, new int[]{-300}),
+                BendableScore.valueOf(new int[]{-20}, new int[]{-300}),
+                BendableScore.valueOf(new int[]{-10}, new int[]{-300}),
                 BendableScore.valueOf(new int[]{-14}, new int[]{-0})), 0.0);
     }
 
@@ -308,8 +335,9 @@ public class BestScoreTerminationTest {
         ScoreDefinition scoreDefinition = mock(ScoreDefinition.class);
         when(scoreDefinition.getLevelsSize()).thenReturn(5);
         BestScoreTermination termination = new BestScoreTermination(scoreDefinition,
-                BendableScore.valueOf(new int[]{0, 0}, new int[]{0, 0, -10}),
-                new double[]{0.75, 0.75, 0.75, 0.75});
+                                                                    BendableScore.valueOf(new int[]{0, 0},
+                                                                                          new int[]{0, 0, -10}),
+                                                                    new double[]{0.75, 0.75, 0.75, 0.75});
 
         // Normal cases
         // Smack in the middle
@@ -318,5 +346,4 @@ public class BestScoreTerminationTest {
                 BendableScore.valueOf(new int[]{0, 0}, new int[]{0, 0, -10}),
                 BendableScore.valueOf(new int[]{-4, -40}, new int[]{-50, -60, -70})), 0.0);
     }
-
 }

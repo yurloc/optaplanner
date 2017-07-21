@@ -44,5 +44,4 @@ public class XStreamXmlSolverFactoryTest {
         assertEquals(originalXml.trim(), savedXml.trim());
         originalConfigInputStream.close();
     }
-
 }

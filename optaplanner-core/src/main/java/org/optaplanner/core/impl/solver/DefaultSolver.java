@@ -58,9 +58,9 @@ public class DefaultSolver<Solution_> extends AbstractSolver<Solution_> {
     // ************************************************************************
 
     public DefaultSolver(EnvironmentMode environmentMode, RandomFactory randomFactory,
-            BasicPlumbingTermination basicPlumbingTermination, Termination termination,
-            BestSolutionRecaller<Solution_> bestSolutionRecaller, List<Phase<Solution_>> phaseList,
-            DefaultSolverScope<Solution_> solverScope) {
+                         BasicPlumbingTermination basicPlumbingTermination, Termination termination,
+                         BestSolutionRecaller<Solution_> bestSolutionRecaller, List<Phase<Solution_>> phaseList,
+                         DefaultSolverScope<Solution_> solverScope) {
         super(termination, bestSolutionRecaller, phaseList);
         this.environmentMode = environmentMode;
         this.randomFactory = randomFactory;
@@ -158,7 +158,7 @@ public class DefaultSolver<Solution_> extends AbstractSolver<Solution_> {
     public final Solution_ solve(Solution_ planningProblem) {
         if (planningProblem == null) {
             throw new IllegalArgumentException("The planningProblem (" + planningProblem
-                    + ") must not be null.");
+                                                       + ") must not be null.");
         }
         solverScope.setBestSolution(planningProblem);
         outerSolvingStarted(solverScope);
@@ -188,11 +188,11 @@ public class DefaultSolver<Solution_> extends AbstractSolver<Solution_> {
         int startingSolverCount = solverScope.getStartingSolverCount() + 1;
         solverScope.setStartingSolverCount(startingSolverCount);
         logger.info("Solving {}: time spent ({}), best score ({}), environment mode ({}), random ({}).",
-                (startingSolverCount == 1 ? "started" : "restarted"),
-                solverScope.calculateTimeMillisSpentUpToNow(),
-                solverScope.getBestScore(),
-                environmentMode.name(),
-                (randomFactory != null ? randomFactory : "not fixed"));
+                    (startingSolverCount == 1 ? "started" : "restarted"),
+                    solverScope.calculateTimeMillisSpentUpToNow(),
+                    solverScope.getBestScore(),
+                    environmentMode.name(),
+                    (randomFactory != null ? randomFactory : "not fixed"));
     }
 
     @Override
@@ -205,12 +205,12 @@ public class DefaultSolver<Solution_> extends AbstractSolver<Solution_> {
         // Must be kept open for doProblemFactChange
         solverScope.getScoreDirector().dispose();
         logger.info("Solving ended: time spent ({}), best score ({}), score calculation speed ({}/sec),"
-                        + " phase total ({}), environment mode ({}).",
-                solverScope.getTimeMillisSpent(),
-                solverScope.getBestScore(),
-                solverScope.getScoreCalculationSpeed(),
-                phaseList.size(),
-                environmentMode.name());
+                            + " phase total ({}), environment mode ({}).",
+                    solverScope.getTimeMillisSpent(),
+                    solverScope.getBestScore(),
+                    solverScope.getScoreCalculationSpeed(),
+                    phaseList.size(),
+                    environmentMode.name());
         solving.set(false);
     }
 
@@ -233,7 +233,7 @@ public class DefaultSolver<Solution_> extends AbstractSolver<Solution_> {
             basicPlumbingTermination.endProblemFactChangesProcessing();
             bestSolutionRecaller.updateBestSolution(solverScope);
             logger.info("Real-time problem fact changes done: step total ({}), new best score ({}).",
-                    stepIndex, score);
+                        stepIndex, score);
             return true;
         }
     }
@@ -244,5 +244,4 @@ public class DefaultSolver<Solution_> extends AbstractSolver<Solution_> {
         logger.debug("    Step index ({}), new score ({}) for real-time problem fact change.", stepIndex, score);
         return score;
     }
-
 }

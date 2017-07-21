@@ -53,7 +53,7 @@ public class SimpleLongScoreDefinition extends AbstractScoreDefinition<SimpleLon
     public SimpleLongScore fromLevelNumbers(int initScore, Number[] levelNumbers) {
         if (levelNumbers.length != getLevelsSize()) {
             throw new IllegalStateException("The levelNumbers (" + Arrays.toString(levelNumbers)
-                    + ")'s length (" + levelNumbers.length + ") must equal the levelSize (" + getLevelsSize() + ").");
+                                                    + ")'s length (" + levelNumbers.length + ") must equal the levelSize (" + getLevelsSize() + ").");
         }
         return SimpleLongScore.valueOfUninitialized(initScore, (Long) levelNumbers[0]);
     }
@@ -67,14 +67,13 @@ public class SimpleLongScoreDefinition extends AbstractScoreDefinition<SimpleLon
     public SimpleLongScore buildOptimisticBound(InitializingScoreTrend initializingScoreTrend, SimpleLongScore score) {
         InitializingScoreTrendLevel[] trendLevels = initializingScoreTrend.getTrendLevels();
         return SimpleLongScore.valueOfUninitialized(0,
-                trendLevels[0] == InitializingScoreTrendLevel.ONLY_DOWN ? score.getScore() : Long.MAX_VALUE);
+                                                    trendLevels[0] == InitializingScoreTrendLevel.ONLY_DOWN ? score.getScore() : Long.MAX_VALUE);
     }
 
     @Override
     public SimpleLongScore buildPessimisticBound(InitializingScoreTrend initializingScoreTrend, SimpleLongScore score) {
         InitializingScoreTrendLevel[] trendLevels = initializingScoreTrend.getTrendLevels();
         return SimpleLongScore.valueOfUninitialized(0,
-                trendLevels[0] == InitializingScoreTrendLevel.ONLY_UP ? score.getScore() : Long.MIN_VALUE);
+                                                    trendLevels[0] == InitializingScoreTrendLevel.ONLY_UP ? score.getScore() : Long.MIN_VALUE);
     }
-
 }

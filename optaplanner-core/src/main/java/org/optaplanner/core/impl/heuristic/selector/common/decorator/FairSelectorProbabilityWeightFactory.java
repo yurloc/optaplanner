@@ -26,5 +26,4 @@ public class FairSelectorProbabilityWeightFactory<Solution_>
     public double createProbabilityWeight(ScoreDirector<Solution_> scoreDirector, IterableSelector selector) {
         return (double) selector.getSize();
     }
-
 }

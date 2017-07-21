@@ -68,15 +68,15 @@ public class BendableBigDecimalScoreHolder extends AbstractScoreHolder {
     public void addHardConstraintMatch(RuleContext kcontext, int hardLevel, BigDecimal weight) {
         hardScores[hardLevel] = hardScores[hardLevel].add(weight);
         registerConstraintMatch(kcontext,
-                () -> hardScores[hardLevel] = hardScores[hardLevel].subtract(weight),
-                () -> {
-                    BigDecimal[] newHardScores = new BigDecimal[hardScores.length];
-                    Arrays.fill(newHardScores, BigDecimal.ZERO);
-                    BigDecimal[] newSoftScores = new BigDecimal[softScores.length];
-                    Arrays.fill(newSoftScores, BigDecimal.ZERO);
-                    newHardScores[hardLevel] = weight;
-                    return BendableBigDecimalScore.valueOf(newHardScores, newSoftScores);
-                });
+                                () -> hardScores[hardLevel] = hardScores[hardLevel].subtract(weight),
+                                () -> {
+                                    BigDecimal[] newHardScores = new BigDecimal[hardScores.length];
+                                    Arrays.fill(newHardScores, BigDecimal.ZERO);
+                                    BigDecimal[] newSoftScores = new BigDecimal[softScores.length];
+                                    Arrays.fill(newSoftScores, BigDecimal.ZERO);
+                                    newHardScores[hardLevel] = weight;
+                                    return BendableBigDecimalScore.valueOf(newHardScores, newSoftScores);
+                                });
     }
 
     /**
@@ -88,15 +88,15 @@ public class BendableBigDecimalScoreHolder extends AbstractScoreHolder {
     public void addSoftConstraintMatch(RuleContext kcontext, int softLevel, BigDecimal weight) {
         softScores[softLevel] = softScores[softLevel].add(weight);
         registerConstraintMatch(kcontext,
-                () -> softScores[softLevel] = softScores[softLevel].subtract(weight),
-                () -> {
-                    BigDecimal[] newHardScores = new BigDecimal[hardScores.length];
-                    Arrays.fill(newHardScores, BigDecimal.ZERO);
-                    BigDecimal[] newSoftScores = new BigDecimal[softScores.length];
-                    Arrays.fill(newSoftScores, BigDecimal.ZERO);
-                    newSoftScores[softLevel] = weight;
-                    return BendableBigDecimalScore.valueOf(newHardScores, newSoftScores);
-                });
+                                () -> softScores[softLevel] = softScores[softLevel].subtract(weight),
+                                () -> {
+                                    BigDecimal[] newHardScores = new BigDecimal[hardScores.length];
+                                    Arrays.fill(newHardScores, BigDecimal.ZERO);
+                                    BigDecimal[] newSoftScores = new BigDecimal[softScores.length];
+                                    Arrays.fill(newSoftScores, BigDecimal.ZERO);
+                                    newSoftScores[softLevel] = weight;
+                                    return BendableBigDecimalScore.valueOf(newHardScores, newSoftScores);
+                                });
     }
 
     /**
@@ -107,35 +107,34 @@ public class BendableBigDecimalScoreHolder extends AbstractScoreHolder {
     public void addMultiConstraintMatch(RuleContext kcontext, BigDecimal[] hardWeights, BigDecimal[] softWeights) {
         if (hardScores.length != hardWeights.length) {
             throw new IllegalArgumentException("The hardScores length (" + hardScores.length
-                    + ") is different than the hardWeights length (" + hardWeights.length + ").");
+                                                       + ") is different than the hardWeights length (" + hardWeights.length + ").");
         }
         for (int i = 0; i < hardScores.length; i++) {
             hardScores[i] = hardScores[i].add(hardWeights[i]);
         }
         if (softScores.length != softWeights.length) {
             throw new IllegalArgumentException("The softScores length (" + softScores.length
-                    + ") is different than the softWeights length (" + softWeights.length + ").");
+                                                       + ") is different than the softWeights length (" + softWeights.length + ").");
         }
         for (int i = 0; i < softScores.length; i++) {
             softScores[i] = softScores[i].add(softWeights[i]);
         }
         registerConstraintMatch(kcontext,
-                () -> {
-                    for (int i = 0; i < hardScores.length; i++) {
-                        hardScores[i] = hardScores[i].subtract(hardWeights[i]);
-                    }
-                    for (int i = 0; i < softScores.length; i++) {
-                        softScores[i] = softScores[i].subtract(softWeights[i]);
-                    }
-                },
-                () -> BendableBigDecimalScore.valueOf(hardWeights, softWeights));
+                                () -> {
+                                    for (int i = 0; i < hardScores.length; i++) {
+                                        hardScores[i] = hardScores[i].subtract(hardWeights[i]);
+                                    }
+                                    for (int i = 0; i < softScores.length; i++) {
+                                        softScores[i] = softScores[i].subtract(softWeights[i]);
+                                    }
+                                },
+                                () -> BendableBigDecimalScore.valueOf(hardWeights, softWeights));
     }
 
     @Override
     public Score extractScore(int initScore) {
         return new BendableBigDecimalScore(initScore,
-                Arrays.copyOf(hardScores, hardScores.length),
-                Arrays.copyOf(softScores, softScores.length));
+                                           Arrays.copyOf(hardScores, hardScores.length),
+                                           Arrays.copyOf(softScores, softScores.length));
     }
-
 }

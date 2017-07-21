@@ -102,5 +102,4 @@ public class LocalSearchStepScope<Solution_> extends AbstractStepScope<Solution_
     // ************************************************************************
     // Calculated methods
     // ************************************************************************
-
 }

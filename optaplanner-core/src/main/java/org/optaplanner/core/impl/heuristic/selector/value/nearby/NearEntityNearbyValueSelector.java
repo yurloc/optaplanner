@@ -40,7 +40,8 @@ public class NearEntityNearbyValueSelector extends AbstractValueSelector {
     protected NearbyDistanceMatrix nearbyDistanceMatrix = null;
 
     public NearEntityNearbyValueSelector(ValueSelector childValueSelector, EntitySelector originEntitySelector,
-            NearbyDistanceMeter nearbyDistanceMeter, NearbyRandom nearbyRandom, boolean randomSelection) {
+                                         NearbyDistanceMeter nearbyDistanceMeter, NearbyRandom nearbyRandom,
+                                         boolean randomSelection) {
         this.childValueSelector = childValueSelector;
         this.originEntitySelector = originEntitySelector;
         this.nearbyDistanceMeter = nearbyDistanceMeter;
@@ -48,7 +49,7 @@ public class NearEntityNearbyValueSelector extends AbstractValueSelector {
         this.randomSelection = randomSelection;
         if (randomSelection && nearbyRandom == null) {
             throw new IllegalArgumentException("The valueSelector (" + this
-                    + ") with randomSelection (" + randomSelection + ") has no nearbyRandom (" + nearbyRandom + ").");
+                                                       + ") with randomSelection (" + randomSelection + ") has no nearbyRandom (" + nearbyRandom + ").");
         }
         discardNearbyIndexZero = childValueSelector.getVariableDescriptor().getVariablePropertyType().isAssignableFrom(
                 originEntitySelector.getEntityDescriptor().getEntityClass());
@@ -68,17 +69,17 @@ public class NearEntityNearbyValueSelector extends AbstractValueSelector {
         long originSize = originEntitySelector.getSize();
         if (originSize > (long) Integer.MAX_VALUE) {
             throw new IllegalStateException("The originEntitySelector (" + originEntitySelector
-                    + ") has an entitySize (" + originSize
-                    + ") which is higher than Integer.MAX_VALUE.");
+                                                    + ") has an entitySize (" + originSize
+                                                    + ") which is higher than Integer.MAX_VALUE.");
         }
         nearbyDistanceMatrix = new NearbyDistanceMatrix(nearbyDistanceMeter, (int) originSize);
         for (Iterator originIt = originEntitySelector.endingIterator(); originIt.hasNext(); ) {
-            final Object origin =  originIt.next();
+            final Object origin = originIt.next();
             long childSize = childValueSelector.getSize(origin);
             if (childSize > (long) Integer.MAX_VALUE) {
                 throw new IllegalStateException("The childEntitySelector (" + childValueSelector
-                        + ") has an entitySize (" + childSize
-                        + ") which is higher than Integer.MAX_VALUE.");
+                                                        + ") has an entitySize (" + childSize
+                                                        + ") which is higher than Integer.MAX_VALUE.");
             }
             int destinationSize = (int) childSize;
             if (randomSelection) {
@@ -177,7 +178,6 @@ public class NearEntityNearbyValueSelector extends AbstractValueSelector {
             nextNearbyIndex++;
             return next;
         }
-
     }
 
     private class RandomEntityNearbyValueIterator extends SelectionIterator<Object> {
@@ -189,8 +189,8 @@ public class NearEntityNearbyValueSelector extends AbstractValueSelector {
             this.originEntityIterator = originEntityIterator;
             if (childSize > (long) Integer.MAX_VALUE) {
                 throw new IllegalStateException("The valueSelector (" + this
-                        + ") has an entitySize (" + childSize
-                        + ") which is higher than Integer.MAX_VALUE.");
+                                                        + ") has an entitySize (" + childSize
+                                                        + ") which is higher than Integer.MAX_VALUE.");
             }
             nearbySize = (int) childSize - (discardNearbyIndexZero ? 1 : 0);
         }
@@ -209,12 +209,10 @@ public class NearEntityNearbyValueSelector extends AbstractValueSelector {
             }
             return nearbyDistanceMatrix.getDestination(origin, nearbyIndex);
         }
-
     }
 
     @Override
     public String toString() {
         return getClass().getSimpleName() + "(" + originEntitySelector + ", " + childValueSelector + ")";
     }
-
 }

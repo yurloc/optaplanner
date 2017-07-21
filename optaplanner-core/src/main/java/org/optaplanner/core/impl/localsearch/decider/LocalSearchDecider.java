@@ -49,7 +49,7 @@ public class LocalSearchDecider<Solution_> {
     protected boolean assertExpectedUndoMoveScore = false;
 
     public LocalSearchDecider(String logIndentation,
-            Termination termination, MoveSelector moveSelector, Acceptor acceptor, Forager forager) {
+                              Termination termination, MoveSelector moveSelector, Acceptor acceptor, Forager forager) {
         this.logIndentation = logIndentation;
         this.termination = termination;
         this.moveSelector = moveSelector;
@@ -115,7 +115,7 @@ public class LocalSearchDecider<Solution_> {
             // TODO use Selector filtering to filter out not doable moves
             if (!move.isMoveDoable(scoreDirector)) {
                 logger.trace("{}        Move index ({}) not doable, ignoring move ({}).",
-                        logIndentation, moveScope.getMoveIndex(), move);
+                             logIndentation, moveScope.getMoveIndex(), move);
             } else {
                 doMove(moveScope);
                 if (forager.isQuitEarly()) {
@@ -152,9 +152,9 @@ public class LocalSearchDecider<Solution_> {
             phaseScope.assertExpectedUndoMoveScore(move, undoMove, phaseScope.getLastCompletedStepScope().getScore());
         }
         logger.trace("{}        Move index ({}), score ({}), accepted ({}), move ({}).",
-                logIndentation,
-                moveScope.getMoveIndex(), moveScope.getScore(), moveScope.getAccepted(),
-                moveScope.getMove());
+                     logIndentation,
+                     moveScope.getMoveIndex(), moveScope.getScore(), moveScope.getAccepted(),
+                     moveScope.getMove());
     }
 
     private void processMove(LocalSearchMoveScope<Solution_> moveScope) {
@@ -185,5 +185,4 @@ public class LocalSearchDecider<Solution_> {
         acceptor.solvingEnded(solverScope);
         forager.solvingEnded(solverScope);
     }
-
 }

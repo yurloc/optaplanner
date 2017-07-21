@@ -36,5 +36,4 @@ public interface EasyScoreCalculator<Solution_> {
      * @return never null
      */
     Score calculateScore(Solution_ solution);
-
 }

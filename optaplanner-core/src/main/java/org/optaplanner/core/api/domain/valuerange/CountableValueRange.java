@@ -50,5 +50,4 @@ public interface CountableValueRange<T> extends ValueRange<T> {
      * @return never null
      */
     Iterator<T> createOriginalIterator();
-
 }

@@ -27,6 +27,6 @@ public interface TestdataRichChainedObject {
      */
     @InverseRelationShadowVariable(sourceVariableName = "chainedObject")
     TestdataRichChainedEntity getNextEntity();
-    void setNextEntity(TestdataRichChainedEntity nextEntity);
 
+    void setNextEntity(TestdataRichChainedEntity nextEntity);
 }

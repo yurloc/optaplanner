@@ -36,7 +36,6 @@ public class MutationCounter<Solution_> {
     }
 
     /**
-     *
      * @param a never null
      * @param b never null
      * @return {@code >= 0}, the number of planning variables that have a different value in {@code a} and {@code b}.
@@ -47,8 +46,8 @@ public class MutationCounter<Solution_> {
             List<Object> aEntities = entityDescriptor.extractEntities(a);
             List<Object> bEntities = entityDescriptor.extractEntities(b);
             for (Iterator<Object> aIt = aEntities.iterator(), bIt = bEntities.iterator(); aIt.hasNext() && bIt.hasNext(); ) {
-                Object aEntity =  aIt.next();
-                Object bEntity =  bIt.next();
+                Object aEntity = aIt.next();
+                Object bEntity = bIt.next();
                 for (GenuineVariableDescriptor<Solution_> variableDescriptor : entityDescriptor.getGenuineVariableDescriptors()) {
                     // TODO broken if the value is an entity, because then it's never the same
                     // But we don't want to depend on value/entity equals() => use surrogate entity id's to compare
@@ -70,5 +69,4 @@ public class MutationCounter<Solution_> {
     public String toString() {
         return "MutationCounter(" + solutionDescriptor + ")";
     }
-
 }

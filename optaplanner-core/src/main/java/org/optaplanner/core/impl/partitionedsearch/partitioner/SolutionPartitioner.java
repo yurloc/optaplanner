@@ -46,5 +46,4 @@ public interface SolutionPartitioner<Solution_> {
      * @return never null, {@link List#size()} of at least 1.
      */
     List<Solution_> splitWorkingSolution(ScoreDirector<Solution_> scoreDirector, Integer runnablePartThreadLimit);
-
 }

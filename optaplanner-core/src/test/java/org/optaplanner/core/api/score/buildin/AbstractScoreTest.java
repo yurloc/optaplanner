@@ -48,10 +48,9 @@ public abstract class AbstractScoreTest {
         }
     }
 
-    public static void assertScoreFeasible(FeasibilityScore ... scores) {
+    public static void assertScoreFeasible(FeasibilityScore... scores) {
         for (FeasibilityScore score : scores) {
             assertEquals(score + " should be feasible.", true, score.isFeasible());
         }
     }
-
 }

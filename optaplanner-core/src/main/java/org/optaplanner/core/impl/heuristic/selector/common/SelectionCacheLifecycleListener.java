@@ -23,5 +23,4 @@ public interface SelectionCacheLifecycleListener {
     void constructCache(DefaultSolverScope solverScope);
 
     void disposeCache(DefaultSolverScope solverScope);
-
 }

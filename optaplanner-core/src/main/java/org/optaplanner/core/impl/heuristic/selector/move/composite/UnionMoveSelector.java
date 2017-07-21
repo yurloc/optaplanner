@@ -52,22 +52,22 @@ public class UnionMoveSelector extends CompositeMoveSelector {
     }
 
     public UnionMoveSelector(List<MoveSelector> childMoveSelectorList, boolean randomSelection,
-            SelectionProbabilityWeightFactory selectorProbabilityWeightFactory) {
+                             SelectionProbabilityWeightFactory selectorProbabilityWeightFactory) {
         super(childMoveSelectorList, randomSelection);
         this.selectorProbabilityWeightFactory = selectorProbabilityWeightFactory;
         if (!randomSelection) {
             if (selectorProbabilityWeightFactory != null) {
                 throw new IllegalArgumentException("The selector (" + this
-                        + ") with randomSelection (" + randomSelection
-                        + ") cannot have a selectorProbabilityWeightFactory (" + selectorProbabilityWeightFactory
-                        + ").");
+                                                           + ") with randomSelection (" + randomSelection
+                                                           + ") cannot have a selectorProbabilityWeightFactory (" + selectorProbabilityWeightFactory
+                                                           + ").");
             }
         } else {
             if (selectorProbabilityWeightFactory == null) {
                 throw new IllegalArgumentException("The selector (" + this
-                        + ") with randomSelection (" + randomSelection
-                        + ") requires a selectorProbabilityWeightFactory ("  + selectorProbabilityWeightFactory
-                        + ").");
+                                                           + ") with randomSelection (" + randomSelection
+                                                           + ") requires a selectorProbabilityWeightFactory (" + selectorProbabilityWeightFactory
+                                                           + ").");
             }
         }
     }
@@ -150,7 +150,7 @@ public class UnionMoveSelector extends CompositeMoveSelector {
                 if (probabilityItem.probabilityWeight < 0.0) {
                     throw new IllegalStateException(
                             "The selectorProbabilityWeightFactory (" + selectorProbabilityWeightFactory
-                            + ") returned a negative probabilityWeight (" + probabilityItem.probabilityWeight + ").");
+                                    + ") returned a negative probabilityWeight (" + probabilityItem.probabilityWeight + ").");
                 }
                 probabilityItemMap.put(moveIterator, probabilityItem);
             }
@@ -194,7 +194,6 @@ public class UnionMoveSelector extends CompositeMoveSelector {
             }
             probabilityWeightTotal = probabilityWeightOffset;
         }
-
     }
 
     private static class ProbabilityItem {
@@ -202,12 +201,10 @@ public class UnionMoveSelector extends CompositeMoveSelector {
         protected MoveSelector moveSelector;
         protected Iterator<Move> moveIterator;
         protected double probabilityWeight;
-
     }
 
     @Override
     public String toString() {
         return "Union(" + childMoveSelectorList + ")";
     }
-
 }

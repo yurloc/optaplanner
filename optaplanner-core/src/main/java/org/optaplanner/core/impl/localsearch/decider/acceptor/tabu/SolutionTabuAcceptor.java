@@ -54,5 +54,4 @@ public class SolutionTabuAcceptor extends AbstractTabuAcceptor {
         tabuToStepIndexMap.put(tabu, 0); // TODO should -1 when AbstractTabuAcceptor can handle that
         tabuSequenceDeque.add(tabu);
     }
-
 }

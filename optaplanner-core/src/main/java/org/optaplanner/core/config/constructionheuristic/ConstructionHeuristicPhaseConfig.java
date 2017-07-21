@@ -43,7 +43,7 @@ import org.optaplanner.core.impl.constructionheuristic.placer.EntityPlacer;
 import org.optaplanner.core.impl.solver.recaller.BestSolutionRecaller;
 import org.optaplanner.core.impl.solver.termination.Termination;
 
-import static org.apache.commons.lang3.ObjectUtils.*;
+import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
 
 @XStreamAlias("constructionHeuristic")
 public class ConstructionHeuristicPhaseConfig extends PhaseConfig<ConstructionHeuristicPhaseConfig> {
@@ -59,7 +59,9 @@ public class ConstructionHeuristicPhaseConfig extends PhaseConfig<ConstructionHe
     @XStreamImplicit
     protected List<EntityPlacerConfig> entityPlacerConfigList = null;
 
-    /** Simpler alternative for {@link #entityPlacerConfigList}. */
+    /**
+     * Simpler alternative for {@link #entityPlacerConfigList}.
+     */
     @XStreamImplicit()
     protected List<MoveSelectorConfig> moveSelectorConfigList = null;
 
@@ -122,10 +124,10 @@ public class ConstructionHeuristicPhaseConfig extends PhaseConfig<ConstructionHe
     // Builder methods
     // ************************************************************************
 
-
     @Override
     public ConstructionHeuristicPhase buildPhase(int phaseIndex, HeuristicConfigPolicy solverConfigPolicy,
-            BestSolutionRecaller bestSolutionRecaller, Termination solverTermination) {
+                                                 BestSolutionRecaller bestSolutionRecaller,
+                                                 Termination solverTermination) {
         HeuristicConfigPolicy phaseConfigPolicy = solverConfigPolicy.createPhaseConfigPolicy();
         phaseConfigPolicy.setReinitializeVariableFilterEnabled(true);
         phaseConfigPolicy.setInitializedChainedValueFilterEnabled(true);
@@ -136,9 +138,9 @@ public class ConstructionHeuristicPhaseConfig extends PhaseConfig<ConstructionHe
         ConstructionHeuristicType constructionHeuristicType_ = defaultIfNull(
                 constructionHeuristicType, ConstructionHeuristicType.ALLOCATE_ENTITY_FROM_QUEUE);
         phaseConfigPolicy.setEntitySorterManner(entitySorterManner != null ? entitySorterManner
-                : constructionHeuristicType_.getDefaultEntitySorterManner());
+                                                        : constructionHeuristicType_.getDefaultEntitySorterManner());
         phaseConfigPolicy.setValueSorterManner(valueSorterManner != null ? valueSorterManner
-                : constructionHeuristicType_.getDefaultValueSorterManner());
+                                                       : constructionHeuristicType_.getDefaultValueSorterManner());
         EntityPlacerConfig entityPlacerConfig;
         if (ConfigUtils.isEmptyCollection(entityPlacerConfigList)) {
             entityPlacerConfig = buildUnfoldedEntityPlacerConfig(phaseConfigPolicy, constructionHeuristicType_);
@@ -146,19 +148,19 @@ public class ConstructionHeuristicPhaseConfig extends PhaseConfig<ConstructionHe
             entityPlacerConfig = entityPlacerConfigList.get(0);
             if (constructionHeuristicType != null) {
                 throw new IllegalArgumentException("The constructionHeuristicType (" + constructionHeuristicType
-                        + ") must not be configured if the entityPlacerConfig (" + entityPlacerConfig
-                        + ") is explicitly configured.");
+                                                           + ") must not be configured if the entityPlacerConfig (" + entityPlacerConfig
+                                                           + ") is explicitly configured.");
             }
             if (moveSelectorConfigList != null) {
                 throw new IllegalArgumentException("The moveSelectorConfigList (" + moveSelectorConfigList
-                        + ") can not be configured if the entityPlacerConfig (" + entityPlacerConfig
-                        + ") is explicitly configured.");
+                                                           + ") can not be configured if the entityPlacerConfig (" + entityPlacerConfig
+                                                           + ") is explicitly configured.");
             }
         } else {
             // TODO entityPlacerConfigList is only a List because of XStream limitations.
             throw new IllegalArgumentException("The entityPlacerConfigList (" + entityPlacerConfigList
-                    + ") must be a singleton or empty. Use multiple " + ConstructionHeuristicPhaseConfig.class
-                    + " elements to initialize multiple entity classes.");
+                                                       + ") must be a singleton or empty. Use multiple " + ConstructionHeuristicPhaseConfig.class
+                                                       + " elements to initialize multiple entity classes.");
         }
         EntityPlacer entityPlacer = entityPlacerConfig.buildEntityPlacer(phaseConfigPolicy);
         phase.setEntityPlacer(entityPlacer);
@@ -207,10 +209,10 @@ public class ConstructionHeuristicPhaseConfig extends PhaseConfig<ConstructionHe
                 if (!ConfigUtils.isEmptyCollection(moveSelectorConfigList)) {
                     if (moveSelectorConfigList.size() != 1) {
                         throw new IllegalArgumentException("For the constructionHeuristicType ("
-                                + constructionHeuristicType + "), the moveSelectorConfigList (" + moveSelectorConfigList
-                                + ") must be a singleton. Use a single " + UnionMoveSelectorConfig.class.getSimpleName()
-                                + " or " + CartesianProductMoveSelectorConfig.class.getSimpleName()
-                                + " element to nest multiple MoveSelectors.");
+                                                                   + constructionHeuristicType + "), the moveSelectorConfigList (" + moveSelectorConfigList
+                                                                   + ") must be a singleton. Use a single " + UnionMoveSelectorConfig.class.getSimpleName()
+                                                                   + " or " + CartesianProductMoveSelectorConfig.class.getSimpleName()
+                                                                   + " element to nest multiple MoveSelectors.");
                     }
                     return QueuedValuePlacerConfig.unfoldNew(phaseConfigPolicy, moveSelectorConfigList.get(0));
                 }
@@ -220,16 +222,17 @@ public class ConstructionHeuristicPhaseConfig extends PhaseConfig<ConstructionHe
                 if (!ConfigUtils.isEmptyCollection(moveSelectorConfigList)) {
                     if (moveSelectorConfigList.size() != 1) {
                         throw new IllegalArgumentException("For the constructionHeuristicType ("
-                                + constructionHeuristicType + "), the moveSelectorConfigList (" + moveSelectorConfigList
-                                + ") must be a singleton. Use a single " + UnionMoveSelectorConfig.class.getSimpleName()
-                                + " or " + CartesianProductMoveSelectorConfig.class.getSimpleName()
-                                + " element to nest multiple MoveSelectors.");
+                                                                   + constructionHeuristicType + "), the moveSelectorConfigList (" + moveSelectorConfigList
+                                                                   + ") must be a singleton. Use a single " + UnionMoveSelectorConfig.class.getSimpleName()
+                                                                   + " or " + CartesianProductMoveSelectorConfig.class.getSimpleName()
+                                                                   + " element to nest multiple MoveSelectors.");
                     }
                     return PooledEntityPlacerConfig.unfoldNew(phaseConfigPolicy, moveSelectorConfigList.get(0));
                 }
                 return new PooledEntityPlacerConfig();
             default:
-                throw new IllegalStateException("The constructionHeuristicType (" + constructionHeuristicType + ") is not implemented.");
+                throw new IllegalStateException(
+                        "The constructionHeuristicType (" + constructionHeuristicType + ") is not implemented.");
         }
     }
 
@@ -237,16 +240,15 @@ public class ConstructionHeuristicPhaseConfig extends PhaseConfig<ConstructionHe
     public void inherit(ConstructionHeuristicPhaseConfig inheritedConfig) {
         super.inherit(inheritedConfig);
         constructionHeuristicType = ConfigUtils.inheritOverwritableProperty(constructionHeuristicType,
-                inheritedConfig.getConstructionHeuristicType());
+                                                                            inheritedConfig.getConstructionHeuristicType());
         entitySorterManner = ConfigUtils.inheritOverwritableProperty(entitySorterManner,
-                inheritedConfig.getEntitySorterManner());
+                                                                     inheritedConfig.getEntitySorterManner());
         valueSorterManner = ConfigUtils.inheritOverwritableProperty(valueSorterManner,
-                inheritedConfig.getValueSorterManner());
+                                                                    inheritedConfig.getValueSorterManner());
         setEntityPlacerConfig(ConfigUtils.inheritOverwritableProperty(
                 getEntityPlacerConfig(), inheritedConfig.getEntityPlacerConfig()));
         moveSelectorConfigList = ConfigUtils.inheritMergeableListConfig(
                 moveSelectorConfigList, inheritedConfig.getMoveSelectorConfigList());
         foragerConfig = ConfigUtils.inheritConfig(foragerConfig, inheritedConfig.getForagerConfig());
     }
-
 }

@@ -42,8 +42,8 @@ public class StrategicOscillationByLevelFinalistPodium extends AbstractFinalistP
     public void stepStarted(LocalSearchStepScope stepScope) {
         super.stepStarted(stepScope);
         referenceLevelNumbers = referenceBestScoreInsteadOfLastStepScore
-            ? stepScope.getPhaseScope().getBestScore().toLevelNumbers()
-            : stepScope.getPhaseScope().getLastCompletedStepScope().getScore().toLevelNumbers();
+                ? stepScope.getPhaseScope().getBestScore().toLevelNumbers()
+                : stepScope.getPhaseScope().getLastCompletedStepScope().getScore().toLevelNumbers();
         finalistScore = null;
         finalistLevelNumbers = null;
     }
@@ -99,5 +99,4 @@ public class StrategicOscillationByLevelFinalistPodium extends AbstractFinalistP
         finalistScore = null;
         finalistLevelNumbers = null;
     }
-
 }

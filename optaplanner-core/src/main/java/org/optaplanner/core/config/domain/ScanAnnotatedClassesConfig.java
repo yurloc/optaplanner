@@ -54,12 +54,13 @@ public class ScanAnnotatedClassesConfig extends AbstractConfig<ScanAnnotatedClas
     // Builder methods
     // ************************************************************************
 
-    public SolutionDescriptor buildSolutionDescriptor(SolverConfigContext configContext, ScoreDefinition deprecatedScoreDefinition) {
+    public SolutionDescriptor buildSolutionDescriptor(SolverConfigContext configContext,
+                                                      ScoreDefinition deprecatedScoreDefinition) {
         ClassLoader[] classLoaders;
         if (configContext.getClassLoader() != null) {
-            classLoaders = new ClassLoader[] {configContext.getClassLoader()};
+            classLoaders = new ClassLoader[]{configContext.getClassLoader()};
         } else if (configContext.getKieContainer() != null) {
-            classLoaders = new ClassLoader[] {configContext.getKieContainer().getClassLoader()};
+            classLoaders = new ClassLoader[]{configContext.getKieContainer().getClassLoader()};
             ReflectionsKieVfsUrlType.register(configContext.getKieContainer());
         } else {
             classLoaders = new ClassLoader[0];
@@ -70,8 +71,8 @@ public class ScanAnnotatedClassesConfig extends AbstractConfig<ScanAnnotatedClas
             for (String packageInclude : packageIncludeList) {
                 if (StringUtils.isEmpty(packageInclude)) {
                     throw new IllegalArgumentException("The scanAnnotatedClasses (" + this
-                            + ") has a packageInclude (" + packageInclude
-                            + ") that is empty or null. Remove it or fill it in.");
+                                                               + ") has a packageInclude (" + packageInclude
+                                                               + ") that is empty or null. Remove it or fill it in.");
                 }
                 builder.addUrls(ReflectionsWorkaroundClasspathHelper.forPackage(packageInclude, classLoaders));
                 filterBuilder.includePackage(packageInclude);
@@ -98,19 +99,19 @@ public class ScanAnnotatedClassesConfig extends AbstractConfig<ScanAnnotatedClas
         }
         if (ConfigUtils.isEmptyCollection(solutionClassSet)) {
             throw new IllegalStateException("The scanAnnotatedClasses (" + this
-                    + ") did not find any classes with a " + PlanningSolution.class.getSimpleName()
-                    + " annotation.\n"
-                    + "Maybe you forgot to annotate a class with a " + PlanningSolution.class.getSimpleName()
-                    + " annotation.\n"
-                    + (ConfigUtils.isEmptyCollection(packageIncludeList) ? ""
+                                                    + ") did not find any classes with a " + PlanningSolution.class.getSimpleName()
+                                                    + " annotation.\n"
+                                                    + "Maybe you forgot to annotate a class with a " + PlanningSolution.class.getSimpleName()
+                                                    + " annotation.\n"
+                                                    + (ConfigUtils.isEmptyCollection(packageIncludeList) ? ""
                     : "Maybe the annotated class does match the packageIncludeList (" + packageIncludeList + ").\n")
-                    + "Maybe you're using special classloading mechanisms (OSGi, ...) and this is a bug."
-                    + " If you can confirm that, report it to our issue tracker"
-                    + " and workaround it by defining the classes explicitly in the solver configuration.");
+                                                    + "Maybe you're using special classloading mechanisms (OSGi, ...) and this is a bug."
+                                                    + " If you can confirm that, report it to our issue tracker"
+                                                    + " and workaround it by defining the classes explicitly in the solver configuration.");
         } else if (solutionClassSet.size() > 1) {
             throw new IllegalStateException("The scanAnnotatedClasses (" + this
-                    + ") found multiple classes (" + solutionClassSet
-                    + ") with a " + PlanningSolution.class.getSimpleName() + " annotation.");
+                                                    + ") found multiple classes (" + solutionClassSet
+                                                    + ") with a " + PlanningSolution.class.getSimpleName() + " annotation.");
         }
         Class<?> solutionClass = solutionClassSet.iterator().next();
         return solutionClass;
@@ -121,14 +122,15 @@ public class ScanAnnotatedClassesConfig extends AbstractConfig<ScanAnnotatedClas
         retainOnlyClassesWithDeclaredAnnotation(entityClassSet, PlanningEntity.class);
         if (ConfigUtils.isEmptyCollection(entityClassSet)) {
             throw new IllegalStateException("The scanAnnotatedClasses (" + this
-                    + ") did not find any classes with a " + PlanningEntity.class.getSimpleName()
-                    + " annotation.");
+                                                    + ") did not find any classes with a " + PlanningEntity.class.getSimpleName()
+                                                    + " annotation.");
         }
         return new ArrayList<>(entityClassSet);
     }
 
     // TODO We need unit test for this: annotation scanning with TestdataUnannotatedExtendedEntity
-    private void retainOnlyClassesWithDeclaredAnnotation(Set<Class<?>> classSet, Class<? extends Annotation> annotation) {
+    private void retainOnlyClassesWithDeclaredAnnotation(Set<Class<?>> classSet,
+                                                         Class<? extends Annotation> annotation) {
         classSet.removeIf(clazz -> !clazz.isAnnotationPresent(annotation));
     }
 
@@ -142,5 +144,4 @@ public class ScanAnnotatedClassesConfig extends AbstractConfig<ScanAnnotatedClas
     public String toString() {
         return getClass().getSimpleName() + "(" + (packageIncludeList == null ? "" : packageIncludeList) + ")";
     }
-
 }

@@ -77,5 +77,4 @@ public class TestdataDuplicatePlanningEntityCollectionPropertySolution extends T
     public void setScore(SimpleScore score) {
         this.score = score;
     }
-
 }

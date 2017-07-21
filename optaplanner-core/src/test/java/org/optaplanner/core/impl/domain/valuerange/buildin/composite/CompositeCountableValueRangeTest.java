@@ -25,10 +25,11 @@ import java.util.Random;
 import org.junit.Test;
 import org.optaplanner.core.impl.domain.valuerange.buildin.collection.ListValueRange;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.*;
-import static org.optaplanner.core.impl.testdata.util.PlannerAssert.*;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.assertAllElementsOfIterator;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.assertElementsOfIterator;
 
 public class CompositeCountableValueRangeTest {
 
@@ -64,18 +65,20 @@ public class CompositeCountableValueRangeTest {
         assertEquals(false, createValueRange(Arrays.asList(0, 2, 5, 10), Arrays.asList(-15, 25, -1)).contains(-14));
         assertEquals(true, createValueRange(Arrays.asList(0, 2, 5, 10), Arrays.asList(-15, 25, -1)).contains(-1));
         assertEquals(false, createValueRange(Arrays.asList(0, 2, 5, 10), Arrays.asList(-15, 25, -1)).contains(1));
-        assertEquals(true, createValueRange(Arrays.asList("a", "b"), Arrays.asList("c"), Arrays.asList("d")).contains("c"));
-        assertEquals(false, createValueRange(Arrays.asList("a", "b"), Arrays.asList("c"), Arrays.asList("d")).contains("n"));
+        assertEquals(true,
+                     createValueRange(Arrays.asList("a", "b"), Arrays.asList("c"), Arrays.asList("d")).contains("c"));
+        assertEquals(false,
+                     createValueRange(Arrays.asList("a", "b"), Arrays.asList("c"), Arrays.asList("d")).contains("n"));
     }
 
     @Test
     public void createOriginalIterator() {
         assertAllElementsOfIterator(createValueRange(Arrays.asList(0, 2, 5, 10), Arrays.asList(-15, 25, -1))
-                .createOriginalIterator(), 0, 2, 5, 10, -15, 25, -1);
+                                            .createOriginalIterator(), 0, 2, 5, 10, -15, 25, -1);
         assertAllElementsOfIterator(createValueRange(Arrays.asList("a", "b"), Arrays.asList("c"), Arrays.asList("d"))
-                .createOriginalIterator(), "a", "b", "c", "d");
+                                            .createOriginalIterator(), "a", "b", "c", "d");
         assertAllElementsOfIterator(createValueRange(Collections.<String>emptyList(), Collections.<String>emptyList())
-                .createOriginalIterator());
+                                            .createOriginalIterator());
     }
 
     @Test
@@ -84,12 +87,11 @@ public class CompositeCountableValueRangeTest {
 
         when(workingRandom.nextInt(anyInt())).thenReturn(3, 0);
         assertElementsOfIterator(createValueRange(Arrays.asList(0, 2, 5, 10), Arrays.asList(-15, 25, -1))
-                .createRandomIterator(workingRandom), 10, 0);
+                                         .createRandomIterator(workingRandom), 10, 0);
         when(workingRandom.nextInt(anyInt())).thenReturn(3, 0);
         assertElementsOfIterator(createValueRange(Arrays.asList("a", "b"), Arrays.asList("c"), Arrays.asList("d"))
-                .createRandomIterator(workingRandom), "d", "a");
+                                         .createRandomIterator(workingRandom), "d", "a");
         assertElementsOfIterator(createValueRange(Collections.<String>emptyList(), Collections.<String>emptyList())
-                .createRandomIterator(workingRandom));
+                                         .createRandomIterator(workingRandom));
     }
-
 }

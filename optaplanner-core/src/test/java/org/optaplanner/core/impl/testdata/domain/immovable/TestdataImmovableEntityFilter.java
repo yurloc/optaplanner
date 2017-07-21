@@ -25,5 +25,4 @@ public class TestdataImmovableEntityFilter implements SelectionFilter<TestdataIm
     public boolean accept(ScoreDirector<TestdataImmovableSolution> scoreDirector, TestdataImmovableEntity entity) {
         return !entity.isLocked();
     }
-
 }

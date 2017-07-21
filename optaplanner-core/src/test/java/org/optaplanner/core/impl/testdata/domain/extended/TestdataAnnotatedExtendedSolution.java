@@ -32,7 +32,7 @@ public class TestdataAnnotatedExtendedSolution extends TestdataSolution {
 
     public static SolutionDescriptor<TestdataAnnotatedExtendedSolution> buildExtendedSolutionDescriptor() {
         return SolutionDescriptor.buildSolutionDescriptor(TestdataAnnotatedExtendedSolution.class,
-                TestdataEntity.class, TestdataAnnotatedExtendedEntity.class);
+                                                          TestdataEntity.class, TestdataAnnotatedExtendedEntity.class);
     }
 
     private List<TestdataValue> subValueList;
@@ -45,7 +45,6 @@ public class TestdataAnnotatedExtendedSolution extends TestdataSolution {
     public TestdataAnnotatedExtendedSolution(String code) {
         super(code);
     }
-
 
     @ValueRangeProvider(id = "subValueRange")
     @ProblemFactCollectionProperty
@@ -69,5 +68,4 @@ public class TestdataAnnotatedExtendedSolution extends TestdataSolution {
     // ************************************************************************
     // Complex methods
     // ************************************************************************
-
 }

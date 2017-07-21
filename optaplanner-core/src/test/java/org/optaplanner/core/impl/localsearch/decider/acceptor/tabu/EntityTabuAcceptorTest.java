@@ -262,5 +262,4 @@ public class EntityTabuAcceptorTest {
         moveScope.setScore(SimpleScore.valueOf(score));
         return moveScope;
     }
-
 }

@@ -58,7 +58,7 @@ public class SimpleDoubleScoreDefinition extends AbstractScoreDefinition<SimpleD
     public SimpleDoubleScore fromLevelNumbers(int initScore, Number[] levelNumbers) {
         if (levelNumbers.length != getLevelsSize()) {
             throw new IllegalStateException("The levelNumbers (" + Arrays.toString(levelNumbers)
-                    + ")'s length (" + levelNumbers.length + ") must equal the levelSize (" + getLevelsSize() + ").");
+                                                    + ")'s length (" + levelNumbers.length + ") must equal the levelSize (" + getLevelsSize() + ").");
         }
         return SimpleDoubleScore.valueOfUninitialized(initScore, (Double) levelNumbers[0]);
     }
@@ -69,17 +69,18 @@ public class SimpleDoubleScoreDefinition extends AbstractScoreDefinition<SimpleD
     }
 
     @Override
-    public SimpleDoubleScore buildOptimisticBound(InitializingScoreTrend initializingScoreTrend, SimpleDoubleScore score) {
+    public SimpleDoubleScore buildOptimisticBound(InitializingScoreTrend initializingScoreTrend,
+                                                  SimpleDoubleScore score) {
         InitializingScoreTrendLevel[] trendLevels = initializingScoreTrend.getTrendLevels();
         return SimpleDoubleScore.valueOfUninitialized(0,
-                trendLevels[0] == InitializingScoreTrendLevel.ONLY_DOWN ? score.getScore() : Double.POSITIVE_INFINITY);
+                                                      trendLevels[0] == InitializingScoreTrendLevel.ONLY_DOWN ? score.getScore() : Double.POSITIVE_INFINITY);
     }
 
     @Override
-    public SimpleDoubleScore buildPessimisticBound(InitializingScoreTrend initializingScoreTrend, SimpleDoubleScore score) {
+    public SimpleDoubleScore buildPessimisticBound(InitializingScoreTrend initializingScoreTrend,
+                                                   SimpleDoubleScore score) {
         InitializingScoreTrendLevel[] trendLevels = initializingScoreTrend.getTrendLevels();
         return SimpleDoubleScore.valueOfUninitialized(0,
-                trendLevels[0] == InitializingScoreTrendLevel.ONLY_UP ? score.getScore() : Double.NEGATIVE_INFINITY);
+                                                      trendLevels[0] == InitializingScoreTrendLevel.ONLY_UP ? score.getScore() : Double.NEGATIVE_INFINITY);
     }
-
 }

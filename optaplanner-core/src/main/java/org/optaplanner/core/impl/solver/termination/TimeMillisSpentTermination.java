@@ -28,7 +28,7 @@ public class TimeMillisSpentTermination extends AbstractTermination {
         this.timeMillisSpentLimit = timeMillisSpentLimit;
         if (timeMillisSpentLimit < 0L) {
             throw new IllegalArgumentException("The timeMillisSpentLimit (" + timeMillisSpentLimit
-                    + ") cannot be negative.");
+                                                       + ") cannot be negative.");
         }
     }
 
@@ -91,5 +91,4 @@ public class TimeMillisSpentTermination extends AbstractTermination {
     public String toString() {
         return "TimeMillisSpent(" + timeMillisSpentLimit + ")";
     }
-
 }

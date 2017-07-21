@@ -32,7 +32,8 @@ import org.optaplanner.core.impl.testdata.domain.TestdataSolution;
 import org.optaplanner.core.impl.testdata.domain.TestdataValue;
 
 import static org.mockito.Mockito.*;
-import static org.optaplanner.core.impl.testdata.util.PlannerAssert.*;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.assertAllCodesOfValueSelector;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.verifyPhaseLifecycle;
 
 public class SortingValueSelectorTest {
 
@@ -56,7 +57,6 @@ public class SortingValueSelectorTest {
                 TestdataEntity.class, "value",
                 new TestdataValue("jan"), new TestdataValue("feb"), new TestdataValue("mar"),
                 new TestdataValue("apr"), new TestdataValue("may"), new TestdataValue("jun"));
-
 
         SelectionSorter<TestdataSolution, TestdataValue> sorter = (scoreDirector, selectionList)
                 -> selectionList.sort(Comparator.comparing(TestdataObject::getCode));
@@ -113,5 +113,4 @@ public class SortingValueSelectorTest {
         verify(childValueSelector, times(timesCalled)).iterator();
         verify(childValueSelector, times(timesCalled)).getSize();
     }
-
 }

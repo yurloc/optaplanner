@@ -62,5 +62,4 @@ public class CachingMoveSelector extends AbstractCachingMoveSelector {
     public String toString() {
         return "Caching(" + childMoveSelector + ")";
     }
-
 }

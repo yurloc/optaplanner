@@ -28,7 +28,8 @@ import org.optaplanner.core.impl.score.director.ScoreDirector;
 /**
  * Retrievable from {@link ScoreDirector#getConstraintMatchTotals()}.
  */
-public class ConstraintMatchTotal implements Serializable, Comparable<ConstraintMatchTotal> {
+public class ConstraintMatchTotal implements Serializable,
+                                             Comparable<ConstraintMatchTotal> {
 
     protected final String constraintPackage;
     protected final String constraintName;
@@ -90,12 +91,12 @@ public class ConstraintMatchTotal implements Serializable, Comparable<Constraint
     public ConstraintMatch addConstraintMatch(List<Object> justificationList, Score score) {
         scoreTotal = scoreTotal.add(score);
         ConstraintMatch constraintMatch = new ConstraintMatch(constraintPackage, constraintName,
-                justificationList, score);
+                                                              justificationList, score);
         boolean added = constraintMatchSet.add(constraintMatch);
         if (!added) {
             throw new IllegalStateException("The constraintMatchTotal (" + this
-                    + ") could not add constraintMatch (" + constraintMatch
-                    + ") to its constraintMatchSet (" + constraintMatchSet + ").");
+                                                    + ") could not add constraintMatch (" + constraintMatch
+                                                    + ") to its constraintMatchSet (" + constraintMatchSet + ").");
         }
         return constraintMatch;
     }
@@ -105,8 +106,8 @@ public class ConstraintMatchTotal implements Serializable, Comparable<Constraint
         boolean removed = constraintMatchSet.remove(constraintMatch);
         if (!removed) {
             throw new IllegalStateException("The constraintMatchTotal (" + this
-                    + ") could not remove constraintMatch (" + constraintMatch
-                    + ") from its constraintMatchSet (" + constraintMatchSet + ").");
+                                                    + ") could not remove constraintMatch (" + constraintMatch
+                                                    + ") from its constraintMatchSet (" + constraintMatchSet + ").");
         }
     }
 
@@ -131,5 +132,4 @@ public class ConstraintMatchTotal implements Serializable, Comparable<Constraint
     public String toString() {
         return getConstraintId() + "=" + getScoreTotal();
     }
-
 }

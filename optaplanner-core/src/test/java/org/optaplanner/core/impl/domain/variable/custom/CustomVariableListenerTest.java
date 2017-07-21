@@ -170,5 +170,4 @@ public class CustomVariableListenerTest {
         assertEquals("1-3", c.getComposedCode());
         assertEquals("3-1", c.getReverseComposedCode());
     }
-
 }

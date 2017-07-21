@@ -34,7 +34,7 @@ public class NoChangePhaseConfig extends PhaseConfig<NoChangePhaseConfig> {
 
     @Override
     public NoChangePhase buildPhase(int phaseIndex, HeuristicConfigPolicy solverConfigPolicy,
-            BestSolutionRecaller bestSolutionRecaller, Termination solverTermination) {
+                                    BestSolutionRecaller bestSolutionRecaller, Termination solverTermination) {
         HeuristicConfigPolicy phaseConfigPolicy = solverConfigPolicy.createPhaseConfigPolicy();
         return new NoChangePhase(
                 phaseIndex, solverConfigPolicy.getLogIndentation(), bestSolutionRecaller,
@@ -45,5 +45,4 @@ public class NoChangePhaseConfig extends PhaseConfig<NoChangePhaseConfig> {
     public void inherit(NoChangePhaseConfig inheritedConfig) {
         super.inherit(inheritedConfig);
     }
-
 }

@@ -26,7 +26,7 @@ import org.optaplanner.core.impl.testdata.domain.TestdataObject;
 import org.optaplanner.core.impl.testdata.domain.chained.TestdataChainedObject;
 
 @PlanningEntity(movableEntitySelectionFilter = TestdataImmovableChainedEntityFilter.class)
-public class TestdataImmovableChainedEntity extends TestdataObject implements TestdataChainedObject  {
+public class TestdataImmovableChainedEntity extends TestdataObject implements TestdataChainedObject {
 
     public static EntityDescriptor buildEntityDescriptor() {
         SolutionDescriptor solutionDescriptor = TestdataImmovableChainedSolution.buildSolutionDescriptor();
@@ -35,7 +35,8 @@ public class TestdataImmovableChainedEntity extends TestdataObject implements Te
 
     public static GenuineVariableDescriptor buildVariableDescriptorForChainedObject() {
         SolutionDescriptor solutionDescriptor = TestdataImmovableChainedSolution.buildSolutionDescriptor();
-        EntityDescriptor entityDescriptor = solutionDescriptor.findEntityDescriptorOrFail(TestdataImmovableChainedEntity.class);
+        EntityDescriptor entityDescriptor = solutionDescriptor.findEntityDescriptorOrFail(
+                TestdataImmovableChainedEntity.class);
         return entityDescriptor.getGenuineVariableDescriptor("chainedObject");
     }
 
@@ -80,5 +81,4 @@ public class TestdataImmovableChainedEntity extends TestdataObject implements Te
     // ************************************************************************
     // Complex methods
     // ************************************************************************
-
 }

@@ -114,12 +114,10 @@ public class NullableCountableValueRange<T> extends AbstractCountableValueRange<
             long index = RandomUtils.nextLong(workingRandom, size);
             return get(index);
         }
-
     }
 
     @Override
     public String toString() {
         return "[null]∪" + childValueRange; // Formatting: interval (mathematics) ISO 31-11
     }
-
 }

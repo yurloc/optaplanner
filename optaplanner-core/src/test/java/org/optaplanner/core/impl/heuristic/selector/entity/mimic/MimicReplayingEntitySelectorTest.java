@@ -26,20 +26,23 @@ import org.optaplanner.core.impl.phase.scope.AbstractStepScope;
 import org.optaplanner.core.impl.solver.scope.DefaultSolverScope;
 import org.optaplanner.core.impl.testdata.domain.TestdataEntity;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
-import static org.optaplanner.core.impl.testdata.util.PlannerAssert.*;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.assertCode;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.verifyPhaseLifecycle;
 
 public class MimicReplayingEntitySelectorTest {
 
     @Test
     public void originalSelection() {
         EntitySelector childEntitySelector = SelectorTestUtils.mockEntitySelector(TestdataEntity.class,
-                new TestdataEntity("e1"), new TestdataEntity("e2"), new TestdataEntity("e3"));
+                                                                                  new TestdataEntity("e1"),
+                                                                                  new TestdataEntity("e2"),
+                                                                                  new TestdataEntity("e3"));
 
         MimicRecordingEntitySelector recordingEntitySelector = new MimicRecordingEntitySelector(childEntitySelector);
-        MimicReplayingEntitySelector replayingEntitySelector = new MimicReplayingEntitySelector(recordingEntitySelector);
+        MimicReplayingEntitySelector replayingEntitySelector = new MimicReplayingEntitySelector(
+                recordingEntitySelector);
 
         DefaultSolverScope solverScope = mock(DefaultSolverScope.class);
         recordingEntitySelector.solvingStarted(solverScope);
@@ -93,7 +96,7 @@ public class MimicReplayingEntitySelectorTest {
     }
 
     private void runOriginalAsserts(MimicRecordingEntitySelector recordingEntitySelector,
-            MimicReplayingEntitySelector replayingEntitySelector) {
+                                    MimicReplayingEntitySelector replayingEntitySelector) {
         Iterator<Object> recordingIterator = recordingEntitySelector.iterator();
         assertNotNull(recordingIterator);
         Iterator<Object> replayingIterator = replayingEntitySelector.iterator();
@@ -124,5 +127,4 @@ public class MimicReplayingEntitySelectorTest {
         assertEquals(3L, recordingEntitySelector.getSize());
         assertEquals(3L, replayingEntitySelector.getSize());
     }
-
 }

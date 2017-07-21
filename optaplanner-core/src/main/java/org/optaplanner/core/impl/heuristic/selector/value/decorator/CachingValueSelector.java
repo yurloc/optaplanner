@@ -35,7 +35,7 @@ public class CachingValueSelector extends AbstractCachingValueSelector implement
     protected final boolean randomSelection;
 
     public CachingValueSelector(EntityIndependentValueSelector childValueSelector, SelectionCacheType cacheType,
-            boolean randomSelection) {
+                                boolean randomSelection) {
         super(childValueSelector, cacheType);
         this.randomSelection = randomSelection;
     }
@@ -68,5 +68,4 @@ public class CachingValueSelector extends AbstractCachingValueSelector implement
     public String toString() {
         return "Caching(" + childValueSelector + ")";
     }
-
 }

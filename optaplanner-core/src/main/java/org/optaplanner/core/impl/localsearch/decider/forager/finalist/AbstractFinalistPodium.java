@@ -55,5 +55,4 @@ public abstract class AbstractFinalistPodium extends LocalSearchPhaseLifecycleLi
         finalistIsAccepted = false;
         finalistList = null;
     }
-
 }

@@ -29,5 +29,4 @@ public class TestdataObjectId {
     public Integer getId() {
         return id;
     }
-
 }

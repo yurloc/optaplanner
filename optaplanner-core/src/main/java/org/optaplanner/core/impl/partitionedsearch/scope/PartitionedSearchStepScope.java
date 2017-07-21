@@ -65,5 +65,4 @@ public class PartitionedSearchStepScope<Solution_> extends AbstractStepScope<Sol
     // ************************************************************************
     // Calculated methods
     // ************************************************************************
-
 }

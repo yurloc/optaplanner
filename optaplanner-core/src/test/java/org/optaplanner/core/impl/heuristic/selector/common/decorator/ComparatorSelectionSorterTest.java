@@ -31,10 +31,11 @@ public class ComparatorSelectionSorterTest {
 
     @Test
     public void sort() {
-        Integer[] baseArray = new Integer[] {3, 4, 3, 5, 1};
+        Integer[] baseArray = new Integer[]{3, 4, 3, 5, 1};
         List<Integer> arrayToSort = new ArrayList<>();
         Collections.addAll(arrayToSort, baseArray);
-        ComparatorSelectionSorter<TestdataSolution, Integer> selectionSorter = new ComparatorSelectionSorter<>(new TestComparator(), SelectionSorterOrder.ASCENDING);
+        ComparatorSelectionSorter<TestdataSolution, Integer> selectionSorter = new ComparatorSelectionSorter<>(
+                new TestComparator(), SelectionSorterOrder.ASCENDING);
         selectionSorter.sort(null, arrayToSort);
         assertTrue(ascendingSort(arrayToSort));
 
@@ -75,7 +76,5 @@ public class ComparatorSelectionSorterTest {
         public int compare(Integer a, Integer b) {
             return a.compareTo(b);
         }
-
     }
-
 }

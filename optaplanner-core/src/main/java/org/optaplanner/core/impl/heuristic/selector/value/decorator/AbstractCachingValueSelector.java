@@ -37,18 +37,19 @@ public abstract class AbstractCachingValueSelector extends AbstractValueSelector
 
     protected List<Object> cachedValueList = null;
 
-    public AbstractCachingValueSelector(EntityIndependentValueSelector childValueSelector, SelectionCacheType cacheType) {
+    public AbstractCachingValueSelector(EntityIndependentValueSelector childValueSelector,
+                                        SelectionCacheType cacheType) {
         this.childValueSelector = childValueSelector;
         this.cacheType = cacheType;
         if (childValueSelector.isNeverEnding()) {
             throw new IllegalStateException("The selector (" + this
-                    + ") has a childValueSelector (" + childValueSelector
-                    + ") with neverEnding (" + childValueSelector.isNeverEnding() + ").");
+                                                    + ") has a childValueSelector (" + childValueSelector
+                                                    + ") with neverEnding (" + childValueSelector.isNeverEnding() + ").");
         }
         phaseLifecycleSupport.addEventListener(childValueSelector);
         if (cacheType.isNotCached()) {
             throw new IllegalArgumentException("The selector (" + this
-                    + ") does not support the cacheType (" + cacheType + ").");
+                                                       + ") does not support the cacheType (" + cacheType + ").");
         }
         phaseLifecycleSupport.addEventListener(new SelectionCacheLifecycleBridge(cacheType, this));
     }
@@ -71,15 +72,15 @@ public abstract class AbstractCachingValueSelector extends AbstractValueSelector
         long childSize = childValueSelector.getSize();
         if (childSize > (long) Integer.MAX_VALUE) {
             throw new IllegalStateException("The selector (" + this
-                    + ") has a childValueSelector (" + childValueSelector
-                    + ") with childSize (" + childSize
-                    + ") which is higher than Integer.MAX_VALUE.");
+                                                    + ") has a childValueSelector (" + childValueSelector
+                                                    + ") with childSize (" + childSize
+                                                    + ") which is higher than Integer.MAX_VALUE.");
         }
         cachedValueList = new ArrayList<>((int) childSize);
         // TODO Fail-faster if a non FromSolutionPropertyValueSelector is used
         childValueSelector.iterator().forEachRemaining(cachedValueList::add);
         logger.trace("    Created cachedValueList: size ({}), valueSelector ({}).",
-                cachedValueList.size(), this);
+                     cachedValueList.size(), this);
     }
 
     @Override
@@ -114,5 +115,4 @@ public abstract class AbstractCachingValueSelector extends AbstractValueSelector
     public Iterator<Object> endingIterator() {
         return cachedValueList.iterator();
     }
-
 }

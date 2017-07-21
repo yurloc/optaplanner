@@ -31,7 +31,8 @@ import org.optaplanner.core.impl.testdata.domain.TestdataSolution;
 import org.optaplanner.core.impl.testdata.domain.TestdataValue;
 
 import static org.mockito.Mockito.*;
-import static org.optaplanner.core.impl.testdata.util.PlannerAssert.*;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.assertAllCodesOfValueSelector;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.verifyPhaseLifecycle;
 
 public class EntityIndependentFilteringValueSelectorTest {
 
@@ -40,7 +41,6 @@ public class EntityIndependentFilteringValueSelectorTest {
         EntityIndependentValueSelector childValueSelector = SelectorTestUtils.mockEntityIndependentValueSelector(
                 TestdataEntity.class, "value",
                 new TestdataValue("v1"), new TestdataValue("v2"), new TestdataValue("v3"), new TestdataValue("v4"));
-
 
         SelectionFilter<TestdataSolution, TestdataValue> filter
                 = (scoreDirector, value) -> !value.getCode().equals("v3");
@@ -99,5 +99,4 @@ public class EntityIndependentFilteringValueSelectorTest {
         verify(childValueSelector, times(5)).iterator();
         verify(childValueSelector, times(5)).getSize();
     }
-
 }

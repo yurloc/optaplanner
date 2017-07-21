@@ -36,5 +36,4 @@ public interface Demand<S extends Supply> extends Serializable {
      * @return never null
      */
     S createExternalizedSupply(InnerScoreDirector scoreDirector);
-
 }

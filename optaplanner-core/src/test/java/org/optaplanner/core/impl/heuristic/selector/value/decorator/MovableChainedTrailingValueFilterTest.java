@@ -75,5 +75,4 @@ public class MovableChainedTrailingValueFilterTest {
         assertEquals(false, filter.accept(scoreDirector, c1));
         assertEquals(true, filter.accept(scoreDirector, c2));
     }
-
 }

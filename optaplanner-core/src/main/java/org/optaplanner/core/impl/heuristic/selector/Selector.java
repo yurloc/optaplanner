@@ -54,5 +54,4 @@ public interface Selector extends PhaseLifecycleListener {
      * @return never null
      */
     SelectionCacheType getCacheType();
-
 }

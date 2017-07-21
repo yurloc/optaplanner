@@ -43,7 +43,7 @@ public class SelectedCountLimitValueSelector extends AbstractValueSelector imple
         this.selectedCountLimit = selectedCountLimit;
         if (selectedCountLimit < 0L) {
             throw new IllegalArgumentException("The selector (" + this
-                    + ") has a negative selectedCountLimit (" + selectedCountLimit + ").");
+                                                       + ") has a negative selectedCountLimit (" + selectedCountLimit + ").");
         }
         phaseLifecycleSupport.addEventListener(childValueSelector);
     }
@@ -77,8 +77,8 @@ public class SelectedCountLimitValueSelector extends AbstractValueSelector imple
     public long getSize() {
         if (!(childValueSelector instanceof EntityIndependentValueSelector)) {
             throw new IllegalArgumentException("To use the method getSize(), the moveSelector (" + this
-                    + ") needs to be based on an EntityIndependentValueSelector (" + childValueSelector + ")."
-                    + " Check your @" + ValueRangeProvider.class.getSimpleName() + " annotations.");
+                                                       + ") needs to be based on an EntityIndependentValueSelector (" + childValueSelector + ")."
+                                                       + " Check your @" + ValueRangeProvider.class.getSimpleName() + " annotations.");
         }
         long childSize = ((EntityIndependentValueSelector) childValueSelector).getSize();
         return Math.min(selectedCountLimit, childSize);
@@ -122,12 +122,10 @@ public class SelectedCountLimitValueSelector extends AbstractValueSelector imple
             selectedSize++;
             return childValueIterator.next();
         }
-
     }
 
     @Override
     public String toString() {
         return "SelectedCountLimit(" + childValueSelector + ")";
     }
-
 }

@@ -33,7 +33,8 @@ import org.optaplanner.core.impl.solver.random.RandomUtils;
 import org.optaplanner.core.impl.solver.scope.DefaultSolverScope;
 
 public class ProbabilityValueSelector extends AbstractValueSelector
-        implements EntityIndependentValueSelector, SelectionCacheLifecycleListener  {
+        implements EntityIndependentValueSelector,
+                   SelectionCacheLifecycleListener {
 
     protected final EntityIndependentValueSelector childValueSelector;
     protected final SelectionCacheType cacheType;
@@ -43,19 +44,19 @@ public class ProbabilityValueSelector extends AbstractValueSelector
     protected double probabilityWeightTotal = -1.0;
 
     public ProbabilityValueSelector(EntityIndependentValueSelector childValueSelector, SelectionCacheType cacheType,
-            SelectionProbabilityWeightFactory probabilityWeightFactory) {
+                                    SelectionProbabilityWeightFactory probabilityWeightFactory) {
         this.childValueSelector = childValueSelector;
         this.cacheType = cacheType;
         this.probabilityWeightFactory = probabilityWeightFactory;
         if (childValueSelector.isNeverEnding()) {
             throw new IllegalStateException("The selector (" + this
-                    + ") has a childValueSelector (" + childValueSelector
-                    + ") with neverEnding (" + childValueSelector.isNeverEnding() + ").");
+                                                    + ") has a childValueSelector (" + childValueSelector
+                                                    + ") with neverEnding (" + childValueSelector.isNeverEnding() + ").");
         }
         phaseLifecycleSupport.addEventListener(childValueSelector);
         if (cacheType.isNotCached()) {
             throw new IllegalArgumentException("The selector (" + this
-                    + ") does not support the cacheType (" + cacheType + ").");
+                                                       + ") does not support the cacheType (" + cacheType + ").");
         }
         phaseLifecycleSupport.addEventListener(new SelectionCacheLifecycleBridge(cacheType, this));
     }
@@ -151,5 +152,4 @@ public class ProbabilityValueSelector extends AbstractValueSelector
     public String toString() {
         return "Probability(" + childValueSelector + ")";
     }
-
 }

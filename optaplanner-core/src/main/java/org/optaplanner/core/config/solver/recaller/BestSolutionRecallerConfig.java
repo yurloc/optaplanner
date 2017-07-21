@@ -40,5 +40,4 @@ public class BestSolutionRecallerConfig extends AbstractConfig<BestSolutionRecal
     @Override
     public void inherit(BestSolutionRecallerConfig inheritedConfig) {
     }
-
 }

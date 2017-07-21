@@ -93,5 +93,4 @@ public class ConstructionHeuristicStepScope<Solution_> extends AbstractStepScope
     // ************************************************************************
     // Calculated methods
     // ************************************************************************
-
 }

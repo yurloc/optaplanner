@@ -72,5 +72,4 @@ public abstract class AbstractRandomChangeIterator<S extends Move> extends Upcom
     }
 
     protected abstract S newChangeSelection(Object entity, Object toValue);
-
 }

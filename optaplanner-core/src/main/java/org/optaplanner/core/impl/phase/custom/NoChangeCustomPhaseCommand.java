@@ -27,5 +27,4 @@ public class NoChangeCustomPhaseCommand extends AbstractCustomPhaseCommand<Objec
     public void changeWorkingSolution(ScoreDirector<Object> scoreDirector) {
         // Do nothing
     }
-
 }

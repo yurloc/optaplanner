@@ -199,5 +199,4 @@ public final class SimpleBigDecimalScore extends AbstractScore<SimpleBigDecimalS
     public boolean isCompatibleArithmeticArgument(Score otherScore) {
         return otherScore instanceof SimpleBigDecimalScore;
     }
-
 }

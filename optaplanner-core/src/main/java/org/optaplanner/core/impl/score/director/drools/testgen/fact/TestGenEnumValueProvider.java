@@ -33,5 +33,4 @@ class TestGenEnumValueProvider extends TestGenAbstractValueProvider<Enum<?>> {
     public String toString() {
         return value.getClass().getSimpleName() + "." + value.name();
     }
-
 }

@@ -49,5 +49,4 @@ public abstract class VariableListenerAdapter<Entity_> implements VariableListen
     public void afterEntityRemoved(ScoreDirector scoreDirector, Entity_ entity) {
         // Hook method
     }
-
 }

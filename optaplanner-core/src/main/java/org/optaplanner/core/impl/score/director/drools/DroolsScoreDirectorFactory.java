@@ -59,17 +59,17 @@ public class DroolsScoreDirectorFactory<Solution_> extends AbstractScoreDirector
         if (kieSessionModel == null) {
             if (ksessionName == null) {
                 throw new IllegalArgumentException("The kieContainer does not have a default ksession"
-                        + " and the ksessionName (" + ksessionName + ") is not specified.");
+                                                           + " and the ksessionName (" + ksessionName + ") is not specified.");
             } else {
                 throw new IllegalArgumentException("The kieContainer does not contain a ksessionName ("
-                        + ksessionName + ") with that name.");
+                                                           + ksessionName + ") with that name.");
             }
         }
         if (kieSessionModel.getType() != KieSessionModel.KieSessionType.STATEFUL) {
             throw new IllegalStateException("The ksessionName (" + ksessionName
-                    + ") with type (" + kieSessionModel.getType() + ") is not stateful.\n"
-                    + "Stateless sessions are not allowed because they don't support incremental score calculation"
-                    + " and are therefore exponentially slower.");
+                                                    + ") with type (" + kieSessionModel.getType() + ") is not stateful.\n"
+                                                    + "Stateless sessions are not allowed because they don't support incremental score calculation"
+                                                    + " and are therefore exponentially slower.");
         }
         String kbaseName = kieSessionModel.getKieBaseModel().getName();
         KieBase kieBase = kieContainer.newKieBase(kbaseName, null);
@@ -94,8 +94,8 @@ public class DroolsScoreDirectorFactory<Solution_> extends AbstractScoreDirector
         }
         if (!hasGlobalScoreHolder) {
             throw new IllegalArgumentException("The kieBase with kiePackages (" + kieBase.getKiePackages()
-                    + ") has no global field called " + DroolsScoreDirector.GLOBAL_SCORE_HOLDER_KEY + ".\n"
-                    + "Check if the rule files are found and if the global field is spelled correctly.");
+                                                       + ") has no global field called " + DroolsScoreDirector.GLOBAL_SCORE_HOLDER_KEY + ".\n"
+                                                       + "Check if the rule files are found and if the global field is spelled correctly.");
         }
     }
 
@@ -129,5 +129,4 @@ public class DroolsScoreDirectorFactory<Solution_> extends AbstractScoreDirector
     public KieSession newKieSession() {
         return kieContainer.newKieSession(ksessionName);
     }
-
 }

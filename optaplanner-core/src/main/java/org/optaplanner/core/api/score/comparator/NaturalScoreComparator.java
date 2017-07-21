@@ -24,11 +24,11 @@ import org.optaplanner.core.api.score.Score;
 /**
  * Compares by the natural order of {@link Score}s.
  */
-public class NaturalScoreComparator implements Comparator<Score>, Serializable {
+public class NaturalScoreComparator implements Comparator<Score>,
+                                               Serializable {
 
     @Override
     public int compare(Score score1, Score score2) {
         return score1.compareTo(score2);
     }
-
 }

@@ -36,7 +36,8 @@ public class KieSolverAssemblerService implements KieAssemblerService {
     }
 
     @Override
-    public void addResource(KnowledgeBuilder kbuilder, Resource resource, ResourceType type, ResourceConfiguration configuration) {
+    public void addResource(KnowledgeBuilder kbuilder, Resource resource, ResourceType type,
+                            ResourceConfiguration configuration) {
         // Do nothing for now
     }
 
@@ -44,5 +45,4 @@ public class KieSolverAssemblerService implements KieAssemblerService {
     public Class getServiceInterface() {
         return KieAssemblerService.class;
     }
-
 }

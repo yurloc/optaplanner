@@ -35,7 +35,7 @@ public class TestdataUnsupportedFactTypeSolution extends TestdataObject {
 
     public static SolutionDescriptor<TestdataUnsupportedFactTypeSolution> buildSolutionDescriptor() {
         return SolutionDescriptor.buildSolutionDescriptor(TestdataUnsupportedFactTypeSolution.class,
-                TestdataEntity.class);
+                                                          TestdataEntity.class);
     }
 
     private List<TestdataValue> valueList;
@@ -85,5 +85,4 @@ public class TestdataUnsupportedFactTypeSolution extends TestdataObject {
     public Collection<?> getProblemFacts() { // unspecified element type is unsupported
         return null;
     }
-
 }

@@ -47,7 +47,7 @@ import org.optaplanner.core.impl.solver.scope.DefaultSolverScope;
 import org.optaplanner.core.impl.solver.termination.BasicPlumbingTermination;
 import org.optaplanner.core.impl.solver.termination.Termination;
 
-import static org.apache.commons.lang3.ObjectUtils.*;
+import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
 
 @XStreamAlias("solver")
 public class SolverConfig extends AbstractConfig<SolverConfig> {
@@ -232,7 +232,8 @@ public class SolverConfig extends AbstractConfig<SolverConfig> {
                 .buildBestSolutionRecaller(environmentMode_);
         List<Phase<Solution_>> phaseList = buildPhaseList(configPolicy, bestSolutionRecaller, termination);
         DefaultSolver<Solution_> solver = new DefaultSolver<>(environmentMode_, randomFactory,
-                basicPlumbingTermination, termination, bestSolutionRecaller, phaseList, solverScope);
+                                                              basicPlumbingTermination, termination,
+                                                              bestSolutionRecaller, phaseList, solverScope);
         return solver;
     }
 
@@ -263,28 +264,30 @@ public class SolverConfig extends AbstractConfig<SolverConfig> {
         if (scanAnnotatedClassesConfig != null) {
             if (solutionClass != null || entityClassList != null) {
                 throw new IllegalArgumentException("The solver configuration with scanAnnotatedClasses ("
-                        + scanAnnotatedClassesConfig + ") cannot also have a solutionClass (" + solutionClass
-                        + ") or an entityClass (" + entityClassList + ").\n"
-                        + "  Please decide between automatic scanning or manual referencing.");
+                                                           + scanAnnotatedClassesConfig + ") cannot also have a solutionClass (" + solutionClass
+                                                           + ") or an entityClass (" + entityClassList + ").\n"
+                                                           + "  Please decide between automatic scanning or manual referencing.");
             }
             return scanAnnotatedClassesConfig.buildSolutionDescriptor(configContext, deprecatedScoreDefinition);
         } else {
             if (solutionClass == null) {
-                throw new IllegalArgumentException("The solver configuration must have a solutionClass (" + solutionClass
-                        + "), if it has no scanAnnotatedClasses (" + scanAnnotatedClassesConfig + ").");
+                throw new IllegalArgumentException(
+                        "The solver configuration must have a solutionClass (" + solutionClass
+                                + "), if it has no scanAnnotatedClasses (" + scanAnnotatedClassesConfig + ").");
             }
             if (ConfigUtils.isEmptyCollection(entityClassList)) {
                 throw new IllegalArgumentException(
                         "The solver configuration must have at least 1 entityClass (" + entityClassList
-                        + "), if it has no scanAnnotatedClasses (" + scanAnnotatedClassesConfig + ").");
+                                + "), if it has no scanAnnotatedClasses (" + scanAnnotatedClassesConfig + ").");
             }
-            return SolutionDescriptor.buildSolutionDescriptor((Class<Solution_>) solutionClass, entityClassList, deprecatedScoreDefinition);
+            return SolutionDescriptor.buildSolutionDescriptor((Class<Solution_>) solutionClass, entityClassList,
+                                                              deprecatedScoreDefinition);
         }
     }
 
     protected <Solution_> List<Phase<Solution_>> buildPhaseList(HeuristicConfigPolicy configPolicy,
-                                         BestSolutionRecaller bestSolutionRecaller,
-                                         Termination termination) {
+                                                                BestSolutionRecaller bestSolutionRecaller,
+                                                                Termination termination) {
         List<PhaseConfig> phaseConfigList_ = phaseConfigList;
         if (ConfigUtils.isEmptyCollection(phaseConfigList_)) {
             phaseConfigList_ = Arrays.asList(
@@ -295,7 +298,7 @@ public class SolverConfig extends AbstractConfig<SolverConfig> {
         int phaseIndex = 0;
         for (PhaseConfig phaseConfig : phaseConfigList_) {
             Phase<Solution_> phase = phaseConfig.buildPhase(phaseIndex, configPolicy,
-                    bestSolutionRecaller, termination);
+                                                            bestSolutionRecaller, termination);
             phaseList.add(phase);
             phaseIndex++;
         }
@@ -304,20 +307,22 @@ public class SolverConfig extends AbstractConfig<SolverConfig> {
 
     @Override
     public void inherit(SolverConfig inheritedConfig) {
-        environmentMode = ConfigUtils.inheritOverwritableProperty(environmentMode, inheritedConfig.getEnvironmentMode());
+        environmentMode = ConfigUtils.inheritOverwritableProperty(environmentMode,
+                                                                  inheritedConfig.getEnvironmentMode());
         daemon = ConfigUtils.inheritOverwritableProperty(daemon, inheritedConfig.getDaemon());
         randomType = ConfigUtils.inheritOverwritableProperty(randomType, inheritedConfig.getRandomType());
         randomSeed = ConfigUtils.inheritOverwritableProperty(randomSeed, inheritedConfig.getRandomSeed());
         randomFactoryClass = ConfigUtils.inheritOverwritableProperty(
                 randomFactoryClass, inheritedConfig.getRandomFactoryClass());
-        scanAnnotatedClassesConfig = ConfigUtils.inheritConfig(scanAnnotatedClassesConfig, inheritedConfig.getScanAnnotatedClassesConfig());
+        scanAnnotatedClassesConfig = ConfigUtils.inheritConfig(scanAnnotatedClassesConfig,
+                                                               inheritedConfig.getScanAnnotatedClassesConfig());
         solutionClass = ConfigUtils.inheritOverwritableProperty(solutionClass, inheritedConfig.getSolutionClass());
         entityClassList = ConfigUtils.inheritMergeableListProperty(
                 entityClassList, inheritedConfig.getEntityClassList());
-        scoreDirectorFactoryConfig = ConfigUtils.inheritConfig(scoreDirectorFactoryConfig, inheritedConfig.getScoreDirectorFactoryConfig());
+        scoreDirectorFactoryConfig = ConfigUtils.inheritConfig(scoreDirectorFactoryConfig,
+                                                               inheritedConfig.getScoreDirectorFactoryConfig());
         terminationConfig = ConfigUtils.inheritConfig(terminationConfig, inheritedConfig.getTerminationConfig());
         phaseConfigList = ConfigUtils.inheritMergeableListConfig(
                 phaseConfigList, inheritedConfig.getPhaseConfigList());
     }
-
 }

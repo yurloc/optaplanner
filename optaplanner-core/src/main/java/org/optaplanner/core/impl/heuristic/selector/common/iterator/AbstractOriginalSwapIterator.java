@@ -42,7 +42,7 @@ public abstract class AbstractOriginalSwapIterator<S, SubS> extends UpcomingSele
     private SubS leftSubSelection;
 
     public AbstractOriginalSwapIterator(ListIterable<SubS> leftSubSelector,
-            ListIterable<SubS> rightSubSelector) {
+                                        ListIterable<SubS> rightSubSelector) {
         this.leftSubSelector = leftSubSelector;
         this.rightSubSelector = rightSubSelector;
         leftEqualsRight = (leftSubSelector == rightSubSelector);
@@ -78,5 +78,4 @@ public abstract class AbstractOriginalSwapIterator<S, SubS> extends UpcomingSele
     }
 
     protected abstract S newSwapSelection(SubS leftSubSelection, SubS rightSubSelection);
-
 }

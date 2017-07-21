@@ -29,5 +29,4 @@ public interface ScoreDirectorFactory<Solution_> {
      * @return never null
      */
     ScoreDirector<Solution_> buildScoreDirector();
-
 }

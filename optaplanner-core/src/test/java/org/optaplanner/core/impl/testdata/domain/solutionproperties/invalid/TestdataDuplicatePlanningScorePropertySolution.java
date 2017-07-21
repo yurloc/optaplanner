@@ -77,5 +77,4 @@ public class TestdataDuplicatePlanningScorePropertySolution extends TestdataObje
     public void setScore(SimpleScore score) {
         this.score = score;
     }
-
 }

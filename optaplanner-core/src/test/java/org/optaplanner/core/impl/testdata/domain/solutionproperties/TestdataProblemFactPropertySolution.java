@@ -34,7 +34,8 @@ import org.optaplanner.core.impl.testdata.domain.TestdataValue;
 public class TestdataProblemFactPropertySolution extends TestdataObject {
 
     public static SolutionDescriptor<TestdataProblemFactPropertySolution> buildSolutionDescriptor() {
-        return SolutionDescriptor.buildSolutionDescriptor(TestdataProblemFactPropertySolution.class, TestdataEntity.class);
+        return SolutionDescriptor.buildSolutionDescriptor(TestdataProblemFactPropertySolution.class,
+                                                          TestdataEntity.class);
     }
 
     private List<TestdataValue> valueList;
@@ -96,5 +97,4 @@ public class TestdataProblemFactPropertySolution extends TestdataObject {
     public void setScore(SimpleScore score) {
         this.score = score;
     }
-
 }

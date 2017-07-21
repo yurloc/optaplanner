@@ -33,7 +33,7 @@ class TestGenSetValueProvider extends TestGenAbstractValueProvider<Set<?>> {
     private final List<TestGenFact> requiredFacts;
 
     public TestGenSetValueProvider(Set<?> value, String identifier, Type genericType,
-            Map<Object, TestGenFact> existingInstances) {
+                                   Map<Object, TestGenFact> existingInstances) {
         super(value);
         this.identifier = identifier;
         this.typeArgument = genericType;
@@ -70,5 +70,4 @@ class TestGenSetValueProvider extends TestGenAbstractValueProvider<Set<?>> {
     public String toString() {
         return identifier;
     }
-
 }

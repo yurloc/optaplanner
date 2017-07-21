@@ -41,5 +41,4 @@ public class ValueRangeFactoryTest {
         solution = solver.solve(solution);
         assertNotNull(solution);
     }
-
 }

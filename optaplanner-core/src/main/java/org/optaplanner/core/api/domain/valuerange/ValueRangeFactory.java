@@ -114,7 +114,8 @@ public class ValueRangeFactory {
      * @param incrementUnit {@code > 0}
      * @return never null
      */
-    public static CountableValueRange<BigInteger> createBigIntegerValueRange(BigInteger from, BigInteger to, BigInteger incrementUnit) {
+    public static CountableValueRange<BigInteger> createBigIntegerValueRange(BigInteger from, BigInteger to,
+                                                                             BigInteger incrementUnit) {
         return new BigIntegerValueRange(from, to, incrementUnit);
     }
 
@@ -137,7 +138,8 @@ public class ValueRangeFactory {
      * @param incrementUnit {@code > 0}
      * @return never null
      */
-    public static CountableValueRange<BigDecimal> createBigDecimalValueRange(BigDecimal from, BigDecimal to, BigDecimal incrementUnit) {
+    public static CountableValueRange<BigDecimal> createBigDecimalValueRange(BigDecimal from, BigDecimal to,
+                                                                             BigDecimal incrementUnit) {
         return new BigDecimalValueRange(from, to, incrementUnit);
     }
 
@@ -195,5 +197,4 @@ public class ValueRangeFactory {
             Temporal_ from, Temporal_ to, long incrementUnitAmount, TemporalUnit incrementUnitType) {
         return new TemporalValueRange<>(from, to, incrementUnitAmount, incrementUnitType);
     }
-
 }

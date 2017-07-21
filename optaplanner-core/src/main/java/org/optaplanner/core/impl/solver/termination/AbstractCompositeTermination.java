@@ -92,12 +92,12 @@ public abstract class AbstractCompositeTermination extends AbstractTermination i
     // Other methods
     // ************************************************************************
 
-    protected List<Termination> createChildThreadTerminationList(DefaultSolverScope solverScope, ChildThreadType childThreadType) {
+    protected List<Termination> createChildThreadTerminationList(DefaultSolverScope solverScope,
+                                                                 ChildThreadType childThreadType) {
         List<Termination> childThreadTerminationList = new ArrayList<>(terminationList.size());
         for (Termination termination : terminationList) {
             childThreadTerminationList.add(termination.createChildThreadTermination(solverScope, childThreadType));
         }
         return childThreadTerminationList;
     }
-
 }

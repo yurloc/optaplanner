@@ -25,7 +25,8 @@ import org.optaplanner.core.impl.score.director.InnerScoreDirector;
 /**
  * To get an instance, demand a {@link CollectionInverseVariableDemand} from {@link InnerScoreDirector#getSupplyManager()}.
  */
-public class CollectionInverseVariableDemand implements Demand<CollectionInverseVariableSupply>, Serializable {
+public class CollectionInverseVariableDemand implements Demand<CollectionInverseVariableSupply>,
+                                                        Serializable {
 
     private static final int CLASS_NAME_HASH_CODE = CollectionInverseVariableDemand.class.getName().hashCode() * 37;
 
@@ -76,5 +77,4 @@ public class CollectionInverseVariableDemand implements Demand<CollectionInverse
     public String toString() {
         return getClass().getSimpleName() + "(" + sourceVariableDescriptor.getSimpleEntityAndVariableName() + ")";
     }
-
 }

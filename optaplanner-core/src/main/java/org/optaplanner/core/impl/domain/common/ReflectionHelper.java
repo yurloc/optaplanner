@@ -111,14 +111,16 @@ public final class ReflectionHelper {
      */
     public static Method getGetterMethod(Class<?> containingClass, String propertyName) {
         String getterName = PROPERTY_ACCESSOR_PREFIX_GET
-                + (propertyName.isEmpty() ? "" : propertyName.substring(0, 1).toUpperCase() + propertyName.substring(1));
+                + (propertyName.isEmpty() ? "" : propertyName.substring(0, 1).toUpperCase() + propertyName.substring(
+                1));
         try {
             return containingClass.getMethod(getterName);
         } catch (NoSuchMethodException e) {
             // intentionally empty
         }
         String isserName = PROPERTY_ACCESSOR_PREFIX_IS
-                + (propertyName.isEmpty() ? "" : propertyName.substring(0, 1).toUpperCase() + propertyName.substring(1));
+                + (propertyName.isEmpty() ? "" : propertyName.substring(0, 1).toUpperCase() + propertyName.substring(
+                1));
         try {
             Method method = containingClass.getMethod(isserName);
             if (method.getReturnType() == boolean.class) {
@@ -160,7 +162,8 @@ public final class ReflectionHelper {
      */
     public static Method getSetterMethod(Class<?> containingClass, Class<?> propertyType, String propertyName) {
         String setterName = PROPERTY_MUTATOR_PREFIX
-                + (propertyName.isEmpty() ? "" : propertyName.substring(0, 1).toUpperCase() + propertyName.substring(1));
+                + (propertyName.isEmpty() ? "" : propertyName.substring(0, 1).toUpperCase() + propertyName.substring(
+                1));
         try {
             return containingClass.getMethod(setterName, propertyType);
         } catch (NoSuchMethodException e) {
@@ -175,7 +178,8 @@ public final class ReflectionHelper {
      */
     public static Method getSetterMethod(Class<?> containingClass, String propertyName) {
         String setterName = PROPERTY_MUTATOR_PREFIX
-                + (propertyName.isEmpty() ? "" : propertyName.substring(0, 1).toUpperCase() + propertyName.substring(1));
+                + (propertyName.isEmpty() ? "" : propertyName.substring(0, 1).toUpperCase() + propertyName.substring(
+                1));
         Method[] methods = Arrays.stream(containingClass.getMethods())
                 .filter(method -> method.getName().equals(setterName))
                 .toArray(Method[]::new);
@@ -184,8 +188,8 @@ public final class ReflectionHelper {
         }
         if (methods.length > 1) {
             throw new IllegalStateException("The containingClass (" + containingClass
-                    + ") has multiple setter methods (" + Arrays.toString(methods)
-                    + ") with the propertyName (" + propertyName + ").");
+                                                    + ") has multiple setter methods (" + Arrays.toString(methods)
+                                                    + ") with the propertyName (" + propertyName + ").");
         }
         return methods[0];
     }
@@ -203,41 +207,41 @@ public final class ReflectionHelper {
     public static void assertGetterMethod(Method getterMethod, Class<? extends Annotation> annotationClass) {
         if (getterMethod.getParameterTypes().length != 0) {
             throw new IllegalStateException("The getterMethod (" + getterMethod + ") with a "
-                    + annotationClass.getSimpleName() + " annotation must not have any parameters ("
-                    + Arrays.toString(getterMethod.getParameterTypes()) + ").");
+                                                    + annotationClass.getSimpleName() + " annotation must not have any parameters ("
+                                                    + Arrays.toString(getterMethod.getParameterTypes()) + ").");
         }
         String methodName = getterMethod.getName();
         if (methodName.startsWith(PROPERTY_ACCESSOR_PREFIX_GET)) {
             if (getterMethod.getReturnType() == void.class) {
                 throw new IllegalStateException("The getterMethod (" + getterMethod + ") with a "
-                        + annotationClass.getSimpleName() + " annotation must have a non-void return type ("
-                        + getterMethod.getReturnType() + ").");
+                                                        + annotationClass.getSimpleName() + " annotation must have a non-void return type ("
+                                                        + getterMethod.getReturnType() + ").");
             }
         } else if (methodName.startsWith(PROPERTY_ACCESSOR_PREFIX_IS)) {
             if (getterMethod.getReturnType() != boolean.class) {
                 throw new IllegalStateException("The getterMethod (" + getterMethod + ") with a "
-                        + annotationClass.getSimpleName() + " annotation must have a primitive boolean return type ("
-                        + getterMethod.getReturnType() + ") or use another prefix in its methodName ("
-                        + methodName + ").");
+                                                        + annotationClass.getSimpleName() + " annotation must have a primitive boolean return type ("
+                                                        + getterMethod.getReturnType() + ") or use another prefix in its methodName ("
+                                                        + methodName + ").");
             }
         } else {
             throw new IllegalStateException("The getterMethod (" + getterMethod + ") with a "
-                    + annotationClass.getSimpleName() + " annotation has a methodName ("
-                    + methodName + ") that does not start with a valid prefix ("
-                    + Arrays.toString(PROPERTY_ACCESSOR_PREFIXES) + ").");
+                                                    + annotationClass.getSimpleName() + " annotation has a methodName ("
+                                                    + methodName + ") that does not start with a valid prefix ("
+                                                    + Arrays.toString(PROPERTY_ACCESSOR_PREFIXES) + ").");
         }
     }
 
     public static void assertReadMethod(Method readMethod, Class<? extends Annotation> annotationClass) {
         if (readMethod.getParameterTypes().length != 0) {
             throw new IllegalStateException("The readMethod (" + readMethod + ") with a "
-                    + annotationClass.getSimpleName() + " annotation must not have any parameters ("
-                    + Arrays.toString(readMethod.getParameterTypes()) + ").");
+                                                    + annotationClass.getSimpleName() + " annotation must not have any parameters ("
+                                                    + Arrays.toString(readMethod.getParameterTypes()) + ").");
         }
         if (readMethod.getReturnType() == void.class) {
             throw new IllegalStateException("The readMethod (" + readMethod + ") with a "
-                    + annotationClass.getSimpleName() + " annotation must have a non-void return type ("
-                    + readMethod.getReturnType() + ").");
+                                                    + annotationClass.getSimpleName() + " annotation must have a non-void return type ("
+                                                    + readMethod.getReturnType() + ").");
         }
     }
 
@@ -291,6 +295,5 @@ public final class ReflectionHelper {
 
     private ReflectionHelper() {
     }
-
 }
 

@@ -28,13 +28,13 @@ public class SelectionCacheLifecycleBridge implements PhaseLifecycleListener {
     protected final SelectionCacheLifecycleListener selectionCacheLifecycleListener;
 
     public SelectionCacheLifecycleBridge(SelectionCacheType cacheType,
-            SelectionCacheLifecycleListener selectionCacheLifecycleListener) {
+                                         SelectionCacheLifecycleListener selectionCacheLifecycleListener) {
         this.cacheType = cacheType;
         this.selectionCacheLifecycleListener = selectionCacheLifecycleListener;
         if (cacheType == null) {
             throw new IllegalArgumentException("The cacheType (" + cacheType
-                    + ") for selectionCacheLifecycleListener (" + selectionCacheLifecycleListener
-                    + ") should have already been resolved.");
+                                                       + ") for selectionCacheLifecycleListener (" + selectionCacheLifecycleListener
+                                                       + ") should have already been resolved.");
         }
     }
 

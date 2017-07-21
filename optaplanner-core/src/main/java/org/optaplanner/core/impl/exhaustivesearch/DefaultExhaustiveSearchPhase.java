@@ -54,7 +54,7 @@ public class DefaultExhaustiveSearchPhase<Solution_> extends AbstractPhase<Solut
     protected boolean assertExpectedWorkingSolutionScore = false;
 
     public DefaultExhaustiveSearchPhase(int phaseIndex, String logIndentation,
-            BestSolutionRecaller<Solution_> bestSolutionRecaller, Termination termination) {
+                                        BestSolutionRecaller<Solution_> bestSolutionRecaller, Termination termination) {
         super(phaseIndex, logIndentation, bestSolutionRecaller, termination);
     }
 
@@ -141,8 +141,8 @@ public class DefaultExhaustiveSearchPhase<Solution_> extends AbstractPhase<Solut
         long entitySize = entitySelector.getSize();
         if (entitySize > (long) Integer.MAX_VALUE) {
             throw new IllegalStateException("The entitySelector (" + entitySelector
-                    + ") has an entitySize (" + entitySize
-                    + ") which is higher than Integer.MAX_VALUE.");
+                                                    + ") has an entitySize (" + entitySize
+                                                    + ") which is higher than Integer.MAX_VALUE.");
         }
         List<ExhaustiveSearchLayer> layerList = new ArrayList<>((int) entitySize);
         int depth = 0;
@@ -176,9 +176,9 @@ public class DefaultExhaustiveSearchPhase<Solution_> extends AbstractPhase<Solut
             startNode.setScore(score);
             ScoreBounder scoreBounder = decider.getScoreBounder();
             phaseScope.setBestPessimisticBound(startLayer.isLastLayer() ? score
-                    : scoreBounder.calculatePessimisticBound(scoreDirector, score));
+                                                       : scoreBounder.calculatePessimisticBound(scoreDirector, score));
             startNode.setOptimisticBound(startLayer.isLastLayer() ? score
-                    : scoreBounder.calculateOptimisticBound(scoreDirector, score));
+                                                 : scoreBounder.calculateOptimisticBound(scoreDirector, score));
         }
         if (!startLayer.isLastLayer()) {
             phaseScope.addExpandableNode(startNode);
@@ -237,7 +237,8 @@ public class DefaultExhaustiveSearchPhase<Solution_> extends AbstractPhase<Solut
         decider.stepEnded(stepScope);
         if (logger.isDebugEnabled()) {
             ExhaustiveSearchPhaseScope<Solution_> phaseScope = stepScope.getPhaseScope();
-            logger.debug("{}    ES step ({}), time spent ({}), treeId ({}), {} best score ({}), selected move count ({}).",
+            logger.debug(
+                    "{}    ES step ({}), time spent ({}), treeId ({}), {} best score ({}), selected move count ({}).",
                     logIndentation,
                     stepScope.getStepIndex(),
                     phaseScope.calculateSolverTimeMillisSpentUpToNow(),
@@ -254,13 +255,13 @@ public class DefaultExhaustiveSearchPhase<Solution_> extends AbstractPhase<Solut
         decider.phaseEnded(phaseScope);
         phaseScope.endingNow();
         logger.info("{}Exhaustive Search phase ({}) ended: time spent ({}), best score ({}),"
-                        + " score calculation speed ({}/sec), step total ({}).",
-                logIndentation,
-                phaseIndex,
-                phaseScope.calculateSolverTimeMillisSpentUpToNow(),
-                phaseScope.getBestScore(),
-                phaseScope.getPhaseScoreCalculationSpeed(),
-                phaseScope.getNextStepIndex());
+                            + " score calculation speed ({}/sec), step total ({}).",
+                    logIndentation,
+                    phaseIndex,
+                    phaseScope.calculateSolverTimeMillisSpentUpToNow(),
+                    phaseScope.getBestScore(),
+                    phaseScope.getPhaseScoreCalculationSpeed(),
+                    phaseScope.getNextStepIndex());
     }
 
     @Override
@@ -269,5 +270,4 @@ public class DefaultExhaustiveSearchPhase<Solution_> extends AbstractPhase<Solut
         entitySelector.solvingEnded(solverScope);
         decider.solvingEnded(solverScope);
     }
-
 }

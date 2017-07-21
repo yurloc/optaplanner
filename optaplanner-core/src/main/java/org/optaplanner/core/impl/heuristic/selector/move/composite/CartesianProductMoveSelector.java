@@ -44,7 +44,7 @@ public class CartesianProductMoveSelector extends CompositeMoveSelector {
     private final boolean ignoreEmptyChildIterators;
 
     public CartesianProductMoveSelector(List<MoveSelector> childMoveSelectorList, boolean ignoreEmptyChildIterators,
-            boolean randomSelection) {
+                                        boolean randomSelection) {
         super(childMoveSelectorList, randomSelection);
         this.ignoreEmptyChildIterators = ignoreEmptyChildIterators;
     }
@@ -168,7 +168,6 @@ public class CartesianProductMoveSelector extends CompositeMoveSelector {
             }
             return new CompositeMove(moveList);
         }
-
     }
 
     public class RandomCartesianProductMoveIterator extends SelectionIterator<Move> {
@@ -216,7 +215,7 @@ public class CartesianProductMoveSelector extends CompositeMoveSelector {
                             skip = true;
                         } else {
                             throw new NoSuchElementException("The iterator of childMoveSelector (" + moveSelector
-                                    + ") is empty.");
+                                                                     + ") is empty.");
                         }
                     }
                 }
@@ -227,19 +226,17 @@ public class CartesianProductMoveSelector extends CompositeMoveSelector {
             if (ignoreEmptyChildIterators) {
                 if (moveList.isEmpty()) {
                     throw new NoSuchElementException("All iterators of childMoveSelectorList (" + childMoveSelectorList
-                            + ") are empty.");
+                                                             + ") are empty.");
                 } else if (moveList.size() == 1) {
                     return moveList.get(0);
                 }
             }
             return new CompositeMove(moveList.toArray(new Move[0]));
         }
-
     }
 
     @Override
     public String toString() {
         return "CartesianProduct(" + childMoveSelectorList + ")";
     }
-
 }

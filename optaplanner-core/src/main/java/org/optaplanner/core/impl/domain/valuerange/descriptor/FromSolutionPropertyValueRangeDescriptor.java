@@ -52,5 +52,4 @@ public class FromSolutionPropertyValueRangeDescriptor<Solution_>
     public ValueRange<?> extractValueRange(Solution_ solution) {
         return readValueRange(solution);
     }
-
 }

@@ -118,5 +118,4 @@ public class AndCompositeTermination extends AbstractCompositeTermination {
     public String toString() {
         return "And(" + terminationList + ")";
     }
-
 }

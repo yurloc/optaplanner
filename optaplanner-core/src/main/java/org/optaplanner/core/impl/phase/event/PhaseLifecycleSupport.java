@@ -61,5 +61,4 @@ public class PhaseLifecycleSupport<Solution_> extends AbstractEventSupport<Phase
             phaseLifecycleListener.solvingEnded(solverScope);
         }
     }
-
 }

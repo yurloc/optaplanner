@@ -91,7 +91,8 @@ public class TestdataEntityCollectionPropertyEntity extends TestdataObject {
         return stringToEntityListMap;
     }
 
-    public void setStringToEntityListMap(Map<String, List<TestdataEntityCollectionPropertyEntity>> stringToEntityListMap) {
+    public void setStringToEntityListMap(
+            Map<String, List<TestdataEntityCollectionPropertyEntity>> stringToEntityListMap) {
         this.stringToEntityListMap = stringToEntityListMap;
     }
 
@@ -107,5 +108,4 @@ public class TestdataEntityCollectionPropertyEntity extends TestdataObject {
     // ************************************************************************
     // Complex methods
     // ************************************************************************
-
 }

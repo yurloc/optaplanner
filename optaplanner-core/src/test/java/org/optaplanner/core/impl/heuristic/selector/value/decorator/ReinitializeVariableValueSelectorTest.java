@@ -29,7 +29,8 @@ import org.optaplanner.core.impl.testdata.domain.TestdataValue;
 import org.optaplanner.core.impl.testdata.domain.multivar.TestdataMultiVarEntity;
 
 import static org.mockito.Mockito.*;
-import static org.optaplanner.core.impl.testdata.util.PlannerAssert.*;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.assertAllCodesOfValueSelectorForEntity;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.verifyPhaseLifecycle;
 
 public class ReinitializeVariableValueSelectorTest {
 
@@ -43,7 +44,7 @@ public class ReinitializeVariableValueSelectorTest {
         TestdataValue v2 = new TestdataValue("v2");
         TestdataValue v3 = new TestdataValue("v3");
         ValueSelector childValueSelector = SelectorTestUtils.mockValueSelector(variableDescriptor,
-                v1, v2, v3);
+                                                                               v1, v2, v3);
 
         ValueSelector valueSelector = new ReinitializeVariableValueSelector(childValueSelector);
 
@@ -80,7 +81,6 @@ public class ReinitializeVariableValueSelectorTest {
         assertAllCodesOfValueSelectorForEntity(valueSelector, e2, "v1", "v2", "v3");
         valueSelector.stepEnded(stepScopeB1);
 
-
         AbstractStepScope stepScopeB2 = mock(AbstractStepScope.class);
         when(stepScopeB2.getPhaseScope()).thenReturn(phaseScopeB);
         valueSelector.stepStarted(stepScopeB2);
@@ -108,7 +108,7 @@ public class ReinitializeVariableValueSelectorTest {
         TestdataValue s2 = new TestdataValue("s2");
         TestdataValue s3 = new TestdataValue("s3");
         ValueSelector childValueSelector = SelectorTestUtils.mockValueSelector(variableDescriptor,
-                s1, s2, s3);
+                                                                               s1, s2, s3);
 
         ValueSelector valueSelector = new ReinitializeVariableValueSelector(childValueSelector);
 
@@ -146,7 +146,6 @@ public class ReinitializeVariableValueSelectorTest {
         assertAllCodesOfValueSelectorForEntity(valueSelector, e2, "s1", "s2", "s3");
         valueSelector.stepEnded(stepScopeB1);
 
-
         AbstractStepScope stepScopeB2 = mock(AbstractStepScope.class);
         when(stepScopeB2.getPhaseScope()).thenReturn(phaseScopeB);
         valueSelector.stepStarted(stepScopeB2);
@@ -162,5 +161,4 @@ public class ReinitializeVariableValueSelectorTest {
         verify(childValueSelector, atMost(4)).iterator(any());
         verify(childValueSelector, atMost(4)).getSize(any());
     }
-
 }

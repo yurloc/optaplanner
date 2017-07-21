@@ -55,11 +55,8 @@ import org.optaplanner.core.impl.testdata.domain.reflect.accessmodifier.Testdata
 import org.optaplanner.core.impl.testdata.domain.reflect.field.TestdataFieldAnnotatedEntity;
 import org.optaplanner.core.impl.testdata.domain.reflect.field.TestdataFieldAnnotatedSolution;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotSame;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
-import static org.optaplanner.core.impl.testdata.util.PlannerAssert.*;
+import static org.junit.Assert.*;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.assertCode;
 import static org.optaplanner.core.impl.testdata.util.PlannerAssert.assertNull;
 
 public abstract class AbstractSolutionClonerTest {
@@ -112,7 +109,6 @@ public abstract class AbstractSolutionClonerTest {
         assertCode("1", cloneB.getValue());
     }
 
-
     @Test
     public void cloneFieldAnnotatedSolution() {
         SolutionDescriptor solutionDescriptor = TestdataFieldAnnotatedSolution.buildSolutionDescriptor();
@@ -129,7 +125,7 @@ public abstract class AbstractSolutionClonerTest {
         List<TestdataValue> valueList = Arrays.asList(val1, val2, val3);
         List<TestdataFieldAnnotatedEntity> originalEntityList = Arrays.asList(a, b, c, d);
         TestdataFieldAnnotatedSolution original = new TestdataFieldAnnotatedSolution("solution",
-                valueList, originalEntityList);
+                                                                                     valueList, originalEntityList);
 
         TestdataFieldAnnotatedSolution clone = cloner.cloneSolution(original);
 
@@ -221,13 +217,15 @@ public abstract class AbstractSolutionClonerTest {
         TestdataUnannotatedExtendedEntity d = new TestdataUnannotatedExtendedEntity("d", val3, c);
         c.setExtraObject(d);
 
-        TestdataUnannotatedExtendedSolution original = new TestdataUnannotatedExtendedSolution("solution", "extraObjectOnSolution");
+        TestdataUnannotatedExtendedSolution original = new TestdataUnannotatedExtendedSolution("solution",
+                                                                                               "extraObjectOnSolution");
         List<TestdataValue> valueList = Arrays.asList(val1, val2, val3);
         original.setValueList(valueList);
         List<TestdataEntity> originalEntityList = Arrays.<TestdataEntity>asList(a, b, c, d);
         original.setEntityList(originalEntityList);
 
-        TestdataUnannotatedExtendedSolution clone = (TestdataUnannotatedExtendedSolution) cloner.cloneSolution(original);
+        TestdataUnannotatedExtendedSolution clone = (TestdataUnannotatedExtendedSolution) cloner.cloneSolution(
+                original);
 
         assertNotSame(original, clone);
         assertCode("solution", clone);
@@ -272,7 +270,8 @@ public abstract class AbstractSolutionClonerTest {
         TestdataExtendedThirdPartyEntity d = new TestdataExtendedThirdPartyEntity("d", val3, c);
         c.setExtraObject(d);
 
-        TestdataExtendedThirdPartySolution original = new TestdataExtendedThirdPartySolution("solution", "extraObjectOnSolution");
+        TestdataExtendedThirdPartySolution original = new TestdataExtendedThirdPartySolution("solution",
+                                                                                             "extraObjectOnSolution");
         List<TestdataValue> valueList = Arrays.asList(val1, val2, val3);
         original.setValueList(valueList);
         List<TestdataThirdPartyEntityPojo> originalEntityList = Arrays.<TestdataThirdPartyEntityPojo>asList(a, b, c, d);
@@ -310,15 +309,16 @@ public abstract class AbstractSolutionClonerTest {
     }
 
     private void assertEntityClone(TestdataEntity originalEntity, TestdataEntity cloneEntity,
-            String entityCode, String valueCode) {
+                                   String entityCode, String valueCode) {
         assertNotSame(originalEntity, cloneEntity);
         assertCode(entityCode, originalEntity);
         assertCode(entityCode, cloneEntity);
         assertCode(valueCode, cloneEntity.getValue());
     }
 
-    private void assertEntityClone(TestdataFieldAnnotatedEntity originalEntity, TestdataFieldAnnotatedEntity cloneEntity,
-            String entityCode, String valueCode) {
+    private void assertEntityClone(TestdataFieldAnnotatedEntity originalEntity,
+                                   TestdataFieldAnnotatedEntity cloneEntity,
+                                   String entityCode, String valueCode) {
         assertNotSame(originalEntity, cloneEntity);
         assertCode(entityCode, originalEntity);
         assertCode(entityCode, cloneEntity);
@@ -326,7 +326,7 @@ public abstract class AbstractSolutionClonerTest {
     }
 
     private void assertEntityClone(TestdataThirdPartyEntityPojo originalEntity,
-            TestdataThirdPartyEntityPojo cloneEntity, String entityCode, String valueCode) {
+                                   TestdataThirdPartyEntityPojo cloneEntity, String entityCode, String valueCode) {
         assertNotSame(originalEntity, cloneEntity);
         assertCode(entityCode, originalEntity);
         assertCode(entityCode, cloneEntity);
@@ -377,7 +377,7 @@ public abstract class AbstractSolutionClonerTest {
     }
 
     private void assertChainedEntityClone(TestdataChainedEntity originalEntity, TestdataChainedEntity cloneEntity,
-            String entityCode, TestdataChainedObject value) {
+                                          String entityCode, TestdataChainedObject value) {
         assertNotSame(originalEntity, cloneEntity);
         assertCode(entityCode, originalEntity);
         assertCode(entityCode, cloneEntity);
@@ -439,7 +439,7 @@ public abstract class AbstractSolutionClonerTest {
     }
 
     private void assertSetBasedEntityClone(TestdataSetBasedEntity originalEntity, TestdataSetBasedEntity cloneEntity,
-            String entityCode, String valueCode) {
+                                           String entityCode, String valueCode) {
         assertNotSame(originalEntity, cloneEntity);
         assertCode(entityCode, originalEntity);
         assertCode(entityCode, cloneEntity);
@@ -545,7 +545,8 @@ public abstract class AbstractSolutionClonerTest {
     }
 
     private void assertEntityCollectionPropertyEntityClone(TestdataEntityCollectionPropertyEntity originalEntity,
-            TestdataEntityCollectionPropertyEntity cloneEntity, String entityCode, String valueCode) {
+                                                           TestdataEntityCollectionPropertyEntity cloneEntity,
+                                                           String entityCode, String valueCode) {
         assertNotSame(originalEntity, cloneEntity);
         assertCode(entityCode, originalEntity);
         assertCode(entityCode, cloneEntity);
@@ -617,8 +618,9 @@ public abstract class AbstractSolutionClonerTest {
         assertEquals("shadow value b1", cloneB.getShadowVariableMap().get("shadow key b1"));
     }
 
-    private void assertDeepCloningEntityClone(TestdataDeepCloningEntity originalEntity, TestdataDeepCloningEntity cloneEntity,
-            String entityCode) {
+    private void assertDeepCloningEntityClone(TestdataDeepCloningEntity originalEntity,
+                                              TestdataDeepCloningEntity cloneEntity,
+                                              String entityCode) {
         assertNotSame(originalEntity, cloneEntity);
         assertCode(entityCode, originalEntity);
         assertCode(entityCode, cloneEntity);
@@ -714,8 +716,9 @@ public abstract class AbstractSolutionClonerTest {
         assertEquals("shadow value b1", cloneB.getShadowVariableMap().get("shadow key b1"));
     }
 
-    private void assertDeepCloningEntityClone(TestdataFieldAnnotatedDeepCloningEntity originalEntity, TestdataFieldAnnotatedDeepCloningEntity cloneEntity,
-            String entityCode) {
+    private void assertDeepCloningEntityClone(TestdataFieldAnnotatedDeepCloningEntity originalEntity,
+                                              TestdataFieldAnnotatedDeepCloningEntity cloneEntity,
+                                              String entityCode) {
         assertNotSame(originalEntity, cloneEntity);
         assertCode(entityCode, originalEntity);
         assertCode(entityCode, cloneEntity);
@@ -745,5 +748,4 @@ public abstract class AbstractSolutionClonerTest {
             }
         }
     }
-
 }

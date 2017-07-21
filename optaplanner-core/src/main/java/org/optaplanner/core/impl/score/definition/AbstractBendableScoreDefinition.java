@@ -23,7 +23,7 @@ public abstract class AbstractBendableScoreDefinition<S extends FeasibilityScore
     protected static String[] generateLevelLabels(int hardLevelsSize, int softLevelsSize) {
         if (hardLevelsSize < 0 || softLevelsSize < 0) {
             throw new IllegalArgumentException("The hardLevelsSize (" + hardLevelsSize
-                    + ") and softLevelsSize (" + softLevelsSize + ") should be positive.");
+                                                       + ") and softLevelsSize (" + softLevelsSize + ") should be positive.");
         }
         String[] levelLabels = new String[hardLevelsSize + softLevelsSize];
         for (int i = 0; i < levelLabels.length; i++) {
@@ -68,5 +68,4 @@ public abstract class AbstractBendableScoreDefinition<S extends FeasibilityScore
     public int getFeasibleLevelsSize() {
         return hardLevelsSize;
     }
-
 }

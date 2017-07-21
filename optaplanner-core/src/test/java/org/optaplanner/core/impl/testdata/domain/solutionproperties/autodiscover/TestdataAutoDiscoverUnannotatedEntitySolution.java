@@ -51,8 +51,9 @@ public class TestdataAutoDiscoverUnannotatedEntitySolution extends TestdataObjec
     }
 
     public TestdataAutoDiscoverUnannotatedEntitySolution(String code, TestdataObject singleProblemFact,
-            List<TestdataValue> problemFactList, List<TestdataUnannotatedExtendedEntity> entityList,
-            TestdataUnannotatedExtendedEntity otherEntity) {
+                                                         List<TestdataValue> problemFactList,
+                                                         List<TestdataUnannotatedExtendedEntity> entityList,
+                                                         TestdataUnannotatedExtendedEntity otherEntity) {
         super(code);
         this.singleProblemFactField = singleProblemFact;
         this.problemFactListField = problemFactList;
@@ -86,5 +87,4 @@ public class TestdataAutoDiscoverUnannotatedEntitySolution extends TestdataObjec
     public void setScore(SimpleScore score) {
         this.score = score;
     }
-
 }

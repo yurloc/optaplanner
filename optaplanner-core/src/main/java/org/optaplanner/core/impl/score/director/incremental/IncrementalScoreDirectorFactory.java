@@ -31,7 +31,8 @@ public class IncrementalScoreDirectorFactory<Solution_> extends AbstractScoreDir
 
     private Class<? extends IncrementalScoreCalculator> incrementalScoreCalculatorClass;
 
-    public IncrementalScoreDirectorFactory(Class<? extends IncrementalScoreCalculator> incrementalScoreCalculatorClass) {
+    public IncrementalScoreDirectorFactory(
+            Class<? extends IncrementalScoreCalculator> incrementalScoreCalculatorClass) {
         this.incrementalScoreCalculatorClass = incrementalScoreCalculatorClass;
     }
 
@@ -47,9 +48,10 @@ public class IncrementalScoreDirectorFactory<Solution_> extends AbstractScoreDir
     public IncrementalScoreDirector<Solution_> buildScoreDirector(
             boolean lookUpEnabled, boolean constraintMatchEnabledPreference) {
         IncrementalScoreCalculator<Solution_> incrementalScoreCalculator = ConfigUtils.newInstance(this,
-                "incrementalScoreCalculatorClass", incrementalScoreCalculatorClass);
+                                                                                                   "incrementalScoreCalculatorClass",
+                                                                                                   incrementalScoreCalculatorClass);
         return new IncrementalScoreDirector<>(this,
-                lookUpEnabled, constraintMatchEnabledPreference, incrementalScoreCalculator);
+                                              lookUpEnabled, constraintMatchEnabledPreference,
+                                              incrementalScoreCalculator);
     }
-
 }

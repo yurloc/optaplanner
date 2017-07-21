@@ -143,10 +143,10 @@ public interface ScoreDirector<Solution_> {
      * Matching is determined by the {@link LookUpStrategyType} on {@link PlanningSolution}.
      * Matching uses a {@link PlanningId} by default.
      * @param externalObject sometimes null
+     * @param <E> the object type
      * @return null if externalObject is null or if there is no workingObject for externalObject
      * @throws IllegalArgumentException if it cannot be located or if the externalObject's class is not supported
      * @throws IllegalStateException if it cannot be located
-     * @param <E> the object type
      */
     <E> E lookUpWorkingObject(E externalObject);
 
@@ -154,5 +154,4 @@ public interface ScoreDirector<Solution_> {
      * Needs to be called after use because some implementations needs to clean up their resources.
      */
     void dispose();
-
 }

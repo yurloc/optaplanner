@@ -116,5 +116,4 @@ public interface Move<Solution_> {
      * @return never null
      */
     Collection<? extends Object> getPlanningValues();
-
 }

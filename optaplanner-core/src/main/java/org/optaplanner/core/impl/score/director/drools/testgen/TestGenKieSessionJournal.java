@@ -51,7 +51,8 @@ public class TestGenKieSessionJournal {
         updateJournal = new ArrayList<>();
     }
 
-    public TestGenKieSessionJournal(List<TestGenFact> facts, List<TestGenKieSessionInsert> initialInsertJournal, List<TestGenKieSessionOperation> updateJournal) {
+    public TestGenKieSessionJournal(List<TestGenFact> facts, List<TestGenKieSessionInsert> initialInsertJournal,
+                                    List<TestGenKieSessionOperation> updateJournal) {
         this.facts = facts;
         this.initialInsertJournal = initialInsertJournal;
         this.updateJournal = updateJournal;
@@ -113,7 +114,7 @@ public class TestGenKieSessionJournal {
         TestGenFact entityFact = existingInstances.get(entity);
         if (entityFact == null) {
             throw new IllegalStateException("The entity (" + entity.getClass().getSimpleName()
-                    + "[" + entity + "]) is not a working fact");
+                                                    + "[" + entity + "]) is not a working fact");
         }
         Object value = variableDescriptor.getValue(entity);
         TestGenFact valueFact = value == null ? TestGenNullFact.INSTANCE : existingInstances.get(value);
@@ -179,5 +180,4 @@ public class TestGenKieSessionJournal {
     public List<TestGenKieSessionOperation> getMoveOperations() {
         return updateJournal;
     }
-
 }

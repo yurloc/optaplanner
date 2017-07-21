@@ -57,5 +57,4 @@ public class TestGenKieSessionFireAllRules implements TestGenKieSessionOperation
     public String toString() {
         return "operation F #" + id;
     }
-
 }

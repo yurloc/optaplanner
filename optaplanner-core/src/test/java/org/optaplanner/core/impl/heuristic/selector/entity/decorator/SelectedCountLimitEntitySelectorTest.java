@@ -25,14 +25,21 @@ import org.optaplanner.core.impl.solver.scope.DefaultSolverScope;
 import org.optaplanner.core.impl.testdata.domain.TestdataEntity;
 
 import static org.mockito.Mockito.*;
-import static org.optaplanner.core.impl.testdata.util.PlannerAssert.*;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.assertAllCodesOfEntitySelector;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.assertAllCodesOfIterator;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.assertEquals;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.verifyPhaseLifecycle;
 
 public class SelectedCountLimitEntitySelectorTest {
 
     @Test
     public void selectSizeLimitLowerThanSelectorSize() {
         EntitySelector childEntitySelector = SelectorTestUtils.mockEntitySelector(TestdataEntity.class,
-                new TestdataEntity("e1"), new TestdataEntity("e2"), new TestdataEntity("e3"), new TestdataEntity("e4"), new TestdataEntity("e5"));
+                                                                                  new TestdataEntity("e1"),
+                                                                                  new TestdataEntity("e2"),
+                                                                                  new TestdataEntity("e3"),
+                                                                                  new TestdataEntity("e4"),
+                                                                                  new TestdataEntity("e5"));
         EntitySelector entitySelector = new SelectedCountLimitEntitySelector(childEntitySelector, true, 3L);
 
         DefaultSolverScope solverScope = mock(DefaultSolverScope.class);
@@ -87,11 +94,12 @@ public class SelectedCountLimitEntitySelectorTest {
         verify(childEntitySelector, times(5)).getSize();
     }
 
-
     @Test
     public void selectSizeLimitHigherThanSelectorSize() {
         EntitySelector childEntitySelector = SelectorTestUtils.mockEntitySelector(TestdataEntity.class,
-                new TestdataEntity("e1"), new TestdataEntity("e2"), new TestdataEntity("e3"));
+                                                                                  new TestdataEntity("e1"),
+                                                                                  new TestdataEntity("e2"),
+                                                                                  new TestdataEntity("e3"));
         EntitySelector entitySelector = new SelectedCountLimitEntitySelector(childEntitySelector, true, 5L);
 
         DefaultSolverScope solverScope = mock(DefaultSolverScope.class);
@@ -175,7 +183,10 @@ public class SelectedCountLimitEntitySelectorTest {
     @Test
     public void endingIteratorOriginalOrder() {
         EntitySelector childEntitySelector = SelectorTestUtils.mockEntitySelector(TestdataEntity.class,
-                new TestdataEntity("e1"), new TestdataEntity("e2"), new TestdataEntity("e3"), new TestdataEntity("e4"));
+                                                                                  new TestdataEntity("e1"),
+                                                                                  new TestdataEntity("e2"),
+                                                                                  new TestdataEntity("e3"),
+                                                                                  new TestdataEntity("e4"));
         EntitySelector entitySelector = new SelectedCountLimitEntitySelector(childEntitySelector, false, 2L);
         assertAllCodesOfIterator(entitySelector.endingIterator(), "e1", "e2");
     }
@@ -183,9 +194,11 @@ public class SelectedCountLimitEntitySelectorTest {
     @Test
     public void endingIteratorRandomOrder() {
         EntitySelector childEntitySelector = SelectorTestUtils.mockEntitySelector(TestdataEntity.class,
-                new TestdataEntity("e1"), new TestdataEntity("e2"), new TestdataEntity("e3"), new TestdataEntity("e4"));
+                                                                                  new TestdataEntity("e1"),
+                                                                                  new TestdataEntity("e2"),
+                                                                                  new TestdataEntity("e3"),
+                                                                                  new TestdataEntity("e4"));
         EntitySelector entitySelector = new SelectedCountLimitEntitySelector(childEntitySelector, true, 2L);
         assertAllCodesOfIterator(entitySelector.endingIterator(), "e1", "e2", "e3", "e4");
     }
-
 }

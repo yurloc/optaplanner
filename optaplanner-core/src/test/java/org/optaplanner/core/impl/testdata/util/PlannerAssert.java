@@ -1,4 +1,3 @@
-
 /*
  * Copyright 2012 Red Hat, Inc. and/or its affiliates.
  *
@@ -70,7 +69,7 @@ public class PlannerAssert extends Assert {
         if (!expectedClass.isInstance(actualInstance)) {
             String cleanMessage = message == null ? "" : message;
             throw new ComparisonFailure(cleanMessage, expectedClass.getName(),
-                    actualInstance == null ? "null" : actualInstance.getClass().getName());
+                                        actualInstance == null ? "null" : actualInstance.getClass().getName());
         }
     }
 
@@ -82,7 +81,7 @@ public class PlannerAssert extends Assert {
         if (expectedClass.isInstance(actualInstance)) {
             String cleanMessage = message == null ? "" : message;
             throw new ComparisonFailure(cleanMessage, "not " + expectedClass.getName(),
-                    actualInstance == null ? "null" : actualInstance.getClass().getName());
+                                        actualInstance == null ? "null" : actualInstance.getClass().getName());
         }
     }
 
@@ -114,8 +113,10 @@ public class PlannerAssert extends Assert {
             for (int j = i + 1; j < objects.length; j++) {
                 T a = objects[i];
                 T b = objects[j];
-                assertTrue("Object (" + a + ") must compare equal to object (" + b + ").", comparator.compare(a, b) == 0);
-                assertTrue("Object (" + b + ") must compare equal to object (" + a + ").", comparator.compare(b, a) == 0);
+                assertTrue("Object (" + a + ") must compare equal to object (" + b + ").",
+                           comparator.compare(a, b) == 0);
+                assertTrue("Object (" + b + ") must compare equal to object (" + a + ").",
+                           comparator.compare(b, a) == 0);
             }
         }
     }
@@ -131,7 +132,7 @@ public class PlannerAssert extends Assert {
         for (int i = 0; i < elements.length; i++) {
             if (!collection.contains(elements[i])) {
                 fail("The asserted collection (" + collection
-                        + ") does not contain expected element (" + elements[i] + ")");
+                             + ") does not contain expected element (" + elements[i] + ")");
             }
         }
     }
@@ -147,7 +148,7 @@ public class PlannerAssert extends Assert {
         for (int i = 0; i < keys.length; i++) {
             if (!map.containsKey(keys[i])) {
                 fail("The asserted map (" + map
-                        + ") does not contain expected key (" + keys[i] + ")");
+                             + ") does not contain expected key (" + keys[i] + ")");
             }
         }
     }
@@ -157,7 +158,7 @@ public class PlannerAssert extends Assert {
     // ************************************************************************
 
     public static void verifyPhaseLifecycle(PhaseLifecycleListener phaseLifecycleListener,
-            int solvingCount, int phaseCount, int stepCount) {
+                                            int solvingCount, int phaseCount, int stepCount) {
         verify(phaseLifecycleListener, times(solvingCount)).solvingStarted(Matchers.<DefaultSolverScope>any());
         verify(phaseLifecycleListener, times(phaseCount)).phaseStarted(Matchers.<AbstractPhaseScope>any());
         verify(phaseLifecycleListener, times(stepCount)).stepStarted(Matchers.<AbstractStepScope>any());
@@ -167,7 +168,7 @@ public class PlannerAssert extends Assert {
     }
 
     public static void verifyPhaseLifecycle(ConstructionHeuristicPhaseLifecycleListener phaseLifecycleListener,
-            int solvingCount, int phaseCount, int stepCount) {
+                                            int solvingCount, int phaseCount, int stepCount) {
         verify(phaseLifecycleListener, times(solvingCount)).solvingStarted(Matchers.<DefaultSolverScope>any());
         verify(phaseLifecycleListener, times(phaseCount)).phaseStarted(Matchers.<ConstructionHeuristicPhaseScope>any());
         verify(phaseLifecycleListener, times(stepCount)).stepStarted(Matchers.<ConstructionHeuristicStepScope>any());
@@ -177,7 +178,7 @@ public class PlannerAssert extends Assert {
     }
 
     public static void verifyPhaseLifecycle(LocalSearchPhaseLifecycleListener phaseLifecycleListener,
-            int solvingCount, int phaseCount, int stepCount) {
+                                            int solvingCount, int phaseCount, int stepCount) {
         verify(phaseLifecycleListener, times(solvingCount)).solvingStarted(Matchers.<DefaultSolverScope>any());
         verify(phaseLifecycleListener, times(phaseCount)).phaseStarted(Matchers.<LocalSearchPhaseScope>any());
         verify(phaseLifecycleListener, times(stepCount)).stepStarted(Matchers.<LocalSearchStepScope>any());
@@ -202,7 +203,7 @@ public class PlannerAssert extends Assert {
         try {
             iterator.next();
             fail("The iterator with hasNext() (" + false + ") is expected to throw a "
-                    + NoSuchElementException.class.getSimpleName() + " when calling next().");
+                         + NoSuchElementException.class.getSimpleName() + " when calling next().");
         } catch (NoSuchElementException e) {
             // Do nothing
         }
@@ -365,7 +366,8 @@ public class PlannerAssert extends Assert {
         assertCodesOfNeverEndingOfEntitySelector(entitySelector, DO_NOT_ASSERT_SIZE, codes);
     }
 
-    public static void assertCodesOfNeverEndingOfEntitySelector(EntitySelector entitySelector, long size, String... codes) {
+    public static void assertCodesOfNeverEndingOfEntitySelector(EntitySelector entitySelector, long size,
+                                                                String... codes) {
         Iterator<Object> iterator = entitySelector.iterator();
         assertCodesOfIterator(iterator, codes);
         assertTrue(iterator.hasNext());
@@ -390,12 +392,12 @@ public class PlannerAssert extends Assert {
     }
 
     public static void assertAllCodesOfValueSelector(EntityIndependentValueSelector valueSelector,
-            String... codes) {
+                                                     String... codes) {
         assertAllCodesOfValueSelector(valueSelector, (long) codes.length, codes);
     }
 
     public static void assertAllCodesOfValueSelector(EntityIndependentValueSelector valueSelector, long size,
-            String... codes) {
+                                                     String... codes) {
         assertAllCodesOfIterator(valueSelector.iterator(), codes);
         assertEquals(true, valueSelector.isCountable());
         assertEquals(false, valueSelector.isNeverEnding());
@@ -405,12 +407,12 @@ public class PlannerAssert extends Assert {
     }
 
     public static void assertAllCodesOfValueSelectorForEntity(ValueSelector valueSelector, Object entity,
-            String... codes) {
+                                                              String... codes) {
         assertAllCodesOfValueSelectorForEntity(valueSelector, entity, (long) codes.length, codes);
     }
 
     public static void assertAllCodesOfValueSelectorForEntity(ValueSelector valueSelector, Object entity,
-            long size,  String... codes) {
+                                                              long size, String... codes) {
         assertAllCodesOfIterator(valueSelector.iterator(entity), codes);
         assertEquals(true, valueSelector.isCountable());
         assertEquals(false, valueSelector.isNeverEnding());
@@ -420,12 +422,12 @@ public class PlannerAssert extends Assert {
     }
 
     public static void assertAllCodesOfSubChainSelector(SubChainSelector subChainSelector,
-            String... codes) {
+                                                        String... codes) {
         assertAllCodesOfSubChainSelector(subChainSelector, (long) codes.length, codes);
     }
 
     public static void assertAllCodesOfSubChainSelector(SubChainSelector subChainSelector, long size,
-            String... codes) {
+                                                        String... codes) {
         assertAllCodesOfIterator(subChainSelector.iterator(), codes);
         assertEquals(true, subChainSelector.isCountable());
         assertEquals(false, subChainSelector.isNeverEnding());
@@ -441,5 +443,4 @@ public class PlannerAssert extends Assert {
 
     private PlannerAssert() {
     }
-
 }

@@ -36,7 +36,6 @@ public abstract class AbstractTermination extends PhaseLifecycleListenerAdapter 
     @Override
     public Termination createChildThreadTermination(DefaultSolverScope solverScope, ChildThreadType childThreadType) {
         throw new UnsupportedOperationException("This terminationClass (" + getClass()
-                + ") does not yet support being used in child threads of type (" + childThreadType + ").");
+                                                        + ") does not yet support being used in child threads of type (" + childThreadType + ").");
     }
-
 }

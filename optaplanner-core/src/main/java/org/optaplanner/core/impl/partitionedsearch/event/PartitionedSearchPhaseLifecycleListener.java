@@ -33,5 +33,4 @@ public interface PartitionedSearchPhaseLifecycleListener<Solution_> extends Solv
     void stepEnded(PartitionedSearchStepScope<Solution_> stepScope);
 
     void phaseEnded(PartitionedSearchPhaseScope<Solution_> phaseScope);
-
 }

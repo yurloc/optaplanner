@@ -20,9 +20,10 @@ import java.util.Random;
 
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
-import static org.optaplanner.core.impl.testdata.util.PlannerAssert.*;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.assertAllElementsOfIterator;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.assertElementsOfIterator;
 
 public class DoubleValueRangeTest {
 
@@ -49,10 +50,9 @@ public class DoubleValueRangeTest {
         assertAllElementsOfIterator(new DoubleValueRange(7.0, 7.0).createRandomIterator(workingRandom));
         when(workingRandom.nextDouble()).thenReturn(Math.nextAfter(1.0, Double.NEGATIVE_INFINITY));
         assertElementsOfIterator(new DoubleValueRange(0.000001, 0.000002).createRandomIterator(workingRandom),
-                Math.nextAfter(0.000002, Double.NEGATIVE_INFINITY));
+                                 Math.nextAfter(0.000002, Double.NEGATIVE_INFINITY));
         when(workingRandom.nextDouble()).thenReturn(Math.nextAfter(1.0, Double.NEGATIVE_INFINITY));
         assertElementsOfIterator(new DoubleValueRange(1000000.0, 2000000.0).createRandomIterator(workingRandom),
-                Math.nextAfter(2000000.0, Double.NEGATIVE_INFINITY));
+                                 Math.nextAfter(2000000.0, Double.NEGATIVE_INFINITY));
     }
-
 }

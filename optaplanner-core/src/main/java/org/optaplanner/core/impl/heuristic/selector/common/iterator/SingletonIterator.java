@@ -95,5 +95,4 @@ public class SingletonIterator<T> implements ListIterator<T> {
     public void add(T t) {
         throw new UnsupportedOperationException();
     }
-
 }

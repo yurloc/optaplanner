@@ -71,5 +71,4 @@ public class TestdataExtendedAbstractSolution extends AbstractSolution<HardSoftS
     // ************************************************************************
     // Complex methods
     // ************************************************************************
-
 }

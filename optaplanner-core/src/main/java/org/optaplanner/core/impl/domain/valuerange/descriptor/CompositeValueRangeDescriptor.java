@@ -43,8 +43,8 @@ public class CompositeValueRangeDescriptor<Solution_> extends AbstractValueRange
         for (ValueRangeDescriptor<Solution_> valueRangeDescriptor : childValueRangeDescriptorList) {
             if (!valueRangeDescriptor.isCountable()) {
                 throw new IllegalStateException("The valueRangeDescriptor (" + this
-                        + ") has a childValueRangeDescriptor (" + valueRangeDescriptor
-                        + ") with countable (" + valueRangeDescriptor.isCountable() + ").");
+                                                        + ") has a childValueRangeDescriptor (" + valueRangeDescriptor
+                                                        + ") with countable (" + valueRangeDescriptor.isCountable() + ").");
             }
             if (!valueRangeDescriptor.isEntityIndependent()) {
                 entityIndependent = false;
@@ -81,9 +81,9 @@ public class CompositeValueRangeDescriptor<Solution_> extends AbstractValueRange
         for (ValueRangeDescriptor<Solution_> valueRangeDescriptor : childValueRangeDescriptorList) {
             EntityIndependentValueRangeDescriptor<Solution_> entityIndependentValueRangeDescriptor
                     = (EntityIndependentValueRangeDescriptor) valueRangeDescriptor;
-            childValueRangeList.add((CountableValueRange) entityIndependentValueRangeDescriptor.extractValueRange(solution));
+            childValueRangeList.add(
+                    (CountableValueRange) entityIndependentValueRangeDescriptor.extractValueRange(solution));
         }
         return doNullInValueRangeWrapping(new CompositeCountableValueRange(childValueRangeList));
     }
-
 }

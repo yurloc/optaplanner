@@ -32,7 +32,9 @@ public class TemporalValueRange<Temporal_ extends Temporal & Comparable<? super 
 
     private final Temporal_ from;
     private final Temporal_ to;
-    /** We could not use a {@link TemporalAmount} as {@code incrementUnit} due to lack of calculus functions. */
+    /**
+     * We could not use a {@link TemporalAmount} as {@code incrementUnit} due to lack of calculus functions.
+     */
     private final long incrementUnitAmount;
     private final TemporalUnit incrementUnitType;
 
@@ -53,23 +55,23 @@ public class TemporalValueRange<Temporal_ extends Temporal & Comparable<? super 
 
         if (from == null || to == null || incrementUnitType == null) {
             throw new IllegalArgumentException("The " + getClass().getSimpleName()
-                    + " must have a from (" + from + "),  to (" + to + ") and incrementUnitType (" + incrementUnitType
-                    + ") that are not null.");
+                                                       + " must have a from (" + from + "),  to (" + to + ") and incrementUnitType (" + incrementUnitType
+                                                       + ") that are not null.");
         }
         if (incrementUnitAmount <= 0) {
             throw new IllegalArgumentException("The " + getClass().getSimpleName()
-                    + " must have strictly positive incrementUnitAmount (" + incrementUnitAmount + ").");
+                                                       + " must have strictly positive incrementUnitAmount (" + incrementUnitAmount + ").");
         }
         if (!from.isSupported(incrementUnitType) || !to.isSupported(incrementUnitType)) {
             throw new IllegalArgumentException("The " + getClass().getSimpleName()
-                    + " must have an incrementUnitType (" + incrementUnitType
-                    + ") that is supported by its from (" + from + ") class (" + from.getClass().getSimpleName()
-                    + ") and to (" + to + ") class (" + to.getClass().getSimpleName() + ").");
+                                                       + " must have an incrementUnitType (" + incrementUnitType
+                                                       + ") that is supported by its from (" + from + ") class (" + from.getClass().getSimpleName()
+                                                       + ") and to (" + to + ") class (" + to.getClass().getSimpleName() + ").");
         }
         // We cannot use Temporal.until() to check bounds due to rounding errors
         if (from.compareTo(to) > 0) {
             throw new IllegalArgumentException("The " + getClass().getSimpleName()
-                    + " cannot have a from (" + from + ") which is strictly higher than its to (" + to + ").");
+                                                       + " cannot have a from (" + from + ") which is strictly higher than its to (" + to + ").");
         }
         long space = from.until(to, incrementUnitType);
         Temporal expectedTo = from.plus(space, incrementUnitType);
@@ -81,28 +83,29 @@ public class TemporalValueRange<Temporal_ extends Temporal & Comparable<? super 
                 roundedExpectedTo = from.plus(space, incrementUnitType);
             } catch (DateTimeException e) {
                 throw new IllegalArgumentException("The " + getClass().getSimpleName()
-                        + "'s incrementUnitType (" + incrementUnitType
-                        + ") must fit an integer number of times in the space (" + space
-                        + ") between from (" + from + ") and to (" + to + ").\n"
-                        + "The to (" + to + ") is not the expectedTo (" + expectedTo + ").", e);
+                                                           + "'s incrementUnitType (" + incrementUnitType
+                                                           + ") must fit an integer number of times in the space (" + space
+                                                           + ") between from (" + from + ") and to (" + to + ").\n"
+                                                           + "The to (" + to + ") is not the expectedTo (" + expectedTo + ").",
+                                                   e);
             }
             // Fail fast if there's a remainder on type (to be consistent with other value ranges)
             if (!to.equals(roundedExpectedTo)) {
                 throw new IllegalArgumentException("The " + getClass().getSimpleName()
-                        + "'s incrementUnitType (" + incrementUnitType
-                        + ") must fit an integer number of times in the space (" + space
-                        + ") between from (" + from + ") and to (" + to + ").\n"
-                        + "The to (" + to + ") is not the expectedTo (" + expectedTo
-                        + ") nor the roundedExpectedTo (" + roundedExpectedTo + ").");
+                                                           + "'s incrementUnitType (" + incrementUnitType
+                                                           + ") must fit an integer number of times in the space (" + space
+                                                           + ") between from (" + from + ") and to (" + to + ").\n"
+                                                           + "The to (" + to + ") is not the expectedTo (" + expectedTo
+                                                           + ") nor the roundedExpectedTo (" + roundedExpectedTo + ").");
             }
         }
 
         // Fail fast if there's a remainder on amount (to be consistent with other value ranges)
         if (space % incrementUnitAmount > 0) {
             throw new IllegalArgumentException("The " + getClass().getSimpleName()
-                    + "'s incrementUnitAmount (" + incrementUnitAmount
-                    + ") must fit an integer number of times in the space (" + space
-                    + ") between from (" + from + ") and to (" + to + ").");
+                                                       + "'s incrementUnitAmount (" + incrementUnitAmount
+                                                       + ") must fit an integer number of times in the space (" + space
+                                                       + ") between from (" + from + ") and to (" + to + ").");
         }
         size = space / incrementUnitAmount;
     }
@@ -165,7 +168,6 @@ public class TemporalValueRange<Temporal_ extends Temporal & Comparable<? super 
             index++;
             return next;
         }
-
     }
 
     @Override
@@ -191,12 +193,10 @@ public class TemporalValueRange<Temporal_ extends Temporal & Comparable<? super 
             long index = RandomUtils.nextLong(workingRandom, size);
             return get(index);
         }
-
     }
 
     @Override
     public String toString() {
         return "[" + from + "-" + to + ")"; // Formatting: interval (mathematics) ISO 31-11
     }
-
 }

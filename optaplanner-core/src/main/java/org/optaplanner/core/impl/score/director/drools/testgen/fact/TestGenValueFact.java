@@ -97,7 +97,8 @@ public class TestGenValueFact implements TestGenFact {
                 } else {
                     Method parseMethod = getParseMethod(field);
                     if (parseMethod != null) {
-                        fields.add(new TestGenFactField(this, fieldName, new TestGenParsedValueProvider(parseMethod, value)));
+                        fields.add(new TestGenFactField(this, fieldName,
+                                                        new TestGenParsedValueProvider(parseMethod, value)));
                     } else {
                         throw new IllegalStateException("Unsupported type: " + field.getType());
                     }
@@ -162,11 +163,13 @@ public class TestGenValueFact implements TestGenFact {
     public void printInitialization(StringBuilder sb) {
         if (instance.getClass().isEnum()) {
             sb.append(String.format("        %s %s = %s.%s;\n",
-                    instance.getClass().getSimpleName(), variableName, instance.getClass().getSimpleName(),
-                    ((Enum) instance).name()));
+                                    instance.getClass().getSimpleName(), variableName,
+                                    instance.getClass().getSimpleName(),
+                                    ((Enum) instance).name()));
         } else {
             sb.append(String.format("        %s %s = new %s();\n",
-                    instance.getClass().getSimpleName(), variableName, instance.getClass().getSimpleName()));
+                                    instance.getClass().getSimpleName(), variableName,
+                                    instance.getClass().getSimpleName()));
         }
     }
 
@@ -180,5 +183,4 @@ public class TestGenValueFact implements TestGenFact {
     public String toString() {
         return variableName;
     }
-
 }

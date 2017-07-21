@@ -38,5 +38,4 @@ class TestGenExistingInstanceValueProvider extends TestGenAbstractValueProvider<
     public String toString() {
         return identifier;
     }
-
 }

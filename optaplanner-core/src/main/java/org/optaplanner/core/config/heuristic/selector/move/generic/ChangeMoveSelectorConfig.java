@@ -70,20 +70,24 @@ public class ChangeMoveSelectorConfig extends MoveSelectorConfig<ChangeMoveSelec
 
     @Override
     public MoveSelector buildBaseMoveSelector(HeuristicConfigPolicy configPolicy,
-            SelectionCacheType minimumCacheType, boolean randomSelection) {
+                                              SelectionCacheType minimumCacheType, boolean randomSelection) {
         if (entitySelectorConfig == null) {
             throw new IllegalStateException("The entitySelectorConfig (" + entitySelectorConfig
-                    + ") should haven been initialized during unfolding.");
+                                                    + ") should haven been initialized during unfolding.");
         }
         EntitySelector entitySelector = entitySelectorConfig.buildEntitySelector(configPolicy,
-                minimumCacheType, SelectionOrder.fromRandomSelectionBoolean(randomSelection));
+                                                                                 minimumCacheType,
+                                                                                 SelectionOrder.fromRandomSelectionBoolean(
+                                                                                         randomSelection));
         if (valueSelectorConfig == null) {
             throw new IllegalStateException("The valueSelectorConfig (" + valueSelectorConfig
-                    + ") should haven been initialized during unfolding.");
+                                                    + ") should haven been initialized during unfolding.");
         }
         ValueSelector valueSelector = valueSelectorConfig.buildValueSelector(configPolicy,
-                entitySelector.getEntityDescriptor(),
-                minimumCacheType, SelectionOrder.fromRandomSelectionBoolean(randomSelection));
+                                                                             entitySelector.getEntityDescriptor(),
+                                                                             minimumCacheType,
+                                                                             SelectionOrder.fromRandomSelectionBoolean(
+                                                                                     randomSelection));
         return new ChangeMoveSelector(entitySelector, valueSelector, randomSelection);
     }
 
@@ -146,7 +150,8 @@ public class ChangeMoveSelectorConfig extends MoveSelectorConfig<ChangeMoveSelec
     @Override
     public void inherit(ChangeMoveSelectorConfig inheritedConfig) {
         super.inherit(inheritedConfig);
-        entitySelectorConfig = ConfigUtils.inheritConfig(entitySelectorConfig, inheritedConfig.getEntitySelectorConfig());
+        entitySelectorConfig = ConfigUtils.inheritConfig(entitySelectorConfig,
+                                                         inheritedConfig.getEntitySelectorConfig());
         valueSelectorConfig = ConfigUtils.inheritConfig(valueSelectorConfig, inheritedConfig.getValueSelectorConfig());
     }
 
@@ -154,5 +159,4 @@ public class ChangeMoveSelectorConfig extends MoveSelectorConfig<ChangeMoveSelec
     public String toString() {
         return getClass().getSimpleName() + "(" + entitySelectorConfig + ", " + valueSelectorConfig + ")";
     }
-
 }

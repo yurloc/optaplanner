@@ -50,6 +50,5 @@ public interface SolutionCloner<Solution_> {
      * @param original never null, the original {@link PlanningSolution}
      * @return never null, the cloned {@link PlanningSolution}
      */
-     Solution_ cloneSolution(Solution_ original);
-
+    Solution_ cloneSolution(Solution_ original);
 }

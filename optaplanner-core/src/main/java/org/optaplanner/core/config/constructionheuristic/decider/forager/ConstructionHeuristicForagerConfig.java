@@ -51,8 +51,7 @@ public class ConstructionHeuristicForagerConfig extends AbstractConfig<Construct
                     || pickEarlyType == ConstructionHeuristicPickEarlyType.FIRST_FEASIBLE_SCORE_OR_NON_DETERIORATING_HARD)
                     && !(configPolicy.getScoreDefinition() instanceof FeasibilityScoreDefinition)) {
                 throw new IllegalArgumentException("The pickEarlyType (" + pickEarlyType
-                        + ") is not compatible with the scoreDefinition (" + configPolicy.getScoreDefinition() + ").");
-
+                                                           + ") is not compatible with the scoreDefinition (" + configPolicy.getScoreDefinition() + ").");
             }
             pickEarlyType_ = pickEarlyType;
         }
@@ -63,5 +62,4 @@ public class ConstructionHeuristicForagerConfig extends AbstractConfig<Construct
     public void inherit(ConstructionHeuristicForagerConfig inheritedConfig) {
         pickEarlyType = ConfigUtils.inheritOverwritableProperty(pickEarlyType, inheritedConfig.getPickEarlyType());
     }
-
 }

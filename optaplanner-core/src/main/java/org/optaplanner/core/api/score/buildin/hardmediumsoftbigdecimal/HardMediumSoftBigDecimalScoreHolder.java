@@ -49,50 +49,51 @@ public class HardMediumSoftBigDecimalScoreHolder extends AbstractScoreHolder {
     // ************************************************************************
     // Worker methods
     // ************************************************************************
+
     /**
      * Add a hard constraint of specified weighting.
-     *
+     * <p>
      * This is typically used in Drools scoring to add a hard constraint match (negative value to indicate an infeasible
      * solution).
-     *
      * @param kcontext never null, the magic variable in DRL
      * @param hardWeight never null, higher is better, negative for a penalty, positive for a reward
      */
     public void addHardConstraintMatch(RuleContext kcontext, BigDecimal hardWeight) {
         hardScore = (hardScore == null) ? hardWeight : hardScore.add(hardWeight);
         registerConstraintMatch(kcontext,
-                () -> hardScore = hardScore.subtract(hardWeight),
-                () -> HardMediumSoftBigDecimalScore.valueOf(hardWeight, BigDecimal.ZERO, BigDecimal.ZERO));
+                                () -> hardScore = hardScore.subtract(hardWeight),
+                                () -> HardMediumSoftBigDecimalScore.valueOf(hardWeight, BigDecimal.ZERO,
+                                                                            BigDecimal.ZERO));
     }
 
     /**
      * Add a medium level constraint of specified weighting.
-     *
+     * <p>
      * This is typically used in Drools scoring to add a medium priority constraint match.
-     *
      * @param kcontext never null, the magic variable in DRL
      * @param mediumWeight never null, higher is better, negative for a penalty, positive for a reward
      */
     public void addMediumConstraintMatch(RuleContext kcontext, BigDecimal mediumWeight) {
         mediumScore = (mediumScore == null) ? mediumWeight : mediumScore.add(mediumWeight);
         registerConstraintMatch(kcontext,
-                () -> mediumScore = mediumScore.subtract(mediumWeight),
-                () -> HardMediumSoftBigDecimalScore.valueOf(BigDecimal.ZERO, mediumWeight, BigDecimal.ZERO));
+                                () -> mediumScore = mediumScore.subtract(mediumWeight),
+                                () -> HardMediumSoftBigDecimalScore.valueOf(BigDecimal.ZERO, mediumWeight,
+                                                                            BigDecimal.ZERO));
     }
 
     /**
      * Add a soft constraint match of specified weighting.
-     *
+     * <p>
      * This is typically used in Drools scoring to add a low priority constraint match.
-     *
      * @param kcontext never null, the magic variable in DRL
      * @param softWeight never null, higher is better, negative for a penalty, positive for a reward
      */
     public void addSoftConstraintMatch(RuleContext kcontext, BigDecimal softWeight) {
         softScore = (softScore == null) ? softWeight : softScore.add(softWeight);
         registerConstraintMatch(kcontext,
-                () -> softScore = softScore.subtract(softWeight),
-                () -> HardMediumSoftBigDecimalScore.valueOf(BigDecimal.ZERO, BigDecimal.ZERO, softWeight));
+                                () -> softScore = softScore.subtract(softWeight),
+                                () -> HardMediumSoftBigDecimalScore.valueOf(BigDecimal.ZERO, BigDecimal.ZERO,
+                                                                            softWeight));
     }
 
     /**
@@ -101,25 +102,25 @@ public class HardMediumSoftBigDecimalScoreHolder extends AbstractScoreHolder {
      * @param mediumWeight never null, higher is better, negative for a penalty, positive for a reward
      * @param softWeight never null, higher is better, negative for a penalty, positive for a reward
      */
-    public void addMultiConstraintMatch(RuleContext kcontext, BigDecimal hardWeight, BigDecimal mediumWeight, BigDecimal softWeight) {
+    public void addMultiConstraintMatch(RuleContext kcontext, BigDecimal hardWeight, BigDecimal mediumWeight,
+                                        BigDecimal softWeight) {
         hardScore = (hardScore == null) ? hardWeight : hardScore.add(hardWeight);
         mediumScore = (mediumScore == null) ? mediumWeight : mediumScore.add(mediumWeight);
         softScore = (softScore == null) ? softWeight : softScore.add(softWeight);
         registerConstraintMatch(kcontext,
-                () -> {
-                    hardScore = hardScore.subtract(hardWeight);
-                    mediumScore = mediumScore.subtract(mediumWeight);
-                    softScore = softScore.subtract(softWeight);
-                },
-                () -> HardMediumSoftBigDecimalScore.valueOf(hardWeight, mediumWeight, softWeight));
+                                () -> {
+                                    hardScore = hardScore.subtract(hardWeight);
+                                    mediumScore = mediumScore.subtract(mediumWeight);
+                                    softScore = softScore.subtract(softWeight);
+                                },
+                                () -> HardMediumSoftBigDecimalScore.valueOf(hardWeight, mediumWeight, softWeight));
     }
 
     @Override
     public Score extractScore(int initScore) {
         return HardMediumSoftBigDecimalScore.valueOfUninitialized(initScore,
-                hardScore == null ? BigDecimal.ZERO : hardScore,
-                mediumScore == null ? BigDecimal.ZERO : mediumScore,
-                softScore == null ? BigDecimal.ZERO : softScore);
+                                                                  hardScore == null ? BigDecimal.ZERO : hardScore,
+                                                                  mediumScore == null ? BigDecimal.ZERO : mediumScore,
+                                                                  softScore == null ? BigDecimal.ZERO : softScore);
     }
-
 }

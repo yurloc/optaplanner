@@ -41,7 +41,7 @@ public class WeightFactorySelectionSorter<Solution_, T> implements SelectionSort
     private final Comparator<Comparable> appliedWeightComparator;
 
     public WeightFactorySelectionSorter(SelectionSorterWeightFactory<Solution_, T> selectionSorterWeightFactory,
-            SelectionSorterOrder selectionSorterOrder) {
+                                        SelectionSorterOrder selectionSorterOrder) {
         this.selectionSorterWeightFactory = selectionSorterWeightFactory;
         switch (selectionSorterOrder) {
             case ASCENDING:
@@ -52,7 +52,7 @@ public class WeightFactorySelectionSorter<Solution_, T> implements SelectionSort
                 break;
             default:
                 throw new IllegalStateException("The selectionSorterOrder (" + selectionSorterOrder
-                        + ") is not implemented.");
+                                                        + ") is not implemented.");
         }
     }
 
@@ -73,11 +73,10 @@ public class WeightFactorySelectionSorter<Solution_, T> implements SelectionSort
             T previous = selectionMap.put(difficultyWeight, selection);
             if (previous != null) {
                 throw new IllegalStateException("The selectionList contains 2 times the same selection ("
-                        + previous + ") and (" + selection + ").");
+                                                        + previous + ") and (" + selection + ").");
             }
         }
         selectionList.clear();
         selectionList.addAll(selectionMap.values());
     }
-
 }

@@ -34,7 +34,7 @@ import org.optaplanner.core.impl.heuristic.selector.entity.nearby.NearEntityNear
 import org.optaplanner.core.impl.heuristic.selector.value.ValueSelector;
 import org.optaplanner.core.impl.heuristic.selector.value.nearby.NearEntityNearbyValueSelector;
 
-import static org.apache.commons.lang3.ObjectUtils.*;
+import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
 
 @XStreamAlias("nearbySelection")
 public class NearbySelectionConfig extends SelectorConfig<NearbySelectionConfig> {
@@ -109,7 +109,8 @@ public class NearbySelectionConfig extends SelectorConfig<NearbySelectionConfig>
         return blockDistributionUniformDistributionProbability;
     }
 
-    public void setBlockDistributionUniformDistributionProbability(Double blockDistributionUniformDistributionProbability) {
+    public void setBlockDistributionUniformDistributionProbability(
+            Double blockDistributionUniformDistributionProbability) {
         this.blockDistributionUniformDistributionProbability = blockDistributionUniformDistributionProbability;
     }
 
@@ -148,63 +149,68 @@ public class NearbySelectionConfig extends SelectorConfig<NearbySelectionConfig>
     public void validateNearby(SelectionCacheType resolvedCacheType, SelectionOrder resolvedSelectionOrder) {
         if (originEntitySelectorConfig == null) {
             throw new IllegalArgumentException("The nearbySelectorConfig (" + this
-                    + ") is nearby selection"
-                    + " but lacks an originEntitySelectorConfig (" + originEntitySelectorConfig + ").");
+                                                       + ") is nearby selection"
+                                                       + " but lacks an originEntitySelectorConfig (" + originEntitySelectorConfig + ").");
         }
         if (originEntitySelectorConfig.getMimicSelectorRef() == null) {
             throw new IllegalArgumentException("The nearbySelectorConfig (" + this
-                    + ") has an originEntitySelectorConfig (" + originEntitySelectorConfig
-                    + ") which has no MimicSelectorRef (" + originEntitySelectorConfig.getMimicSelectorRef() + "). "
-                    + "A nearby's original entity should always be the same as an entity selected earlier in the move.");
+                                                       + ") has an originEntitySelectorConfig (" + originEntitySelectorConfig
+                                                       + ") which has no MimicSelectorRef (" + originEntitySelectorConfig.getMimicSelectorRef() + "). "
+                                                       + "A nearby's original entity should always be the same as an entity selected earlier in the move.");
         }
         if (nearbyDistanceMeterClass == null) {
             throw new IllegalArgumentException("The nearbySelectorConfig (" + this
-                    + ") is nearby selection"
-                    + " but lacks a nearbyDistanceMeterClass (" + nearbyDistanceMeterClass + ").");
+                                                       + ") is nearby selection"
+                                                       + " but lacks a nearbyDistanceMeterClass (" + nearbyDistanceMeterClass + ").");
         }
         if (resolvedSelectionOrder != SelectionOrder.ORIGINAL && resolvedSelectionOrder != SelectionOrder.RANDOM) {
             throw new IllegalArgumentException("The nearbySelectorConfig (" + this
-                    + ") with nearbyOriginEntitySelector ("  + originEntitySelectorConfig
-                    + ") and nearbyDistanceMeterClass ("  + nearbyDistanceMeterClass
-                    + ") has a resolvedSelectionOrder (" + resolvedSelectionOrder
-                    + ") that is not " + SelectionOrder.ORIGINAL + " or " + SelectionOrder.RANDOM + ".");
+                                                       + ") with nearbyOriginEntitySelector (" + originEntitySelectorConfig
+                                                       + ") and nearbyDistanceMeterClass (" + nearbyDistanceMeterClass
+                                                       + ") has a resolvedSelectionOrder (" + resolvedSelectionOrder
+                                                       + ") that is not " + SelectionOrder.ORIGINAL + " or " + SelectionOrder.RANDOM + ".");
         }
         if (resolvedCacheType.isCached()) {
             throw new IllegalArgumentException("The nearbySelectorConfig (" + this
-                    + ") with nearbyOriginEntitySelector ("  + originEntitySelectorConfig
-                    + ") and nearbyDistanceMeterClass ("  + nearbyDistanceMeterClass
-                    + ") has a resolvedCacheType (" + resolvedCacheType
-                    + ") that is cached.");
+                                                       + ") with nearbyOriginEntitySelector (" + originEntitySelectorConfig
+                                                       + ") and nearbyDistanceMeterClass (" + nearbyDistanceMeterClass
+                                                       + ") has a resolvedCacheType (" + resolvedCacheType
+                                                       + ") that is cached.");
         }
     }
 
     public EntitySelector applyNearbyEntitySelector(HeuristicConfigPolicy configPolicy,
-        SelectionCacheType minimumCacheType, SelectionCacheType resolvedCacheType,
-        SelectionOrder resolvedSelectionOrder, EntitySelector entitySelector) {
+                                                    SelectionCacheType minimumCacheType,
+                                                    SelectionCacheType resolvedCacheType,
+                                                    SelectionOrder resolvedSelectionOrder,
+                                                    EntitySelector entitySelector) {
         boolean randomSelection = resolvedSelectionOrder.toRandomSelectionBoolean();
         EntitySelector originEntitySelector = originEntitySelectorConfig.buildEntitySelector(
                 configPolicy,
                 minimumCacheType, resolvedSelectionOrder);
         NearbyDistanceMeter nearbyDistanceMeter = ConfigUtils.newInstance(this,
-                "nearbyDistanceMeterClass", nearbyDistanceMeterClass);
+                                                                          "nearbyDistanceMeterClass",
+                                                                          nearbyDistanceMeterClass);
         // TODO Check nearbyDistanceMeterClass.getGenericInterfaces() to confirm generic type S is an entityClass
         NearbyRandom nearbyRandom = buildNearbyRandom(randomSelection);
         return new NearEntityNearbyEntitySelector(entitySelector, originEntitySelector,
-                nearbyDistanceMeter, nearbyRandom, randomSelection);
+                                                  nearbyDistanceMeter, nearbyRandom, randomSelection);
     }
 
     public ValueSelector applyNearbyValueSelector(HeuristicConfigPolicy configPolicy,
-            SelectionCacheType minimumCacheType, SelectionCacheType resolvedCacheType,
-            SelectionOrder resolvedSelectionOrder, ValueSelector valueSelector) {
+                                                  SelectionCacheType minimumCacheType,
+                                                  SelectionCacheType resolvedCacheType,
+                                                  SelectionOrder resolvedSelectionOrder, ValueSelector valueSelector) {
         boolean randomSelection = resolvedSelectionOrder.toRandomSelectionBoolean();
         EntitySelector originEntitySelector = originEntitySelectorConfig.buildEntitySelector(
                 configPolicy, minimumCacheType, resolvedSelectionOrder);
         NearbyDistanceMeter nearbyDistanceMeter = ConfigUtils.newInstance(this,
-                "nearbyDistanceMeterClass", nearbyDistanceMeterClass);
+                                                                          "nearbyDistanceMeterClass",
+                                                                          nearbyDistanceMeterClass);
         // TODO Check nearbyDistanceMeterClass.getGenericInterfaces() to confirm generic type S is an entityClass
         NearbyRandom nearbyRandom = buildNearbyRandom(randomSelection);
         return new NearEntityNearbyValueSelector(valueSelector, originEntitySelector,
-                nearbyDistanceMeter, nearbyRandom, randomSelection);
+                                                 nearbyDistanceMeter, nearbyRandom, randomSelection);
     }
 
     protected NearbyRandom buildNearbyRandom(boolean randomSelection) {
@@ -224,41 +230,42 @@ public class NearbySelectionConfig extends SelectorConfig<NearbySelectionConfig>
             if (blockDistributionEnabled || linearDistributionEnabled || parabolicDistributionEnabled
                     || betaDistributionEnabled) {
                 throw new IllegalArgumentException("The nearbySelectorConfig (" + this
-                        + ") with randomSelection (" + randomSelection
-                        + ") has distribution parameters.");
+                                                           + ") with randomSelection (" + randomSelection
+                                                           + ") has distribution parameters.");
             }
             return null;
         }
         if (blockDistributionEnabled && linearDistributionEnabled) {
             throw new IllegalArgumentException("The nearbySelectorConfig (" + this
-                    + ") has both blockDistribution and linearDistribution parameters.");
+                                                       + ") has both blockDistribution and linearDistribution parameters.");
         }
         if (blockDistributionEnabled && parabolicDistributionEnabled) {
             throw new IllegalArgumentException("The nearbySelectorConfig (" + this
-                    + ") has both blockDistribution and parabolicDistribution parameters.");
+                                                       + ") has both blockDistribution and parabolicDistribution parameters.");
         }
         if (blockDistributionEnabled && betaDistributionEnabled) {
             throw new IllegalArgumentException("The nearbySelectorConfig (" + this
-                    + ") has both blockDistribution and betaDistribution parameters.");
+                                                       + ") has both blockDistribution and betaDistribution parameters.");
         }
         if (linearDistributionEnabled && parabolicDistributionEnabled) {
             throw new IllegalArgumentException("The nearbySelectorConfig (" + this
-                    + ") has both linearDistribution and parabolicDistribution parameters.");
+                                                       + ") has both linearDistribution and parabolicDistribution parameters.");
         }
         if (linearDistributionEnabled && betaDistributionEnabled) {
             throw new IllegalArgumentException("The nearbySelectorConfig (" + this
-                    + ") has both linearDistribution and betaDistribution parameters.");
+                                                       + ") has both linearDistribution and betaDistribution parameters.");
         }
         if (parabolicDistributionEnabled && betaDistributionEnabled) {
             throw new IllegalArgumentException("The nearbySelectorConfig (" + this
-                    + ") has both parabolicDistribution and betaDistribution parameters.");
+                                                       + ") has both parabolicDistribution and betaDistribution parameters.");
         }
         if (blockDistributionEnabled) {
             int sizeMinimum = defaultIfNull(blockDistributionSizeMinimum, 1);
             int sizeMaximum = defaultIfNull(blockDistributionSizeMaximum, Integer.MAX_VALUE);
             double sizeRatio = defaultIfNull(blockDistributionSizeRatio, 1.0);
             double uniformDistributionProbability = defaultIfNull(blockDistributionUniformDistributionProbability, 0.0);
-            return new BlockDistributionNearbyRandom(sizeMinimum, sizeMaximum, sizeRatio, uniformDistributionProbability);
+            return new BlockDistributionNearbyRandom(sizeMinimum, sizeMaximum, sizeRatio,
+                                                     uniformDistributionProbability);
         } else if (linearDistributionEnabled) {
             int sizeMaximum = defaultIfNull(linearDistributionSizeMaximum, Integer.MAX_VALUE);
             return new LinearDistributionNearbyRandom(sizeMaximum);
@@ -277,27 +284,28 @@ public class NearbySelectionConfig extends SelectorConfig<NearbySelectionConfig>
     @Override
     public void inherit(NearbySelectionConfig inheritedConfig) {
         super.inherit(inheritedConfig);
-        originEntitySelectorConfig = ConfigUtils.inheritConfig(originEntitySelectorConfig, inheritedConfig.getOriginEntitySelectorConfig());
+        originEntitySelectorConfig = ConfigUtils.inheritConfig(originEntitySelectorConfig,
+                                                               inheritedConfig.getOriginEntitySelectorConfig());
         nearbyDistanceMeterClass = ConfigUtils.inheritOverwritableProperty(nearbyDistanceMeterClass,
-                inheritedConfig.getNearbyDistanceMeterClass());
+                                                                           inheritedConfig.getNearbyDistanceMeterClass());
         nearbySelectionDistributionType = ConfigUtils.inheritOverwritableProperty(nearbySelectionDistributionType,
-                inheritedConfig.getNearbySelectionDistributionType());
+                                                                                  inheritedConfig.getNearbySelectionDistributionType());
         blockDistributionSizeMinimum = ConfigUtils.inheritOverwritableProperty(blockDistributionSizeMinimum,
-                inheritedConfig.getBlockDistributionSizeMinimum());
+                                                                               inheritedConfig.getBlockDistributionSizeMinimum());
         blockDistributionSizeMaximum = ConfigUtils.inheritOverwritableProperty(blockDistributionSizeMaximum,
-                inheritedConfig.getBlockDistributionSizeMaximum());
+                                                                               inheritedConfig.getBlockDistributionSizeMaximum());
         blockDistributionSizeRatio = ConfigUtils.inheritOverwritableProperty(blockDistributionSizeRatio,
-                inheritedConfig.getBlockDistributionSizeRatio());
-        blockDistributionUniformDistributionProbability = ConfigUtils.inheritOverwritableProperty(blockDistributionUniformDistributionProbability,
+                                                                             inheritedConfig.getBlockDistributionSizeRatio());
+        blockDistributionUniformDistributionProbability = ConfigUtils.inheritOverwritableProperty(
+                blockDistributionUniformDistributionProbability,
                 inheritedConfig.getBlockDistributionUniformDistributionProbability());
         linearDistributionSizeMaximum = ConfigUtils.inheritOverwritableProperty(linearDistributionSizeMaximum,
-                inheritedConfig.getLinearDistributionSizeMaximum());
+                                                                                inheritedConfig.getLinearDistributionSizeMaximum());
         parabolicDistributionSizeMaximum = ConfigUtils.inheritOverwritableProperty(parabolicDistributionSizeMaximum,
-                inheritedConfig.getParabolicDistributionSizeMaximum());
+                                                                                   inheritedConfig.getParabolicDistributionSizeMaximum());
         betaDistributionAlpha = ConfigUtils.inheritOverwritableProperty(betaDistributionAlpha,
-                inheritedConfig.getBetaDistributionAlpha());
+                                                                        inheritedConfig.getBetaDistributionAlpha());
         betaDistributionBeta = ConfigUtils.inheritOverwritableProperty(betaDistributionBeta,
-                inheritedConfig.getBetaDistributionBeta());
+                                                                       inheritedConfig.getBetaDistributionBeta());
     }
-
 }

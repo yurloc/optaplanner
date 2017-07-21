@@ -43,7 +43,7 @@ public class AbstractSolverFactory<Solution_> extends SolverFactory<Solution_> {
     public SolverConfig getSolverConfig() {
         if (solverConfig == null) {
             throw new IllegalStateException("The solverConfig (" + solverConfig + ") is null," +
-                    " call configure(...) first.");
+                                                    " call configure(...) first.");
         }
         return solverConfig;
     }
@@ -52,7 +52,7 @@ public class AbstractSolverFactory<Solution_> extends SolverFactory<Solution_> {
     public Solver<Solution_> buildSolver() {
         if (solverConfig == null) {
             throw new IllegalStateException("The solverConfig (" + solverConfig + ") is null," +
-                    " call configure(...) first.");
+                                                    " call configure(...) first.");
         }
         return solverConfig.buildSolver(solverConfigContext);
     }
@@ -61,10 +61,9 @@ public class AbstractSolverFactory<Solution_> extends SolverFactory<Solution_> {
     public SolverFactory<Solution_> cloneSolverFactory() {
         if (solverConfig == null) {
             throw new IllegalStateException("The solverConfig (" + solverConfig + ") is null," +
-                    " call configure(...) first.");
+                                                    " call configure(...) first.");
         }
         SolverConfig solverConfigClone = new SolverConfig(solverConfig);
         return new EmptySolverFactory<>(solverConfigContext, solverConfigClone);
     }
-
 }

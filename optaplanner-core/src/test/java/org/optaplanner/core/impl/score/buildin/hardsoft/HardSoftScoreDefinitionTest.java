@@ -84,5 +84,4 @@ public class HardSoftScoreDefinitionTest extends AbstractScoreDefinitionTest {
         assertEquals(Integer.MIN_VALUE, pessimisticBound.getHardScore());
         assertEquals(Integer.MIN_VALUE, pessimisticBound.getSoftScore());
     }
-
 }

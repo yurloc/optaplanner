@@ -27,7 +27,8 @@ import org.optaplanner.core.impl.score.director.ScoreDirector;
 /**
  * Retrievable from {@link ScoreDirector#getIndictmentMap()}.
  */
-public class Indictment implements Serializable, Comparable<Indictment> {
+public class Indictment implements Serializable,
+                                   Comparable<Indictment> {
 
     protected final Object justification;
 
@@ -88,8 +89,8 @@ public class Indictment implements Serializable, Comparable<Indictment> {
         boolean removed = constraintMatchSet.remove(constraintMatch);
         if (!removed) {
             throw new IllegalStateException("The indictment (" + this
-                    + ") could not remove constraintMatch (" + constraintMatch
-                    + ") from its constraintMatchSet (" + constraintMatchSet + ").");
+                                                    + ") could not remove constraintMatch (" + constraintMatch
+                                                    + ") from its constraintMatchSet (" + constraintMatchSet + ").");
         }
     }
 
@@ -110,5 +111,4 @@ public class Indictment implements Serializable, Comparable<Indictment> {
     public String toString() {
         return justification + "=" + getScoreTotal();
     }
-
 }

@@ -37,18 +37,18 @@ public class EntityDependentSortingValueSelector extends AbstractValueSelector {
     protected ScoreDirector scoreDirector = null;
 
     public EntityDependentSortingValueSelector(ValueSelector childValueSelector, SelectionCacheType cacheType,
-            SelectionSorter sorter) {
+                                               SelectionSorter sorter) {
         this.childValueSelector = childValueSelector;
         this.cacheType = cacheType;
         this.sorter = sorter;
         if (childValueSelector.isNeverEnding()) {
             throw new IllegalStateException("The selector (" + this
-                    + ") has a childValueSelector (" + childValueSelector
-                    + ") with neverEnding (" + childValueSelector.isNeverEnding() + ").");
+                                                    + ") has a childValueSelector (" + childValueSelector
+                                                    + ") with neverEnding (" + childValueSelector.isNeverEnding() + ").");
         }
         if (cacheType != SelectionCacheType.STEP) {
             throw new IllegalArgumentException("The selector (" + this
-                    + ") does not support the cacheType (" + cacheType + ").");
+                                                       + ") does not support the cacheType (" + cacheType + ").");
         }
         phaseLifecycleSupport.addEventListener(childValueSelector);
     }
@@ -103,17 +103,17 @@ public class EntityDependentSortingValueSelector extends AbstractValueSelector {
         long childSize = childValueSelector.getSize(entity);
         if (childSize > (long) Integer.MAX_VALUE) {
             throw new IllegalStateException("The selector (" + this
-                    + ") has a childValueSelector (" + childValueSelector
-                    + ") with childSize (" + childSize
-                    + ") which is higher than Integer.MAX_VALUE.");
+                                                    + ") has a childValueSelector (" + childValueSelector
+                                                    + ") with childSize (" + childSize
+                                                    + ") which is higher than Integer.MAX_VALUE.");
         }
         List<Object> cachedValueList = new ArrayList<>((int) childSize);
         childValueSelector.iterator(entity).forEachRemaining(cachedValueList::add);
         logger.trace("    Created cachedValueList: size ({}), valueSelector ({}).",
-                cachedValueList.size(), this);
+                     cachedValueList.size(), this);
         sorter.sort(scoreDirector, cachedValueList);
         logger.trace("    Sorted cachedValueList: size ({}), valueSelector ({}).",
-                cachedValueList.size(), this);
+                     cachedValueList.size(), this);
         return cachedValueList.iterator();
     }
 
@@ -126,5 +126,4 @@ public class EntityDependentSortingValueSelector extends AbstractValueSelector {
     public String toString() {
         return "Sorting(" + childValueSelector + ")";
     }
-
 }

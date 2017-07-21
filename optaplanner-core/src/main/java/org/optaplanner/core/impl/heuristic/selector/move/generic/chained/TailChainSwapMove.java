@@ -45,8 +45,9 @@ public class TailChainSwapMove<Solution_> extends AbstractMove<Solution_> {
     protected final Object rightValue;
 
     public TailChainSwapMove(GenuineVariableDescriptor<Solution_> variableDescriptor,
-            SingletonInverseVariableSupply inverseVariableSupply, AnchorVariableSupply anchorVariableSupply,
-            Object leftEntity, Object rightValue) {
+                             SingletonInverseVariableSupply inverseVariableSupply,
+                             AnchorVariableSupply anchorVariableSupply,
+                             Object leftEntity, Object rightValue) {
         this.variableDescriptor = variableDescriptor;
         this.inverseVariableSupply = inverseVariableSupply;
         this.anchorVariableSupply = anchorVariableSupply;
@@ -115,12 +116,12 @@ public class TailChainSwapMove<Solution_> extends AbstractMove<Solution_> {
         Object leftValue = variableDescriptor.getValue(leftEntity);
         if (leftAnchor != rightAnchor) {
             return new TailChainSwapMove<>(variableDescriptor, inverseVariableSupply, anchorVariableSupply, leftEntity,
-                    leftValue);
+                                           leftValue);
         } else {
             Object rightEntity = inverseVariableSupply.getInverseSingleton(rightValue);
             if (rightEntity != null) {
                 return new TailChainSwapMove<>(variableDescriptor, inverseVariableSupply, anchorVariableSupply,
-                        rightEntity, rightValue);
+                                               rightEntity, rightValue);
             } else {
                 // TODO Currently unsupported because we fail to create a valid undoMove... even though doMove supports it
                 throw new IllegalStateException("Impossible state, because isMoveDoable() should not return true.");
@@ -240,5 +241,4 @@ public class TailChainSwapMove<Solution_> extends AbstractMove<Solution_> {
         Object rightEntity = inverseVariableSupply.getInverseSingleton(rightValue);
         return leftEntity + " {" + leftValue + "} <-tailChainSwap-> " + rightEntity + " {" + rightValue + "}";
     }
-
 }

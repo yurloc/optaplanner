@@ -40,7 +40,8 @@ public class TailChainSwapMoveTest {
     public void isMoveDoable() {
         GenuineVariableDescriptor<TestdataChainedSolution> variableDescriptor = TestdataChainedEntity.buildVariableDescriptorForChainedObject();
         SolutionDescriptor<TestdataChainedSolution> solutionDescriptor = variableDescriptor.getEntityDescriptor().getSolutionDescriptor();
-        InnerScoreDirector<TestdataChainedSolution> scoreDirector = PlannerTestUtils.mockScoreDirector(solutionDescriptor);
+        InnerScoreDirector<TestdataChainedSolution> scoreDirector = PlannerTestUtils.mockScoreDirector(
+                solutionDescriptor);
 
         TestdataChainedAnchor a0 = new TestdataChainedAnchor("a0");
         TestdataChainedEntity a1 = new TestdataChainedEntity("a1", a0);
@@ -60,19 +61,26 @@ public class TailChainSwapMoveTest {
         AnchorVariableSupply anchorVariableSupply = scoreDirector.getSupplyManager()
                 .demand(new AnchorVariableDemand(variableDescriptor));
 
-        assertEquals(true, new TailChainSwapMove<>(variableDescriptor, inverseVariableSupply, anchorVariableSupply, a2, b0).isMoveDoable(scoreDirector));
-        assertEquals(true, new TailChainSwapMove<>(variableDescriptor, inverseVariableSupply, anchorVariableSupply, b1, a1).isMoveDoable(scoreDirector));
-        assertEquals(true, new TailChainSwapMove<>(variableDescriptor, inverseVariableSupply, anchorVariableSupply, a1, a2).isMoveDoable(scoreDirector));
-        assertEquals(true, new TailChainSwapMove<>(variableDescriptor, inverseVariableSupply, anchorVariableSupply, a3, a0).isMoveDoable(scoreDirector));
-        assertEquals(false, new TailChainSwapMove<>(variableDescriptor, inverseVariableSupply, anchorVariableSupply, a1, a1).isMoveDoable(scoreDirector));
-        assertEquals(false, new TailChainSwapMove<>(variableDescriptor, inverseVariableSupply, anchorVariableSupply, a2, a0).isMoveDoable(scoreDirector));
+        assertEquals(true, new TailChainSwapMove<>(variableDescriptor, inverseVariableSupply, anchorVariableSupply, a2,
+                                                   b0).isMoveDoable(scoreDirector));
+        assertEquals(true, new TailChainSwapMove<>(variableDescriptor, inverseVariableSupply, anchorVariableSupply, b1,
+                                                   a1).isMoveDoable(scoreDirector));
+        assertEquals(true, new TailChainSwapMove<>(variableDescriptor, inverseVariableSupply, anchorVariableSupply, a1,
+                                                   a2).isMoveDoable(scoreDirector));
+        assertEquals(true, new TailChainSwapMove<>(variableDescriptor, inverseVariableSupply, anchorVariableSupply, a3,
+                                                   a0).isMoveDoable(scoreDirector));
+        assertEquals(false, new TailChainSwapMove<>(variableDescriptor, inverseVariableSupply, anchorVariableSupply, a1,
+                                                    a1).isMoveDoable(scoreDirector));
+        assertEquals(false, new TailChainSwapMove<>(variableDescriptor, inverseVariableSupply, anchorVariableSupply, a2,
+                                                    a0).isMoveDoable(scoreDirector));
     }
 
     @Test
     public void doMove() {
         GenuineVariableDescriptor<TestdataChainedSolution> variableDescriptor = TestdataChainedEntity.buildVariableDescriptorForChainedObject();
         SolutionDescriptor<TestdataChainedSolution> solutionDescriptor = variableDescriptor.getEntityDescriptor().getSolutionDescriptor();
-        InnerScoreDirector<TestdataChainedSolution> scoreDirector = PlannerTestUtils.mockScoreDirector(solutionDescriptor);
+        InnerScoreDirector<TestdataChainedSolution> scoreDirector = PlannerTestUtils.mockScoreDirector(
+                solutionDescriptor);
 
         TestdataChainedAnchor a0 = new TestdataChainedAnchor("a0");
         TestdataChainedEntity a1 = new TestdataChainedEntity("a1", a0);
@@ -95,7 +103,9 @@ public class TailChainSwapMoveTest {
         SelectorTestUtils.assertChain(a0, a1, a2, a3);
         SelectorTestUtils.assertChain(b0, b1);
 
-        TailChainSwapMove<TestdataChainedSolution> move = new TailChainSwapMove<>(variableDescriptor, inverseVariableSupply, anchorVariableSupply, a2, b0);
+        TailChainSwapMove<TestdataChainedSolution> move = new TailChainSwapMove<>(variableDescriptor,
+                                                                                  inverseVariableSupply,
+                                                                                  anchorVariableSupply, a2, b0);
         TailChainSwapMove<TestdataChainedSolution> undoMove = move.createUndoMove(scoreDirector);
         move.doMove(scoreDirector);
         SelectorTestUtils.assertChain(a0, a1, b1);
@@ -121,7 +131,8 @@ public class TailChainSwapMoveTest {
     public void doMoveInSameChain() {
         GenuineVariableDescriptor<TestdataChainedSolution> variableDescriptor = TestdataChainedEntity.buildVariableDescriptorForChainedObject();
         SolutionDescriptor<TestdataChainedSolution> solutionDescriptor = variableDescriptor.getEntityDescriptor().getSolutionDescriptor();
-        InnerScoreDirector<TestdataChainedSolution> scoreDirector = PlannerTestUtils.mockScoreDirector(solutionDescriptor);
+        InnerScoreDirector<TestdataChainedSolution> scoreDirector = PlannerTestUtils.mockScoreDirector(
+                solutionDescriptor);
 
         TestdataChainedAnchor a0 = new TestdataChainedAnchor("a0");
         TestdataChainedEntity a1 = new TestdataChainedEntity("a1", a0);
@@ -143,7 +154,9 @@ public class TailChainSwapMoveTest {
                 .demand(new AnchorVariableDemand(variableDescriptor));
         SelectorTestUtils.assertChain(a0, a1, a2, a3, a4, a5, a6, a7);
 
-        TailChainSwapMove<TestdataChainedSolution> move = new TailChainSwapMove<>(variableDescriptor, inverseVariableSupply, anchorVariableSupply, a4, a1);
+        TailChainSwapMove<TestdataChainedSolution> move = new TailChainSwapMove<>(variableDescriptor,
+                                                                                  inverseVariableSupply,
+                                                                                  anchorVariableSupply, a4, a1);
         TailChainSwapMove<TestdataChainedSolution> undoMove = move.createUndoMove(scoreDirector);
         move.doMove(scoreDirector);
         SelectorTestUtils.assertChain(a0, a1, a4, a3, a2, a5, a6, a7);
@@ -199,7 +212,8 @@ public class TailChainSwapMoveTest {
     public void toStringTest() {
         GenuineVariableDescriptor<TestdataChainedSolution> variableDescriptor = TestdataChainedEntity.buildVariableDescriptorForChainedObject();
         SolutionDescriptor<TestdataChainedSolution> solutionDescriptor = variableDescriptor.getEntityDescriptor().getSolutionDescriptor();
-        InnerScoreDirector<TestdataChainedSolution> scoreDirector = PlannerTestUtils.mockScoreDirector(solutionDescriptor);
+        InnerScoreDirector<TestdataChainedSolution> scoreDirector = PlannerTestUtils.mockScoreDirector(
+                solutionDescriptor);
 
         TestdataChainedAnchor a0 = new TestdataChainedAnchor("a0");
         TestdataChainedEntity a1 = new TestdataChainedEntity("a1", a0);
@@ -220,15 +234,24 @@ public class TailChainSwapMoveTest {
                 .demand(new AnchorVariableDemand(variableDescriptor));
 
         assertEquals("a1 {a0} <-tailChainSwap-> b1 {b0}", new TailChainSwapMove<>(variableDescriptor,
-                inverseVariableSupply, anchorVariableSupply, a1, b0).toString());
+                                                                                  inverseVariableSupply,
+                                                                                  anchorVariableSupply, a1,
+                                                                                  b0).toString());
         assertEquals("a1 {a0} <-tailChainSwap-> null {b1}", new TailChainSwapMove<>(variableDescriptor,
-                inverseVariableSupply, anchorVariableSupply, a1, b1).toString());
+                                                                                    inverseVariableSupply,
+                                                                                    anchorVariableSupply, a1,
+                                                                                    b1).toString());
         assertEquals("b1 {b0} <-tailChainSwap-> a1 {a0}", new TailChainSwapMove<>(variableDescriptor,
-                inverseVariableSupply, anchorVariableSupply, b1, a0).toString());
+                                                                                  inverseVariableSupply,
+                                                                                  anchorVariableSupply, b1,
+                                                                                  a0).toString());
         assertEquals("a1 {a0} <-tailChainSwap-> null {a3}", new TailChainSwapMove<>(variableDescriptor,
-                inverseVariableSupply, anchorVariableSupply, a1, a3).toString());
+                                                                                    inverseVariableSupply,
+                                                                                    anchorVariableSupply, a1,
+                                                                                    a3).toString());
         assertEquals("a2 {a1} <-tailChainSwap-> a1 {a0}", new TailChainSwapMove<>(variableDescriptor,
-                inverseVariableSupply, anchorVariableSupply, a2, a0).toString());
+                                                                                  inverseVariableSupply,
+                                                                                  anchorVariableSupply, a2,
+                                                                                  a0).toString());
     }
-
 }

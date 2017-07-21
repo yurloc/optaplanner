@@ -33,8 +33,8 @@ import org.slf4j.LoggerFactory;
  * the score calculated during {@link AbstractScoreDirector#assertShadowVariablesAreNotStale(Score, Object)}.
  */
 public class TestGenCorruptedVariableListenerReproducer implements
-        TestGenOriginalProblemReproducer,
-        TestGenKieSessionListener {
+                                                        TestGenOriginalProblemReproducer,
+                                                        TestGenKieSessionListener {
 
     private static final Logger logger = LoggerFactory.getLogger(TestGenCorruptedVariableListenerReproducer.class);
     private final String analysis;
@@ -88,11 +88,11 @@ public class TestGenCorruptedVariableListenerReproducer implements
 
     @Override
     public void afterFireAllRules(KieSession kieSession, TestGenKieSessionJournal journal,
-            TestGenKieSessionFireAllRules fire) {
+                                  TestGenKieSessionFireAllRules fire) {
         Score<?> workingScore = extractScore(kieSession);
         if (fire.isAssertFire()) {
             logger.debug("    [Assert mode] Score: working[{}], uncorrupted[{}] ({})",
-                    workingScore, lastWorkingScore, fire);
+                         workingScore, lastWorkingScore, fire);
             // if this assertion fire's score is different from the previous fire it means that a shadow variable
             // update was corrupted
             if (lastFireId == fire.getFireId() - 1
@@ -110,5 +110,4 @@ public class TestGenCorruptedVariableListenerReproducer implements
     public String toString() {
         return analysis;
     }
-
 }

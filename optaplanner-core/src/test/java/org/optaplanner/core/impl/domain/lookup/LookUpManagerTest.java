@@ -64,5 +64,4 @@ public class LookUpManagerTest {
         expectedException.expect(NullPointerException.class);
         lookUpManager.addWorkingObject("");
     }
-
 }

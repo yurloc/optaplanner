@@ -67,23 +67,28 @@ public class TailChainSwapMoveSelectorConfig extends MoveSelectorConfig<TailChai
 
     @Override
     public MoveSelector buildBaseMoveSelector(HeuristicConfigPolicy configPolicy,
-            SelectionCacheType minimumCacheType, boolean randomSelection) {
+                                              SelectionCacheType minimumCacheType, boolean randomSelection) {
         EntitySelectorConfig entitySelectorConfig_ = entitySelectorConfig == null ? new EntitySelectorConfig()
                 : entitySelectorConfig;
         EntitySelector entitySelector = entitySelectorConfig_.buildEntitySelector(configPolicy,
-                minimumCacheType, SelectionOrder.fromRandomSelectionBoolean(randomSelection));
+                                                                                  minimumCacheType,
+                                                                                  SelectionOrder.fromRandomSelectionBoolean(
+                                                                                          randomSelection));
         ValueSelectorConfig valueSelectorConfig_ = valueSelectorConfig == null ? new ValueSelectorConfig()
                 : valueSelectorConfig;
         ValueSelector valueSelector = valueSelectorConfig_.buildValueSelector(configPolicy,
-                entitySelector.getEntityDescriptor(),
-                minimumCacheType, SelectionOrder.fromRandomSelectionBoolean(randomSelection));
+                                                                              entitySelector.getEntityDescriptor(),
+                                                                              minimumCacheType,
+                                                                              SelectionOrder.fromRandomSelectionBoolean(
+                                                                                      randomSelection));
         return new TailChainSwapMoveSelector(entitySelector, valueSelector, randomSelection);
     }
 
     @Override
     public void inherit(TailChainSwapMoveSelectorConfig inheritedConfig) {
         super.inherit(inheritedConfig);
-        entitySelectorConfig = ConfigUtils.inheritConfig(entitySelectorConfig, inheritedConfig.getEntitySelectorConfig());
+        entitySelectorConfig = ConfigUtils.inheritConfig(entitySelectorConfig,
+                                                         inheritedConfig.getEntitySelectorConfig());
         valueSelectorConfig = ConfigUtils.inheritConfig(valueSelectorConfig, inheritedConfig.getValueSelectorConfig());
     }
 
@@ -91,5 +96,4 @@ public class TailChainSwapMoveSelectorConfig extends MoveSelectorConfig<TailChai
     public String toString() {
         return getClass().getSimpleName() + "(" + entitySelectorConfig + ", " + valueSelectorConfig + ")";
     }
-
 }

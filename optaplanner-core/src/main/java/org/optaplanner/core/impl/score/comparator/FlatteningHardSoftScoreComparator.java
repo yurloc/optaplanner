@@ -25,7 +25,8 @@ import org.optaplanner.core.api.score.buildin.hardsoft.HardSoftScore;
 /**
  * Compares 2 {@link HardSoftScore}s based on the calculation of the hard multiplied by a weight, summed with the soft.
  */
-public class FlatteningHardSoftScoreComparator implements Comparator<Score>, Serializable {
+public class FlatteningHardSoftScoreComparator implements Comparator<Score>,
+                                                          Serializable {
 
     private int hardWeight;
 
@@ -45,5 +46,4 @@ public class FlatteningHardSoftScoreComparator implements Comparator<Score>, Ser
         long score2Side = (long) score2.getHardScore() * (long) hardWeight + (long) score2.getSoftScore();
         return score1Side < score2Side ? -1 : (score1Side == score2Side ? 0 : 1);
     }
-
 }

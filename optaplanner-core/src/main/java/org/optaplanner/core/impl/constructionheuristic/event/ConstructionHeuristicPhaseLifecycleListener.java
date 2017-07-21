@@ -34,5 +34,4 @@ public interface ConstructionHeuristicPhaseLifecycleListener<Solution_> extends 
     void stepEnded(ConstructionHeuristicStepScope<Solution_> stepScope);
 
     void phaseEnded(ConstructionHeuristicPhaseScope<Solution_> phaseScope);
-
 }

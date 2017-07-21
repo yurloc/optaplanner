@@ -40,7 +40,7 @@ public class SubChainReversingChangeMove<Solution_> extends AbstractMove<Solutio
     protected final Object toPlanningValue;
 
     public SubChainReversingChangeMove(SubChain subChain, GenuineVariableDescriptor<Solution_> variableDescriptor,
-            SingletonInverseVariableSupply inverseVariableSupply, Object toPlanningValue) {
+                                       SingletonInverseVariableSupply inverseVariableSupply, Object toPlanningValue) {
         this.subChain = subChain;
         this.variableDescriptor = variableDescriptor;
         this.inverseVariableSupply = inverseVariableSupply;
@@ -75,7 +75,8 @@ public class SubChainReversingChangeMove<Solution_> extends AbstractMove<Solutio
     @Override
     public SubChainReversingChangeMove<Solution_> createUndoMove(ScoreDirector<Solution_> scoreDirector) {
         Object oldFirstValue = variableDescriptor.getValue(subChain.getFirstEntity());
-        return new SubChainReversingChangeMove<>(subChain.reverse(), variableDescriptor, inverseVariableSupply, oldFirstValue);
+        return new SubChainReversingChangeMove<>(subChain.reverse(), variableDescriptor, inverseVariableSupply,
+                                                 oldFirstValue);
     }
 
     @Override
@@ -169,5 +170,4 @@ public class SubChainReversingChangeMove<Solution_> extends AbstractMove<Solutio
         Object oldFirstValue = variableDescriptor.getValue(subChain.getFirstEntity());
         return subChain.toDottedString() + " {" + oldFirstValue + " -reversing-> " + toPlanningValue + "}";
     }
-
 }

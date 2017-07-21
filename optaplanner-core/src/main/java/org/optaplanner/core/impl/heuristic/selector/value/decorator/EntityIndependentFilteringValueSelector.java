@@ -26,7 +26,7 @@ public class EntityIndependentFilteringValueSelector extends FilteringValueSelec
         implements EntityIndependentValueSelector {
 
     public EntityIndependentFilteringValueSelector(EntityIndependentValueSelector childValueSelector,
-            List<SelectionFilter> filterList) {
+                                                   List<SelectionFilter> filterList) {
         super(childValueSelector, filterList);
     }
 
@@ -38,7 +38,7 @@ public class EntityIndependentFilteringValueSelector extends FilteringValueSelec
     @Override
     public Iterator<Object> iterator() {
         return new JustInTimeFilteringValueIterator(((EntityIndependentValueSelector) childValueSelector).iterator(),
-                determineBailOutSize());
+                                                    determineBailOutSize());
     }
 
     protected long determineBailOutSize() {
@@ -47,5 +47,4 @@ public class EntityIndependentFilteringValueSelector extends FilteringValueSelec
         }
         return ((EntityIndependentValueSelector) childValueSelector).getSize() * 10L;
     }
-
 }

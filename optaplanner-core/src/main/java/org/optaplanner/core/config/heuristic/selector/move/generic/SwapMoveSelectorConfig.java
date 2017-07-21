@@ -35,7 +35,7 @@ import org.optaplanner.core.impl.heuristic.selector.entity.EntitySelector;
 import org.optaplanner.core.impl.heuristic.selector.move.MoveSelector;
 import org.optaplanner.core.impl.heuristic.selector.move.generic.SwapMoveSelector;
 
-import static org.apache.commons.lang3.ObjectUtils.*;
+import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
 
 @XStreamAlias("swapMoveSelector")
 public class SwapMoveSelectorConfig extends MoveSelectorConfig<SwapMoveSelectorConfig> {
@@ -82,21 +82,21 @@ public class SwapMoveSelectorConfig extends MoveSelectorConfig<SwapMoveSelectorC
 
     @Override
     public MoveSelector buildBaseMoveSelector(HeuristicConfigPolicy configPolicy,
-            SelectionCacheType minimumCacheType, boolean randomSelection) {
+                                              SelectionCacheType minimumCacheType, boolean randomSelection) {
         EntitySelectorConfig entitySelectorConfig_ = entitySelectorConfig == null ? new EntitySelectorConfig()
                 : entitySelectorConfig;
         EntitySelector leftEntitySelector = entitySelectorConfig_.buildEntitySelector(
                 configPolicy,
                 minimumCacheType, SelectionOrder.fromRandomSelectionBoolean(randomSelection));
         EntitySelectorConfig rightEntitySelectorConfig = defaultIfNull(secondaryEntitySelectorConfig,
-                entitySelectorConfig_);
+                                                                       entitySelectorConfig_);
         EntitySelector rightEntitySelector = rightEntitySelectorConfig.buildEntitySelector(
                 configPolicy,
                 minimumCacheType, SelectionOrder.fromRandomSelectionBoolean(randomSelection));
         List<GenuineVariableDescriptor> variableDescriptorList = deduceVariableDescriptorList(
                 leftEntitySelector.getEntityDescriptor(), variableNameIncludeList);
         return new SwapMoveSelector(leftEntitySelector, rightEntitySelector, variableDescriptorList,
-                randomSelection);
+                                    randomSelection);
     }
 
     @Override
@@ -104,13 +104,14 @@ public class SwapMoveSelectorConfig extends MoveSelectorConfig<SwapMoveSelectorC
         EntityDescriptor onlyEntityDescriptor = entitySelectorConfig == null ? null
                 : entitySelectorConfig.extractEntityDescriptor(configPolicy);
         if (secondaryEntitySelectorConfig != null) {
-            EntityDescriptor onlySecondaryEntityDescriptor = secondaryEntitySelectorConfig.extractEntityDescriptor(configPolicy);
+            EntityDescriptor onlySecondaryEntityDescriptor = secondaryEntitySelectorConfig.extractEntityDescriptor(
+                    configPolicy);
             if (onlyEntityDescriptor != onlySecondaryEntityDescriptor) {
                 throw new IllegalArgumentException("The entitySelector (" + entitySelectorConfig
-                        + ")'s entityDescriptor (" + onlyEntityDescriptor
-                        + ") and secondaryEntitySelectorConfig (" + secondaryEntitySelectorConfig
-                        + ")'s entityDescriptor (" + onlySecondaryEntityDescriptor
-                        + ") must have the same entity class.");
+                                                           + ")'s entityDescriptor (" + onlyEntityDescriptor
+                                                           + ") and secondaryEntitySelectorConfig (" + secondaryEntitySelectorConfig
+                                                           + ")'s entityDescriptor (" + onlySecondaryEntityDescriptor
+                                                           + ") must have the same entity class.");
             }
         }
         if (onlyEntityDescriptor != null) {
@@ -132,7 +133,8 @@ public class SwapMoveSelectorConfig extends MoveSelectorConfig<SwapMoveSelectorC
             }
             childMoveSelectorConfig.setEntitySelectorConfig(childEntitySelectorConfig);
             if (secondaryEntitySelectorConfig != null) {
-                EntitySelectorConfig childSecondaryEntitySelectorConfig = new EntitySelectorConfig(secondaryEntitySelectorConfig);
+                EntitySelectorConfig childSecondaryEntitySelectorConfig = new EntitySelectorConfig(
+                        secondaryEntitySelectorConfig);
                 if (childSecondaryEntitySelectorConfig.getMimicSelectorRef() == null) {
                     childSecondaryEntitySelectorConfig.setEntityClass(entityDescriptor.getEntityClass());
                 }
@@ -155,8 +157,10 @@ public class SwapMoveSelectorConfig extends MoveSelectorConfig<SwapMoveSelectorC
     @Override
     public void inherit(SwapMoveSelectorConfig inheritedConfig) {
         super.inherit(inheritedConfig);
-        entitySelectorConfig = ConfigUtils.inheritConfig(entitySelectorConfig, inheritedConfig.getEntitySelectorConfig());
-        secondaryEntitySelectorConfig = ConfigUtils.inheritConfig(secondaryEntitySelectorConfig, inheritedConfig.getSecondaryEntitySelectorConfig());
+        entitySelectorConfig = ConfigUtils.inheritConfig(entitySelectorConfig,
+                                                         inheritedConfig.getEntitySelectorConfig());
+        secondaryEntitySelectorConfig = ConfigUtils.inheritConfig(secondaryEntitySelectorConfig,
+                                                                  inheritedConfig.getSecondaryEntitySelectorConfig());
         variableNameIncludeList = ConfigUtils.inheritMergeableListProperty(
                 variableNameIncludeList, inheritedConfig.getVariableNameIncludeList());
     }
@@ -166,5 +170,4 @@ public class SwapMoveSelectorConfig extends MoveSelectorConfig<SwapMoveSelectorC
         return getClass().getSimpleName() + "(" + entitySelectorConfig
                 + (secondaryEntitySelectorConfig == null ? "" : ", " + secondaryEntitySelectorConfig) + ")";
     }
-
 }

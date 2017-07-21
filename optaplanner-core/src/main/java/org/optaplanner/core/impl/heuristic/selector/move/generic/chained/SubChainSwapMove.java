@@ -42,8 +42,9 @@ public class SubChainSwapMove<Solution_> extends AbstractMove<Solution_> {
     protected final SubChain leftSubChain;
     protected final SubChain rightSubChain;
 
-    public SubChainSwapMove(GenuineVariableDescriptor<Solution_> variableDescriptor, SingletonInverseVariableSupply inverseVariableSupply,
-            SubChain leftSubChain, SubChain rightSubChain) {
+    public SubChainSwapMove(GenuineVariableDescriptor<Solution_> variableDescriptor,
+                            SingletonInverseVariableSupply inverseVariableSupply,
+                            SubChain leftSubChain, SubChain rightSubChain) {
         this.variableDescriptor = variableDescriptor;
         this.inverseVariableSupply = inverseVariableSupply;
         this.leftSubChain = leftSubChain;
@@ -80,7 +81,7 @@ public class SubChainSwapMove<Solution_> extends AbstractMove<Solution_> {
     @Override
     public SubChainSwapMove<Solution_> createUndoMove(ScoreDirector<Solution_> scoreDirector) {
         return new SubChainSwapMove<>(variableDescriptor, inverseVariableSupply,
-                rightSubChain, leftSubChain);
+                                      rightSubChain, leftSubChain);
     }
 
     @Override
@@ -175,5 +176,4 @@ public class SubChainSwapMove<Solution_> extends AbstractMove<Solution_> {
         return leftSubChain.toDottedString() + " {" + oldLeftValue + "} <-> "
                 + rightSubChain.toDottedString() + " {" + oldRightValue + "}";
     }
-
 }

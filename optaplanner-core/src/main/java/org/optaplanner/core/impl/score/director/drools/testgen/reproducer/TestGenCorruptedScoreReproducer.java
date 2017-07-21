@@ -32,7 +32,8 @@ import org.slf4j.LoggerFactory;
  * Detects corrupted score for the given journal. It should behave equally to
  * {@link AbstractScoreDirector#assertWorkingScoreFromScratch(Score, Object)}.
  */
-public class TestGenCorruptedScoreReproducer implements TestGenOriginalProblemReproducer, TestGenKieSessionListener {
+public class TestGenCorruptedScoreReproducer implements TestGenOriginalProblemReproducer,
+                                                        TestGenKieSessionListener {
 
     private static final Logger logger = LoggerFactory.getLogger(TestGenCorruptedScoreReproducer.class);
     private final String analysis;
@@ -79,7 +80,7 @@ public class TestGenCorruptedScoreReproducer implements TestGenOriginalProblemRe
 
     @Override
     public void afterFireAllRules(KieSession kieSession, TestGenKieSessionJournal journal,
-            TestGenKieSessionFireAllRules fire) {
+                                  TestGenKieSessionFireAllRules fire) {
         KieSession uncorruptedSession = scoreDirector.createKieSession();
         for (TestGenKieSessionInsert insert : journal.getInitialInserts()) {
             Object object = insert.getFact().getInstance();
@@ -99,5 +100,4 @@ public class TestGenCorruptedScoreReproducer implements TestGenOriginalProblemRe
     public String toString() {
         return analysis;
     }
-
 }

@@ -77,11 +77,11 @@ public class LookUpStrategyResolver {
                     MemberAccessor memberAccessor2 = ConfigUtils.findPlanningIdMemberAccessor(objectClass);
                     if (memberAccessor2 == null) {
                         throw new IllegalArgumentException("The class (" + objectClass
-                                + ") does not have a " + PlanningId.class.getSimpleName() + " annotation,"
-                                + " but the lookUpStrategyType (" + lookUpStrategyType + ") requires it.\n"
-                                + "Maybe add the " + PlanningId.class.getSimpleName() + " annotation"
-                                + " or change the " + PlanningSolution.class.getSimpleName() + " annotation's "
-                                + LookUpStrategyType.class.getSimpleName() + ".");
+                                                                   + ") does not have a " + PlanningId.class.getSimpleName() + " annotation,"
+                                                                   + " but the lookUpStrategyType (" + lookUpStrategyType + ") requires it.\n"
+                                                                   + "Maybe add the " + PlanningId.class.getSimpleName() + " annotation"
+                                                                   + " or change the " + PlanningSolution.class.getSimpleName() + " annotation's "
+                                                                   + LookUpStrategyType.class.getSimpleName() + ".");
                     }
                     return new PlanningIdLookUpStrategy(memberAccessor2);
                 case EQUALITY:
@@ -96,21 +96,20 @@ public class LookUpStrategyResolver {
                     }
                     if (equalsMethod.getDeclaringClass().equals(Object.class)) {
                         throw new IllegalArgumentException("The class (" + object.getClass().getSimpleName()
-                                + ") doesn't override the equals() method, neither does any superclass.");
+                                                                   + ") doesn't override the equals() method, neither does any superclass.");
                     }
                     if (hashCodeMethod.getDeclaringClass().equals(Object.class)) {
                         throw new IllegalArgumentException("The class (" + object.getClass().getSimpleName()
-                                + ") overrides equals() but neither it nor any superclass"
-                                + " overrides the hashCode() method.");
+                                                                   + ") overrides equals() but neither it nor any superclass"
+                                                                   + " overrides the hashCode() method.");
                     }
                     return new EqualsLookUpStrategy();
                 case NONE:
                     return new NoneLookUpStrategy();
                 default:
                     throw new IllegalStateException("The lookUpStrategyType (" + lookUpStrategyType
-                            + ") is not implemented.");
+                                                            + ") is not implemented.");
             }
         });
     }
-
 }

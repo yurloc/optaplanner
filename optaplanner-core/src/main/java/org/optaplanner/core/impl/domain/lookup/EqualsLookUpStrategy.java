@@ -25,7 +25,7 @@ public class EqualsLookUpStrategy implements LookUpStrategy {
         Object oldAddedObject = idToWorkingObjectMap.put(workingObject, workingObject);
         if (oldAddedObject != null) {
             throw new IllegalStateException("The workingObjects (" + oldAddedObject + ", " + workingObject
-                    + ") are equal (as in Object.equals()). Working objects must be unique.");
+                                                    + ") are equal (as in Object.equals()). Working objects must be unique.");
         }
     }
 
@@ -34,7 +34,7 @@ public class EqualsLookUpStrategy implements LookUpStrategy {
         Object removedObject = idToWorkingObjectMap.remove(workingObject);
         if (workingObject != removedObject) {
             throw new IllegalStateException("The workingObject (" + workingObject
-                    + ") differs from the removedObject (" + removedObject + ").");
+                                                    + ") differs from the removedObject (" + removedObject + ").");
         }
     }
 
@@ -42,5 +42,4 @@ public class EqualsLookUpStrategy implements LookUpStrategy {
     public <E> E lookUpWorkingObject(Map<Object, Object> idToWorkingObjectMap, E externalObject) {
         return (E) idToWorkingObjectMap.get(externalObject);
     }
-
 }

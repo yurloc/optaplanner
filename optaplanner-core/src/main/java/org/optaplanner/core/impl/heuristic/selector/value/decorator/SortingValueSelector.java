@@ -28,7 +28,7 @@ public class SortingValueSelector extends AbstractCachingValueSelector implement
     protected final SelectionSorter sorter;
 
     public SortingValueSelector(EntityIndependentValueSelector childValueSelector, SelectionCacheType cacheType,
-            SelectionSorter sorter) {
+                                SelectionSorter sorter) {
         super(childValueSelector, cacheType);
         this.sorter = sorter;
     }
@@ -42,7 +42,7 @@ public class SortingValueSelector extends AbstractCachingValueSelector implement
         super.constructCache(solverScope);
         sorter.sort(solverScope.getScoreDirector(), cachedValueList);
         logger.trace("    Sorted cachedValueList: size ({}), valueSelector ({}).",
-                cachedValueList.size(), this);
+                     cachedValueList.size(), this);
     }
 
     @Override
@@ -64,5 +64,4 @@ public class SortingValueSelector extends AbstractCachingValueSelector implement
     public String toString() {
         return "Sorting(" + childValueSelector + ")";
     }
-
 }

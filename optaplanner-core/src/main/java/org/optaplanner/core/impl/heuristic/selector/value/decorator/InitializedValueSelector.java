@@ -99,7 +99,8 @@ public class InitializedValueSelector extends AbstractValueSelector {
             this(entity, childValueIterator, determineBailOutSize(entity));
         }
 
-        public JustInTimeInitializedValueIterator(Object entity, Iterator<Object> childValueIterator, long bailOutSize) {
+        public JustInTimeInitializedValueIterator(Object entity, Iterator<Object> childValueIterator,
+                                                  long bailOutSize) {
             this.entity = entity;
             this.childValueIterator = childValueIterator;
             this.bailOutSize = bailOutSize;
@@ -117,7 +118,7 @@ public class InitializedValueSelector extends AbstractValueSelector {
                     // if childValueIterator is neverEnding and nothing is accepted, bail out of the infinite loop
                     if (attemptsBeforeBailOut <= 0L) {
                         logger.warn("Bailing out of neverEnding selector ({}) to avoid infinite loop.",
-                                InitializedValueSelector.this);
+                                    InitializedValueSelector.this);
                         return noUpcomingSelection();
                     }
                     attemptsBeforeBailOut--;
@@ -126,7 +127,6 @@ public class InitializedValueSelector extends AbstractValueSelector {
             } while (!accept(next));
             return next;
         }
-
     }
 
     protected long determineBailOutSize(Object entity) {
@@ -146,5 +146,4 @@ public class InitializedValueSelector extends AbstractValueSelector {
     public String toString() {
         return "Initialized(" + childValueSelector + ")";
     }
-
 }

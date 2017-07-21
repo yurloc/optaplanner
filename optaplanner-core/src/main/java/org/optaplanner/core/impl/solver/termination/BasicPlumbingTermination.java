@@ -112,7 +112,8 @@ public class BasicPlumbingTermination extends AbstractTermination {
      * @param problemFactChangeList never null
      * @return as specified by {@link Collection#add}
      */
-    public synchronized <Solution_> boolean addProblemFactChanges(List<ProblemFactChange<Solution_>> problemFactChangeList) {
+    public synchronized <Solution_> boolean addProblemFactChanges(
+            List<ProblemFactChange<Solution_>> problemFactChangeList) {
         boolean added = problemFactChangeQueue.addAll(problemFactChangeList);
         notifyAll();
         return added;
@@ -148,8 +149,8 @@ public class BasicPlumbingTermination extends AbstractTermination {
     @Override
     public boolean isPhaseTerminated(AbstractPhaseScope phaseScope) {
         throw new IllegalStateException(BasicPlumbingTermination.class.getSimpleName()
-                + " configured only as solver termination."
-                + " It is always bridged to phase termination.");
+                                                + " configured only as solver termination."
+                                                + " It is always bridged to phase termination.");
     }
 
     @Override
@@ -160,8 +161,8 @@ public class BasicPlumbingTermination extends AbstractTermination {
     @Override
     public double calculatePhaseTimeGradient(AbstractPhaseScope phaseScope) {
         throw new IllegalStateException(BasicPlumbingTermination.class.getSimpleName()
-                + " configured only as solver termination."
-                + " It is always bridged to phase termination.");
+                                                + " configured only as solver termination."
+                                                + " It is always bridged to phase termination.");
     }
 
     // ************************************************************************
@@ -177,5 +178,4 @@ public class BasicPlumbingTermination extends AbstractTermination {
     public String toString() {
         return "BasicPlumbing()";
     }
-
 }

@@ -122,5 +122,4 @@ public class LookUpStrategyEqualityTest {
         TestdataObjectEquals object = new TestdataObjectEquals(0);
         assertNull(lookUpManager.lookUpWorkingObject(object));
     }
-
 }

@@ -32,7 +32,8 @@ public class HardMediumSoftScoreDefinitionTest {
 
     @Test
     public void getLevelLabels() {
-        assertArrayEquals(new String[]{"hard score", "medium score", "soft score"}, new HardMediumSoftScoreDefinition().getLevelLabels());
+        assertArrayEquals(new String[]{"hard score", "medium score", "soft score"},
+                          new HardMediumSoftScoreDefinition().getLevelLabels());
     }
 
     @Test
@@ -87,5 +88,4 @@ public class HardMediumSoftScoreDefinitionTest {
         assertEquals(Integer.MIN_VALUE, pessimisticBound.getMediumScore());
         assertEquals(Integer.MIN_VALUE, pessimisticBound.getSoftScore());
     }
-
 }

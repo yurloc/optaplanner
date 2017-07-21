@@ -31,5 +31,4 @@ public abstract class AbstractAcceptor extends LocalSearchPhaseLifecycleListener
     // ************************************************************************
     // Worker methods
     // ************************************************************************
-
 }

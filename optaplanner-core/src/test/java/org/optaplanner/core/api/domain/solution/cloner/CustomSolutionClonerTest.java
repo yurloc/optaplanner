@@ -89,5 +89,4 @@ public class CustomSolutionClonerTest {
         expectedException.expectMessage("Cloning corruption: the same entity ");
         factory.buildSolver().solve(solution);
     }
-
 }

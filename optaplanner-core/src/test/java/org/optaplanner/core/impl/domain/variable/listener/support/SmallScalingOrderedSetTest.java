@@ -107,5 +107,4 @@ public class SmallScalingOrderedSetTest {
         assertTrue(set.contains("s9"));
         assertTrue(set.contains("s10"));
     }
-
 }

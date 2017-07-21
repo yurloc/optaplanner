@@ -63,9 +63,11 @@ public class HardMediumSoftBigDecimalScoreDefinition extends AbstractFeasibility
     public HardMediumSoftBigDecimalScore fromLevelNumbers(int initScore, Number[] levelNumbers) {
         if (levelNumbers.length != getLevelsSize()) {
             throw new IllegalStateException("The levelNumbers (" + Arrays.toString(levelNumbers)
-                    + ")'s length (" + levelNumbers.length + ") must equal the levelSize (" + getLevelsSize() + ").");
+                                                    + ")'s length (" + levelNumbers.length + ") must equal the levelSize (" + getLevelsSize() + ").");
         }
-        return HardMediumSoftBigDecimalScore.valueOfUninitialized(initScore, (BigDecimal) levelNumbers[0], (BigDecimal) levelNumbers[1], (BigDecimal) levelNumbers[2]);
+        return HardMediumSoftBigDecimalScore.valueOfUninitialized(initScore, (BigDecimal) levelNumbers[0],
+                                                                  (BigDecimal) levelNumbers[1],
+                                                                  (BigDecimal) levelNumbers[2]);
     }
 
     @Override
@@ -74,17 +76,18 @@ public class HardMediumSoftBigDecimalScoreDefinition extends AbstractFeasibility
     }
 
     @Override
-    public HardMediumSoftBigDecimalScore buildOptimisticBound(InitializingScoreTrend initializingScoreTrend, HardMediumSoftBigDecimalScore score) {
+    public HardMediumSoftBigDecimalScore buildOptimisticBound(InitializingScoreTrend initializingScoreTrend,
+                                                              HardMediumSoftBigDecimalScore score) {
         // TODO https://issues.jboss.org/browse/PLANNER-232
         throw new UnsupportedOperationException("PLANNER-232: BigDecimalScore does not support bounds" +
-                " because a BigDecimal cannot represent infinity.");
+                                                        " because a BigDecimal cannot represent infinity.");
     }
 
     @Override
-    public HardMediumSoftBigDecimalScore buildPessimisticBound(InitializingScoreTrend initializingScoreTrend, HardMediumSoftBigDecimalScore score) {
+    public HardMediumSoftBigDecimalScore buildPessimisticBound(InitializingScoreTrend initializingScoreTrend,
+                                                               HardMediumSoftBigDecimalScore score) {
         // TODO https://issues.jboss.org/browse/PLANNER-232
         throw new UnsupportedOperationException("PLANNER-232: BigDecimalScore does not support bounds" +
-                " because a BigDecimal cannot represent infinity.");
+                                                        " because a BigDecimal cannot represent infinity.");
     }
-
 }

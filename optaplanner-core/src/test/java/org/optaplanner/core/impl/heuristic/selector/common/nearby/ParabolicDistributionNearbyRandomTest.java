@@ -56,5 +56,4 @@ public class ParabolicDistributionNearbyRandomTest {
         assertEquals(0, nearbyRandom.nextInt(random, 500));
         assertEquals(0, nearbyRandom.nextInt(random, 10));
     }
-
 }

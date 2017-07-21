@@ -30,5 +30,4 @@ public class FixedTabuSizeStrategyTest {
         assertEquals(5, new FixedTabuSizeStrategy(5).determineTabuSize(stepScope));
         assertEquals(17, new FixedTabuSizeStrategy(17).determineTabuSize(stepScope));
     }
-
 }

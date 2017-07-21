@@ -40,5 +40,4 @@ public class EntityTabuAcceptor extends AbstractTabuAcceptor {
     protected Collection<? extends Object> findNewTabu(LocalSearchStepScope stepScope) {
         return stepScope.getStep().getPlanningEntities();
     }
-
 }

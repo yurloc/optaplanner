@@ -44,5 +44,4 @@ public class ConstructionHeuristicPhaseScope<Solution_> extends AbstractPhaseSco
     // ************************************************************************
     // Calculated methods
     // ************************************************************************
-
 }

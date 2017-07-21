@@ -32,9 +32,8 @@ import org.optaplanner.core.impl.testdata.domain.reinitialize.TestdataReinitiali
 import org.optaplanner.core.impl.testdata.domain.reinitialize.TestdataReinitializeSolution;
 import org.optaplanner.core.impl.testdata.util.PlannerTestUtils;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.optaplanner.core.impl.testdata.util.PlannerAssert.*;
+import static org.junit.Assert.*;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.assertCode;
 
 public class DefaultConstructionHeuristicPhaseTest {
 
@@ -137,5 +136,4 @@ public class DefaultConstructionHeuristicPhaseTest {
         assertEquals(null, solvedE4.getValue());
         assertEquals(-1, solution.getScore().getInitScore());
     }
-
 }

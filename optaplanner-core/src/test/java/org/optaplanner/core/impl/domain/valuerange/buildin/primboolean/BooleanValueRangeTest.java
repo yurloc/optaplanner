@@ -20,9 +20,10 @@ import java.util.Random;
 
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
-import static org.optaplanner.core.impl.testdata.util.PlannerAssert.*;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.assertAllElementsOfIterator;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.assertElementsOfIterator;
 
 public class BooleanValueRangeTest {
 
@@ -55,7 +56,7 @@ public class BooleanValueRangeTest {
 
         when(workingRandom.nextBoolean()).thenReturn(true, true, false, true);
         assertElementsOfIterator(new BooleanValueRange().createRandomIterator(workingRandom),
-                Boolean.TRUE, Boolean.TRUE, Boolean.FALSE, Boolean.TRUE);
+                                 Boolean.TRUE, Boolean.TRUE, Boolean.FALSE, Boolean.TRUE);
     }
 
     @Test(expected = IndexOutOfBoundsException.class)
@@ -67,5 +68,4 @@ public class BooleanValueRangeTest {
     public void getIndexGreaterThanSize() {
         new BooleanValueRange().get(2);
     }
-
 }

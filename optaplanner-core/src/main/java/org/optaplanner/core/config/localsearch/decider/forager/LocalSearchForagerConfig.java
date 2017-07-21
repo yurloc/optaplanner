@@ -23,7 +23,7 @@ import org.optaplanner.core.config.util.ConfigUtils;
 import org.optaplanner.core.impl.localsearch.decider.forager.AcceptedForager;
 import org.optaplanner.core.impl.localsearch.decider.forager.Forager;
 
-import static org.apache.commons.lang3.ObjectUtils.*;
+import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
 
 @XStreamAlias("localSearchForagerConfig")
 public class LocalSearchForagerConfig extends AbstractConfig<LocalSearchForagerConfig> {
@@ -83,9 +83,9 @@ public class LocalSearchForagerConfig extends AbstractConfig<LocalSearchForagerC
         if (foragerClass != null) {
             if (pickEarlyType != null || acceptedCountLimit != null || finalistPodiumType != null) {
                 throw new IllegalArgumentException("The forager with foragerClass (" + foragerClass
-                        + ") must not also have a pickEarlyType (" + pickEarlyType
-                        + "), acceptedCountLimit (" + acceptedCountLimit
-                        + ") or finalistPodiumType (" + finalistPodiumType + ").");
+                                                           + ") must not also have a pickEarlyType (" + pickEarlyType
+                                                           + "), acceptedCountLimit (" + acceptedCountLimit
+                                                           + ") or finalistPodiumType (" + finalistPodiumType + ").");
             }
             return ConfigUtils.newInstance(this, "foragerClass", foragerClass);
         }
@@ -93,22 +93,22 @@ public class LocalSearchForagerConfig extends AbstractConfig<LocalSearchForagerC
         int acceptedCountLimit_ = defaultIfNull(acceptedCountLimit, Integer.MAX_VALUE);
         FinalistPodiumType finalistPodiumType_ = defaultIfNull(finalistPodiumType, FinalistPodiumType.HIGHEST_SCORE);
         // Breaking ties randomly leads statistically to much better results
-        boolean breakTieRandomly_  = defaultIfNull(breakTieRandomly, true);
-        return new AcceptedForager(finalistPodiumType_.buildFinalistPodium(), pickEarlyType_, acceptedCountLimit_, breakTieRandomly_);
+        boolean breakTieRandomly_ = defaultIfNull(breakTieRandomly, true);
+        return new AcceptedForager(finalistPodiumType_.buildFinalistPodium(), pickEarlyType_, acceptedCountLimit_,
+                                   breakTieRandomly_);
     }
 
     @Override
     public void inherit(LocalSearchForagerConfig inheritedConfig) {
         foragerClass = ConfigUtils.inheritOverwritableProperty(foragerClass,
-                inheritedConfig.getForagerClass());
+                                                               inheritedConfig.getForagerClass());
         pickEarlyType = ConfigUtils.inheritOverwritableProperty(pickEarlyType,
-                inheritedConfig.getPickEarlyType());
+                                                                inheritedConfig.getPickEarlyType());
         acceptedCountLimit = ConfigUtils.inheritOverwritableProperty(acceptedCountLimit,
-                inheritedConfig.getAcceptedCountLimit());
+                                                                     inheritedConfig.getAcceptedCountLimit());
         finalistPodiumType = ConfigUtils.inheritOverwritableProperty(finalistPodiumType,
-                inheritedConfig.getFinalistPodiumType());
+                                                                     inheritedConfig.getFinalistPodiumType());
         breakTieRandomly = ConfigUtils.inheritOverwritableProperty(breakTieRandomly,
-                inheritedConfig.getBreakTieRandomly());
+                                                                   inheritedConfig.getBreakTieRandomly());
     }
-
 }

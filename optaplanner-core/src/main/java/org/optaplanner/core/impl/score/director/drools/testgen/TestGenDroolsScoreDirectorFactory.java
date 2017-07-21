@@ -30,5 +30,4 @@ public class TestGenDroolsScoreDirectorFactory<Solution_> extends DroolsScoreDir
             boolean lookUpEnabled, boolean constraintMatchEnabledPreference) {
         return new TestGenDroolsScoreDirector<>(this, lookUpEnabled, constraintMatchEnabledPreference, null, null);
     }
-
 }

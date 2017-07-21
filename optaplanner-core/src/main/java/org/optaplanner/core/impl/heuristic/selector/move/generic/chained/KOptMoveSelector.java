@@ -43,35 +43,35 @@ public class KOptMoveSelector extends GenericMoveSelector {
     protected AnchorVariableSupply anchorVariableSupply;
 
     public KOptMoveSelector(EntitySelector entitySelector, ValueSelector[] valueSelectors,
-            boolean randomSelection) {
+                            boolean randomSelection) {
         this.entitySelector = entitySelector;
         this.valueSelectors = valueSelectors;
         this.randomSelection = randomSelection;
         if (!randomSelection) {
             throw new UnsupportedOperationException(
                     "Non randomSelection (such as original selection) is not yet supported on "
-                    + KOptMoveSelector.class.getSimpleName() + "."); // TODO
+                            + KOptMoveSelector.class.getSimpleName() + "."); // TODO
         }
         variableDescriptor = valueSelectors[0].getVariableDescriptor();
         if (!variableDescriptor.isChained()) {
             throw new IllegalStateException("The selector (" + this
-                    + ")'s valueSelector's  variableDescriptor (" + variableDescriptor
-                    + ") must be chained (" + variableDescriptor.isChained() + ").");
+                                                    + ")'s valueSelector's  variableDescriptor (" + variableDescriptor
+                                                    + ") must be chained (" + variableDescriptor.isChained() + ").");
         }
         if (!variableDescriptor.getEntityDescriptor().getEntityClass().isAssignableFrom(
                 entitySelector.getEntityDescriptor().getEntityClass())) {
             throw new IllegalStateException("The selector (" + this
-                    + ") has a valueSelector with a entityClass ("
-                    + variableDescriptor.getEntityDescriptor().getEntityClass()
-                    + ") which is not equal or a superclass to the entitySelector's entityClass ("
-                    + entitySelector.getEntityDescriptor().getEntityClass() + ").");
+                                                    + ") has a valueSelector with a entityClass ("
+                                                    + variableDescriptor.getEntityDescriptor().getEntityClass()
+                                                    + ") which is not equal or a superclass to the entitySelector's entityClass ("
+                                                    + entitySelector.getEntityDescriptor().getEntityClass() + ").");
         }
         phaseLifecycleSupport.addEventListener(entitySelector);
         for (ValueSelector valueSelector : valueSelectors) {
             if (valueSelector.getVariableDescriptor() != variableDescriptor) {
                 throw new IllegalStateException("The selector (" + this
-                        + ") has a valueSelector with a variableDescriptor ("  + valueSelector.getVariableDescriptor()
-                        + ") that differs from the first variableDescriptor (" + variableDescriptor + ").");
+                                                        + ") has a valueSelector with a variableDescriptor (" + valueSelector.getVariableDescriptor()
+                                                        + ") that differs from the first variableDescriptor (" + variableDescriptor + ").");
             }
             phaseLifecycleSupport.addEventListener(valueSelector);
         }
@@ -156,7 +156,7 @@ public class KOptMoveSelector extends GenericMoveSelector {
                         values[i] = valueIterator.next();
                     }
                     return new KOptMove(variableDescriptor, inverseVariableSupply, anchorVariableSupply,
-                            entity, values);
+                                        entity, values);
                 }
             };
         }
@@ -166,5 +166,4 @@ public class KOptMoveSelector extends GenericMoveSelector {
     public String toString() {
         return getClass().getSimpleName() + "(" + entitySelector + ", " + Arrays.toString(valueSelectors) + ")";
     }
-
 }

@@ -98,7 +98,6 @@ public class MimicRecordingEntitySelector extends AbstractEntitySelector impleme
             }
             return next;
         }
-
     }
 
     @Override
@@ -172,12 +171,10 @@ public class MimicRecordingEntitySelector extends AbstractEntitySelector impleme
         public int previousIndex() {
             return childEntityIterator.previousIndex();
         }
-
     }
 
     @Override
     public String toString() {
         return "Recording(" + childEntitySelector + ")";
     }
-
 }

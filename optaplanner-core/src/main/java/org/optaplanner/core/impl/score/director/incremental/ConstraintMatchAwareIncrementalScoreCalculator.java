@@ -57,5 +57,4 @@ public interface ConstraintMatchAwareIncrementalScoreCalculator<Solution_>
      * @see ScoreDirector#getIndictmentMap()
      */
     Map<Object, Indictment> getIndictmentMap();
-
 }

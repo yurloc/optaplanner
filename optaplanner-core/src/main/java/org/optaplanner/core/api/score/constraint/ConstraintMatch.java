@@ -25,7 +25,8 @@ import org.optaplanner.core.api.score.Score;
 /**
  * Retrievable from {@link ConstraintMatchTotal#getConstraintMatchSet()}.
  */
-public class ConstraintMatch implements Serializable, Comparable<ConstraintMatch> {
+public class ConstraintMatch implements Serializable,
+                                        Comparable<ConstraintMatch> {
 
     protected final String constraintPackage;
     protected final String constraintName;
@@ -40,7 +41,7 @@ public class ConstraintMatch implements Serializable, Comparable<ConstraintMatch
      * @param score never null
      */
     public ConstraintMatch(String constraintPackage, String constraintName,
-            List<Object> justificationList, Score score) {
+                           List<Object> justificationList, Score score) {
         this.constraintPackage = constraintPackage;
         this.constraintName = constraintName;
         this.justificationList = justificationList;
@@ -89,5 +90,4 @@ public class ConstraintMatch implements Serializable, Comparable<ConstraintMatch
     public String toString() {
         return getIdentificationString() + "=" + getScore();
     }
-
 }

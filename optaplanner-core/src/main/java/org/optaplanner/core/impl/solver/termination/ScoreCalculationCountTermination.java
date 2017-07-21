@@ -29,7 +29,7 @@ public class ScoreCalculationCountTermination extends AbstractTermination {
         this.scoreCalculationCountLimit = scoreCalculationCountLimit;
         if (scoreCalculationCountLimit < 0L) {
             throw new IllegalArgumentException("The scoreCalculationCountLimit (" + scoreCalculationCountLimit
-                    + ") cannot be negative.");
+                                                       + ") cannot be negative.");
         }
     }
 
@@ -91,5 +91,4 @@ public class ScoreCalculationCountTermination extends AbstractTermination {
     public String toString() {
         return "ScoreCalculationCount(" + scoreCalculationCountLimit + ")";
     }
-
 }

@@ -33,13 +33,16 @@ public @interface PlanningVariableReference {
      */
     Class<?> entityClass() default NullEntityClass.class;
 
-    /** Workaround for annotation limitation in {@link #entityClass()}. */
-    interface NullEntityClass {}
+    /**
+     * Workaround for annotation limitation in {@link #entityClass()}.
+     */
+    interface NullEntityClass {
+
+    }
 
     /**
      * The name of the planning variable that is referenced.
      * @return never null, a genuine or shadow variable name
      */
     String variableName();
-
 }

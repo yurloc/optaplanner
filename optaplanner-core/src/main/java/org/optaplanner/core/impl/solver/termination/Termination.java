@@ -59,7 +59,7 @@ public interface Termination extends PhaseLifecycleListener {
      * should be careful not to return a timeGradient above 1.0.
      * @param solverScope never null
      * @return timeGradient t for which {@code 0.0 <= t <= 1.0 or -1.0} when it is not supported.
-     *         At the start of a solver t is 0.0 and at the end t would be 1.0.
+     * At the start of a solver t is 0.0 and at the end t would be 1.0.
      */
     double calculateSolverTimeGradient(DefaultSolverScope solverScope);
 
@@ -67,7 +67,7 @@ public interface Termination extends PhaseLifecycleListener {
      * See {@link #calculateSolverTimeGradient(DefaultSolverScope)}.
      * @param phaseScope never null
      * @return timeGradient t for which {@code 0.0 <= t <= 1.0 or -1.0} when it is not supported.
-     *         At the start of a phase t is 0.0 and at the end t would be 1.0.
+     * At the start of a phase t is 0.0 and at the end t would be 1.0.
      */
     double calculatePhaseTimeGradient(AbstractPhaseScope phaseScope);
 
@@ -79,5 +79,4 @@ public interface Termination extends PhaseLifecycleListener {
      * @throws UnsupportedOperationException if not supported by this termination
      */
     Termination createChildThreadTermination(DefaultSolverScope solverScope, ChildThreadType childThreadType);
-
 }

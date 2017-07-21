@@ -50,5 +50,4 @@ public class AbstractEntityPlacerTest {
         }
         assertFalse(iterator.hasNext());
     }
-
 }

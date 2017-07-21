@@ -83,5 +83,4 @@ public class HardSoftLongScoreDefinitionTest {
         assertEquals(Long.MIN_VALUE, pessimisticBound.getHardScore());
         assertEquals(Long.MIN_VALUE, pessimisticBound.getSoftScore());
     }
-
 }

@@ -33,7 +33,8 @@ public class ClassloadedTestdataEntity {
 
     public static GenuineVariableDescriptor buildVariableDescriptorForValue() {
         SolutionDescriptor solutionDescriptor = ClassloadedTestdataSolution.buildSolutionDescriptor();
-        EntityDescriptor entityDescriptor = solutionDescriptor.findEntityDescriptorOrFail(ClassloadedTestdataEntity.class);
+        EntityDescriptor entityDescriptor = solutionDescriptor.findEntityDescriptorOrFail(
+                ClassloadedTestdataEntity.class);
         return entityDescriptor.getGenuineVariableDescriptor("value");
     }
 
@@ -58,5 +59,4 @@ public class ClassloadedTestdataEntity {
     // ************************************************************************
     // Complex methods
     // ************************************************************************
-
 }

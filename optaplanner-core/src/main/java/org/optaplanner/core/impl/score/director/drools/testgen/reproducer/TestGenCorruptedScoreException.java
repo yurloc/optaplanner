@@ -37,5 +37,4 @@ public class TestGenCorruptedScoreException extends RuntimeException {
     public Score<?> getUncorruptedScore() {
         return uncorruptedScore;
     }
-
 }

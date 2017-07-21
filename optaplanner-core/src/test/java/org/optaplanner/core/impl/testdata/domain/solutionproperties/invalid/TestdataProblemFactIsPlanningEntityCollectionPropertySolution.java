@@ -77,5 +77,4 @@ public class TestdataProblemFactIsPlanningEntityCollectionPropertySolution exten
     public void setScore(SimpleScore score) {
         this.score = score;
     }
-
 }

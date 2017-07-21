@@ -20,9 +20,10 @@ import java.util.Random;
 
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
-import static org.optaplanner.core.impl.testdata.util.PlannerAssert.*;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.assertAllElementsOfIterator;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.assertElementsOfIterator;
 
 public class IntValueRangeTest {
 
@@ -101,5 +102,4 @@ public class IntValueRangeTest {
         when(workingRandom.nextInt(anyInt())).thenReturn(3, 0);
         assertElementsOfIterator(new IntValueRange(100, 120, 5).createRandomIterator(workingRandom), 115, 100);
     }
-
 }

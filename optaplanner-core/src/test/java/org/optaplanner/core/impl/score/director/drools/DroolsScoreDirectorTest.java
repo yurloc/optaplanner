@@ -33,7 +33,8 @@ public class DroolsScoreDirectorTest {
 
     @Test
     public void illegalStateExceptionThrownWhenConstraintMatchNotEnabled() {
-        DroolsScoreDirector<Object> director = new DroolsScoreDirector<>(mockDroolsScoreDirectorFactory(), false, false);
+        DroolsScoreDirector<Object> director = new DroolsScoreDirector<>(mockDroolsScoreDirectorFactory(), false,
+                                                                         false);
         director.setWorkingSolution(new Object());
         expectedException.expect(IllegalStateException.class);
         expectedException.expectMessage("constraintMatchEnabled");
@@ -56,5 +57,4 @@ public class DroolsScoreDirectorTest {
                 mock(KieSession.class, withSettings().extraInterfaces(RuleEventManager.class)));
         return factory;
     }
-
 }

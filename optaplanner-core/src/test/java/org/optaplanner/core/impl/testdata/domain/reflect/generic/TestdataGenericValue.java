@@ -26,5 +26,4 @@ public class TestdataGenericValue<T> extends TestdataObject {
     public TestdataGenericValue(String code) {
         super(code);
     }
-
 }

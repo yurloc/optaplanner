@@ -95,5 +95,4 @@ public class SubChain implements Serializable {
     public String toDottedString() {
         return "[" + getFirstEntity() + ".." + getLastEntity() + "]";
     }
-
 }

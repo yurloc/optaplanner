@@ -34,7 +34,8 @@ public class FlatteningHardSoftScoreComparatorTest {
     private String firstScore;
     private String secondScore;
 
-    public FlatteningHardSoftScoreComparatorTest(int expectedResult, int modifier, String firstScore, String secondScore) {
+    public FlatteningHardSoftScoreComparatorTest(int expectedResult, int modifier, String firstScore,
+                                                 String secondScore) {
         this.expectedResult = expectedResult;
         this.modifier = modifier;
         this.firstScore = firstScore;
@@ -72,6 +73,6 @@ public class FlatteningHardSoftScoreComparatorTest {
     public void compare() {
         assertEquals(expectedResult, new FlatteningHardSoftScoreComparator(modifier)
                 .compare(new HardSoftScoreDefinition().parseScore(firstScore),
-                        new HardSoftScoreDefinition().parseScore(secondScore)));
+                         new HardSoftScoreDefinition().parseScore(secondScore)));
     }
 }

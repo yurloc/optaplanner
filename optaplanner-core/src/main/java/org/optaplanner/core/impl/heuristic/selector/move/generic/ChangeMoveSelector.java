@@ -41,7 +41,7 @@ public class ChangeMoveSelector extends GenericMoveSelector {
     protected SingletonInverseVariableSupply inverseVariableSupply = null;
 
     public ChangeMoveSelector(EntitySelector entitySelector, ValueSelector valueSelector,
-            boolean randomSelection) {
+                              boolean randomSelection) {
         this.entitySelector = entitySelector;
         this.valueSelector = valueSelector;
         this.randomSelection = randomSelection;
@@ -90,7 +90,7 @@ public class ChangeMoveSelector extends GenericMoveSelector {
         } else {
             long size = 0;
             for (Iterator it = entitySelector.endingIterator(); it.hasNext(); ) {
-                Object entity =  it.next();
+                Object entity = it.next();
                 size += valueSelector.getSize(entity);
             }
             return size;
@@ -139,5 +139,4 @@ public class ChangeMoveSelector extends GenericMoveSelector {
     public String toString() {
         return getClass().getSimpleName() + "(" + entitySelector + ", " + valueSelector + ")";
     }
-
 }

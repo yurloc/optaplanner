@@ -45,7 +45,7 @@ import org.optaplanner.core.impl.localsearch.decider.forager.Forager;
 import org.optaplanner.core.impl.solver.recaller.BestSolutionRecaller;
 import org.optaplanner.core.impl.solver.termination.Termination;
 
-import static org.apache.commons.lang3.ObjectUtils.*;
+import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
 
 @XStreamAlias("localSearch")
 public class LocalSearchPhaseConfig extends PhaseConfig<LocalSearchPhaseConfig> {
@@ -105,13 +105,13 @@ public class LocalSearchPhaseConfig extends PhaseConfig<LocalSearchPhaseConfig> 
 
     @Override
     public LocalSearchPhase buildPhase(int phaseIndex, HeuristicConfigPolicy solverConfigPolicy,
-            BestSolutionRecaller bestSolutionRecaller, Termination solverTermination) {
+                                       BestSolutionRecaller bestSolutionRecaller, Termination solverTermination) {
         HeuristicConfigPolicy phaseConfigPolicy = solverConfigPolicy.createPhaseConfigPolicy();
         DefaultLocalSearchPhase phase = new DefaultLocalSearchPhase(
                 phaseIndex, solverConfigPolicy.getLogIndentation(), bestSolutionRecaller,
                 buildPhaseTermination(phaseConfigPolicy, solverTermination));
         phase.setDecider(buildDecider(phaseConfigPolicy,
-                phase.getTermination()));
+                                      phase.getTermination()));
         EnvironmentMode environmentMode = phaseConfigPolicy.getEnvironmentMode();
         if (environmentMode.isNonIntrusiveFullAsserted()) {
             phase.setAssertStepScoreFromScratch(true);
@@ -128,13 +128,13 @@ public class LocalSearchPhaseConfig extends PhaseConfig<LocalSearchPhaseConfig> 
         Acceptor acceptor = buildAcceptor(configPolicy);
         Forager forager = buildForager(configPolicy);
         LocalSearchDecider decider = new LocalSearchDecider(configPolicy.getLogIndentation(),
-                termination, moveSelector, acceptor, forager);
+                                                            termination, moveSelector, acceptor, forager);
         if (moveSelector.isNeverEnding() && !forager.supportsNeverEndingMoveSelector()) {
             throw new IllegalStateException("The moveSelector (" + moveSelector
-                    + ") has neverEnding (" + moveSelector.isNeverEnding()
-                    + "), but the forager (" + forager
-                    + ") does not support it.\n"
-                    + "Maybe configure the <forager> with an <acceptedCountLimit>.");
+                                                    + ") has neverEnding (" + moveSelector.isNeverEnding()
+                                                    + "), but the forager (" + forager
+                                                    + ") does not support it.\n"
+                                                    + "Maybe configure the <forager> with an <acceptedCountLimit>.");
         }
         EnvironmentMode environmentMode = configPolicy.getEnvironmentMode();
         if (environmentMode.isNonIntrusiveFullAsserted()) {
@@ -151,8 +151,8 @@ public class LocalSearchPhaseConfig extends PhaseConfig<LocalSearchPhaseConfig> 
         if (acceptorConfig != null) {
             if (localSearchType != null) {
                 throw new IllegalArgumentException("The localSearchType (" + localSearchType
-                        + ") must not be configured if the acceptorConfig (" + acceptorConfig
-                        + ") is explicitly configured.");
+                                                           + ") must not be configured if the acceptorConfig (" + acceptorConfig
+                                                           + ") is explicitly configured.");
             }
             acceptorConfig_ = acceptorConfig;
         } else {
@@ -173,7 +173,7 @@ public class LocalSearchPhaseConfig extends PhaseConfig<LocalSearchPhaseConfig> 
                     break;
                 default:
                     throw new IllegalStateException("The localSearchType (" + localSearchType_
-                            + ") is not implemented.");
+                                                            + ") is not implemented.");
             }
         }
         return acceptorConfig_.buildAcceptor(configPolicy);
@@ -184,8 +184,8 @@ public class LocalSearchPhaseConfig extends PhaseConfig<LocalSearchPhaseConfig> 
         if (foragerConfig != null) {
             if (localSearchType != null) {
                 throw new IllegalArgumentException("The localSearchType (" + localSearchType
-                        + ") must not be configured if the foragerConfig (" + foragerConfig
-                        + ") is explicitly configured.");
+                                                           + ") must not be configured if the foragerConfig (" + foragerConfig
+                                                           + ") is explicitly configured.");
             }
             foragerConfig_ = foragerConfig;
         } else {
@@ -206,7 +206,7 @@ public class LocalSearchPhaseConfig extends PhaseConfig<LocalSearchPhaseConfig> 
                     break;
                 default:
                     throw new IllegalStateException("The localSearchType (" + localSearchType_
-                            + ") is not implemented.");
+                                                            + ") is not implemented.");
             }
         }
         return foragerConfig_.buildForager(configPolicy);
@@ -222,16 +222,16 @@ public class LocalSearchPhaseConfig extends PhaseConfig<LocalSearchPhaseConfig> 
             unionMoveSelectorConfig.setMoveSelectorConfigList(Arrays.<MoveSelectorConfig>asList(
                     new ChangeMoveSelectorConfig(), new SwapMoveSelectorConfig()));
             moveSelector = unionMoveSelectorConfig.buildMoveSelector(configPolicy,
-                    defaultCacheType, defaultSelectionOrder);
+                                                                     defaultCacheType, defaultSelectionOrder);
         } else if (moveSelectorConfigList.size() == 1) {
             moveSelector = moveSelectorConfigList.get(0).buildMoveSelector(
                     configPolicy, defaultCacheType, defaultSelectionOrder);
         } else {
             // TODO moveSelectorConfigList is only a List because of XStream limitations.
             throw new IllegalArgumentException("The moveSelectorConfigList (" + moveSelectorConfigList
-                    + ") must be a singleton or empty. Use a single " + UnionMoveSelectorConfig.class.getSimpleName()
-                    + " or " + CartesianProductMoveSelectorConfig.class.getSimpleName()
-                    + " element to nest multiple MoveSelectors.");
+                                                       + ") must be a singleton or empty. Use a single " + UnionMoveSelectorConfig.class.getSimpleName()
+                                                       + " or " + CartesianProductMoveSelectorConfig.class.getSimpleName()
+                                                       + " element to nest multiple MoveSelectors.");
         }
         return moveSelector;
     }
@@ -240,11 +240,10 @@ public class LocalSearchPhaseConfig extends PhaseConfig<LocalSearchPhaseConfig> 
     public void inherit(LocalSearchPhaseConfig inheritedConfig) {
         super.inherit(inheritedConfig);
         localSearchType = ConfigUtils.inheritOverwritableProperty(localSearchType,
-                inheritedConfig.getLocalSearchType());
+                                                                  inheritedConfig.getLocalSearchType());
         setMoveSelectorConfig(ConfigUtils.inheritOverwritableProperty(
                 getMoveSelectorConfig(), inheritedConfig.getMoveSelectorConfig()));
         acceptorConfig = ConfigUtils.inheritConfig(acceptorConfig, inheritedConfig.getAcceptorConfig());
         foragerConfig = ConfigUtils.inheritConfig(foragerConfig, inheritedConfig.getForagerConfig());
     }
-
 }

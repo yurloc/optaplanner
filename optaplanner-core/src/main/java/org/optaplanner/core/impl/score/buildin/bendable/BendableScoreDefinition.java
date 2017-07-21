@@ -49,17 +49,17 @@ public class BendableScoreDefinition extends AbstractBendableScoreDefinition<Ben
         BendableScore score = BendableScore.parseScore(scoreString);
         if (score.getHardLevelsSize() != hardLevelsSize) {
             throw new IllegalArgumentException("The scoreString (" + scoreString
-                    + ") for the scoreClass (" + BendableScore.class.getSimpleName()
-                    + ") doesn't follow the correct pattern:"
-                    + " the hardLevelsSize (" + score.getHardLevelsSize()
-                    + ") doesn't match the scoreDefinition's hardLevelsSize (" + hardLevelsSize + ").");
+                                                       + ") for the scoreClass (" + BendableScore.class.getSimpleName()
+                                                       + ") doesn't follow the correct pattern:"
+                                                       + " the hardLevelsSize (" + score.getHardLevelsSize()
+                                                       + ") doesn't match the scoreDefinition's hardLevelsSize (" + hardLevelsSize + ").");
         }
         if (score.getSoftLevelsSize() != softLevelsSize) {
             throw new IllegalArgumentException("The scoreString (" + scoreString
-                    + ") for the scoreClass (" + BendableScore.class.getSimpleName()
-                    + ") doesn't follow the correct pattern:"
-                    + " the softLevelsSize (" + score.getSoftLevelsSize()
-                    + ") doesn't match the scoreDefinition's softLevelsSize (" + softLevelsSize + ").");
+                                                       + ") for the scoreClass (" + BendableScore.class.getSimpleName()
+                                                       + ") doesn't follow the correct pattern:"
+                                                       + " the softLevelsSize (" + score.getSoftLevelsSize()
+                                                       + ") doesn't match the scoreDefinition's softLevelsSize (" + softLevelsSize + ").");
         }
         return score;
     }
@@ -68,7 +68,7 @@ public class BendableScoreDefinition extends AbstractBendableScoreDefinition<Ben
     public BendableScore fromLevelNumbers(int initScore, Number[] levelNumbers) {
         if (levelNumbers.length != getLevelsSize()) {
             throw new IllegalStateException("The levelNumbers (" + Arrays.toString(levelNumbers)
-                    + ")'s length (" + levelNumbers.length + ") must equal the levelSize (" + getLevelsSize() + ").");
+                                                    + ")'s length (" + levelNumbers.length + ") must equal the levelSize (" + getLevelsSize() + ").");
         }
         int[] hardScores = new int[hardLevelsSize];
         for (int i = 0; i < hardLevelsSize; i++) {
@@ -89,12 +89,12 @@ public class BendableScoreDefinition extends AbstractBendableScoreDefinition<Ben
         int levelsSize = hardLevelsSize + softLevelsSize;
         if (scores.length != levelsSize) {
             throw new IllegalArgumentException("The scores (" + Arrays.toString(scores)
-                    + ")'s length (" + scores.length
-                    + ") is not levelsSize (" + levelsSize + ").");
+                                                       + ")'s length (" + scores.length
+                                                       + ") is not levelsSize (" + levelsSize + ").");
         }
         return BendableScore.valueOfUninitialized(initScore,
-                Arrays.copyOfRange(scores, 0, hardLevelsSize),
-                Arrays.copyOfRange(scores, hardLevelsSize, levelsSize));
+                                                  Arrays.copyOfRange(scores, 0, hardLevelsSize),
+                                                  Arrays.copyOfRange(scores, hardLevelsSize, levelsSize));
     }
 
     @Override
@@ -133,5 +133,4 @@ public class BendableScoreDefinition extends AbstractBendableScoreDefinition<Ben
         }
         return BendableScore.valueOfUninitialized(0, hardScores, softScores);
     }
-
 }

@@ -39,5 +39,4 @@ public interface SelectionSorter<Solution_, T> {
      * of {@link PlanningEntity}, planningValue,  {@link Move} or {@link Selector}
      */
     void sort(ScoreDirector<Solution_> scoreDirector, List<T> selectionList);
-
 }

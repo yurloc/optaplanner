@@ -95,5 +95,4 @@ public class ConstructionHeuristicMoveScope<Solution_> {
     public String toString() {
         return getClass().getSimpleName() + "(" + stepScope.getStepIndex() + "/" + moveIndex + ")";
     }
-
 }

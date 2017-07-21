@@ -33,5 +33,4 @@ public interface SingletonInverseVariableSupply extends Supply {
      * @return sometimes null, an entity for which the planning variable is the planningValue.
      */
     Object getInverseSingleton(Object planningValue);
-
 }

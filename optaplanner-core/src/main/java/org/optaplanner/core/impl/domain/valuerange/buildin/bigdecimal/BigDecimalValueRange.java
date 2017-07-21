@@ -54,28 +54,28 @@ public class BigDecimalValueRange extends AbstractCountableValueRange<BigDecimal
         int scale = from.scale();
         if (scale != to.scale()) {
             throw new IllegalArgumentException("The " + getClass().getSimpleName()
-                    + " cannot have a to (" + to + ") scale (" + to.scale()
-                    + ") which is different than its from (" + from + ") scale (" + scale + ").");
+                                                       + " cannot have a to (" + to + ") scale (" + to.scale()
+                                                       + ") which is different than its from (" + from + ") scale (" + scale + ").");
         }
         if (scale != incrementUnit.scale()) {
             throw new IllegalArgumentException("The " + getClass().getSimpleName()
-                    + " cannot have a from (" + incrementUnit + ") scale (" + incrementUnit.scale()
-                    + ") which is different than its from (" + from + ") scale (" + scale + ").");
+                                                       + " cannot have a from (" + incrementUnit + ") scale (" + incrementUnit.scale()
+                                                       + ") which is different than its from (" + from + ") scale (" + scale + ").");
         }
         if (to.compareTo(from) < 0) {
             throw new IllegalArgumentException("The " + getClass().getSimpleName()
-                    + " cannot have a from (" + from + ") which is strictly higher than its to (" + to + ").");
+                                                       + " cannot have a from (" + from + ") which is strictly higher than its to (" + to + ").");
         }
         if (incrementUnit.compareTo(BigDecimal.ZERO) <= 0) {
             throw new IllegalArgumentException("The " + getClass().getSimpleName()
-                    + " must have strictly positive incrementUnit (" + incrementUnit + ").");
+                                                       + " must have strictly positive incrementUnit (" + incrementUnit + ").");
         }
 
         if (!to.unscaledValue().subtract(from.unscaledValue()).remainder(incrementUnit.unscaledValue())
                 .equals(BigInteger.ZERO)) {
             throw new IllegalArgumentException("The " + getClass().getSimpleName()
-                    + "'s incrementUnit (" + incrementUnit
-                    + ") must fit an integer number of times between from (" + from + ") and to (" + to + ").");
+                                                       + "'s incrementUnit (" + incrementUnit
+                                                       + ") must fit an integer number of times between from (" + from + ") and to (" + to + ").");
         }
     }
 
@@ -88,7 +88,7 @@ public class BigDecimalValueRange extends AbstractCountableValueRange<BigDecimal
     public BigDecimal get(long index) {
         if (index < 0L || index >= getSize()) {
             throw new IndexOutOfBoundsException("The index (" + index + ") must be >= 0 and < size ("
-                    + getSize() + ").");
+                                                        + getSize() + ").");
         }
         return incrementUnit.multiply(BigDecimal.valueOf(index)).add(from);
     }
@@ -124,7 +124,6 @@ public class BigDecimalValueRange extends AbstractCountableValueRange<BigDecimal
             upcoming = upcoming.add(incrementUnit);
             return next;
         }
-
     }
 
     @Override
@@ -154,12 +153,10 @@ public class BigDecimalValueRange extends AbstractCountableValueRange<BigDecimal
             long index = RandomUtils.nextLong(workingRandom, size);
             return incrementUnit.multiply(BigDecimal.valueOf(index)).add(from);
         }
-
     }
 
     @Override
     public String toString() {
         return "[" + from + "-" + to + ")"; // Formatting: interval (mathematics) ISO 31-11
     }
-
 }

@@ -30,14 +30,16 @@ import org.optaplanner.core.impl.solver.scope.DefaultSolverScope;
 import org.optaplanner.core.impl.testdata.domain.TestdataSolution;
 
 import static org.mockito.Mockito.*;
-import static org.optaplanner.core.impl.testdata.util.PlannerAssert.*;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.assertCodesOfNeverEndingMoveSelector;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.verifyPhaseLifecycle;
 
 public class ProbabilityMoveSelectorTest {
 
     @Test
     public void randomSelection() {
         MoveSelector childMoveSelector = SelectorTestUtils.mockMoveSelector(DummyMove.class,
-                new DummyMove("e1"), new DummyMove("e2"), new DummyMove("e3"), new DummyMove("e4"));
+                                                                            new DummyMove("e1"), new DummyMove("e2"),
+                                                                            new DummyMove("e3"), new DummyMove("e4"));
 
         SelectionProbabilityWeightFactory<TestdataSolution, DummyMove> probabilityWeightFactory
                 = (scoreDirector, move) -> {
@@ -55,10 +57,11 @@ public class ProbabilityMoveSelectorTest {
             }
         };
         MoveSelector moveSelector = new ProbabilityMoveSelector(childMoveSelector, SelectionCacheType.STEP,
-                probabilityWeightFactory);
+                                                                probabilityWeightFactory);
 
         Random workingRandom = mock(Random.class);
-        when(workingRandom.nextDouble()).thenReturn(1222.0 / 1234.0, 111.0 / 1234.0, 0.0, 1230.0 / 1234.0, 1199.0 / 1234.0);
+        when(workingRandom.nextDouble()).thenReturn(1222.0 / 1234.0, 111.0 / 1234.0, 0.0, 1230.0 / 1234.0,
+                                                    1199.0 / 1234.0);
 
         DefaultSolverScope solverScope = mock(DefaultSolverScope.class);
         when(solverScope.getWorkingRandom()).thenReturn(workingRandom);
@@ -81,5 +84,4 @@ public class ProbabilityMoveSelectorTest {
         verifyPhaseLifecycle(childMoveSelector, 1, 1, 1);
         verify(childMoveSelector, times(1)).iterator();
     }
-
 }

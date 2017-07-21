@@ -37,7 +37,7 @@ public class DoubleValueRange extends AbstractUncountableValueRange<Double> {
         this.to = to;
         if (to < from) {
             throw new IllegalArgumentException("The " + getClass().getSimpleName()
-                    + " cannot have a from (" + from + ") which is strictly higher than its to (" + to + ").");
+                                                       + " cannot have a from (" + from + ") which is strictly higher than its to (" + to + ").");
         }
     }
 
@@ -88,12 +88,10 @@ public class DoubleValueRange extends AbstractUncountableValueRange<Double> {
             }
             return next;
         }
-
     }
 
     @Override
     public String toString() {
         return "[" + from + "-" + to + ")"; // Formatting: interval (mathematics) ISO 31-11
     }
-
 }

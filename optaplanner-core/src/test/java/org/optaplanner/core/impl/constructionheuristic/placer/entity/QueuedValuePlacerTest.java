@@ -22,11 +22,9 @@ import org.junit.Test;
 import org.optaplanner.core.impl.constructionheuristic.placer.Placement;
 import org.optaplanner.core.impl.constructionheuristic.placer.QueuedValuePlacer;
 import org.optaplanner.core.impl.domain.variable.descriptor.GenuineVariableDescriptor;
-import org.optaplanner.core.impl.heuristic.move.Move;
 import org.optaplanner.core.impl.heuristic.selector.SelectorTestUtils;
 import org.optaplanner.core.impl.heuristic.selector.entity.EntitySelector;
 import org.optaplanner.core.impl.heuristic.selector.move.MoveSelector;
-import org.optaplanner.core.impl.heuristic.selector.move.generic.ChangeMove;
 import org.optaplanner.core.impl.heuristic.selector.move.generic.ChangeMoveSelector;
 import org.optaplanner.core.impl.heuristic.selector.value.EntityIndependentValueSelector;
 import org.optaplanner.core.impl.heuristic.selector.value.mimic.MimicRecordingValueSelector;
@@ -37,11 +35,9 @@ import org.optaplanner.core.impl.solver.scope.DefaultSolverScope;
 import org.optaplanner.core.impl.testdata.domain.TestdataEntity;
 import org.optaplanner.core.impl.testdata.domain.TestdataValue;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
-import static org.optaplanner.core.impl.testdata.util.PlannerAssert.*;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.verifyPhaseLifecycle;
 
 public class QueuedValuePlacerTest extends AbstractEntityPlacerTest {
 
@@ -49,7 +45,9 @@ public class QueuedValuePlacerTest extends AbstractEntityPlacerTest {
     public void oneMoveSelector() {
         GenuineVariableDescriptor variableDescriptor = TestdataEntity.buildVariableDescriptorForValue();
         EntitySelector entitySelector = SelectorTestUtils.mockEntitySelector(variableDescriptor.getEntityDescriptor(),
-                new TestdataEntity("a"), new TestdataEntity("b"), new TestdataEntity("c"));
+                                                                             new TestdataEntity("a"),
+                                                                             new TestdataEntity("b"),
+                                                                             new TestdataEntity("c"));
         EntityIndependentValueSelector valueSelector = SelectorTestUtils.mockEntityIndependentValueSelector(
                 variableDescriptor,
                 new TestdataValue("1"), new TestdataValue("2"));
@@ -114,5 +112,4 @@ public class QueuedValuePlacerTest extends AbstractEntityPlacerTest {
         verifyPhaseLifecycle(entitySelector, 1, 2, 4);
         verifyPhaseLifecycle(valueSelector, 1, 2, 4);
     }
-
 }

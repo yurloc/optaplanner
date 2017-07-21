@@ -28,7 +28,7 @@ import org.optaplanner.core.impl.heuristic.selector.move.MoveSelector;
 import org.optaplanner.core.impl.heuristic.selector.move.generic.chained.SubChainSwapMoveSelector;
 import org.optaplanner.core.impl.heuristic.selector.value.chained.SubChainSelector;
 
-import static org.apache.commons.lang3.ObjectUtils.*;
+import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
 
 @XStreamAlias("subChainSwapMoveSelector")
 public class SubChainSwapMoveSelectorConfig extends MoveSelectorConfig<SubChainSwapMoveSelectorConfig> {
@@ -79,31 +79,37 @@ public class SubChainSwapMoveSelectorConfig extends MoveSelectorConfig<SubChainS
 
     @Override
     public MoveSelector buildBaseMoveSelector(HeuristicConfigPolicy configPolicy,
-            SelectionCacheType minimumCacheType, boolean randomSelection) {
+                                              SelectionCacheType minimumCacheType, boolean randomSelection) {
         EntityDescriptor entityDescriptor = deduceEntityDescriptor(
                 configPolicy.getSolutionDescriptor(), entityClass);
         SubChainSelectorConfig subChainSelectorConfig_ = subChainSelectorConfig == null ? new SubChainSelectorConfig()
                 : subChainSelectorConfig;
         SubChainSelector leftSubChainSelector = subChainSelectorConfig_.buildSubChainSelector(configPolicy,
-                entityDescriptor,
-                minimumCacheType, SelectionOrder.fromRandomSelectionBoolean(randomSelection));
+                                                                                              entityDescriptor,
+                                                                                              minimumCacheType,
+                                                                                              SelectionOrder.fromRandomSelectionBoolean(
+                                                                                                      randomSelection));
         SubChainSelectorConfig rightSubChainSelectorConfig = defaultIfNull(secondarySubChainSelectorConfig,
-                subChainSelectorConfig_);
+                                                                           subChainSelectorConfig_);
         SubChainSelector rightSubChainSelector = rightSubChainSelectorConfig.buildSubChainSelector(configPolicy,
-                entityDescriptor,
-                minimumCacheType, SelectionOrder.fromRandomSelectionBoolean(randomSelection));
+                                                                                                   entityDescriptor,
+                                                                                                   minimumCacheType,
+                                                                                                   SelectionOrder.fromRandomSelectionBoolean(
+                                                                                                           randomSelection));
         return new SubChainSwapMoveSelector(leftSubChainSelector, rightSubChainSelector, randomSelection,
-                defaultIfNull(selectReversingMoveToo, true));
+                                            defaultIfNull(selectReversingMoveToo, true));
     }
 
     @Override
     public void inherit(SubChainSwapMoveSelectorConfig inheritedConfig) {
         super.inherit(inheritedConfig);
         entityClass = ConfigUtils.inheritOverwritableProperty(entityClass, inheritedConfig.getEntityClass());
-        subChainSelectorConfig = ConfigUtils.inheritConfig(subChainSelectorConfig, inheritedConfig.getSubChainSelectorConfig());
-        secondarySubChainSelectorConfig = ConfigUtils.inheritConfig(secondarySubChainSelectorConfig, inheritedConfig.getSecondarySubChainSelectorConfig());
+        subChainSelectorConfig = ConfigUtils.inheritConfig(subChainSelectorConfig,
+                                                           inheritedConfig.getSubChainSelectorConfig());
+        secondarySubChainSelectorConfig = ConfigUtils.inheritConfig(secondarySubChainSelectorConfig,
+                                                                    inheritedConfig.getSecondarySubChainSelectorConfig());
         selectReversingMoveToo = ConfigUtils.inheritOverwritableProperty(selectReversingMoveToo,
-                inheritedConfig.getSelectReversingMoveToo());
+                                                                         inheritedConfig.getSelectReversingMoveToo());
     }
 
     @Override
@@ -111,5 +117,4 @@ public class SubChainSwapMoveSelectorConfig extends MoveSelectorConfig<SubChainS
         return getClass().getSimpleName() + "(" + subChainSelectorConfig
                 + (secondarySubChainSelectorConfig == null ? "" : ", " + secondarySubChainSelectorConfig) + ")";
     }
-
 }

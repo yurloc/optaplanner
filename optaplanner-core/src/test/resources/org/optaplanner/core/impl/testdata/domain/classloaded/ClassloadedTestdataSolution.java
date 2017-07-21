@@ -31,7 +31,8 @@ import org.optaplanner.core.impl.domain.solution.descriptor.SolutionDescriptor;
 public class ClassloadedTestdataSolution {
 
     public static SolutionDescriptor buildSolutionDescriptor() {
-        return SolutionDescriptor.buildSolutionDescriptor(ClassloadedTestdataSolution.class, ClassloadedTestdataEntity.class);
+        return SolutionDescriptor.buildSolutionDescriptor(ClassloadedTestdataSolution.class,
+                                                          ClassloadedTestdataEntity.class);
     }
 
     private List<ClassloadedTestdataValue> valueList;
@@ -73,5 +74,4 @@ public class ClassloadedTestdataSolution {
     // ************************************************************************
     // Complex methods
     // ************************************************************************
-
 }

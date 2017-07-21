@@ -16,7 +16,6 @@
 
 package org.optaplanner.core.impl.domain.valuerange.descriptor;
 
-import java.lang.reflect.Array;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -53,14 +52,14 @@ public abstract class AbstractFromPropertyValueRangeDescriptor<Solution_>
         ValueRangeProvider valueRangeProviderAnnotation = memberAccessor.getAnnotation(ValueRangeProvider.class);
         if (valueRangeProviderAnnotation == null) {
             throw new IllegalStateException("The member (" + memberAccessor
-                    + ") must have a valueRangeProviderAnnotation (" + valueRangeProviderAnnotation + ").");
+                                                    + ") must have a valueRangeProviderAnnotation (" + valueRangeProviderAnnotation + ").");
         }
         processValueRangeProviderAnnotation(valueRangeProviderAnnotation);
         if (addNullInValueRange && !countable) {
             throw new IllegalStateException("The valueRangeDescriptor (" + this
-                    + ") is nullable, but not countable (" + countable + ").\n"
-                    + "Maybe the member (" + memberAccessor + ") should return "
-                    + CountableValueRange.class.getSimpleName() + ".");
+                                                    + ") is nullable, but not countable (" + countable + ").\n"
+                                                    + "Maybe the member (" + memberAccessor + ") should return "
+                                                    + CountableValueRange.class.getSimpleName() + ".");
         }
     }
 
@@ -71,37 +70,37 @@ public abstract class AbstractFromPropertyValueRangeDescriptor<Solution_>
         arrayWrapping = type.isArray();
         if (!collectionWrapping && !arrayWrapping && !ValueRange.class.isAssignableFrom(type)) {
             throw new IllegalArgumentException("The entityClass (" + entityDescriptor.getEntityClass()
-                    + ") has a " + PlanningVariable.class.getSimpleName()
-                    + " annotated property (" + variableDescriptor.getVariableName()
-                    + ") that refers to a " + ValueRangeProvider.class.getSimpleName()
-                    + " annotated member (" + memberAccessor
-                    + ") that does not return a " + Collection.class.getSimpleName()
-                    + ", an array or a " + ValueRange.class.getSimpleName() + ".");
+                                                       + ") has a " + PlanningVariable.class.getSimpleName()
+                                                       + " annotated property (" + variableDescriptor.getVariableName()
+                                                       + ") that refers to a " + ValueRangeProvider.class.getSimpleName()
+                                                       + " annotated member (" + memberAccessor
+                                                       + ") that does not return a " + Collection.class.getSimpleName()
+                                                       + ", an array or a " + ValueRange.class.getSimpleName() + ".");
         }
         if (collectionWrapping) {
             Type genericType = memberAccessor.getGenericType();
             // TODO reuse ConfgUtils.extractCollectionGenericTypeParameter() if possible
             if (!(genericType instanceof ParameterizedType)) {
                 throw new IllegalArgumentException("The entityClass (" + entityDescriptor.getEntityClass()
-                        + ") has a " + PlanningVariable.class.getSimpleName()
-                        + " annotated property (" + variableDescriptor.getVariableName()
-                        + ") that refers to a " + ValueRangeProvider.class.getSimpleName()
-                        + " annotated member (" + memberAccessor
-                        + ") that returns a " + Collection.class.getSimpleName()
-                        + " which has no generic parameters.\n"
-                        + "Maybe the member (" + memberAccessor + ") should return a typed "
-                        + Collection.class.getSimpleName() + ".");
+                                                           + ") has a " + PlanningVariable.class.getSimpleName()
+                                                           + " annotated property (" + variableDescriptor.getVariableName()
+                                                           + ") that refers to a " + ValueRangeProvider.class.getSimpleName()
+                                                           + " annotated member (" + memberAccessor
+                                                           + ") that returns a " + Collection.class.getSimpleName()
+                                                           + " which has no generic parameters.\n"
+                                                           + "Maybe the member (" + memberAccessor + ") should return a typed "
+                                                           + Collection.class.getSimpleName() + ".");
             }
             ParameterizedType parameterizedType = (ParameterizedType) genericType;
             Type[] typeArguments = parameterizedType.getActualTypeArguments();
             if (typeArguments.length != 1) {
                 throw new IllegalArgumentException("The entityClass (" + entityDescriptor.getEntityClass()
-                        + ") has a " + PlanningVariable.class.getSimpleName()
-                        + " annotated property (" + variableDescriptor.getVariableName()
-                        + ") that refers to a " + ValueRangeProvider.class.getSimpleName()
-                        + " annotated member (" + memberAccessor
-                        + ") that returns a parameterized " + Collection.class.getSimpleName()
-                        + ") with an unsupported number of generic parameters (" + typeArguments.length + ").");
+                                                           + ") has a " + PlanningVariable.class.getSimpleName()
+                                                           + " annotated property (" + variableDescriptor.getVariableName()
+                                                           + ") that refers to a " + ValueRangeProvider.class.getSimpleName()
+                                                           + " annotated member (" + memberAccessor
+                                                           + ") that returns a parameterized " + Collection.class.getSimpleName()
+                                                           + ") with an unsupported number of generic parameters (" + typeArguments.length + ").");
             }
             Type typeArgument = typeArguments[0];
             if (typeArgument instanceof ParameterizedType) {
@@ -111,38 +110,38 @@ public abstract class AbstractFromPropertyValueRangeDescriptor<Solution_>
             }
             if (!(typeArgument instanceof Class)) {
                 throw new IllegalArgumentException("The entityClass (" + entityDescriptor.getEntityClass()
-                        + ") has a " + PlanningVariable.class.getSimpleName()
-                        + " annotated property (" + variableDescriptor.getVariableName()
-                        + ") that refers to a " + ValueRangeProvider.class.getSimpleName()
-                        + " annotated member (" + memberAccessor
-                        + ") that returns a parameterized " + Collection.class.getSimpleName()
-                        + " with an unsupported type arguments (" + typeArgument + ").");
+                                                           + ") has a " + PlanningVariable.class.getSimpleName()
+                                                           + " annotated property (" + variableDescriptor.getVariableName()
+                                                           + ") that refers to a " + ValueRangeProvider.class.getSimpleName()
+                                                           + " annotated member (" + memberAccessor
+                                                           + ") that returns a parameterized " + Collection.class.getSimpleName()
+                                                           + " with an unsupported type arguments (" + typeArgument + ").");
             }
             Class<?> collectionElementClass = ((Class) typeArgument);
             Class<?> variablePropertyType = variableDescriptor.getVariablePropertyType();
             if (!variablePropertyType.isAssignableFrom(collectionElementClass)) {
                 throw new IllegalArgumentException("The entityClass (" + entityDescriptor.getEntityClass()
-                        + ") has a " + PlanningVariable.class.getSimpleName()
-                        + " annotated property (" + variableDescriptor.getVariableName()
-                        + ") that refers to a " + ValueRangeProvider.class.getSimpleName()
-                        + " annotated member (" + memberAccessor
-                        + ") that returns a " + Collection.class.getSimpleName()
-                        + " with elements of type (" + collectionElementClass
-                        + ") which cannot be assigned to the " + PlanningVariable.class.getSimpleName()
-                        + "'s type (" + variablePropertyType + ").");
+                                                           + ") has a " + PlanningVariable.class.getSimpleName()
+                                                           + " annotated property (" + variableDescriptor.getVariableName()
+                                                           + ") that refers to a " + ValueRangeProvider.class.getSimpleName()
+                                                           + " annotated member (" + memberAccessor
+                                                           + ") that returns a " + Collection.class.getSimpleName()
+                                                           + " with elements of type (" + collectionElementClass
+                                                           + ") which cannot be assigned to the " + PlanningVariable.class.getSimpleName()
+                                                           + "'s type (" + variablePropertyType + ").");
             }
         } else if (arrayWrapping) {
             Class<?> arrayElementClass = type.getComponentType();
             Class<?> variablePropertyType = variableDescriptor.getVariablePropertyType();
             if (!variablePropertyType.isAssignableFrom(arrayElementClass)) {
                 throw new IllegalArgumentException("The entityClass (" + entityDescriptor.getEntityClass()
-                        + ") has a " + PlanningVariable.class.getSimpleName()
-                        + " annotated property (" + variableDescriptor.getVariableName()
-                        + ") that refers to a " + ValueRangeProvider.class.getSimpleName()
-                        + " annotated member (" + memberAccessor
-                        + ") that returns a array with elements of type (" + arrayElementClass
-                        + ") which cannot be assigned to the " + PlanningVariable.class.getSimpleName()
-                        + "'s type (" + variablePropertyType + ").");
+                                                           + ") has a " + PlanningVariable.class.getSimpleName()
+                                                           + " annotated property (" + variableDescriptor.getVariableName()
+                                                           + ") that refers to a " + ValueRangeProvider.class.getSimpleName()
+                                                           + " annotated member (" + memberAccessor
+                                                           + ") that returns a array with elements of type (" + arrayElementClass
+                                                           + ") which cannot be assigned to the " + PlanningVariable.class.getSimpleName()
+                                                           + "'s type (" + variablePropertyType + ").");
             }
         }
         countable = collectionWrapping || arrayWrapping || CountableValueRange.class.isAssignableFrom(type);
@@ -161,9 +160,9 @@ public abstract class AbstractFromPropertyValueRangeDescriptor<Solution_>
         Object valueRangeObject = memberAccessor.executeGetter(bean);
         if (valueRangeObject == null) {
             throw new IllegalStateException("The @" + ValueRangeProvider.class.getSimpleName()
-                    + " annotated member (" + memberAccessor
-                    + ") called on bean (" + bean
-                    + ") must not return a null valueRangeObject (" + valueRangeObject + ").");
+                                                    + " annotated member (" + memberAccessor
+                                                    + ") called on bean (" + bean
+                                                    + ") must not return a null valueRangeObject (" + valueRangeObject + ").");
         }
         ValueRange<Object> valueRange;
         if (collectionWrapping) {
@@ -178,10 +177,10 @@ public abstract class AbstractFromPropertyValueRangeDescriptor<Solution_>
         valueRange = doNullInValueRangeWrapping(valueRange);
         if (valueRange.isEmpty()) {
             throw new IllegalStateException("The @" + ValueRangeProvider.class.getSimpleName()
-                    + " annotated member (" + memberAccessor
-                    + ") called on bean (" + bean
-                    + ") must not return an empty valueRange (" + valueRangeObject + ").\n"
-                    + "  If this a valid dataset, apply overconstrained planning as described in the documentation.");
+                                                    + " annotated member (" + memberAccessor
+                                                    + ") called on bean (" + bean
+                                                    + ") must not return an empty valueRange (" + valueRangeObject + ").\n"
+                                                    + "  If this a valid dataset, apply overconstrained planning as described in the documentation.");
         }
         return valueRange;
     }
@@ -193,5 +192,4 @@ public abstract class AbstractFromPropertyValueRangeDescriptor<Solution_>
         //   and ValueRange.get(int) are not efficient.
         return (collection instanceof List ? (List<T>) collection : new ArrayList<>(collection));
     }
-
 }

@@ -28,7 +28,8 @@ public class FieldMemberAccessorTest {
 
     @Test
     public void fieldAnnotatedEntity() throws NoSuchFieldException {
-        FieldMemberAccessor memberAccessor = new FieldMemberAccessor(TestdataFieldAnnotatedEntity.class.getDeclaredField("value"));
+        FieldMemberAccessor memberAccessor = new FieldMemberAccessor(
+                TestdataFieldAnnotatedEntity.class.getDeclaredField("value"));
         assertEquals("value", memberAccessor.getName());
         assertEquals(TestdataValue.class, memberAccessor.getType());
         assertEquals(true, memberAccessor.isAnnotationPresent(PlanningVariable.class));
@@ -40,5 +41,4 @@ public class FieldMemberAccessorTest {
         memberAccessor.executeSetter(e1, v2);
         assertSame(v2, e1.getValue());
     }
-
 }

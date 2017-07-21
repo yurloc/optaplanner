@@ -27,5 +27,4 @@ public class RandomUtilsTest {
         Random random = new Random(37);
         RandomUtils.nextLong(random, 10L + (long) Integer.MAX_VALUE);
     }
-
 }

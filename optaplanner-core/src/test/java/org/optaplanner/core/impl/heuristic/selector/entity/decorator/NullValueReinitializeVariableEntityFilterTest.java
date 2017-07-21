@@ -30,7 +30,8 @@ public class NullValueReinitializeVariableEntityFilterTest {
     @Test
     public void accept() {
         GenuineVariableDescriptor variableDescriptor = TestdataEntity.buildVariableDescriptorForValue();
-        NullValueReinitializeVariableEntityFilter filter = new NullValueReinitializeVariableEntityFilter(variableDescriptor);
+        NullValueReinitializeVariableEntityFilter filter = new NullValueReinitializeVariableEntityFilter(
+                variableDescriptor);
         assertEquals(false, filter.accept(null, new TestdataEntity("a", new TestdataValue())));
         assertEquals(true, filter.accept(null, new TestdataEntity("b", null)));
     }
@@ -39,9 +40,9 @@ public class NullValueReinitializeVariableEntityFilterTest {
     public void acceptWithNullableEntity() {
         EntityDescriptor entityDescriptor = TestdataNullableEntity.buildEntityDescriptor();
         GenuineVariableDescriptor variableDescriptor = entityDescriptor.getGenuineVariableDescriptor("value");
-        NullValueReinitializeVariableEntityFilter filter = new NullValueReinitializeVariableEntityFilter(variableDescriptor);
+        NullValueReinitializeVariableEntityFilter filter = new NullValueReinitializeVariableEntityFilter(
+                variableDescriptor);
         assertEquals(false, filter.accept(null, new TestdataNullableEntity("a", new TestdataValue())));
         assertEquals(true, filter.accept(null, new TestdataNullableEntity("b", null)));
     }
-
 }

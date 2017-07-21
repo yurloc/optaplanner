@@ -57,8 +57,8 @@ public class HardMediumSoftLongScoreHolder extends AbstractScoreHolder {
     public void addHardConstraintMatch(RuleContext kcontext, long hardWeight) {
         hardScore += hardWeight;
         registerConstraintMatch(kcontext,
-                () -> hardScore -= hardWeight,
-                () -> HardMediumSoftLongScore.valueOf(hardWeight, 0L, 0L));
+                                () -> hardScore -= hardWeight,
+                                () -> HardMediumSoftLongScore.valueOf(hardWeight, 0L, 0L));
     }
 
     /**
@@ -68,8 +68,8 @@ public class HardMediumSoftLongScoreHolder extends AbstractScoreHolder {
     public void addMediumConstraintMatch(RuleContext kcontext, long mediumWeight) {
         mediumScore += mediumWeight;
         registerConstraintMatch(kcontext,
-                () -> mediumScore -= mediumWeight,
-                () -> HardMediumSoftLongScore.valueOf(0L, mediumWeight, 0L));
+                                () -> mediumScore -= mediumWeight,
+                                () -> HardMediumSoftLongScore.valueOf(0L, mediumWeight, 0L));
     }
 
     /**
@@ -79,8 +79,8 @@ public class HardMediumSoftLongScoreHolder extends AbstractScoreHolder {
     public void addSoftConstraintMatch(RuleContext kcontext, long softWeight) {
         softScore += softWeight;
         registerConstraintMatch(kcontext,
-                () -> softScore -= softWeight,
-                () -> HardMediumSoftLongScore.valueOf(0L, 0L, softWeight));
+                                () -> softScore -= softWeight,
+                                () -> HardMediumSoftLongScore.valueOf(0L, 0L, softWeight));
     }
 
     /**
@@ -94,17 +94,16 @@ public class HardMediumSoftLongScoreHolder extends AbstractScoreHolder {
         mediumScore += mediumWeight;
         softScore += softWeight;
         registerConstraintMatch(kcontext,
-                () -> {
-                    hardScore -= hardWeight;
-                    mediumScore -= mediumWeight;
-                    softScore -= softWeight;
-                },
-                () -> HardMediumSoftLongScore.valueOf(hardWeight, mediumWeight, softWeight));
+                                () -> {
+                                    hardScore -= hardWeight;
+                                    mediumScore -= mediumWeight;
+                                    softScore -= softWeight;
+                                },
+                                () -> HardMediumSoftLongScore.valueOf(hardWeight, mediumWeight, softWeight));
     }
 
     @Override
     public Score extractScore(int initScore) {
         return HardMediumSoftLongScore.valueOfUninitialized(initScore, hardScore, mediumScore, softScore);
     }
-
 }

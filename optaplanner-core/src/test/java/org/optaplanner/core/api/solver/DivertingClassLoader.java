@@ -60,5 +60,4 @@ public class DivertingClassLoader extends ClassLoader {
         }
         return super.getResources(resourceName);
     }
-
 }

@@ -28,16 +28,18 @@ import org.optaplanner.core.impl.phase.scope.AbstractPhaseScope;
 import org.optaplanner.core.impl.phase.scope.AbstractStepScope;
 import org.optaplanner.core.impl.solver.scope.DefaultSolverScope;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
-import static org.optaplanner.core.impl.testdata.util.PlannerAssert.*;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.assertAllCodesOfIterator;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.verifyPhaseLifecycle;
 
 public class PooledEntityPlacerTest extends AbstractEntityPlacerTest {
 
     @Test
     public void oneMoveSelector() {
         MoveSelector moveSelector = SelectorTestUtils.mockMoveSelector(DummyMove.class,
-                new DummyMove("a1"), new DummyMove("a2"), new DummyMove("b1"));
+                                                                       new DummyMove("a1"), new DummyMove("a2"),
+                                                                       new DummyMove("b1"));
 
         PooledEntityPlacer placer = new PooledEntityPlacer(moveSelector);
 
@@ -54,7 +56,7 @@ public class PooledEntityPlacerTest extends AbstractEntityPlacerTest {
         when(stepScopeA1.getPhaseScope()).thenReturn(phaseScopeA);
         placer.stepStarted(stepScopeA1);
         assertAllCodesOfIterator(placementIterator.next().iterator(),
-                "a1", "a2", "b1");
+                                 "a1", "a2", "b1");
         placer.stepEnded(stepScopeA1);
 
         assertTrue(placementIterator.hasNext());
@@ -62,7 +64,7 @@ public class PooledEntityPlacerTest extends AbstractEntityPlacerTest {
         when(stepScopeA2.getPhaseScope()).thenReturn(phaseScopeA);
         placer.stepStarted(stepScopeA2);
         assertAllCodesOfIterator(placementIterator.next().iterator(),
-                "a1", "a2", "b1");
+                                 "a1", "a2", "b1");
         placer.stepEnded(stepScopeA2);
 
         assertTrue(placementIterator.hasNext());
@@ -70,7 +72,7 @@ public class PooledEntityPlacerTest extends AbstractEntityPlacerTest {
         when(stepScopeA3.getPhaseScope()).thenReturn(phaseScopeA);
         placer.stepStarted(stepScopeA3);
         assertAllCodesOfIterator(placementIterator.next().iterator(),
-                "a1", "a2", "b1");
+                                 "a1", "a2", "b1");
         placer.stepEnded(stepScopeA3);
 
         placer.phaseEnded(phaseScopeA);
@@ -85,7 +87,7 @@ public class PooledEntityPlacerTest extends AbstractEntityPlacerTest {
         when(stepScopeB1.getPhaseScope()).thenReturn(phaseScopeB);
         placer.stepStarted(stepScopeB1);
         assertAllCodesOfIterator(placementIterator.next().iterator(),
-                "a1", "a2", "b1");
+                                 "a1", "a2", "b1");
         placer.stepEnded(stepScopeB1);
 
         placer.phaseEnded(phaseScopeB);
@@ -94,5 +96,4 @@ public class PooledEntityPlacerTest extends AbstractEntityPlacerTest {
 
         verifyPhaseLifecycle(moveSelector, 1, 2, 4);
     }
-
 }

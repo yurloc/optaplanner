@@ -51,11 +51,13 @@ public class SimpleBigDecimalScoreHolderTest extends AbstractScoreHolderTest {
         callOnUpdate(scoreRule3);
         scoreHolder.addConstraintMatch(scoreRule3, new BigDecimal("-0.03")); // Overwrite existing
 
-        assertEquals(SimpleBigDecimalScore.valueOfUninitialized(0, new BigDecimal("-10.03")), scoreHolder.extractScore(0));
-        assertEquals(SimpleBigDecimalScore.valueOfUninitialized(-7, new BigDecimal("-10.03")), scoreHolder.extractScore(-7));
+        assertEquals(SimpleBigDecimalScore.valueOfUninitialized(0, new BigDecimal("-10.03")),
+                     scoreHolder.extractScore(0));
+        assertEquals(SimpleBigDecimalScore.valueOfUninitialized(-7, new BigDecimal("-10.03")),
+                     scoreHolder.extractScore(-7));
         if (constraintMatchEnabled) {
-            assertEquals(SimpleBigDecimalScore.valueOf(new BigDecimal("-10.00")), findConstraintMatchTotal(scoreHolder, "scoreRule1").getScoreTotal());
+            assertEquals(SimpleBigDecimalScore.valueOf(new BigDecimal("-10.00")),
+                         findConstraintMatchTotal(scoreHolder, "scoreRule1").getScoreTotal());
         }
     }
-
 }

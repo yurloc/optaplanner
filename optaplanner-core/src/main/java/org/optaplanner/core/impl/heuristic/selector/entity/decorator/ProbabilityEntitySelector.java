@@ -43,19 +43,19 @@ public class ProbabilityEntitySelector extends AbstractEntitySelector implements
     protected double probabilityWeightTotal = -1.0;
 
     public ProbabilityEntitySelector(EntitySelector childEntitySelector, SelectionCacheType cacheType,
-            SelectionProbabilityWeightFactory probabilityWeightFactory) {
+                                     SelectionProbabilityWeightFactory probabilityWeightFactory) {
         this.childEntitySelector = childEntitySelector;
         this.cacheType = cacheType;
         this.probabilityWeightFactory = probabilityWeightFactory;
         if (childEntitySelector.isNeverEnding()) {
             throw new IllegalStateException("The selector (" + this
-                    + ") has a childEntitySelector (" + childEntitySelector
-                    + ") with neverEnding (" + childEntitySelector.isNeverEnding() + ").");
+                                                    + ") has a childEntitySelector (" + childEntitySelector
+                                                    + ") with neverEnding (" + childEntitySelector.isNeverEnding() + ").");
         }
         phaseLifecycleSupport.addEventListener(childEntitySelector);
         if (cacheType.isNotCached()) {
             throw new IllegalArgumentException("The selector (" + this
-                    + ") does not support the cacheType (" + cacheType + ").");
+                                                       + ") does not support the cacheType (" + cacheType + ").");
         }
         phaseLifecycleSupport.addEventListener(new SelectionCacheLifecycleBridge(cacheType, this));
     }
@@ -134,13 +134,13 @@ public class ProbabilityEntitySelector extends AbstractEntitySelector implements
     @Override
     public ListIterator<Object> listIterator() {
         throw new IllegalStateException("The selector (" + this
-                + ") does not support a ListIterator with randomSelection (true).");
+                                                + ") does not support a ListIterator with randomSelection (true).");
     }
 
     @Override
     public ListIterator<Object> listIterator(int index) {
         throw new IllegalStateException("The selector (" + this
-                + ") does not support a ListIterator with randomSelection (true).");
+                                                + ") does not support a ListIterator with randomSelection (true).");
     }
 
     @Override
@@ -152,5 +152,4 @@ public class ProbabilityEntitySelector extends AbstractEntitySelector implements
     public String toString() {
         return "Probability(" + childEntitySelector + ")";
     }
-
 }

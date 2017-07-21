@@ -20,13 +20,14 @@ import org.optaplanner.core.impl.domain.variable.descriptor.VariableDescriptor;
 import org.optaplanner.core.impl.domain.variable.listener.VariableListener;
 import org.optaplanner.core.impl.score.director.ScoreDirector;
 
-public class SingletonInverseVariableListener implements VariableListener<Object>, SingletonInverseVariableSupply {
+public class SingletonInverseVariableListener implements VariableListener<Object>,
+                                                         SingletonInverseVariableSupply {
 
     protected final InverseRelationShadowVariableDescriptor shadowVariableDescriptor;
     protected final VariableDescriptor sourceVariableDescriptor;
 
     public SingletonInverseVariableListener(InverseRelationShadowVariableDescriptor shadowVariableDescriptor,
-            VariableDescriptor sourceVariableDescriptor) {
+                                            VariableDescriptor sourceVariableDescriptor) {
         this.shadowVariableDescriptor = shadowVariableDescriptor;
         this.sourceVariableDescriptor = sourceVariableDescriptor;
     }
@@ -67,11 +68,11 @@ public class SingletonInverseVariableListener implements VariableListener<Object
             Object shadowValue = shadowVariableDescriptor.getValue(shadowEntity);
             if (shadowValue != null) {
                 throw new IllegalStateException("The entity (" + entity
-                        + ") has a variable (" + sourceVariableDescriptor.getVariableName()
-                        + ") with value (" + shadowEntity
-                        + ") which has a sourceVariableName variable (" + shadowVariableDescriptor.getVariableName()
-                        + ") with a value (" + shadowValue + ") which is not null.\n"
-                        + "Verify the consistency of your input problem for that sourceVariableName variable.");
+                                                        + ") has a variable (" + sourceVariableDescriptor.getVariableName()
+                                                        + ") with value (" + shadowEntity
+                                                        + ") which has a sourceVariableName variable (" + shadowVariableDescriptor.getVariableName()
+                                                        + ") with a value (" + shadowValue + ") which is not null.\n"
+                                                        + "Verify the consistency of your input problem for that sourceVariableName variable.");
             }
             scoreDirector.beforeVariableChanged(shadowVariableDescriptor, shadowEntity);
             shadowVariableDescriptor.setValue(shadowEntity, entity);
@@ -85,11 +86,11 @@ public class SingletonInverseVariableListener implements VariableListener<Object
             Object shadowValue = shadowVariableDescriptor.getValue(shadowEntity);
             if (shadowValue != entity) {
                 throw new IllegalStateException("The entity (" + entity
-                        + ") has a variable (" + sourceVariableDescriptor.getVariableName()
-                        + ") with value (" + shadowEntity
-                        + ") which has a sourceVariableName variable (" + shadowVariableDescriptor.getVariableName()
-                        + ") with a value (" + shadowValue + ") which is not that entity.\n"
-                        + "Verify the consistency of your input problem for that sourceVariableName variable.");
+                                                        + ") has a variable (" + sourceVariableDescriptor.getVariableName()
+                                                        + ") with value (" + shadowEntity
+                                                        + ") which has a sourceVariableName variable (" + shadowVariableDescriptor.getVariableName()
+                                                        + ") with a value (" + shadowValue + ") which is not that entity.\n"
+                                                        + "Verify the consistency of your input problem for that sourceVariableName variable.");
             }
             scoreDirector.beforeVariableChanged(shadowVariableDescriptor, shadowEntity);
             shadowVariableDescriptor.setValue(shadowEntity, null);
@@ -101,5 +102,4 @@ public class SingletonInverseVariableListener implements VariableListener<Object
     public Object getInverseSingleton(Object planningValue) {
         return shadowVariableDescriptor.getValue(planningValue);
     }
-
 }

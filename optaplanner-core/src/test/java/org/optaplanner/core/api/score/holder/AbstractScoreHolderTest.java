@@ -28,8 +28,7 @@ import org.kie.api.definition.rule.Rule;
 import org.kie.api.runtime.rule.RuleContext;
 import org.optaplanner.core.api.score.constraint.ConstraintMatchTotal;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public abstract class AbstractScoreHolderTest {
 
@@ -38,6 +37,7 @@ public abstract class AbstractScoreHolderTest {
     protected final static Object UNDO_JUSTIFICATION = new Object();
 
     private static interface TestModedAssertion extends ModedAssertion<TestModedAssertion> {
+
     }
 
     protected RuleContext mockRuleContext(String ruleName, Object... justifications) {
@@ -58,7 +58,6 @@ public abstract class AbstractScoreHolderTest {
             public List<Object> getObjectsDeep() {
                 return justificationList;
             }
-
         };
         when(kcontext.getMatch()).thenReturn(agendaItem);
         Rule rule = mock(Rule.class);
@@ -84,5 +83,4 @@ public abstract class AbstractScoreHolderTest {
                 .filter(constraintMatchTotal -> constraintMatchTotal.getConstraintName().equals(ruleName)).findFirst();
         return first.orElse(null);
     }
-
 }

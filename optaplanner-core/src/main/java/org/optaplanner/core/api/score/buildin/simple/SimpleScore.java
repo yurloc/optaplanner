@@ -182,5 +182,4 @@ public final class SimpleScore extends AbstractScore<SimpleScore> {
     public boolean isCompatibleArithmeticArgument(Score otherScore) {
         return otherScore instanceof SimpleScore;
     }
-
 }

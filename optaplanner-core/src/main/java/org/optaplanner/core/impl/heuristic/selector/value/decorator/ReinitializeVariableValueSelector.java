@@ -108,5 +108,4 @@ public class ReinitializeVariableValueSelector extends AbstractValueSelector {
     public String toString() {
         return "Reinitialize(" + childValueSelector + ")";
     }
-
 }

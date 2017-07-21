@@ -62,7 +62,7 @@ public class DescriptorPolicy {
         String id = annotation.id();
         if (StringUtils.isEmpty(id)) {
             throw new IllegalStateException("The " + ValueRangeProvider.class.getSimpleName()
-                    + " annotated member (" + memberAccessor + ")'s id (" + id + ") must not be empty.");
+                                                    + " annotated member (" + memberAccessor + ")'s id (" + id + ") must not be empty.");
         }
         validateUniqueValueRangeProviderId(id, memberAccessor);
         return id;
@@ -72,14 +72,14 @@ public class DescriptorPolicy {
         MemberAccessor duplicate = fromSolutionValueRangeProviderMap.get(id);
         if (duplicate != null) {
             throw new IllegalStateException("2 members (" + duplicate + ", " + memberAccessor
-                    + ") with a " + ValueRangeProvider.class.getSimpleName()
-                    + " annotation must not have the same id (" + id + ").");
+                                                    + ") with a " + ValueRangeProvider.class.getSimpleName()
+                                                    + " annotation must not have the same id (" + id + ").");
         }
         duplicate = fromEntityValueRangeProviderMap.get(id);
         if (duplicate != null) {
             throw new IllegalStateException("2 members (" + duplicate + ", " + memberAccessor
-                    + ") with a " + ValueRangeProvider.class.getSimpleName()
-                    + " annotation must not have the same id (" + id + ").");
+                                                    + ") with a " + ValueRangeProvider.class.getSimpleName()
+                                                    + " annotation must not have the same id (" + id + ").");
         }
     }
 
@@ -90,5 +90,4 @@ public class DescriptorPolicy {
         valueRangeProviderIds.addAll(fromEntityValueRangeProviderMap.keySet());
         return valueRangeProviderIds;
     }
-
 }

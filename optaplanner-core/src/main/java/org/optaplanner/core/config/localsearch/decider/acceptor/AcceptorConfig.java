@@ -40,7 +40,7 @@ import org.optaplanner.core.impl.localsearch.decider.acceptor.tabu.size.EntityRa
 import org.optaplanner.core.impl.localsearch.decider.acceptor.tabu.size.FixedTabuSizeStrategy;
 import org.optaplanner.core.impl.localsearch.decider.acceptor.tabu.size.ValueRatioTabuSizeStrategy;
 
-import static org.apache.commons.lang3.ObjectUtils.*;
+import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
 
 @XStreamAlias("acceptor")
 public class AcceptorConfig extends AbstractConfig<AcceptorConfig> {
@@ -257,7 +257,7 @@ public class AcceptorConfig extends AbstractConfig<AcceptorConfig> {
             if (entityTabuSize != null) {
                 if (entityTabuRatio != null) {
                     throw new IllegalArgumentException("The acceptor cannot have both entityTabuSize ("
-                            + entityTabuSize + ") and entityTabuRatio (" + entityTabuRatio + ").");
+                                                               + entityTabuSize + ") and entityTabuRatio (" + entityTabuRatio + ").");
                 }
                 acceptor.setTabuSizeStrategy(new FixedTabuSizeStrategy(entityTabuSize));
             } else if (entityTabuRatio != null) {
@@ -268,8 +268,8 @@ public class AcceptorConfig extends AbstractConfig<AcceptorConfig> {
             if (fadingEntityTabuSize != null) {
                 if (fadingEntityTabuRatio != null) {
                     throw new IllegalArgumentException("The acceptor cannot have both fadingEntityTabuSize ("
-                            + fadingEntityTabuSize + ") and fadingEntityTabuRatio ("
-                            + fadingEntityTabuRatio + ").");
+                                                               + fadingEntityTabuSize + ") and fadingEntityTabuRatio ("
+                                                               + fadingEntityTabuRatio + ").");
                 }
                 acceptor.setFadingTabuSizeStrategy(new FixedTabuSizeStrategy(fadingEntityTabuSize));
             } else if (fadingEntityTabuRatio != null) {
@@ -282,12 +282,12 @@ public class AcceptorConfig extends AbstractConfig<AcceptorConfig> {
         }
         if ((acceptorTypeList != null && acceptorTypeList.contains(AcceptorType.VALUE_TABU))
                 || valueTabuSize != null || valueTabuRatio != null
-                || fadingValueTabuSize != null  || fadingValueTabuRatio != null) {
+                || fadingValueTabuSize != null || fadingValueTabuRatio != null) {
             ValueTabuAcceptor acceptor = new ValueTabuAcceptor(configPolicy.getLogIndentation());
             if (valueTabuSize != null) {
                 if (valueTabuRatio != null) {
                     throw new IllegalArgumentException("The acceptor cannot have both valueTabuSize ("
-                            + valueTabuSize + ") and valueTabuRatio (" + valueTabuRatio + ").");
+                                                               + valueTabuSize + ") and valueTabuRatio (" + valueTabuRatio + ").");
                 }
                 acceptor.setTabuSizeStrategy(new FixedTabuSizeStrategy(valueTabuSize));
             } else if (valueTabuRatio != null) {
@@ -296,8 +296,8 @@ public class AcceptorConfig extends AbstractConfig<AcceptorConfig> {
             if (fadingValueTabuSize != null) {
                 if (fadingValueTabuRatio != null) {
                     throw new IllegalArgumentException("The acceptor cannot have both fadingValueTabuSize ("
-                            + fadingValueTabuSize + ") and fadingValueTabuRatio ("
-                            + fadingValueTabuRatio + ").");
+                                                               + fadingValueTabuSize + ") and fadingValueTabuRatio ("
+                                                               + fadingValueTabuRatio + ").");
                 }
                 acceptor.setFadingTabuSizeStrategy(new FixedTabuSizeStrategy(fadingValueTabuSize));
             } else if (fadingValueTabuRatio != null) {
@@ -365,11 +365,11 @@ public class AcceptorConfig extends AbstractConfig<AcceptorConfig> {
             if (simulatedAnnealingStartingTemperature == null) {
                 // TODO Support SA without a parameter
                 throw new IllegalArgumentException("The acceptorType (" + AcceptorType.SIMULATED_ANNEALING
-                        + ") currently requires a simulatedAnnealingStartingTemperature ("
-                        + simulatedAnnealingStartingTemperature + ").");
+                                                           + ") currently requires a simulatedAnnealingStartingTemperature ("
+                                                           + simulatedAnnealingStartingTemperature + ").");
             }
             acceptor.setStartingTemperature(configPolicy.getScoreDefinition()
-                    .parseScore(simulatedAnnealingStartingTemperature));
+                                                    .parseScore(simulatedAnnealingStartingTemperature));
             acceptorList.add(acceptor);
         }
         if ((acceptorTypeList != null && acceptorTypeList.contains(AcceptorType.LATE_ACCEPTANCE))
@@ -393,16 +393,16 @@ public class AcceptorConfig extends AbstractConfig<AcceptorConfig> {
             return new CompositeAcceptor(acceptorList);
         } else {
             throw new IllegalArgumentException("The acceptor does not specify any acceptorType (" + acceptorTypeList
-                    + ") or other acceptor property.\n"
-                    + "For a good starting values,"
-                    + " see the docs section \"Which optimization algorithms should I use?\".");
+                                                       + ") or other acceptor property.\n"
+                                                       + "For a good starting values,"
+                                                       + " see the docs section \"Which optimization algorithms should I use?\".");
         }
     }
 
     @Override
     public void inherit(AcceptorConfig inheritedConfig) {
         acceptorClassList = ConfigUtils.inheritMergeableListProperty(acceptorClassList,
-                inheritedConfig.getAcceptorClassList());
+                                                                     inheritedConfig.getAcceptorClassList());
         if (acceptorTypeList == null) {
             acceptorTypeList = inheritedConfig.getAcceptorTypeList();
         } else {
@@ -416,36 +416,36 @@ public class AcceptorConfig extends AbstractConfig<AcceptorConfig> {
             }
         }
         entityTabuSize = ConfigUtils.inheritOverwritableProperty(entityTabuSize, inheritedConfig.getEntityTabuSize());
-        entityTabuRatio = ConfigUtils.inheritOverwritableProperty(entityTabuRatio, inheritedConfig.getEntityTabuRatio());
+        entityTabuRatio = ConfigUtils.inheritOverwritableProperty(entityTabuRatio,
+                                                                  inheritedConfig.getEntityTabuRatio());
         fadingEntityTabuSize = ConfigUtils.inheritOverwritableProperty(fadingEntityTabuSize,
-                inheritedConfig.getFadingEntityTabuSize());
+                                                                       inheritedConfig.getFadingEntityTabuSize());
         fadingEntityTabuRatio = ConfigUtils.inheritOverwritableProperty(fadingEntityTabuRatio,
-                inheritedConfig.getFadingEntityTabuRatio());
+                                                                        inheritedConfig.getFadingEntityTabuRatio());
         valueTabuSize = ConfigUtils.inheritOverwritableProperty(valueTabuSize, inheritedConfig.getValueTabuSize());
         valueTabuRatio = ConfigUtils.inheritOverwritableProperty(valueTabuRatio, inheritedConfig.getValueTabuRatio());
         fadingValueTabuSize = ConfigUtils.inheritOverwritableProperty(fadingValueTabuSize,
-                inheritedConfig.getFadingValueTabuSize());
+                                                                      inheritedConfig.getFadingValueTabuSize());
         fadingValueTabuRatio = ConfigUtils.inheritOverwritableProperty(fadingValueTabuRatio,
-                inheritedConfig.getFadingValueTabuRatio());
+                                                                       inheritedConfig.getFadingValueTabuRatio());
         moveTabuSize = ConfigUtils.inheritOverwritableProperty(moveTabuSize, inheritedConfig.getMoveTabuSize());
         fadingMoveTabuSize = ConfigUtils.inheritOverwritableProperty(fadingMoveTabuSize,
-                inheritedConfig.getFadingMoveTabuSize());
+                                                                     inheritedConfig.getFadingMoveTabuSize());
         undoMoveTabuSize = ConfigUtils.inheritOverwritableProperty(undoMoveTabuSize,
-                inheritedConfig.getUndoMoveTabuSize());
+                                                                   inheritedConfig.getUndoMoveTabuSize());
         fadingUndoMoveTabuSize = ConfigUtils.inheritOverwritableProperty(fadingUndoMoveTabuSize,
-                inheritedConfig.getFadingUndoMoveTabuSize());
+                                                                         inheritedConfig.getFadingUndoMoveTabuSize());
         solutionTabuSize = ConfigUtils.inheritOverwritableProperty(solutionTabuSize,
-                inheritedConfig.getSolutionTabuSize());
+                                                                   inheritedConfig.getSolutionTabuSize());
         fadingSolutionTabuSize = ConfigUtils.inheritOverwritableProperty(fadingSolutionTabuSize,
-                inheritedConfig.getFadingSolutionTabuSize());
+                                                                         inheritedConfig.getFadingSolutionTabuSize());
         simulatedAnnealingStartingTemperature = ConfigUtils.inheritOverwritableProperty(
                 simulatedAnnealingStartingTemperature, inheritedConfig.getSimulatedAnnealingStartingTemperature());
         lateAcceptanceSize = ConfigUtils.inheritOverwritableProperty(lateAcceptanceSize,
-                inheritedConfig.getLateAcceptanceSize());
+                                                                     inheritedConfig.getLateAcceptanceSize());
         stepCountingHillClimbingSize = ConfigUtils.inheritOverwritableProperty(stepCountingHillClimbingSize,
-                inheritedConfig.getStepCountingHillClimbingSize());
+                                                                               inheritedConfig.getStepCountingHillClimbingSize());
         stepCountingHillClimbingType = ConfigUtils.inheritOverwritableProperty(stepCountingHillClimbingType,
-                inheritedConfig.getStepCountingHillClimbingType());
+                                                                               inheritedConfig.getStepCountingHillClimbingType());
     }
-
 }

@@ -33,7 +33,7 @@ public class StepCountingHillClimbingAcceptorTest extends AbstractAcceptorTest {
     @Test
     public void typeStep() {
         StepCountingHillClimbingAcceptor acceptor = new StepCountingHillClimbingAcceptor(2,
-                StepCountingHillClimbingType.STEP);
+                                                                                         StepCountingHillClimbingType.STEP);
 
         DefaultSolverScope<TestdataSolution> solverScope = new DefaultSolverScope<>();
         solverScope.setBestScore(SimpleScore.valueOf(-1000));
@@ -139,7 +139,7 @@ public class StepCountingHillClimbingAcceptorTest extends AbstractAcceptorTest {
     @Test
     public void typeEqualOrImprovingStep() {
         StepCountingHillClimbingAcceptor acceptor = new StepCountingHillClimbingAcceptor(2,
-                StepCountingHillClimbingType.EQUAL_OR_IMPROVING_STEP);
+                                                                                         StepCountingHillClimbingType.EQUAL_OR_IMPROVING_STEP);
 
         DefaultSolverScope<TestdataSolution> solverScope = new DefaultSolverScope<>();
         solverScope.setBestScore(SimpleScore.valueOf(-1000));
@@ -245,7 +245,7 @@ public class StepCountingHillClimbingAcceptorTest extends AbstractAcceptorTest {
     @Test
     public void typeImprovingStep() {
         StepCountingHillClimbingAcceptor acceptor = new StepCountingHillClimbingAcceptor(2,
-                StepCountingHillClimbingType.IMPROVING_STEP);
+                                                                                         StepCountingHillClimbingType.IMPROVING_STEP);
 
         DefaultSolverScope<TestdataSolution> solverScope = new DefaultSolverScope<>();
         solverScope.setBestScore(SimpleScore.valueOf(-1000));
@@ -351,12 +351,13 @@ public class StepCountingHillClimbingAcceptorTest extends AbstractAcceptorTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void zeroStepCountingHillClimbingSize() {
-        StepCountingHillClimbingAcceptor acceptor = new StepCountingHillClimbingAcceptor(0, StepCountingHillClimbingType.STEP);
+        StepCountingHillClimbingAcceptor acceptor = new StepCountingHillClimbingAcceptor(0,
+                                                                                         StepCountingHillClimbingType.STEP);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void negativeStepCountingHillClimbingSize() {
-        StepCountingHillClimbingAcceptor acceptor = new StepCountingHillClimbingAcceptor(-1, StepCountingHillClimbingType.STEP);
+        StepCountingHillClimbingAcceptor acceptor = new StepCountingHillClimbingAcceptor(-1,
+                                                                                         StepCountingHillClimbingType.STEP);
     }
-
 }

@@ -42,13 +42,13 @@ public abstract class VariableDescriptor<Solution_> {
         variableName = variableMemberAccessor.getName();
         if (variableMemberAccessor.getType().isPrimitive()) {
             throw new IllegalStateException("The entityClass (" + entityDescriptor.getEntityClass()
-                    + ") has a " + PlanningVariable.class.getSimpleName()
-                    + " annotated member (" + variableMemberAccessor
-                    + ") that returns a primitive type (" + variableMemberAccessor.getType()
-                    + "). This means it cannot represent an uninitialized variable as null"
-                    + " and the Construction Heuristics think it's already initialized.\n"
-                    + "Maybe let the member (" + getSimpleEntityAndVariableName()
-                    + ") return its primitive wrapper type instead.");
+                                                    + ") has a " + PlanningVariable.class.getSimpleName()
+                                                    + " annotated member (" + variableMemberAccessor
+                                                    + ") that returns a primitive type (" + variableMemberAccessor.getType()
+                                                    + "). This means it cannot represent an uninitialized variable as null"
+                                                    + " and the Construction Heuristics think it's already initialized.\n"
+                                                    + "Maybe let the member (" + getSimpleEntityAndVariableName()
+                                                    + ") return its primitive wrapper type instead.");
         }
     }
 
@@ -109,5 +109,4 @@ public abstract class VariableDescriptor<Solution_> {
     }
 
     public abstract boolean isGenuineAndUninitialized(Object entity);
-
 }

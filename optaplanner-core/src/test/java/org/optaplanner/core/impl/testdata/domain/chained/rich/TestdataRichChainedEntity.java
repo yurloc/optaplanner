@@ -82,5 +82,4 @@ public class TestdataRichChainedEntity extends TestdataObject implements Testdat
     // ************************************************************************
     // Complex methods
     // ************************************************************************
-
 }

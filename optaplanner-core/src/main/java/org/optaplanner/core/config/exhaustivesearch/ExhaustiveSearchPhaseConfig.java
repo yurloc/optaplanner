@@ -48,7 +48,7 @@ import org.optaplanner.core.impl.heuristic.selector.move.MoveSelector;
 import org.optaplanner.core.impl.solver.recaller.BestSolutionRecaller;
 import org.optaplanner.core.impl.solver.termination.Termination;
 
-import static org.apache.commons.lang3.ObjectUtils.*;
+import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
 
 @XStreamAlias("exhaustiveSearch")
 public class ExhaustiveSearchPhaseConfig extends PhaseConfig<ExhaustiveSearchPhaseConfig> {
@@ -120,16 +120,16 @@ public class ExhaustiveSearchPhaseConfig extends PhaseConfig<ExhaustiveSearchPha
 
     @Override
     public ExhaustiveSearchPhase buildPhase(int phaseIndex, HeuristicConfigPolicy solverConfigPolicy,
-            BestSolutionRecaller bestSolutionRecaller, Termination solverTermination) {
+                                            BestSolutionRecaller bestSolutionRecaller, Termination solverTermination) {
         HeuristicConfigPolicy phaseConfigPolicy = solverConfigPolicy.createPhaseConfigPolicy();
         phaseConfigPolicy.setReinitializeVariableFilterEnabled(true);
         phaseConfigPolicy.setInitializedChainedValueFilterEnabled(true);
         ExhaustiveSearchType exhaustiveSearchType_ = exhaustiveSearchType == null
                 ? ExhaustiveSearchType.BRANCH_AND_BOUND : exhaustiveSearchType;
         phaseConfigPolicy.setEntitySorterManner(entitySorterManner != null ? entitySorterManner
-                : exhaustiveSearchType_.getDefaultEntitySorterManner());
+                                                        : exhaustiveSearchType_.getDefaultEntitySorterManner());
         phaseConfigPolicy.setValueSorterManner(valueSorterManner != null ? valueSorterManner
-                : exhaustiveSearchType_.getDefaultValueSorterManner());
+                                                       : exhaustiveSearchType_.getDefaultValueSorterManner());
         DefaultExhaustiveSearchPhase phase = new DefaultExhaustiveSearchPhase(
                 phaseIndex, solverConfigPolicy.getLogIndentation(), bestSolutionRecaller,
                 buildPhaseTermination(phaseConfigPolicy, solverTermination));
@@ -139,9 +139,9 @@ public class ExhaustiveSearchPhaseConfig extends PhaseConfig<ExhaustiveSearchPha
             nodeExplorationType_ = defaultIfNull(nodeExplorationType, NodeExplorationType.ORIGINAL_ORDER);
             if (nodeExplorationType_ != NodeExplorationType.ORIGINAL_ORDER) {
                 throw new IllegalArgumentException("The phaseConfig (" + this
-                        + ") has an nodeExplorationType ("  + nodeExplorationType
-                        + ") which is not compatible with its exhaustiveSearchType (" + exhaustiveSearchType
-                        + ").");
+                                                           + ") has an nodeExplorationType (" + nodeExplorationType
+                                                           + ") which is not compatible with its exhaustiveSearchType (" + exhaustiveSearchType
+                                                           + ").");
             }
         } else {
             nodeExplorationType_ = defaultIfNull(nodeExplorationType, NodeExplorationType.DEPTH_FIRST);
@@ -149,10 +149,11 @@ public class ExhaustiveSearchPhaseConfig extends PhaseConfig<ExhaustiveSearchPha
         phase.setNodeComparator(nodeExplorationType_.buildNodeComparator(scoreBounderEnabled));
         EntitySelectorConfig entitySelectorConfig_ = buildEntitySelectorConfig(phaseConfigPolicy);
         EntitySelector entitySelector = entitySelectorConfig_.buildEntitySelector(phaseConfigPolicy,
-                SelectionCacheType.PHASE, SelectionOrder.ORIGINAL);
+                                                                                  SelectionCacheType.PHASE,
+                                                                                  SelectionOrder.ORIGINAL);
         phase.setEntitySelector(entitySelector);
         phase.setDecider(buildDecider(phaseConfigPolicy, entitySelector, bestSolutionRecaller, phase.getTermination(),
-                scoreBounderEnabled));
+                                      scoreBounderEnabled));
         EnvironmentMode environmentMode = phaseConfigPolicy.getEnvironmentMode();
         if (environmentMode.isNonIntrusiveFullAsserted()) {
             phase.setAssertWorkingSolutionScoreFromScratch(true);
@@ -161,7 +162,8 @@ public class ExhaustiveSearchPhaseConfig extends PhaseConfig<ExhaustiveSearchPha
         if (environmentMode.isIntrusiveFastAsserted()) {
             phase.setAssertExpectedWorkingSolutionScore(true);
             phase.setAssertExpectedStepScore(true); // Does nothing because ES doesn't use predictStepScore()
-            phase.setAssertShadowVariablesAreNotStaleAfterStep(true); // Does nothing because ES doesn't use predictStepScore()
+            phase.setAssertShadowVariablesAreNotStaleAfterStep(
+                    true); // Does nothing because ES doesn't use predictStepScore()
         }
         return phase;
     }
@@ -183,9 +185,9 @@ public class ExhaustiveSearchPhaseConfig extends PhaseConfig<ExhaustiveSearchPha
         if (entitySelectorConfig_.getCacheType() != null
                 && entitySelectorConfig_.getCacheType().compareTo(SelectionCacheType.PHASE) < 0) {
             throw new IllegalArgumentException("The phaseConfig (" + this
-                    + ") cannot have an entitySelectorConfig ("  + entitySelectorConfig_
-                    + ") with a cacheType (" + entitySelectorConfig_.getCacheType()
-                    + ") lower than " + SelectionCacheType.PHASE + ".");
+                                                       + ") cannot have an entitySelectorConfig (" + entitySelectorConfig_
+                                                       + ") with a cacheType (" + entitySelectorConfig_.getCacheType()
+                                                       + ") lower than " + SelectionCacheType.PHASE + ".");
         }
         return entitySelectorConfig_;
     }
@@ -194,29 +196,31 @@ public class ExhaustiveSearchPhaseConfig extends PhaseConfig<ExhaustiveSearchPha
         Collection<EntityDescriptor> entityDescriptors = solutionDescriptor.getGenuineEntityDescriptors();
         if (entityDescriptors.size() != 1) {
             throw new IllegalArgumentException("The phaseConfig (" + this
-                    + ") has no entitySelector configured"
-                    + " and because there are multiple in the entityClassSet (" + solutionDescriptor.getEntityClassSet()
-                    + "), it can not be deducted automatically.");
+                                                       + ") has no entitySelector configured"
+                                                       + " and because there are multiple in the entityClassSet (" + solutionDescriptor.getEntityClassSet()
+                                                       + "), it can not be deducted automatically.");
         }
         return entityDescriptors.iterator().next();
     }
 
     private ExhaustiveSearchDecider buildDecider(HeuristicConfigPolicy configPolicy,
-            EntitySelector sourceEntitySelector,
-            BestSolutionRecaller bestSolutionRecaller, Termination termination,
-            boolean scoreBounderEnabled) {
+                                                 EntitySelector sourceEntitySelector,
+                                                 BestSolutionRecaller bestSolutionRecaller, Termination termination,
+                                                 boolean scoreBounderEnabled) {
         ManualEntityMimicRecorder manualEntityMimicRecorder = new ManualEntityMimicRecorder(sourceEntitySelector);
         String mimicSelectorId = sourceEntitySelector.getEntityDescriptor().getEntityClass().getName(); // TODO mimicSelectorId must be a field
         configPolicy.addEntityMimicRecorder(mimicSelectorId, manualEntityMimicRecorder);
         MoveSelectorConfig moveSelectorConfig_ = buildMoveSelectorConfig(configPolicy,
-                sourceEntitySelector, mimicSelectorId);
+                                                                         sourceEntitySelector, mimicSelectorId);
         MoveSelector moveSelector = moveSelectorConfig_.buildMoveSelector(configPolicy,
-                SelectionCacheType.JUST_IN_TIME, SelectionOrder.ORIGINAL);
+                                                                          SelectionCacheType.JUST_IN_TIME,
+                                                                          SelectionOrder.ORIGINAL);
         ScoreBounder scoreBounder = scoreBounderEnabled
                 ? new TrendBasedScoreBounder(configPolicy.getScoreDirectorFactory()) : null;
         ExhaustiveSearchDecider decider = new ExhaustiveSearchDecider(configPolicy.getLogIndentation(),
-                bestSolutionRecaller, termination,
-                manualEntityMimicRecorder, moveSelector, scoreBounderEnabled, scoreBounder);
+                                                                      bestSolutionRecaller, termination,
+                                                                      manualEntityMimicRecorder, moveSelector,
+                                                                      scoreBounderEnabled, scoreBounder);
         EnvironmentMode environmentMode = configPolicy.getEnvironmentMode();
         if (environmentMode.isNonIntrusiveFullAsserted()) {
             decider.setAssertMoveScoreFromScratch(true);
@@ -228,7 +232,7 @@ public class ExhaustiveSearchPhaseConfig extends PhaseConfig<ExhaustiveSearchPha
     }
 
     private MoveSelectorConfig buildMoveSelectorConfig(HeuristicConfigPolicy configPolicy,
-            EntitySelector entitySelector, String mimicSelectorId) {
+                                                       EntitySelector entitySelector, String mimicSelectorId) {
         MoveSelectorConfig moveSelectorConfig_;
         if (moveSelectorConfig == null) {
             EntityDescriptor entityDescriptor = entitySelector.getEntityDescriptor();
@@ -271,15 +275,16 @@ public class ExhaustiveSearchPhaseConfig extends PhaseConfig<ExhaustiveSearchPha
     public void inherit(ExhaustiveSearchPhaseConfig inheritedConfig) {
         super.inherit(inheritedConfig);
         exhaustiveSearchType = ConfigUtils.inheritOverwritableProperty(exhaustiveSearchType,
-                inheritedConfig.getExhaustiveSearchType());
+                                                                       inheritedConfig.getExhaustiveSearchType());
         nodeExplorationType = ConfigUtils.inheritOverwritableProperty(nodeExplorationType,
-                inheritedConfig.getNodeExplorationType());
+                                                                      inheritedConfig.getNodeExplorationType());
         entitySorterManner = ConfigUtils.inheritOverwritableProperty(entitySorterManner,
-                inheritedConfig.getEntitySorterManner());
+                                                                     inheritedConfig.getEntitySorterManner());
         valueSorterManner = ConfigUtils.inheritOverwritableProperty(valueSorterManner,
-                inheritedConfig.getValueSorterManner());
-        entitySelectorConfig = ConfigUtils.inheritConfig(entitySelectorConfig, inheritedConfig.getEntitySelectorConfig());
-        moveSelectorConfig = ConfigUtils.<MoveSelectorConfig>inheritConfig(moveSelectorConfig, inheritedConfig.getMoveSelectorConfig());
+                                                                    inheritedConfig.getValueSorterManner());
+        entitySelectorConfig = ConfigUtils.inheritConfig(entitySelectorConfig,
+                                                         inheritedConfig.getEntitySelectorConfig());
+        moveSelectorConfig = ConfigUtils.<MoveSelectorConfig>inheritConfig(moveSelectorConfig,
+                                                                           inheritedConfig.getMoveSelectorConfig());
     }
-
 }

@@ -70,5 +70,4 @@ public class DefaultRandomFactory implements RandomFactory {
     public String toString() {
         return randomType.name() + (randomSeed == null ? "" : " with seed " + randomSeed);
     }
-
 }

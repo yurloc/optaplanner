@@ -40,8 +40,8 @@ public class EasyScoreDirector<Solution_>
     private final EasyScoreCalculator<Solution_> easyScoreCalculator;
 
     public EasyScoreDirector(EasyScoreDirectorFactory<Solution_> scoreDirectorFactory,
-            boolean lookUpEnabled, boolean constraintMatchEnabledPreference,
-            EasyScoreCalculator<Solution_> easyScoreCalculator) {
+                             boolean lookUpEnabled, boolean constraintMatchEnabledPreference,
+                             EasyScoreCalculator<Solution_> easyScoreCalculator) {
         super(scoreDirectorFactory, lookUpEnabled, constraintMatchEnabledPreference);
         this.easyScoreCalculator = easyScoreCalculator;
     }
@@ -72,24 +72,23 @@ public class EasyScoreDirector<Solution_>
 
     /**
      * {@link ConstraintMatch}s are not supported by this {@link ScoreDirector} implementation.
-     * @throws IllegalStateException always
      * @return throws {@link IllegalStateException}
+     * @throws IllegalStateException always
      */
     @Override
     public Collection<ConstraintMatchTotal> getConstraintMatchTotals() {
         throw new IllegalStateException(ConstraintMatch.class.getSimpleName()
-                + " is not supported by " + EasyScoreDirector.class.getSimpleName() + ".");
+                                                + " is not supported by " + EasyScoreDirector.class.getSimpleName() + ".");
     }
 
     /**
      * {@link ConstraintMatch}s are not supported by this {@link ScoreDirector} implementation.
-     * @throws IllegalStateException always
      * @return throws {@link IllegalStateException}
+     * @throws IllegalStateException always
      */
     @Override
     public Map<Object, Indictment> getIndictmentMap() {
         throw new IllegalStateException(ConstraintMatch.class.getSimpleName()
-                + " is not supported by " + EasyScoreDirector.class.getSimpleName() + ".");
+                                                + " is not supported by " + EasyScoreDirector.class.getSimpleName() + ".");
     }
-
 }

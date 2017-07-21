@@ -106,7 +106,7 @@ public class FilteringEntitySelector extends AbstractEntitySelector {
                     // if childEntityIterator is neverEnding and nothing is accepted, bail out of the infinite loop
                     if (attemptsBeforeBailOut <= 0L) {
                         logger.warn("Bailing out of neverEnding selector ({}) to avoid infinite loop.",
-                                FilteringEntitySelector.this);
+                                    FilteringEntitySelector.this);
                         return noUpcomingSelection();
                     }
                     attemptsBeforeBailOut--;
@@ -115,7 +115,6 @@ public class FilteringEntitySelector extends AbstractEntitySelector {
             } while (!accept(scoreDirector, next));
             return next;
         }
-
     }
 
     @Override
@@ -155,5 +154,4 @@ public class FilteringEntitySelector extends AbstractEntitySelector {
     public String toString() {
         return "Filtering(" + childEntitySelector + ")";
     }
-
 }

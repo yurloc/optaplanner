@@ -33,7 +33,7 @@ public class LinearDistributionNearbyRandom implements NearbyRandom {
         this.sizeMaximum = sizeMaximum;
         if (sizeMaximum < 1) {
             throw new IllegalArgumentException("The maximum (" + sizeMaximum
-                    + ") must be at least 1.");
+                                                       + ") must be at least 1.");
         }
     }
 
@@ -54,5 +54,4 @@ public class LinearDistributionNearbyRandom implements NearbyRandom {
     public int getOverallSizeMaximum() {
         return sizeMaximum;
     }
-
 }

@@ -31,5 +31,4 @@ public interface AnchorVariableSupply extends Supply {
      * @return sometimes null, the anchor for the entity
      */
     Object getAnchor(Object entity);
-
 }

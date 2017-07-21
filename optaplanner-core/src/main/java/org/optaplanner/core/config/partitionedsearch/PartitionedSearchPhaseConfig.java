@@ -134,7 +134,7 @@ public class PartitionedSearchPhaseConfig extends PhaseConfig<PartitionedSearchP
 
     @Override
     public PartitionedSearchPhase buildPhase(int phaseIndex, HeuristicConfigPolicy solverConfigPolicy,
-            BestSolutionRecaller bestSolutionRecaller, Termination solverTermination) {
+                                             BestSolutionRecaller bestSolutionRecaller, Termination solverTermination) {
         HeuristicConfigPolicy phaseConfigPolicy = solverConfigPolicy.createPhaseConfigPolicy();
         DefaultPartitionedSearchPhase phase = new DefaultPartitionedSearchPhase(
                 phaseIndex, solverConfigPolicy.getLogIndentation(), bestSolutionRecaller,
@@ -164,15 +164,16 @@ public class PartitionedSearchPhaseConfig extends PhaseConfig<PartitionedSearchP
     private SolutionPartitioner buildSolutionPartitioner() {
         if (solutionPartitionerClass != null) {
             SolutionPartitioner<?> solutionPartitioner = ConfigUtils.newInstance(this,
-                    "solutionPartitionerClass", solutionPartitionerClass);
+                                                                                 "solutionPartitionerClass",
+                                                                                 solutionPartitionerClass);
             ConfigUtils.applyCustomProperties(solutionPartitioner, "solutionPartitionerClass",
-                    solutionPartitionerCustomProperties);
+                                              solutionPartitionerCustomProperties);
             return solutionPartitioner;
         } else {
             if (solutionPartitionerCustomProperties != null) {
                 throw new IllegalStateException("If there is no solutionPartitionerClass (" + solutionPartitionerClass
-                        + "), then there can be no solutionPartitionerCustomProperties ("
-                        + solutionPartitionerCustomProperties + ") either.");
+                                                        + "), then there can be no solutionPartitionerCustomProperties ("
+                                                        + solutionPartitionerCustomProperties + ") either.");
             }
             // TODO
             throw new UnsupportedOperationException();
@@ -197,16 +198,17 @@ public class PartitionedSearchPhaseConfig extends PhaseConfig<PartitionedSearchP
             resolvedActiveThreadCount = null;
         } else {
             resolvedActiveThreadCount = ConfigUtils.resolveThreadPoolSizeScript(
-                    "runnablePartThreadLimit", runnablePartThreadLimit, ACTIVE_THREAD_COUNT_AUTO, ACTIVE_THREAD_COUNT_UNLIMITED);
+                    "runnablePartThreadLimit", runnablePartThreadLimit, ACTIVE_THREAD_COUNT_AUTO,
+                    ACTIVE_THREAD_COUNT_UNLIMITED);
             if (resolvedActiveThreadCount < 1) {
                 throw new IllegalArgumentException("The runnablePartThreadLimit (" + runnablePartThreadLimit
-                        + ") resulted in a resolvedActiveThreadCount (" + resolvedActiveThreadCount
-                        + ") that is lower than 1.");
+                                                           + ") resulted in a resolvedActiveThreadCount (" + resolvedActiveThreadCount
+                                                           + ") that is lower than 1.");
             }
             if (resolvedActiveThreadCount > availableProcessorCount) {
                 logger.debug("The resolvedActiveThreadCount (" + resolvedActiveThreadCount
-                        + ") is higher than the availableProcessorCount (" + availableProcessorCount
-                        + "), so the JVM will round-robin the CPU instead.");
+                                     + ") is higher than the availableProcessorCount (" + availableProcessorCount
+                                     + "), so the JVM will round-robin the CPU instead.");
             }
         }
         return resolvedActiveThreadCount;
@@ -216,15 +218,14 @@ public class PartitionedSearchPhaseConfig extends PhaseConfig<PartitionedSearchP
     public void inherit(PartitionedSearchPhaseConfig inheritedConfig) {
         super.inherit(inheritedConfig);
         solutionPartitionerClass = ConfigUtils.inheritOverwritableProperty(solutionPartitionerClass,
-                inheritedConfig.getSolutionPartitionerClass());
+                                                                           inheritedConfig.getSolutionPartitionerClass());
         solutionPartitionerCustomProperties = ConfigUtils.inheritMergeableMapProperty(
                 solutionPartitionerCustomProperties, inheritedConfig.getSolutionPartitionerCustomProperties());
         threadFactoryClass = ConfigUtils.inheritOverwritableProperty(threadFactoryClass,
-                inheritedConfig.getThreadFactoryClass());
+                                                                     inheritedConfig.getThreadFactoryClass());
         runnablePartThreadLimit = ConfigUtils.inheritOverwritableProperty(runnablePartThreadLimit,
-                inheritedConfig.getRunnablePartThreadLimit());
+                                                                          inheritedConfig.getRunnablePartThreadLimit());
         phaseConfigList = ConfigUtils.inheritMergeableListConfig(
                 phaseConfigList, inheritedConfig.getPhaseConfigList());
     }
-
 }

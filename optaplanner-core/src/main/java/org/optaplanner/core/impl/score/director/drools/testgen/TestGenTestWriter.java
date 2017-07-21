@@ -88,13 +88,13 @@ class TestGenTestWriter {
         Stream<String> classes = Stream.concat(
                 // imports from facts
                 journal.getFacts().stream()
-                .flatMap(fact -> fact.getImports().stream()),
+                        .flatMap(fact -> fact.getImports().stream()),
                 // imports from update operations (including shadow variable updates with inline values)
                 journal.getMoveOperations().stream()
-                .filter(op -> op instanceof TestGenKieSessionUpdate)
-                .flatMap(up -> {
-                    return ((TestGenKieSessionUpdate) up).getValue().getImports().stream();
-                })
+                        .filter(op -> op instanceof TestGenKieSessionUpdate)
+                        .flatMap(up -> {
+                            return ((TestGenKieSessionUpdate) up).getValue().getImports().stream();
+                        })
         )
                 .filter(cls -> !cls.getPackage().getName().equals("java.lang"))
                 .map(cls -> cls.getCanonicalName());
@@ -128,7 +128,7 @@ class TestGenTestWriter {
         sb
                 .append("        kieServices.newKieBuilder(kfs).buildAll();\n")
                 .append("        KieContainer kieContainer = kieServices.newKieContainer("
-                        + "kieServices.getRepository().getDefaultReleaseId());\n")
+                                + "kieServices.getRepository().getDefaultReleaseId());\n")
                 .append("        KieSession kieSession = kieContainer.newKieSession();\n\n");
         if (scoreDefinition != null) {
             sb
@@ -245,5 +245,4 @@ class TestGenTestWriter {
     public void setCorruptedScoreException(TestGenCorruptedScoreException ex) {
         this.scoreEx = ex;
     }
-
 }

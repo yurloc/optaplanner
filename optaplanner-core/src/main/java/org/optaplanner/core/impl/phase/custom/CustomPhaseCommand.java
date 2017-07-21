@@ -49,5 +49,4 @@ public interface CustomPhaseCommand<Solution_> {
      * @param scoreDirector never null, the {@link ScoreDirector} that needs to get notified of the changes.
      */
     void changeWorkingSolution(ScoreDirector<Solution_> scoreDirector);
-
 }

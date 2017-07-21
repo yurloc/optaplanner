@@ -31,7 +31,7 @@ public enum ExhaustiveSearchType {
                 return EntitySorterManner.DECREASING_DIFFICULTY_IF_AVAILABLE;
             default:
                 throw new IllegalStateException("The exhaustiveSearchType ("
-                        + this + ") is not implemented.");
+                                                        + this + ") is not implemented.");
         }
     }
 
@@ -43,7 +43,7 @@ public enum ExhaustiveSearchType {
                 return ValueSorterManner.INCREASING_STRENGTH_IF_AVAILABLE;
             default:
                 throw new IllegalStateException("The exhaustiveSearchType ("
-                        + this + ") is not implemented.");
+                                                        + this + ") is not implemented.");
         }
     }
 
@@ -55,7 +55,7 @@ public enum ExhaustiveSearchType {
                 return true;
             default:
                 throw new IllegalStateException("The exhaustiveSearchType ("
-                        + this + ") is not implemented.");
+                                                        + this + ") is not implemented.");
         }
     }
 

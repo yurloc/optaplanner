@@ -58,7 +58,7 @@ public class SimpleBigDecimalScoreDefinition extends AbstractScoreDefinition<Sim
     public SimpleBigDecimalScore fromLevelNumbers(int initScore, Number[] levelNumbers) {
         if (levelNumbers.length != getLevelsSize()) {
             throw new IllegalStateException("The levelNumbers (" + Arrays.toString(levelNumbers)
-                    + ")'s length (" + levelNumbers.length + ") must equal the levelSize (" + getLevelsSize() + ").");
+                                                    + ")'s length (" + levelNumbers.length + ") must equal the levelSize (" + getLevelsSize() + ").");
         }
         return SimpleBigDecimalScore.valueOfUninitialized(initScore, (BigDecimal) levelNumbers[0]);
     }
@@ -69,17 +69,18 @@ public class SimpleBigDecimalScoreDefinition extends AbstractScoreDefinition<Sim
     }
 
     @Override
-    public SimpleBigDecimalScore buildOptimisticBound(InitializingScoreTrend initializingScoreTrend, SimpleBigDecimalScore score) {
+    public SimpleBigDecimalScore buildOptimisticBound(InitializingScoreTrend initializingScoreTrend,
+                                                      SimpleBigDecimalScore score) {
         // TODO https://issues.jboss.org/browse/PLANNER-232
         throw new UnsupportedOperationException("PLANNER-232: BigDecimalScore does not support bounds" +
-                " because a BigDecimal cannot represent infinity.");
+                                                        " because a BigDecimal cannot represent infinity.");
     }
 
     @Override
-    public SimpleBigDecimalScore buildPessimisticBound(InitializingScoreTrend initializingScoreTrend, SimpleBigDecimalScore score) {
+    public SimpleBigDecimalScore buildPessimisticBound(InitializingScoreTrend initializingScoreTrend,
+                                                       SimpleBigDecimalScore score) {
         // TODO https://issues.jboss.org/browse/PLANNER-232
         throw new UnsupportedOperationException("PLANNER-232: BigDecimalScore does not support bounds" +
-                " because a BigDecimal cannot represent infinity.");
+                                                        " because a BigDecimal cannot represent infinity.");
     }
-
 }

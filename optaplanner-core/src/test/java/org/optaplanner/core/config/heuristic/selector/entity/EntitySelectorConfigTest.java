@@ -24,7 +24,9 @@ import org.optaplanner.core.impl.heuristic.selector.entity.EntitySelector;
 import org.optaplanner.core.impl.heuristic.selector.entity.FromSolutionEntitySelector;
 import org.optaplanner.core.impl.heuristic.selector.entity.decorator.ShufflingEntitySelector;
 
-import static org.optaplanner.core.impl.testdata.util.PlannerAssert.*;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.assertEquals;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.assertInstanceOf;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.assertNotInstanceOf;
 
 public class EntitySelectorConfigTest extends AbstractSelectorConfigTest {
 
@@ -116,7 +118,7 @@ public class EntitySelectorConfigTest extends AbstractSelectorConfigTest {
                 SelectionCacheType.JUST_IN_TIME, SelectionOrder.RANDOM);
         assertInstanceOf(ShufflingEntitySelector.class, entitySelector);
         assertInstanceOf(FromSolutionEntitySelector.class,
-                ((ShufflingEntitySelector) entitySelector).getChildEntitySelector());
+                         ((ShufflingEntitySelector) entitySelector).getChildEntitySelector());
         assertEquals(SelectionCacheType.PHASE, entitySelector.getCacheType());
     }
 
@@ -130,7 +132,7 @@ public class EntitySelectorConfigTest extends AbstractSelectorConfigTest {
                 SelectionCacheType.JUST_IN_TIME, SelectionOrder.RANDOM);
         assertInstanceOf(ShufflingEntitySelector.class, entitySelector);
         assertInstanceOf(FromSolutionEntitySelector.class,
-                ((ShufflingEntitySelector) entitySelector).getChildEntitySelector());
+                         ((ShufflingEntitySelector) entitySelector).getChildEntitySelector());
         assertEquals(SelectionCacheType.STEP, entitySelector.getCacheType());
     }
 
@@ -143,5 +145,4 @@ public class EntitySelectorConfigTest extends AbstractSelectorConfigTest {
                 buildHeuristicConfigPolicy(),
                 SelectionCacheType.JUST_IN_TIME, SelectionOrder.RANDOM);
     }
-
 }

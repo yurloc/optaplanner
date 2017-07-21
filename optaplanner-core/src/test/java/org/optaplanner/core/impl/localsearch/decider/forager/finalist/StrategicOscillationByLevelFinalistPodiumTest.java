@@ -26,9 +26,9 @@ import org.optaplanner.core.impl.localsearch.scope.LocalSearchStepScope;
 import org.optaplanner.core.impl.solver.scope.DefaultSolverScope;
 import org.optaplanner.core.impl.testdata.domain.TestdataSolution;
 
-import static org.junit.Assert.assertSame;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
-import static org.optaplanner.core.impl.testdata.util.PlannerAssert.*;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.extractSingleton;
 
 public class StrategicOscillationByLevelFinalistPodiumTest {
 
@@ -213,5 +213,4 @@ public class StrategicOscillationByLevelFinalistPodiumTest {
         moveScope.setScore(HardMediumSoftScore.valueOf(hardScore, mediumScore, softScore));
         return moveScope;
     }
-
 }

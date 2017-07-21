@@ -33,5 +33,4 @@ public interface ExhaustiveSearchPhaseLifecycleListener<Solution_> extends Solve
     void stepEnded(ExhaustiveSearchStepScope<Solution_> stepScope);
 
     void phaseEnded(ExhaustiveSearchPhaseScope<Solution_> phaseScope);
-
 }

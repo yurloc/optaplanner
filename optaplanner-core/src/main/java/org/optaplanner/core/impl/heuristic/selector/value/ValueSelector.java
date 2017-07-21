@@ -61,5 +61,4 @@ public interface ValueSelector extends Selector {
      * @see #iterator(Object)
      */
     Iterator<Object> endingIterator(Object entity);
-
 }

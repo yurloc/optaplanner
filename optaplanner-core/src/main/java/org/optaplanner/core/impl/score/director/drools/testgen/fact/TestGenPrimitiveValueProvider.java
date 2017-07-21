@@ -59,5 +59,4 @@ class TestGenPrimitiveValueProvider extends TestGenAbstractValueProvider<Object>
     public String toString() {
         return value.toString();
     }
-
 }

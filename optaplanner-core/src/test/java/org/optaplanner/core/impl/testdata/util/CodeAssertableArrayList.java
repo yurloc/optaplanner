@@ -33,5 +33,4 @@ public class CodeAssertableArrayList<E> extends ArrayList<E> implements CodeAsse
     public String getCode() {
         return code;
     }
-
 }

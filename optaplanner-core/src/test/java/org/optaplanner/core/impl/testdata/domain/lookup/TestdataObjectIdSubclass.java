@@ -25,5 +25,4 @@ public class TestdataObjectIdSubclass extends TestdataObjectId {
     public String toString() {
         return "id=" + getId();
     }
-
 }

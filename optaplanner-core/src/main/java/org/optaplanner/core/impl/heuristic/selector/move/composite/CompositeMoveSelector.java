@@ -47,10 +47,10 @@ public abstract class CompositeMoveSelector extends AbstractMoveSelector {
                         : childMoveSelectorList.subList(0, childMoveSelectorList.size() - 1)) {
                     if (childMoveSelector.isNeverEnding()) {
                         throw new IllegalStateException("The selector (" + this
-                                + ")'s non-last childMoveSelector (" + childMoveSelector
-                                + ") has neverEnding (" + childMoveSelector.isNeverEnding()
-                                + ") with randomSelection (" + randomSelection + ")."
-                                + (childMoveSelector.isCountable() ? ""
+                                                                + ")'s non-last childMoveSelector (" + childMoveSelector
+                                                                + ") has neverEnding (" + childMoveSelector.isNeverEnding()
+                                                                + ") with randomSelection (" + randomSelection + ")."
+                                                                + (childMoveSelector.isCountable() ? ""
                                 : "\nThe selector is not countable, check the "
                                 + ValueRange.class.getSimpleName() + "s involved.\n"
                                 + "Verify that a " + ValueRangeProvider.class.getSimpleName()
@@ -85,5 +85,4 @@ public abstract class CompositeMoveSelector extends AbstractMoveSelector {
     public String toString() {
         return getClass().getSimpleName() + "(" + childMoveSelectorList + ")";
     }
-
 }

@@ -108,5 +108,4 @@ public class SimulatedAnnealingAcceptorTest extends AbstractAcceptorTest {
         acceptor.setStartingTemperature(HardMediumSoftScore.parseScore("1, -1, 2"));
         acceptor.phaseStarted(null);
     }
-
 }

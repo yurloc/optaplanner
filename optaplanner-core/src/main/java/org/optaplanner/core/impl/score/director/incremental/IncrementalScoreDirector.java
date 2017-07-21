@@ -43,8 +43,8 @@ public class IncrementalScoreDirector<Solution_>
     private final IncrementalScoreCalculator<Solution_> incrementalScoreCalculator;
 
     public IncrementalScoreDirector(IncrementalScoreDirectorFactory<Solution_> scoreDirectorFactory,
-            boolean lookUpEnabled, boolean constraintMatchEnabledPreference,
-            IncrementalScoreCalculator<Solution_> incrementalScoreCalculator) {
+                                    boolean lookUpEnabled, boolean constraintMatchEnabledPreference,
+                                    IncrementalScoreCalculator<Solution_> incrementalScoreCalculator) {
         super(scoreDirectorFactory, lookUpEnabled, constraintMatchEnabledPreference);
         this.incrementalScoreCalculator = incrementalScoreCalculator;
     }
@@ -89,7 +89,7 @@ public class IncrementalScoreDirector<Solution_>
     public Collection<ConstraintMatchTotal> getConstraintMatchTotals() {
         if (!isConstraintMatchEnabled()) {
             throw new IllegalStateException("When constraintMatchEnabled (" + isConstraintMatchEnabled()
-                    + ") is disabled in the constructor, this method should not be called.");
+                                                    + ") is disabled in the constructor, this method should not be called.");
         }
         return ((ConstraintMatchAwareIncrementalScoreCalculator<Solution_>) incrementalScoreCalculator)
                 .getConstraintMatchTotals();
@@ -99,7 +99,7 @@ public class IncrementalScoreDirector<Solution_>
     public Map<Object, Indictment> getIndictmentMap() {
         if (!isConstraintMatchEnabled()) {
             throw new IllegalStateException("When constraintMatchEnabled (" + isConstraintMatchEnabled()
-                    + ") is disabled in the constructor, this method should not be called.");
+                                                    + ") is disabled in the constructor, this method should not be called.");
         }
         Map<Object, Indictment> indictmentMap
                 = ((ConstraintMatchAwareIncrementalScoreCalculator<Solution_>) incrementalScoreCalculator)
@@ -111,7 +111,8 @@ public class IncrementalScoreDirector<Solution_>
                 for (ConstraintMatch constraintMatch : constraintMatchTotal.getConstraintMatchSet()) {
                     for (Object justification : constraintMatch.getJustificationList()) {
                         Indictment indictment = indictmentMap.computeIfAbsent(justification,
-                                k -> new Indictment(justification, zeroScore));
+                                                                              k -> new Indictment(justification,
+                                                                                                  zeroScore));
                         indictment.addConstraintMatch(constraintMatch);
                     }
                 }
@@ -196,5 +197,4 @@ public class IncrementalScoreDirector<Solution_>
         incrementalScoreCalculator.resetWorkingSolution(workingSolution); // TODO do not nuke it
         super.afterProblemFactRemoved(problemFact);
     }
-
 }

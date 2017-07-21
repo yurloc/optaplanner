@@ -32,7 +32,7 @@ public class ChainedChangeMove<Solution_> extends ChangeMove<Solution_> {
     protected final SingletonInverseVariableSupply inverseVariableSupply;
 
     public ChainedChangeMove(Object entity, GenuineVariableDescriptor<Solution_> variableDescriptor,
-            SingletonInverseVariableSupply inverseVariableSupply, Object toPlanningValue) {
+                             SingletonInverseVariableSupply inverseVariableSupply, Object toPlanningValue) {
         super(entity, variableDescriptor, toPlanningValue);
         this.inverseVariableSupply = inverseVariableSupply;
     }
@@ -70,5 +70,4 @@ public class ChainedChangeMove<Solution_> extends ChangeMove<Solution_> {
             scoreDirector.changeVariableFacade(variableDescriptor, newTrailingEntity, entity);
         }
     }
-
 }

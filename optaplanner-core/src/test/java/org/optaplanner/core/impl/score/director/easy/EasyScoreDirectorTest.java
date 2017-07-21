@@ -44,5 +44,4 @@ public class EasyScoreDirectorTest {
         when(factory.getSolutionDescriptor()).thenReturn(mock(SolutionDescriptor.class));
         return factory;
     }
-
 }

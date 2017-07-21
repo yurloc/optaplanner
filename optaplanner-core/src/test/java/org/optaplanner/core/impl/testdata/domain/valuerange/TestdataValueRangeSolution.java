@@ -39,7 +39,8 @@ import org.optaplanner.core.impl.testdata.domain.TestdataObject;
 public class TestdataValueRangeSolution extends TestdataObject {
 
     public static SolutionDescriptor<TestdataValueRangeSolution> buildSolutionDescriptor() {
-        return SolutionDescriptor.buildSolutionDescriptor(TestdataValueRangeSolution.class, TestdataValueRangeEntity.class);
+        return SolutionDescriptor.buildSolutionDescriptor(TestdataValueRangeSolution.class,
+                                                          TestdataValueRangeEntity.class);
     }
 
     private List<TestdataValueRangeEntity> entityList;
@@ -119,5 +120,4 @@ public class TestdataValueRangeSolution extends TestdataObject {
         return ValueRangeFactory.createTemporalValueRange(
                 Year.of(2000), Year.of(2003), 1, ChronoUnit.YEARS);
     }
-
 }

@@ -47,5 +47,4 @@ public abstract class LocalSearchPhaseLifecycleListenerAdapter<Solution_> extend
     public void phaseEnded(LocalSearchPhaseScope<Solution_> phaseScope) {
         // Hook method
     }
-
 }

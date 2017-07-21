@@ -58,8 +58,8 @@ public class ReflectionsKieVfsUrlType implements Vfs.UrlType {
         KieModule kieModule = ((InternalKieContainer) kieContainer).getMainKieModule();
         if (!(kieModule instanceof MemoryKieModule)) {
             throw new IllegalStateException("The classpath url (" + url
-                    + ") has an mfs protocol but the kieModule (" + kieModule
-                    + ") is not an instance of " + MemoryKieModule.class.getSimpleName() + ".");
+                                                    + ") has an mfs protocol but the kieModule (" + kieModule
+                                                    + ") is not an instance of " + MemoryKieModule.class.getSimpleName() + ".");
         }
         MemoryFileSystem memoryFileSystem = ((MemoryKieModule) kieModule).getMemoryFileSystem();
         Folder folder = memoryFileSystem.getFolder(url.toExternalForm().substring("mfs:/".length()));
@@ -101,7 +101,7 @@ public class ReflectionsKieVfsUrlType implements Vfs.UrlType {
                     }
                 } else {
                     throw new IllegalStateException("Unsupported resource class (" + resource.getClass()
-                            + ") for resource (" + resource + ").");
+                                                            + ") for resource (" + resource + ").");
                 }
             }
             return vfsFileList;
@@ -111,7 +111,6 @@ public class ReflectionsKieVfsUrlType implements Vfs.UrlType {
         public void close() {
             // Do nothing
         }
-
     }
 
     public static class ReflectionsKieVfsFile implements Vfs.File {
@@ -136,7 +135,5 @@ public class ReflectionsKieVfsUrlType implements Vfs.UrlType {
         public InputStream openInputStream() throws IOException {
             return kieFile.getContents();
         }
-
     }
-
 }

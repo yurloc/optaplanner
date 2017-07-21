@@ -43,5 +43,4 @@ public class CustomStepScope<Solution_> extends AbstractStepScope<Solution_> {
     // ************************************************************************
     // Calculated methods
     // ************************************************************************
-
 }

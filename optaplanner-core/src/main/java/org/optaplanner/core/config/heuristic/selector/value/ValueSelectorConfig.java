@@ -214,7 +214,8 @@ public class ValueSelectorConfig extends SelectorConfig<ValueSelectorConfig> {
         return probabilityWeightFactoryClass;
     }
 
-    public void setProbabilityWeightFactoryClass(Class<? extends SelectionProbabilityWeightFactory> probabilityWeightFactoryClass) {
+    public void setProbabilityWeightFactoryClass(
+            Class<? extends SelectionProbabilityWeightFactory> probabilityWeightFactoryClass) {
         this.probabilityWeightFactoryClass = probabilityWeightFactoryClass;
     }
 
@@ -231,16 +232,17 @@ public class ValueSelectorConfig extends SelectorConfig<ValueSelectorConfig> {
     // ************************************************************************
 
     public GenuineVariableDescriptor extractVariableDescriptor(HeuristicConfigPolicy configPolicy,
-            EntityDescriptor entityDescriptor) {
+                                                               EntityDescriptor entityDescriptor) {
         entityDescriptor = downcastEntityDescriptor(configPolicy, entityDescriptor);
         if (variableName != null) {
             GenuineVariableDescriptor variableDescriptor = entityDescriptor.getGenuineVariableDescriptor(variableName);
             if (variableDescriptor == null) {
                 throw new IllegalArgumentException("The selectorConfig (" + this
-                        + ") has a variableName (" + variableName
-                        + ") which is not a valid planning variable on entityClass ("
-                        + entityDescriptor.getEntityClass() + ").\n"
-                        + entityDescriptor.buildInvalidVariableNameExceptionMessage(variableName));
+                                                           + ") has a variableName (" + variableName
+                                                           + ") which is not a valid planning variable on entityClass ("
+                                                           + entityDescriptor.getEntityClass() + ").\n"
+                                                           + entityDescriptor.buildInvalidVariableNameExceptionMessage(
+                        variableName));
             }
             return variableDescriptor;
         } else if (mimicSelectorRef != null) {
@@ -251,7 +253,6 @@ public class ValueSelectorConfig extends SelectorConfig<ValueSelectorConfig> {
     }
 
     /**
-     *
      * @param configPolicy never null
      * @param entityDescriptor never null
      * @param minimumCacheType never null, If caching is used (different from {@link SelectionCacheType#JUST_IN_TIME}),
@@ -261,8 +262,9 @@ public class ValueSelectorConfig extends SelectorConfig<ValueSelectorConfig> {
      * @return never null
      */
     public ValueSelector buildValueSelector(HeuristicConfigPolicy configPolicy,
-            EntityDescriptor entityDescriptor,
-            SelectionCacheType minimumCacheType, SelectionOrder inheritedSelectionOrder) {
+                                            EntityDescriptor entityDescriptor,
+                                            SelectionCacheType minimumCacheType,
+                                            SelectionOrder inheritedSelectionOrder) {
         if (mimicSelectorRef != null) {
             ValueSelector valueSelector = buildMimicReplaying(configPolicy);
             valueSelector = applyReinitializeVariableFiltering(configPolicy, valueSelector);
@@ -273,7 +275,7 @@ public class ValueSelectorConfig extends SelectorConfig<ValueSelectorConfig> {
         GenuineVariableDescriptor variableDescriptor = deduceVariableDescriptor(entityDescriptor, variableName);
         SelectionCacheType resolvedCacheType = SelectionCacheType.resolve(cacheType, minimumCacheType);
         SelectionOrder resolvedSelectionOrder = SelectionOrder.resolve(selectionOrder,
-                inheritedSelectionOrder);
+                                                                       inheritedSelectionOrder);
 
         if (nearbySelectionConfig != null) {
             nearbySelectionConfig.validateNearby(resolvedCacheType, resolvedSelectionOrder);
@@ -285,17 +287,21 @@ public class ValueSelectorConfig extends SelectorConfig<ValueSelectorConfig> {
 
         // baseValueSelector and lower should be SelectionOrder.ORIGINAL if they are going to get cached completely
         ValueSelector valueSelector = buildBaseValueSelector(configPolicy, variableDescriptor,
-                SelectionCacheType.max(minimumCacheType, resolvedCacheType),
-                determineBaseRandomSelection(variableDescriptor, resolvedCacheType, resolvedSelectionOrder));
+                                                             SelectionCacheType.max(minimumCacheType,
+                                                                                    resolvedCacheType),
+                                                             determineBaseRandomSelection(variableDescriptor,
+                                                                                          resolvedCacheType,
+                                                                                          resolvedSelectionOrder));
 
         if (nearbySelectionConfig != null) {
             // TODO Static filtering (such as movableEntitySelectionFilter) should affect nearbySelection too
             valueSelector = nearbySelectionConfig.applyNearbyValueSelector(configPolicy,
-                    minimumCacheType, resolvedCacheType, resolvedSelectionOrder, valueSelector);
+                                                                           minimumCacheType, resolvedCacheType,
+                                                                           resolvedSelectionOrder, valueSelector);
         }
         valueSelector = applyFiltering(resolvedCacheType, resolvedSelectionOrder, valueSelector);
         valueSelector = applyInitializedChainedValueFilter(configPolicy, variableDescriptor,
-                resolvedCacheType, resolvedSelectionOrder, valueSelector);
+                                                           resolvedCacheType, resolvedSelectionOrder, valueSelector);
         valueSelector = applySorting(resolvedCacheType, resolvedSelectionOrder, valueSelector);
         valueSelector = applyProbability(resolvedCacheType, resolvedSelectionOrder, valueSelector);
         valueSelector = applyShuffling(resolvedCacheType, resolvedSelectionOrder, valueSelector);
@@ -322,42 +328,44 @@ public class ValueSelectorConfig extends SelectorConfig<ValueSelectorConfig> {
                 || probabilityWeightFactoryClass != null
                 || selectedCountLimit != null) {
             throw new IllegalArgumentException("The valueSelectorConfig (" + this
-                    + ") with mimicSelectorRef ("  + mimicSelectorRef
-                    + ") has another property that is not null.");
+                                                       + ") with mimicSelectorRef (" + mimicSelectorRef
+                                                       + ") has another property that is not null.");
         }
         ValueMimicRecorder valueMimicRecorder = configPolicy.getValueMimicRecorder(mimicSelectorRef);
         if (valueMimicRecorder == null) {
             throw new IllegalArgumentException("The valueSelectorConfig (" + this
-                    + ") has a mimicSelectorRef ("  + mimicSelectorRef
-                    + ") for which no valueSelector with that id exists (in its solver phase).");
+                                                       + ") has a mimicSelectorRef (" + mimicSelectorRef
+                                                       + ") for which no valueSelector with that id exists (in its solver phase).");
         }
         return new MimicReplayingValueSelector(valueMimicRecorder);
     }
 
-    protected EntityDescriptor downcastEntityDescriptor(HeuristicConfigPolicy configPolicy, EntityDescriptor entityDescriptor) {
+    protected EntityDescriptor downcastEntityDescriptor(HeuristicConfigPolicy configPolicy,
+                                                        EntityDescriptor entityDescriptor) {
         if (downcastEntityClass != null) {
             Class<?> parentEntityClass = entityDescriptor.getEntityClass();
             if (!parentEntityClass.isAssignableFrom(downcastEntityClass)) {
                 throw new IllegalStateException("The downcastEntityClass (" + downcastEntityClass
-                        + ") is not a subclass of the parentEntityClass (" + parentEntityClass
-                        + ") configured by the " + EntitySelector.class.getSimpleName() + ".");
+                                                        + ") is not a subclass of the parentEntityClass (" + parentEntityClass
+                                                        + ") configured by the " + EntitySelector.class.getSimpleName() + ".");
             }
             SolutionDescriptor solutionDescriptor = configPolicy.getSolutionDescriptor();
             entityDescriptor = solutionDescriptor.getEntityDescriptorStrict(downcastEntityClass);
             if (entityDescriptor == null) {
                 throw new IllegalArgumentException("The selectorConfig (" + this
-                        + ") has an downcastEntityClass (" + downcastEntityClass
-                        + ") that is not a known planning entity.\n"
-                        + "Check your solver configuration. If that class (" + downcastEntityClass.getSimpleName()
-                        + ") is not in the entityClassSet (" + solutionDescriptor.getEntityClassSet()
-                        + "), check your Solution implementation's annotated methods too.");
+                                                           + ") has an downcastEntityClass (" + downcastEntityClass
+                                                           + ") that is not a known planning entity.\n"
+                                                           + "Check your solver configuration. If that class (" + downcastEntityClass.getSimpleName()
+                                                           + ") is not in the entityClassSet (" + solutionDescriptor.getEntityClassSet()
+                                                           + "), check your Solution implementation's annotated methods too.");
             }
         }
         return entityDescriptor;
     }
 
     protected boolean determineBaseRandomSelection(GenuineVariableDescriptor variableDescriptor,
-            SelectionCacheType resolvedCacheType, SelectionOrder resolvedSelectionOrder) {
+                                                   SelectionCacheType resolvedCacheType,
+                                                   SelectionOrder resolvedSelectionOrder) {
         switch (resolvedSelectionOrder) {
             case ORIGINAL:
                 return false;
@@ -372,7 +380,7 @@ public class ValueSelectorConfig extends SelectorConfig<ValueSelectorConfig> {
                         || (isBaseInherentlyCached(variableDescriptor) && !hasFiltering(variableDescriptor));
             default:
                 throw new IllegalStateException("The selectionOrder (" + resolvedSelectionOrder
-                        + ") is not implemented.");
+                                                        + ") is not implemented.");
         }
     }
 
@@ -390,7 +398,7 @@ public class ValueSelectorConfig extends SelectorConfig<ValueSelectorConfig> {
             // because between phases the entities get cloned and the KieSession/Maps contains those clones afterwards
             // https://issues.jboss.org/browse/PLANNER-54
             throw new IllegalArgumentException("The minimumCacheType (" + minimumCacheType
-                    + ") is not yet supported. Please use " + SelectionCacheType.PHASE + " instead.");
+                                                       + ") is not yet supported. Please use " + SelectionCacheType.PHASE + " instead.");
         }
         if (valueRangeDescriptor.isEntityIndependent()) {
             return new FromSolutionPropertyValueSelector(
@@ -402,11 +410,12 @@ public class ValueSelectorConfig extends SelectorConfig<ValueSelectorConfig> {
     }
 
     private boolean hasFiltering(GenuineVariableDescriptor variableDescriptor) {
-        return !ConfigUtils.isEmptyCollection(filterClassList) || variableDescriptor.hasMovableChainedTrailingValueFilter();
+        return !ConfigUtils.isEmptyCollection(
+                filterClassList) || variableDescriptor.hasMovableChainedTrailingValueFilter();
     }
 
     private ValueSelector applyFiltering(SelectionCacheType resolvedCacheType, SelectionOrder resolvedSelectionOrder,
-            ValueSelector valueSelector) {
+                                         ValueSelector valueSelector) {
         GenuineVariableDescriptor variableDescriptor = valueSelector.getVariableDescriptor();
         if (hasFiltering(variableDescriptor)) {
             List<SelectionFilter> filterList = new ArrayList<>(
@@ -426,11 +435,12 @@ public class ValueSelectorConfig extends SelectorConfig<ValueSelectorConfig> {
     }
 
     protected ValueSelector applyInitializedChainedValueFilter(HeuristicConfigPolicy configPolicy,
-            GenuineVariableDescriptor variableDescriptor,
-            SelectionCacheType resolvedCacheType, SelectionOrder resolvedSelectionOrder,
-            ValueSelector valueSelector) {
+                                                               GenuineVariableDescriptor variableDescriptor,
+                                                               SelectionCacheType resolvedCacheType,
+                                                               SelectionOrder resolvedSelectionOrder,
+                                                               ValueSelector valueSelector) {
         if (configPolicy.isInitializedChainedValueFilterEnabled()
-                    && variableDescriptor.isChained()) {
+                && variableDescriptor.isChained()) {
             valueSelector = InitializedValueSelector.create(valueSelector);
         }
         return valueSelector;
@@ -441,58 +451,58 @@ public class ValueSelectorConfig extends SelectorConfig<ValueSelectorConfig> {
                 || sorterOrder != null || sorterClass != null)
                 && resolvedSelectionOrder != SelectionOrder.SORTED) {
             throw new IllegalArgumentException("The valueSelectorConfig (" + this
-                    + ") with sorterManner ("  + sorterManner
-                    + ") and sorterComparatorClass ("  + sorterComparatorClass
-                    + ") and sorterWeightFactoryClass ("  + sorterWeightFactoryClass
-                    + ") and sorterOrder ("  + sorterOrder
-                    + ") and sorterClass ("  + sorterClass
-                    + ") has a resolvedSelectionOrder (" + resolvedSelectionOrder
-                    + ") that is not " + SelectionOrder.SORTED + ".");
+                                                       + ") with sorterManner (" + sorterManner
+                                                       + ") and sorterComparatorClass (" + sorterComparatorClass
+                                                       + ") and sorterWeightFactoryClass (" + sorterWeightFactoryClass
+                                                       + ") and sorterOrder (" + sorterOrder
+                                                       + ") and sorterClass (" + sorterClass
+                                                       + ") has a resolvedSelectionOrder (" + resolvedSelectionOrder
+                                                       + ") that is not " + SelectionOrder.SORTED + ".");
         }
         if (sorterManner != null && sorterComparatorClass != null) {
             throw new IllegalArgumentException("The valueSelectorConfig (" + this
-                    + ") has both a sorterManner (" + sorterManner
-                    + ") and a sorterComparatorClass (" + sorterComparatorClass + ").");
+                                                       + ") has both a sorterManner (" + sorterManner
+                                                       + ") and a sorterComparatorClass (" + sorterComparatorClass + ").");
         }
         if (sorterManner != null && sorterWeightFactoryClass != null) {
             throw new IllegalArgumentException("The valueSelectorConfig (" + this
-                    + ") has both a sorterManner (" + sorterManner
-                    + ") and a sorterWeightFactoryClass (" + sorterWeightFactoryClass + ").");
+                                                       + ") has both a sorterManner (" + sorterManner
+                                                       + ") and a sorterWeightFactoryClass (" + sorterWeightFactoryClass + ").");
         }
         if (sorterManner != null && sorterClass != null) {
             throw new IllegalArgumentException("The valueSelectorConfig (" + this
-                    + ") has both a sorterManner (" + sorterManner
-                    + ") and a sorterClass (" + sorterClass + ").");
+                                                       + ") has both a sorterManner (" + sorterManner
+                                                       + ") and a sorterClass (" + sorterClass + ").");
         }
         if (sorterManner != null && sorterOrder != null) {
             throw new IllegalArgumentException("The valueSelectorConfig (" + this
-                    + ") with sorterManner (" + sorterManner
-                    + ") has a non-null sorterOrder (" + sorterOrder + ").");
+                                                       + ") with sorterManner (" + sorterManner
+                                                       + ") has a non-null sorterOrder (" + sorterOrder + ").");
         }
         if (sorterComparatorClass != null && sorterWeightFactoryClass != null) {
             throw new IllegalArgumentException("The valueSelectorConfig (" + this
-                    + ") has both a sorterComparatorClass (" + sorterComparatorClass
-                    + ") and a sorterWeightFactoryClass (" + sorterWeightFactoryClass + ").");
+                                                       + ") has both a sorterComparatorClass (" + sorterComparatorClass
+                                                       + ") and a sorterWeightFactoryClass (" + sorterWeightFactoryClass + ").");
         }
         if (sorterComparatorClass != null && sorterClass != null) {
             throw new IllegalArgumentException("The valueSelectorConfig (" + this
-                    + ") has both a sorterComparatorClass (" + sorterComparatorClass
-                    + ") and a sorterClass (" + sorterClass + ").");
+                                                       + ") has both a sorterComparatorClass (" + sorterComparatorClass
+                                                       + ") and a sorterClass (" + sorterClass + ").");
         }
         if (sorterWeightFactoryClass != null && sorterClass != null) {
             throw new IllegalArgumentException("The valueSelectorConfig (" + this
-                    + ") has both a sorterWeightFactoryClass (" + sorterWeightFactoryClass
-                    + ") and a sorterClass (" + sorterClass + ").");
+                                                       + ") has both a sorterWeightFactoryClass (" + sorterWeightFactoryClass
+                                                       + ") and a sorterClass (" + sorterClass + ").");
         }
         if (sorterClass != null && sorterOrder != null) {
             throw new IllegalArgumentException("The valueSelectorConfig (" + this
-                    + ") with sorterClass (" + sorterClass
-                    + ") has a non-null sorterOrder (" + sorterOrder + ").");
+                                                       + ") with sorterClass (" + sorterClass
+                                                       + ") has a non-null sorterOrder (" + sorterOrder + ").");
         }
     }
 
     private ValueSelector applySorting(SelectionCacheType resolvedCacheType, SelectionOrder resolvedSelectionOrder,
-            ValueSelector valueSelector) {
+                                       ValueSelector valueSelector) {
         if (resolvedSelectionOrder == SelectionOrder.SORTED) {
             SelectionSorter sorter;
             if (sorterManner != null) {
@@ -503,38 +513,40 @@ public class ValueSelectorConfig extends SelectorConfig<ValueSelectorConfig> {
                 sorter = determineSorter(sorterManner, variableDescriptor);
             } else if (sorterComparatorClass != null) {
                 Comparator<Object> sorterComparator = ConfigUtils.newInstance(this,
-                        "sorterComparatorClass", sorterComparatorClass);
+                                                                              "sorterComparatorClass",
+                                                                              sorterComparatorClass);
                 sorter = new ComparatorSelectionSorter(sorterComparator,
-                        SelectionSorterOrder.resolve(sorterOrder));
+                                                       SelectionSorterOrder.resolve(sorterOrder));
             } else if (sorterWeightFactoryClass != null) {
                 SelectionSorterWeightFactory sorterWeightFactory = ConfigUtils.newInstance(this,
-                        "sorterWeightFactoryClass", sorterWeightFactoryClass);
+                                                                                           "sorterWeightFactoryClass",
+                                                                                           sorterWeightFactoryClass);
                 sorter = new WeightFactorySelectionSorter(sorterWeightFactory,
-                        SelectionSorterOrder.resolve(sorterOrder));
+                                                          SelectionSorterOrder.resolve(sorterOrder));
             } else if (sorterClass != null) {
                 sorter = ConfigUtils.newInstance(this, "sorterClass", sorterClass);
             } else {
                 throw new IllegalArgumentException("The valueSelectorConfig (" + this
-                        + ") with resolvedSelectionOrder ("  + resolvedSelectionOrder
-                        + ") needs a sorterManner (" + sorterManner
-                        + ") or a sorterComparatorClass (" + sorterComparatorClass
-                        + ") or a sorterWeightFactoryClass (" + sorterWeightFactoryClass
-                        + ") or a sorterClass (" + sorterClass + ").");
+                                                           + ") with resolvedSelectionOrder (" + resolvedSelectionOrder
+                                                           + ") needs a sorterManner (" + sorterManner
+                                                           + ") or a sorterComparatorClass (" + sorterComparatorClass
+                                                           + ") or a sorterWeightFactoryClass (" + sorterWeightFactoryClass
+                                                           + ") or a sorterClass (" + sorterClass + ").");
             }
             if (!valueSelector.getVariableDescriptor().isValueRangeEntityIndependent()
                     && resolvedCacheType == SelectionCacheType.STEP) {
                 valueSelector = new EntityDependentSortingValueSelector(valueSelector,
-                        resolvedCacheType, sorter);
+                                                                        resolvedCacheType, sorter);
             } else {
                 if (!(valueSelector instanceof EntityIndependentValueSelector)) {
                     throw new IllegalArgumentException("The valueSelectorConfig (" + this
-                            + ") with resolvedCacheType (" + resolvedCacheType
-                            + ") and resolvedSelectionOrder (" + resolvedSelectionOrder
-                            + ") needs to be based on an EntityIndependentValueSelector (" + valueSelector + ")."
-                            + " Check your @" + ValueRangeProvider.class.getSimpleName() + " annotations.");
+                                                               + ") with resolvedCacheType (" + resolvedCacheType
+                                                               + ") and resolvedSelectionOrder (" + resolvedSelectionOrder
+                                                               + ") needs to be based on an EntityIndependentValueSelector (" + valueSelector + ")."
+                                                               + " Check your @" + ValueRangeProvider.class.getSimpleName() + " annotations.");
                 }
                 valueSelector = new SortingValueSelector((EntityIndependentValueSelector) valueSelector,
-                        resolvedCacheType, sorter);
+                                                         resolvedCacheType, sorter);
             }
         }
         return valueSelector;
@@ -544,64 +556,65 @@ public class ValueSelectorConfig extends SelectorConfig<ValueSelectorConfig> {
         if (probabilityWeightFactoryClass != null
                 && resolvedSelectionOrder != SelectionOrder.PROBABILISTIC) {
             throw new IllegalArgumentException("The valueSelectorConfig (" + this
-                    + ") with probabilityWeightFactoryClass (" + probabilityWeightFactoryClass
-                    + ") has a resolvedSelectionOrder (" + resolvedSelectionOrder
-                    + ") that is not " + SelectionOrder.PROBABILISTIC + ".");
+                                                       + ") with probabilityWeightFactoryClass (" + probabilityWeightFactoryClass
+                                                       + ") has a resolvedSelectionOrder (" + resolvedSelectionOrder
+                                                       + ") that is not " + SelectionOrder.PROBABILISTIC + ".");
         }
     }
 
     private ValueSelector applyProbability(SelectionCacheType resolvedCacheType, SelectionOrder resolvedSelectionOrder,
-            ValueSelector valueSelector) {
+                                           ValueSelector valueSelector) {
         if (resolvedSelectionOrder == SelectionOrder.PROBABILISTIC) {
             if (probabilityWeightFactoryClass == null) {
                 throw new IllegalArgumentException("The valueSelectorConfig (" + this
-                        + ") with resolvedSelectionOrder (" + resolvedSelectionOrder
-                        + ") needs a probabilityWeightFactoryClass ("
-                        + probabilityWeightFactoryClass + ").");
+                                                           + ") with resolvedSelectionOrder (" + resolvedSelectionOrder
+                                                           + ") needs a probabilityWeightFactoryClass ("
+                                                           + probabilityWeightFactoryClass + ").");
             }
             SelectionProbabilityWeightFactory probabilityWeightFactory = ConfigUtils.newInstance(this,
-                    "probabilityWeightFactoryClass", probabilityWeightFactoryClass);
+                                                                                                 "probabilityWeightFactoryClass",
+                                                                                                 probabilityWeightFactoryClass);
             if (!(valueSelector instanceof EntityIndependentValueSelector)) {
                 throw new IllegalArgumentException("The valueSelectorConfig (" + this
-                        + ") with resolvedCacheType (" + resolvedCacheType
-                        + ") and resolvedSelectionOrder (" + resolvedSelectionOrder
-                        + ") needs to be based on an EntityIndependentValueSelector (" + valueSelector + ")."
-                        + " Check your @" + ValueRangeProvider.class.getSimpleName() + " annotations.");
+                                                           + ") with resolvedCacheType (" + resolvedCacheType
+                                                           + ") and resolvedSelectionOrder (" + resolvedSelectionOrder
+                                                           + ") needs to be based on an EntityIndependentValueSelector (" + valueSelector + ")."
+                                                           + " Check your @" + ValueRangeProvider.class.getSimpleName() + " annotations.");
             }
             valueSelector = new ProbabilityValueSelector((EntityIndependentValueSelector) valueSelector,
-                    resolvedCacheType, probabilityWeightFactory);
+                                                         resolvedCacheType, probabilityWeightFactory);
         }
         return valueSelector;
     }
 
     private ValueSelector applyShuffling(SelectionCacheType resolvedCacheType, SelectionOrder resolvedSelectionOrder,
-            ValueSelector valueSelector) {
+                                         ValueSelector valueSelector) {
         if (resolvedSelectionOrder == SelectionOrder.SHUFFLED) {
             if (!(valueSelector instanceof EntityIndependentValueSelector)) {
                 throw new IllegalArgumentException("The valueSelectorConfig (" + this
-                        + ") with resolvedCacheType (" + resolvedCacheType
-                        + ") and resolvedSelectionOrder (" + resolvedSelectionOrder
-                        + ") needs to be based on an EntityIndependentValueSelector (" + valueSelector + ")."
-                        + " Check your @" + ValueRangeProvider.class.getSimpleName() + " annotations.");
+                                                           + ") with resolvedCacheType (" + resolvedCacheType
+                                                           + ") and resolvedSelectionOrder (" + resolvedSelectionOrder
+                                                           + ") needs to be based on an EntityIndependentValueSelector (" + valueSelector + ")."
+                                                           + " Check your @" + ValueRangeProvider.class.getSimpleName() + " annotations.");
             }
             valueSelector = new ShufflingValueSelector((EntityIndependentValueSelector) valueSelector,
-                    resolvedCacheType);
+                                                       resolvedCacheType);
         }
         return valueSelector;
     }
 
     private ValueSelector applyCaching(SelectionCacheType resolvedCacheType, SelectionOrder resolvedSelectionOrder,
-            ValueSelector valueSelector) {
+                                       ValueSelector valueSelector) {
         if (resolvedCacheType.isCached() && resolvedCacheType.compareTo(valueSelector.getCacheType()) > 0) {
             if (!(valueSelector instanceof EntityIndependentValueSelector)) {
                 throw new IllegalArgumentException("The valueSelectorConfig (" + this
-                        + ") with resolvedCacheType (" + resolvedCacheType
-                        + ") and resolvedSelectionOrder (" + resolvedSelectionOrder
-                        + ") needs to be based on an EntityIndependentValueSelector (" + valueSelector + ")."
-                        + " Check your @" + ValueRangeProvider.class.getSimpleName() + " annotations.");
+                                                           + ") with resolvedCacheType (" + resolvedCacheType
+                                                           + ") and resolvedSelectionOrder (" + resolvedSelectionOrder
+                                                           + ") needs to be based on an EntityIndependentValueSelector (" + valueSelector + ")."
+                                                           + " Check your @" + ValueRangeProvider.class.getSimpleName() + " annotations.");
             }
             valueSelector = new CachingValueSelector((EntityIndependentValueSelector) valueSelector, resolvedCacheType,
-                    resolvedSelectionOrder.toRandomSelectionBoolean());
+                                                     resolvedSelectionOrder.toRandomSelectionBoolean());
         }
         return valueSelector;
     }
@@ -610,9 +623,9 @@ public class ValueSelectorConfig extends SelectorConfig<ValueSelectorConfig> {
         if (selectedCountLimit != null
                 && minimumCacheType.compareTo(SelectionCacheType.JUST_IN_TIME) > 0) {
             throw new IllegalArgumentException("The valueSelectorConfig (" + this
-                    + ") with selectedCountLimit (" + selectedCountLimit
-                    + ") has a minimumCacheType (" + minimumCacheType
-                    + ") that is higher than " + SelectionCacheType.JUST_IN_TIME + ".");
+                                                       + ") with selectedCountLimit (" + selectedCountLimit
+                                                       + ") has a minimumCacheType (" + minimumCacheType
+                                                       + ") that is higher than " + SelectionCacheType.JUST_IN_TIME + ".");
         }
     }
 
@@ -629,13 +642,13 @@ public class ValueSelectorConfig extends SelectorConfig<ValueSelectorConfig> {
         if (id != null) {
             if (id.isEmpty()) {
                 throw new IllegalArgumentException("The valueSelectorConfig (" + this
-                        + ") has an empty id (" + id + ").");
+                                                           + ") has an empty id (" + id + ").");
             }
             if (!(valueSelector instanceof EntityIndependentValueSelector)) {
                 throw new IllegalArgumentException("The valueSelectorConfig (" + this
-                        + ") with id (" + id
-                        + ") needs to be based on an EntityIndependentValueSelector (" + valueSelector + ")."
-                        + " Check your @" + ValueRangeProvider.class.getSimpleName() + " annotations.");
+                                                           + ") with id (" + id
+                                                           + ") needs to be based on an EntityIndependentValueSelector (" + valueSelector + ")."
+                                                           + " Check your @" + ValueRangeProvider.class.getSimpleName() + " annotations.");
             }
             MimicRecordingValueSelector mimicRecordingValueSelector
                     = new MimicRecordingValueSelector((EntityIndependentValueSelector) valueSelector);
@@ -646,7 +659,7 @@ public class ValueSelectorConfig extends SelectorConfig<ValueSelectorConfig> {
     }
 
     private ValueSelector applyReinitializeVariableFiltering(HeuristicConfigPolicy configPolicy,
-            ValueSelector valueSelector) {
+                                                             ValueSelector valueSelector) {
         if (configPolicy.isReinitializeVariableFilterEnabled()) {
             valueSelector = new ReinitializeVariableValueSelector(valueSelector);
         }
@@ -665,11 +678,12 @@ public class ValueSelectorConfig extends SelectorConfig<ValueSelectorConfig> {
         super.inherit(inheritedConfig);
         id = ConfigUtils.inheritOverwritableProperty(id, inheritedConfig.getId());
         mimicSelectorRef = ConfigUtils.inheritOverwritableProperty(mimicSelectorRef,
-                inheritedConfig.getMimicSelectorRef());
+                                                                   inheritedConfig.getMimicSelectorRef());
         downcastEntityClass = ConfigUtils.inheritOverwritableProperty(downcastEntityClass,
-                inheritedConfig.getDowncastEntityClass());
+                                                                      inheritedConfig.getDowncastEntityClass());
         variableName = ConfigUtils.inheritOverwritableProperty(variableName, inheritedConfig.getVariableName());
-        nearbySelectionConfig = ConfigUtils.inheritConfig(nearbySelectionConfig, inheritedConfig.getNearbySelectionConfig());
+        nearbySelectionConfig = ConfigUtils.inheritConfig(nearbySelectionConfig,
+                                                          inheritedConfig.getNearbySelectionConfig());
         cacheType = ConfigUtils.inheritOverwritableProperty(cacheType, inheritedConfig.getCacheType());
         selectionOrder = ConfigUtils.inheritOverwritableProperty(selectionOrder, inheritedConfig.getSelectionOrder());
         sorterManner = ConfigUtils.inheritOverwritableProperty(
@@ -706,11 +720,12 @@ public class ValueSelectorConfig extends SelectorConfig<ValueSelectorConfig> {
                 return variableDescriptor.getDecreasingStrengthSorter() != null;
             default:
                 throw new IllegalStateException("The sorterManner ("
-                        + valueSorterManner + ") is not implemented.");
+                                                        + valueSorterManner + ") is not implemented.");
         }
     }
 
-    public static SelectionSorter determineSorter(ValueSorterManner valueSorterManner, GenuineVariableDescriptor variableDescriptor) {
+    public static SelectionSorter determineSorter(ValueSorterManner valueSorterManner,
+                                                  GenuineVariableDescriptor variableDescriptor) {
         SelectionSorter sorter;
         switch (valueSorterManner) {
             case NONE:
@@ -725,16 +740,15 @@ public class ValueSelectorConfig extends SelectorConfig<ValueSelectorConfig> {
                 break;
             default:
                 throw new IllegalStateException("The sorterManner ("
-                        + valueSorterManner + ") is not implemented.");
+                                                        + valueSorterManner + ") is not implemented.");
         }
         if (sorter == null) {
             throw new IllegalArgumentException("The sorterManner (" + valueSorterManner
-                    + ") on entity class (" + variableDescriptor.getEntityDescriptor().getEntityClass()
-                    + ")'s variable (" + variableDescriptor.getVariableName()
-                    + ") fails because that variable getter's " + PlanningVariable.class.getSimpleName()
-                    + " annotation does not declare any strength comparison.");
+                                                       + ") on entity class (" + variableDescriptor.getEntityDescriptor().getEntityClass()
+                                                       + ")'s variable (" + variableDescriptor.getVariableName()
+                                                       + ") fails because that variable getter's " + PlanningVariable.class.getSimpleName()
+                                                       + " annotation does not declare any strength comparison.");
         }
         return sorter;
     }
-
 }

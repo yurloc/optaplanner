@@ -70,7 +70,7 @@ public class ScoreUtils {
             return BendableBigDecimalScore.parseScore(scoreString);
         } else {
             throw new IllegalArgumentException("Unrecognized scoreClass (" + scoreClass
-                    + ") for scoreString (" + scoreString + ").");
+                                                       + ") for scoreString (" + scoreString + ").");
         }
     }
 
@@ -84,7 +84,6 @@ public class ScoreUtils {
     }
 
     /**
-     *
      * @param totalDiffNumbers never null
      * @param scoreDiffNumbers never null
      * @param timeGradientWeightNumbers never null
@@ -92,7 +91,7 @@ public class ScoreUtils {
      * @return {@code 0.0 <= value <= 1.0}
      */
     public static double calculateTimeGradient(Number[] totalDiffNumbers, Number[] scoreDiffNumbers,
-            double[] timeGradientWeightNumbers, int levelDepth) {
+                                               double[] timeGradientWeightNumbers, int levelDepth) {
         double timeGradient = 0.0;
         double remainingTimeGradient = 1.0;
         for (int i = 0; i < levelDepth; i++) {
@@ -124,7 +123,6 @@ public class ScoreUtils {
                 double levelTimeGradient = (double) scoreDiffLevel / (double) totalDiffLevel;
                 timeGradient += levelTimeGradient * levelTimeGradientWeight;
             }
-
         }
         if (timeGradient > 1.0) {
             // Rounding error due to calculating with doubles
@@ -135,5 +133,4 @@ public class ScoreUtils {
 
     private ScoreUtils() {
     }
-
 }

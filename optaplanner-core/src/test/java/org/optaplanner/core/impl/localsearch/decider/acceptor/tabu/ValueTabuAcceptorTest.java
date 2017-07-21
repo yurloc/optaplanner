@@ -262,5 +262,4 @@ public class ValueTabuAcceptorTest {
         moveScope.setScore(SimpleScore.valueOf(score));
         return moveScope;
     }
-
 }

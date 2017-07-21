@@ -43,5 +43,4 @@ public class TestGenKieSessionDelete implements TestGenKieSessionOperation {
     public String toString() {
         return "operation D #" + id;
     }
-
 }

@@ -36,7 +36,7 @@ public class EmptyValueRange<T> extends AbstractCountableValueRange<T> {
     @Override
     public T get(long index) {
         throw new IndexOutOfBoundsException("The index (" + index + ") must be >= 0 and < size ("
-                + getSize() + ").");
+                                                    + getSize() + ").");
     }
 
     @Override
@@ -65,12 +65,10 @@ public class EmptyValueRange<T> extends AbstractCountableValueRange<T> {
         public T next() {
             throw new NoSuchElementException();
         }
-
     }
 
     @Override
     public String toString() {
         return "[]"; // Formatting: interval (mathematics) ISO 31-11
     }
-
 }

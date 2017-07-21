@@ -29,7 +29,8 @@ import org.optaplanner.core.impl.score.director.ScoreDirector;
 /**
  * Alternative to {@link AnchorVariableListener}.
  */
-public class ExternalizedAnchorVariableSupply implements StatefulVariableListener<Object>, AnchorVariableSupply {
+public class ExternalizedAnchorVariableSupply implements StatefulVariableListener<Object>,
+                                                         AnchorVariableSupply {
 
     protected final VariableDescriptor previousVariableDescriptor;
     protected final SingletonInverseVariableSupply nextVariableSupply;
@@ -37,7 +38,7 @@ public class ExternalizedAnchorVariableSupply implements StatefulVariableListene
     protected Map<Object, Object> anchorMap = null;
 
     public ExternalizedAnchorVariableSupply(VariableDescriptor previousVariableDescriptor,
-            SingletonInverseVariableSupply nextVariableSupply) {
+                                            SingletonInverseVariableSupply nextVariableSupply) {
         this.previousVariableDescriptor = previousVariableDescriptor;
         this.nextVariableSupply = nextVariableSupply;
     }
@@ -87,9 +88,9 @@ public class ExternalizedAnchorVariableSupply implements StatefulVariableListene
         boolean removeSucceeded = anchorMap.remove(entity) != null;
         if (!removeSucceeded) {
             throw new IllegalStateException("The supply (" + this + ") is corrupted,"
-                    + " because the entity (" + entity
-                    + ") for sourceVariable (" + previousVariableDescriptor.getVariableName()
-                    + ") cannot be retracted: it was never inserted.");
+                                                    + " because the entity (" + entity
+                                                    + ") for sourceVariable (" + previousVariableDescriptor.getVariableName()
+                                                    + ") cannot be retracted: it was never inserted.");
         }
         // No need to retract the trailing entities because they will be removed too or change their previousVariable
     }
@@ -125,5 +126,4 @@ public class ExternalizedAnchorVariableSupply implements StatefulVariableListene
     public String toString() {
         return getClass().getSimpleName() + "(" + previousVariableDescriptor.getVariableName() + ")";
     }
-
 }

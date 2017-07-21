@@ -56,5 +56,4 @@ public abstract class AbstractEntityPlacer {
     public void solvingEnded(DefaultSolverScope solverScope) {
         phaseLifecycleSupport.fireSolvingEnded(solverScope);
     }
-
 }

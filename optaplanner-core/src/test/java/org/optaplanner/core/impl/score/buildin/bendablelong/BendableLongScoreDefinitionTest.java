@@ -36,11 +36,18 @@ public class BendableLongScoreDefinitionTest {
 
     @Test
     public void getLevelLabels() {
-        assertArrayEquals(new String[]{"hard 0 score", "soft 0 score"}, new BendableLongScoreDefinition(1, 1).getLevelLabels());
-        assertArrayEquals(new String[]{"hard 0 score", "hard 1 score", "hard 2 score", "soft 0 score", "soft 1 score", "soft 2 score", "soft 3 score"}, new BendableLongScoreDefinition(3, 4).getLevelLabels());
-        assertArrayEquals(new String[]{"hard 0 score", "hard 1 score", "hard 2 score", "hard 3 score", "soft 0 score", "soft 1 score", "soft 2 score"}, new BendableLongScoreDefinition(4, 3).getLevelLabels());
-        assertArrayEquals(new String[]{"soft 0 score", "soft 1 score", "soft 2 score", "soft 3 score", "soft 4 score"}, new BendableLongScoreDefinition(0, 5).getLevelLabels());
-        assertArrayEquals(new String[]{"hard 0 score", "hard 1 score", "hard 2 score", "hard 3 score", "hard 4 score"}, new BendableLongScoreDefinition(5, 0).getLevelLabels());
+        assertArrayEquals(new String[]{"hard 0 score", "soft 0 score"},
+                          new BendableLongScoreDefinition(1, 1).getLevelLabels());
+        assertArrayEquals(
+                new String[]{"hard 0 score", "hard 1 score", "hard 2 score", "soft 0 score", "soft 1 score", "soft 2 score", "soft 3 score"},
+                new BendableLongScoreDefinition(3, 4).getLevelLabels());
+        assertArrayEquals(
+                new String[]{"hard 0 score", "hard 1 score", "hard 2 score", "hard 3 score", "soft 0 score", "soft 1 score", "soft 2 score"},
+                new BendableLongScoreDefinition(4, 3).getLevelLabels());
+        assertArrayEquals(new String[]{"soft 0 score", "soft 1 score", "soft 2 score", "soft 3 score", "soft 4 score"},
+                          new BendableLongScoreDefinition(0, 5).getLevelLabels());
+        assertArrayEquals(new String[]{"hard 0 score", "hard 1 score", "hard 2 score", "hard 3 score", "hard 4 score"},
+                          new BendableLongScoreDefinition(5, 0).getLevelLabels());
     }
 
     @Test
@@ -67,7 +74,8 @@ public class BendableLongScoreDefinitionTest {
         for (int i = 0; i < levelSize; i++) {
             scores[i] = ((long) Integer.MAX_VALUE) + i;
         }
-        BendableLongScoreDefinition bendableLongScoreDefinition = new BendableLongScoreDefinition(hardLevelSize, softLevelSize);
+        BendableLongScoreDefinition bendableLongScoreDefinition = new BendableLongScoreDefinition(hardLevelSize,
+                                                                                                  softLevelSize);
         BendableLongScore bendableLongScore = bendableLongScoreDefinition.createScore(scores);
         assertEquals(hardLevelSize, bendableLongScore.getHardLevelsSize());
         assertEquals(softLevelSize, bendableLongScore.getSoftLevelsSize());
@@ -135,5 +143,4 @@ public class BendableLongScoreDefinitionTest {
         assertEquals(Long.MIN_VALUE, pessimisticBound.getSoftScore(1));
         assertEquals(Long.MIN_VALUE, pessimisticBound.getSoftScore(2));
     }
-
 }

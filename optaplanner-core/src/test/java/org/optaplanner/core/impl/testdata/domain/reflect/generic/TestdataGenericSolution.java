@@ -49,8 +49,8 @@ public class TestdataGenericSolution<T> extends TestdataObject {
     }
 
     public TestdataGenericSolution(String code, List<TestdataGenericValue<T>> valueList,
-            List<TestdataGenericValue<Map<T, TestdataGenericValue<T>>>> complexGenericValueList,
-            List<TestdataGenericEntity<T>> entityList) {
+                                   List<TestdataGenericValue<Map<T, TestdataGenericValue<T>>>> complexGenericValueList,
+                                   List<TestdataGenericEntity<T>> entityList) {
         super(code);
         this.valueList = valueList;
         this.complexGenericValueList = complexGenericValueList;
@@ -86,5 +86,4 @@ public class TestdataGenericSolution<T> extends TestdataObject {
     // ************************************************************************
     // Complex methods
     // ************************************************************************
-
 }

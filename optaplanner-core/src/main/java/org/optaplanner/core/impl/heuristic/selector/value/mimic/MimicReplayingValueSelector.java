@@ -44,7 +44,7 @@ public class MimicReplayingValueSelector extends AbstractValueSelector
         if (!valueMimicRecorder.getVariableDescriptor().isValueRangeEntityIndependent()) {
             throw new IllegalArgumentException(
                     "The current implementation support only an entityIndependent variable ("
-                    + valueMimicRecorder.getVariableDescriptor() + ").");
+                            + valueMimicRecorder.getVariableDescriptor() + ").");
         }
     }
 
@@ -133,8 +133,8 @@ public class MimicReplayingValueSelector extends AbstractValueSelector
         public boolean hasNext() {
             if (!hasRecordingCreated) {
                 throw new IllegalStateException("Replay must occur after record."
-                        + " The recordingValueSelector (" + valueMimicRecorder
-                        + ")'s hasNext() has not been called yet. ");
+                                                        + " The recordingValueSelector (" + valueMimicRecorder
+                                                        + ")'s hasNext() has not been called yet. ");
             }
             return hasRecording && !recordingAlreadyReturned;
         }
@@ -143,12 +143,12 @@ public class MimicReplayingValueSelector extends AbstractValueSelector
         public Object next() {
             if (!recordingCreated) {
                 throw new IllegalStateException("Replay must occur after record."
-                        + " The recordingValueSelector (" + valueMimicRecorder
-                        + ")'s next() has not been called yet. ");
+                                                        + " The recordingValueSelector (" + valueMimicRecorder
+                                                        + ")'s next() has not been called yet. ");
             }
             if (recordingAlreadyReturned) {
                 throw new NoSuchElementException("The recordingAlreadyReturned (" + recordingAlreadyReturned
-                        + ") is impossible. Check if hasNext() returns true before this call.");
+                                                         + ") is impossible. Check if hasNext() returns true before this call.");
             }
             // Until the recorder records something, this iterator has no next.
             recordingAlreadyReturned = true;
@@ -162,7 +162,6 @@ public class MimicReplayingValueSelector extends AbstractValueSelector
             }
             return "Next replay (" + (recordingCreated ? recording : "?") + ")";
         }
-
     }
 
     @Override
@@ -175,5 +174,4 @@ public class MimicReplayingValueSelector extends AbstractValueSelector
     public String toString() {
         return "Replaying(" + valueMimicRecorder + ")";
     }
-
 }

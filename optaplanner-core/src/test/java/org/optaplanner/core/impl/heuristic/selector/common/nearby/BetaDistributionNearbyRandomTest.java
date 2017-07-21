@@ -49,5 +49,4 @@ public class BetaDistributionNearbyRandomTest {
         when(random.nextDouble()).thenReturn(3.0 / 500.0);
         assertEquals(3, nearbyRandom.nextInt(random, 500));
     }
-
 }

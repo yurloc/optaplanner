@@ -33,7 +33,7 @@ public class TestdataMultiEntitySolution extends TestdataObject {
 
     public static SolutionDescriptor buildSolutionDescriptor() {
         return SolutionDescriptor.buildSolutionDescriptor(TestdataMultiEntitySolution.class,
-                TestdataLeadEntity.class, TestdataHerdEntity.class);
+                                                          TestdataLeadEntity.class, TestdataHerdEntity.class);
     }
 
     private List<TestdataValue> valueList;
@@ -90,5 +90,4 @@ public class TestdataMultiEntitySolution extends TestdataObject {
     // ************************************************************************
     // Complex methods
     // ************************************************************************
-
 }

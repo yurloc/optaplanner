@@ -34,9 +34,9 @@ import org.optaplanner.core.impl.testdata.domain.chained.TestdataChainedSolution
 import org.optaplanner.core.impl.testdata.domain.chained.rich.TestdataRichChainedEntity;
 import org.optaplanner.core.impl.testdata.domain.chained.rich.TestdataRichChainedSolution;
 
-import static org.junit.Assert.assertSame;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
-import static org.optaplanner.core.impl.testdata.util.PlannerAssert.*;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.assertInstanceOf;
 
 public class VariableListenerSupportTest {
 
@@ -49,7 +49,8 @@ public class VariableListenerSupportTest {
         solution.setEntityList(Collections.<TestdataEntity>emptyList());
         when(scoreDirector.getWorkingSolution()).thenReturn(solution);
         when(scoreDirector.getSupplyManager()).thenReturn(mock(SupplyManager.class));
-        VariableListenerSupport<TestdataSolution> variableListenerSupport = new VariableListenerSupport<>(scoreDirector);
+        VariableListenerSupport<TestdataSolution> variableListenerSupport = new VariableListenerSupport<>(
+                scoreDirector);
         variableListenerSupport.linkVariableListeners();
 
         VariableDescriptor variableDescriptor = solutionDescriptor.getEntityDescriptorStrict(TestdataEntity.class)
@@ -76,7 +77,8 @@ public class VariableListenerSupportTest {
                 = new VariableListenerSupport<>(scoreDirector);
         variableListenerSupport.linkVariableListeners();
 
-        VariableDescriptor variableDescriptor = solutionDescriptor.getEntityDescriptorStrict(TestdataChainedEntity.class)
+        VariableDescriptor variableDescriptor = solutionDescriptor.getEntityDescriptorStrict(
+                TestdataChainedEntity.class)
                 .getVariableDescriptor("chainedObject");
 
         SingletonInverseVariableSupply supply1
@@ -101,7 +103,8 @@ public class VariableListenerSupportTest {
                 = new VariableListenerSupport<>(scoreDirector);
         variableListenerSupport.linkVariableListeners();
 
-        VariableDescriptor variableDescriptor = solutionDescriptor.getEntityDescriptorStrict(TestdataRichChainedEntity.class)
+        VariableDescriptor variableDescriptor = solutionDescriptor.getEntityDescriptorStrict(
+                TestdataRichChainedEntity.class)
                 .getVariableDescriptor("chainedObject");
 
         SingletonInverseVariableSupply supply1
@@ -111,5 +114,4 @@ public class VariableListenerSupportTest {
                 = variableListenerSupport.demand(new SingletonInverseVariableDemand(variableDescriptor));
         assertSame(supply1, supply2);
     }
-
 }

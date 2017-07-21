@@ -74,5 +74,4 @@ public class SimpleScoreDefinitionTest {
         assertEquals(0, pessimisticBound.getInitScore());
         assertEquals(Integer.MIN_VALUE, pessimisticBound.getScore());
     }
-
 }

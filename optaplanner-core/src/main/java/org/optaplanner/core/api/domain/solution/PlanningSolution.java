@@ -25,8 +25,8 @@ import org.optaplanner.core.api.domain.solution.cloner.SolutionCloner;
 import org.optaplanner.core.api.domain.solution.drools.ProblemFactCollectionProperty;
 import org.optaplanner.core.api.domain.solution.drools.ProblemFactProperty;
 
-import static java.lang.annotation.ElementType.*;
-import static java.lang.annotation.RetentionPolicy.*;
+import static java.lang.annotation.ElementType.TYPE;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
  * Specifies that the class is a planning solution.
@@ -73,12 +73,15 @@ public @interface PlanningSolution {
     Class<? extends SolutionCloner> solutionCloner()
             default NullSolutionCloner.class;
 
-    /** Workaround for annotation limitation in {@link #solutionCloner()}. */
-    interface NullSolutionCloner extends SolutionCloner {}
+    /**
+     * Workaround for annotation limitation in {@link #solutionCloner()}.
+     */
+    interface NullSolutionCloner extends SolutionCloner {
+
+    }
 
     /**
      * @return never null
      */
     LookUpStrategyType lookUpStrategyType() default LookUpStrategyType.PLANNING_ID_OR_NONE;
-
 }

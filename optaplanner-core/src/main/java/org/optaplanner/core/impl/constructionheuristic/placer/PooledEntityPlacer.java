@@ -49,7 +49,5 @@ public class PooledEntityPlacer extends AbstractEntityPlacer implements EntityPl
             }
             return new Placement(moveIterator);
         }
-
     }
-
 }

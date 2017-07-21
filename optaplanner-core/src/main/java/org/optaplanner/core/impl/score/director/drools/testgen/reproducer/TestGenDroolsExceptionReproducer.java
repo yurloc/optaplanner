@@ -32,7 +32,7 @@ public class TestGenDroolsExceptionReproducer implements TestGenOriginalProblemR
     private final TestGenDroolsScoreDirector<?> scoreDirector;
 
     public TestGenDroolsExceptionReproducer(RuntimeException originalException,
-            TestGenDroolsScoreDirector<?> scoreDirector) {
+                                            TestGenDroolsScoreDirector<?> scoreDirector) {
         this.originalException = originalException;
         this.scoreDirector = scoreDirector;
     }
@@ -70,9 +70,9 @@ public class TestGenDroolsExceptionReproducer implements TestGenOriginalProblemR
         } catch (RuntimeException reproducedException) {
             if (!areEqual(originalException, reproducedException)) {
                 throw new IllegalStateException(contextDescription
-                        + "\nExpected [" + originalException + "]"
-                        + "\nCaused [" + reproducedException + "]",
-                        reproducedException);
+                                                        + "\nExpected [" + originalException + "]"
+                                                        + "\nCaused [" + reproducedException + "]",
+                                                reproducedException);
             }
         }
     }
@@ -86,7 +86,8 @@ public class TestGenDroolsExceptionReproducer implements TestGenOriginalProblemR
         }
         if (reproducedException.getStackTrace().length == 0) {
             throw new IllegalStateException("Caught exception with empty stack trace => can't compare to the original. "
-                    + "Use '-XX:-OmitStackTraceInFastThrow' to turn off this optimization.", reproducedException);
+                                                    + "Use '-XX:-OmitStackTraceInFastThrow' to turn off this optimization.",
+                                            reproducedException);
         }
         // TODO check all org.drools elements?
         return originalException.getStackTrace()[0].equals(reproducedException.getStackTrace()[0]);

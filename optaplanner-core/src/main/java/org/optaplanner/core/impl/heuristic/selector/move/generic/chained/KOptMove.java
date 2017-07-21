@@ -43,8 +43,8 @@ public class KOptMove<Solution_> extends AbstractMove<Solution_> {
     protected final Object[] values;
 
     public KOptMove(GenuineVariableDescriptor<Solution_> variableDescriptor,
-            SingletonInverseVariableSupply inverseVariableSupply, AnchorVariableSupply anchorVariableSupply,
-            Object entity, Object[] values) {
+                    SingletonInverseVariableSupply inverseVariableSupply, AnchorVariableSupply anchorVariableSupply,
+                    Object entity, Object[] values) {
         this.variableDescriptor = variableDescriptor;
         this.inverseVariableSupply = inverseVariableSupply;
         this.anchorVariableSupply = anchorVariableSupply;
@@ -115,7 +115,7 @@ public class KOptMove<Solution_> extends AbstractMove<Solution_> {
             undoValues[i] = values[values.length - i];
         }
         return new KOptMove<>(variableDescriptor, inverseVariableSupply, anchorVariableSupply,
-                entity, undoValues);
+                              entity, undoValues);
     }
 
     @Override
@@ -198,5 +198,4 @@ public class KOptMove<Solution_> extends AbstractMove<Solution_> {
         builder.append("}");
         return builder.toString();
     }
-
 }

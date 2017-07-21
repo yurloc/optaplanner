@@ -49,9 +49,13 @@ public abstract class AbstractPhase<Solution_> implements Phase<Solution_> {
     protected final BestSolutionRecaller<Solution_> bestSolutionRecaller;
     protected final Termination termination;
 
-    /** Used for {@link DefaultSolver#addPhaseLifecycleListener(PhaseLifecycleListener)}. */
+    /**
+     * Used for {@link DefaultSolver#addPhaseLifecycleListener(PhaseLifecycleListener)}.
+     */
     protected PhaseLifecycleSupport<Solution_> solverPhaseLifecycleSupport;
-    /** Used for {@link #addPhaseLifecycleListener(PhaseLifecycleListener)}. */
+    /**
+     * Used for {@link #addPhaseLifecycleListener(PhaseLifecycleListener)}.
+     */
     protected PhaseLifecycleSupport<Solution_> phaseLifecycleSupport = new PhaseLifecycleSupport<>();
 
     protected boolean assertStepScoreFromScratch = false;
@@ -59,7 +63,7 @@ public abstract class AbstractPhase<Solution_> implements Phase<Solution_> {
     protected boolean assertShadowVariablesAreNotStaleAfterStep = false;
 
     public AbstractPhase(int phaseIndex, String logIndentation,
-            BestSolutionRecaller<Solution_> bestSolutionRecaller, Termination termination) {
+                         BestSolutionRecaller<Solution_> bestSolutionRecaller, Termination termination) {
         this.phaseIndex = phaseIndex;
         this.logIndentation = logIndentation;
         this.bestSolutionRecaller = bestSolutionRecaller;
@@ -205,7 +209,7 @@ public abstract class AbstractPhase<Solution_> implements Phase<Solution_> {
             InnerScoreDirector<Solution_> scoreDirector = phaseScope.getScoreDirector();
             SolutionDescriptor<Solution_> solutionDescriptor = scoreDirector.getSolutionDescriptor();
             Solution_ workingSolution = scoreDirector.getWorkingSolution();
-            for (Iterator<Object> it = solutionDescriptor.extractAllEntitiesIterator(workingSolution); it.hasNext();) {
+            for (Iterator<Object> it = solutionDescriptor.extractAllEntitiesIterator(workingSolution); it.hasNext(); ) {
                 Object entity = it.next();
                 EntityDescriptor<Solution_> entityDescriptor = solutionDescriptor.findEntityDescriptorOrFail(
                         entity.getClass());
@@ -218,13 +222,12 @@ public abstract class AbstractPhase<Solution_> implements Phase<Solution_> {
                         }
                     }
                     throw new IllegalStateException(getPhaseTypeString() + " phase (" + phaseIndex
-                            + ") needs to start from an initialized solution, but the planning variable (" + variableRef
-                            + ") is uninitialized for the entity (" +  entity + ").\n"
-                            + "Maybe there is no Construction Heuristic configured before this phase to initialize the solution.\n"
-                            + "Or maybe the getter/setters of your planning variables in your domain classes aren't implemented correctly.");
+                                                            + ") needs to start from an initialized solution, but the planning variable (" + variableRef
+                                                            + ") is uninitialized for the entity (" + entity + ").\n"
+                                                            + "Maybe there is no Construction Heuristic configured before this phase to initialize the solution.\n"
+                                                            + "Or maybe the getter/setters of your planning variables in your domain classes aren't implemented correctly.");
                 }
             }
         }
     }
-
 }

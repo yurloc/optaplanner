@@ -49,5 +49,4 @@ public class TestdataEntitiesNotClonedSolution implements SolutionCloner<Testdat
         clone.score = original.score;
         return clone;
     }
-
 }

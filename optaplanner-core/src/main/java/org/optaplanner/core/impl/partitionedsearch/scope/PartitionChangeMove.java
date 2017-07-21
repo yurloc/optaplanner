@@ -51,7 +51,7 @@ public final class PartitionChangeMove<Solution_> extends AbstractMove<Solution_
                 changeMap.put(variableDescriptor, new ArrayList<>(entityCount));
             }
         }
-        for (Iterator<Object> it = solutionDescriptor.extractAllEntitiesIterator(workingSolution); it.hasNext();) {
+        for (Iterator<Object> it = solutionDescriptor.extractAllEntitiesIterator(workingSolution); it.hasNext(); ) {
             Object entity = it.next();
             EntityDescriptor<Solution_> entityDescriptor = solutionDescriptor.findEntityDescriptorOrFail(
                     entity.getClass());
@@ -117,18 +117,18 @@ public final class PartitionChangeMove<Solution_> extends AbstractMove<Solution_
                 Object destinationEntity = destinationScoreDirector.lookUpWorkingObject(originEntity);
                 if (destinationEntity == null && originEntity != null) {
                     throw new IllegalStateException("The destinationEntity (" + destinationEntity
-                            + ") cannot be null if the originEntity (" + originEntity + ") is not null.");
+                                                            + ") cannot be null if the originEntity (" + originEntity + ") is not null.");
                 }
                 Object originValue = pair.getValue();
                 Object destinationValue = destinationScoreDirector.lookUpWorkingObject(originValue);
                 if (destinationValue == null && originValue != null) {
                     throw new IllegalStateException("The destinationEntity (" + destinationEntity
-                            + ")'s destinationValue (" + destinationValue
-                            + ") cannot be null if the originEntity (" + originEntity
-                            + ")'s originValue (" + originValue + ") is not null.\n"
-                            + "Maybe add the originValue (" + originValue + ") of class (" + originValue.getClass()
-                            + ") as problem fact in the planning solution with a "
-                            + ProblemFactCollectionProperty.class.getSimpleName() + " annotation.");
+                                                            + ")'s destinationValue (" + destinationValue
+                                                            + ") cannot be null if the originEntity (" + originEntity
+                                                            + ")'s originValue (" + originValue + ") is not null.\n"
+                                                            + "Maybe add the originValue (" + originValue + ") of class (" + originValue.getClass()
+                                                            + ") as problem fact in the planning solution with a "
+                                                            + ProblemFactCollectionProperty.class.getSimpleName() + " annotation.");
                 }
                 destinationPairList.add(Pair.of(destinationEntity, destinationValue));
             }

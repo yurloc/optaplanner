@@ -43,7 +43,7 @@ public class PillarChangeMove<Solution_> extends AbstractMove<Solution_> {
     protected final Object toPlanningValue;
 
     public PillarChangeMove(List<Object> pillar, GenuineVariableDescriptor<Solution_> variableDescriptor,
-            Object toPlanningValue) {
+                            Object toPlanningValue) {
         this.pillar = pillar;
         this.variableDescriptor = variableDescriptor;
         this.toPlanningValue = toPlanningValue;
@@ -148,5 +148,4 @@ public class PillarChangeMove<Solution_> extends AbstractMove<Solution_> {
         Object oldValue = variableDescriptor.getValue(pillar.get(0));
         return pillar.toString() + " {" + oldValue + " -> " + toPlanningValue + "}";
     }
-
 }

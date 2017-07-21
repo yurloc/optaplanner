@@ -35,7 +35,8 @@ import org.optaplanner.core.api.score.constraint.Indictment;
 /**
  * Abstract superclass for {@link ScoreHolder}.
  */
-public abstract class AbstractScoreHolder implements ScoreHolder, Serializable {
+public abstract class AbstractScoreHolder implements ScoreHolder,
+                                                     Serializable {
 
     protected final boolean constraintMatchEnabled;
     protected final Map<String, ConstraintMatchTotal> constraintMatchTotalMap;
@@ -60,7 +61,7 @@ public abstract class AbstractScoreHolder implements ScoreHolder, Serializable {
     public Collection<ConstraintMatchTotal> getConstraintMatchTotals() {
         if (!isConstraintMatchEnabled()) {
             throw new IllegalStateException("When constraintMatchEnabled (" + isConstraintMatchEnabled()
-                    + ") is disabled in the constructor, this method should not be called.");
+                                                    + ") is disabled in the constructor, this method should not be called.");
         }
         return constraintMatchTotalMap.values();
     }
@@ -69,7 +70,7 @@ public abstract class AbstractScoreHolder implements ScoreHolder, Serializable {
     public Map<Object, Indictment> getIndictmentMap() {
         if (!isConstraintMatchEnabled()) {
             throw new IllegalStateException("When constraintMatchEnabled (" + isConstraintMatchEnabled()
-                    + ") is disabled in the constructor, this method should not be called.");
+                                                    + ") is disabled in the constructor, this method should not be called.");
         }
         return indictmentMap;
     }
@@ -79,7 +80,7 @@ public abstract class AbstractScoreHolder implements ScoreHolder, Serializable {
     // ************************************************************************
 
     protected void registerConstraintMatch(RuleContext kcontext,
-            final Runnable constraintUndoListener, Supplier<Score> scoreSupplier) {
+                                           final Runnable constraintUndoListener, Supplier<Score> scoreSupplier) {
         AgendaItem<?> agendaItem = (AgendaItem) kcontext.getMatch();
         ConstraintActivationUnMatchListener constraintActivationUnMatchListener
                 = new ConstraintActivationUnMatchListener(constraintUndoListener);
@@ -93,7 +94,7 @@ public abstract class AbstractScoreHolder implements ScoreHolder, Serializable {
             List<Indictment> indictmentList = new ArrayList<>(justificationList.size());
             for (Object justification : justificationList) {
                 Indictment indictment = indictmentMap.computeIfAbsent(justification,
-                        k -> new Indictment(justification, zeroScore));
+                                                                      k -> new Indictment(justification, zeroScore));
                 boolean added = indictment.addConstraintMatch(constraintMatch);
                 if (added) {
                     indictmentList.add(indictment);
@@ -110,7 +111,8 @@ public abstract class AbstractScoreHolder implements ScoreHolder, Serializable {
         String constraintName = rule.getName();
         String constraintId = constraintPackage + "/" + constraintName;
         return constraintMatchTotalMap.computeIfAbsent(constraintId,
-                k -> new ConstraintMatchTotal(constraintPackage, constraintName, zeroScore));
+                                                       k -> new ConstraintMatchTotal(constraintPackage, constraintName,
+                                                                                     zeroScore));
     }
 
     protected List<Object> extractJustificationList(RuleContext kcontext) {
@@ -143,7 +145,5 @@ public abstract class AbstractScoreHolder implements ScoreHolder, Serializable {
                 }
             }
         }
-
     }
-
 }

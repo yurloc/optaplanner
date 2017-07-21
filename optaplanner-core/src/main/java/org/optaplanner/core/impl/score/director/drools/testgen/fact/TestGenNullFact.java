@@ -66,5 +66,4 @@ public class TestGenNullFact implements TestGenFact {
     public String toString() {
         return "null";
     }
-
 }

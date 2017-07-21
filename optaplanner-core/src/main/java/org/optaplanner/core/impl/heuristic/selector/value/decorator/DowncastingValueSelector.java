@@ -85,5 +85,4 @@ public class DowncastingValueSelector extends AbstractValueSelector {
     public String toString() {
         return "Downcasting(" + childValueSelector + ")";
     }
-
 }

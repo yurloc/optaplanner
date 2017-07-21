@@ -53,5 +53,4 @@ public abstract class AbstractMove<Solution_> implements Move<Solution_> {
      * @param scoreDirector never null
      */
     protected abstract void doMoveOnGenuineVariables(ScoreDirector<Solution_> scoreDirector);
-
 }

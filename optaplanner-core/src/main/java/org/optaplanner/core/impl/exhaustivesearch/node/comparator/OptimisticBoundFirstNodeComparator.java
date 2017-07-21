@@ -24,12 +24,13 @@ import org.optaplanner.core.impl.exhaustivesearch.node.ExhaustiveSearchNode;
 /**
  * Investigate the nodes with a better optimistic bound first, then deeper nodes.
  */
-public class OptimisticBoundFirstNodeComparator implements Comparator<ExhaustiveSearchNode>, Serializable {
+public class OptimisticBoundFirstNodeComparator implements Comparator<ExhaustiveSearchNode>,
+                                                           Serializable {
 
     public OptimisticBoundFirstNodeComparator(boolean scoreBounderEnabled) {
         if (!scoreBounderEnabled) {
             throw new IllegalArgumentException("This " + getClass().getSimpleName()
-                    + " only works if scoreBounderEnabled (" + scoreBounderEnabled + ") is true.");
+                                                       + " only works if scoreBounderEnabled (" + scoreBounderEnabled + ") is true.");
         }
     }
 
@@ -68,5 +69,4 @@ public class OptimisticBoundFirstNodeComparator implements Comparator<Exhaustive
         // Investigate lower breadth index first (to respect ValueSortingManner)
         return Long.compare(b.getBreadth(), a.getBreadth());
     }
-
 }

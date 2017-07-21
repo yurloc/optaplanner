@@ -27,8 +27,9 @@ import org.optaplanner.core.impl.heuristic.selector.common.decorator.SelectionFi
 import org.optaplanner.core.impl.heuristic.selector.common.decorator.SelectionSorterWeightFactory;
 import org.optaplanner.core.impl.score.director.ScoreDirector;
 
-import static java.lang.annotation.ElementType.*;
-import static java.lang.annotation.RetentionPolicy.*;
+import static java.lang.annotation.ElementType.FIELD;
+import static java.lang.annotation.ElementType.METHOD;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
  * Specifies that a bean property (or a field) can be changed and should be optimized by the optimization algorithms.
@@ -79,8 +80,12 @@ public @interface PlanningVariable {
     Class<? extends SelectionFilter> reinitializeVariableEntityFilter()
             default NullReinitializeVariableEntityFilter.class;
 
-    /** Workaround for annotation limitation in {@link #reinitializeVariableEntityFilter()}. */
-    interface NullReinitializeVariableEntityFilter extends SelectionFilter {}
+    /**
+     * Workaround for annotation limitation in {@link #reinitializeVariableEntityFilter()}.
+     */
+    interface NullReinitializeVariableEntityFilter extends SelectionFilter {
+
+    }
 
     /**
      * In some use cases, such as Vehicle Routing, planning entities form a specific graph type,
@@ -105,8 +110,12 @@ public @interface PlanningVariable {
     Class<? extends Comparator> strengthComparatorClass()
             default NullStrengthComparator.class;
 
-    /** Workaround for annotation limitation in {@link #strengthComparatorClass()}. */
-    interface NullStrengthComparator extends Comparator {}
+    /**
+     * Workaround for annotation limitation in {@link #strengthComparatorClass()}.
+     */
+    interface NullStrengthComparator extends Comparator {
+
+    }
 
     /**
      * The {@link SelectionSorterWeightFactory} alternative for {@link #strengthComparatorClass()}.
@@ -118,7 +127,10 @@ public @interface PlanningVariable {
     Class<? extends SelectionSorterWeightFactory> strengthWeightFactoryClass()
             default NullStrengthWeightFactory.class;
 
-    /** Workaround for annotation limitation in {@link #strengthWeightFactoryClass()}. */
-    interface NullStrengthWeightFactory extends SelectionSorterWeightFactory {}
+    /**
+     * Workaround for annotation limitation in {@link #strengthWeightFactoryClass()}.
+     */
+    interface NullStrengthWeightFactory extends SelectionSorterWeightFactory {
 
+    }
 }

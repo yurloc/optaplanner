@@ -44,5 +44,4 @@ public interface ScoreBounder {
      * @see ScoreDefinition#buildPessimisticBound(InitializingScoreTrend, Score)
      */
     Score calculatePessimisticBound(ScoreDirector scoreDirector, Score score);
-
 }

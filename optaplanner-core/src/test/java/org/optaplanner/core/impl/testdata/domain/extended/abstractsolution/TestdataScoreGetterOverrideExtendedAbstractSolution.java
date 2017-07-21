@@ -84,5 +84,4 @@ public class TestdataScoreGetterOverrideExtendedAbstractSolution extends Abstrac
     // ************************************************************************
     // Complex methods
     // ************************************************************************
-
 }

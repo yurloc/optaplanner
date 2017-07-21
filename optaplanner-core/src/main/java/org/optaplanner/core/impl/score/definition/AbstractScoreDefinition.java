@@ -26,7 +26,8 @@ import org.optaplanner.core.impl.score.buildin.hardsoft.HardSoftScoreDefinition;
  * @see ScoreDefinition
  * @see HardSoftScoreDefinition
  */
-public abstract class AbstractScoreDefinition<S extends Score> implements ScoreDefinition<S>, Serializable {
+public abstract class AbstractScoreDefinition<S extends Score> implements ScoreDefinition<S>,
+                                                                          Serializable {
 
     private final String[] levelLabels;
 
@@ -61,5 +62,4 @@ public abstract class AbstractScoreDefinition<S extends Score> implements ScoreD
     public String toString() {
         return getClass().getSimpleName();
     }
-
 }

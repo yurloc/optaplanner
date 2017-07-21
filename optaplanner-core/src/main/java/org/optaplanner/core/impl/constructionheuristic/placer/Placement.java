@@ -21,7 +21,8 @@ import java.util.Iterator;
 
 import org.optaplanner.core.impl.heuristic.move.Move;
 
-public class Placement implements Iterable<Move>, Serializable {
+public class Placement implements Iterable<Move>,
+                                  Serializable {
 
     private final Iterator<Move> moveIterator;
 
@@ -38,5 +39,4 @@ public class Placement implements Iterable<Move>, Serializable {
     public String toString() {
         return "Placement (" + moveIterator + ")";
     }
-
 }

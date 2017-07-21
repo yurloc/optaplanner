@@ -280,13 +280,13 @@ public class TerminationConfig extends AbstractConfig<TerminationConfig> {
             ScoreDefinition scoreDefinition = configPolicy.getScoreDefinition();
             if (!(scoreDefinition instanceof FeasibilityScoreDefinition)) {
                 throw new IllegalStateException("The termination bestScoreFeasible (" + bestScoreFeasible
-                        + ") is not compatible with a scoreDefinitionClass (" + scoreDefinition.getClass()
-                        + ") which does not implement the interface "
-                        + FeasibilityScoreDefinition.class.getSimpleName() + ".");
+                                                        + ") is not compatible with a scoreDefinitionClass (" + scoreDefinition.getClass()
+                                                        + ") which does not implement the interface "
+                                                        + FeasibilityScoreDefinition.class.getSimpleName() + ".");
             }
             if (!bestScoreFeasible) {
                 throw new IllegalArgumentException("The termination bestScoreFeasible (" + bestScoreFeasible
-                        + ") cannot be false.");
+                                                           + ") cannot be false.");
             }
             FeasibilityScoreDefinition feasibilityScoreDefinition = (FeasibilityScoreDefinition) scoreDefinition;
             double[] timeGradientWeightFeasibleNumbers
@@ -295,7 +295,7 @@ public class TerminationConfig extends AbstractConfig<TerminationConfig> {
                 timeGradientWeightFeasibleNumbers[i] = 0.50; // Number pulled out of thin air
             }
             terminationList.add(new BestScoreFeasibleTermination(feasibilityScoreDefinition,
-                    timeGradientWeightFeasibleNumbers));
+                                                                 timeGradientWeightFeasibleNumbers));
         }
         if (stepCountLimit != null) {
             terminationList.add(new StepCountTermination(stepCountLimit));
@@ -304,7 +304,7 @@ public class TerminationConfig extends AbstractConfig<TerminationConfig> {
             logger.info("Deprecated use of calculateCountLimit ({}) in solver configuration.", calculateCountLimit);
             if (scoreCalculationCountLimit != null) {
                 throw new IllegalStateException("The calculateCountLimit (" + calculateCountLimit
-                        + ") and scoreCalculationCountLimit (" +  scoreCalculationCountLimit + ") cannot be used together.");
+                                                        + ") and scoreCalculationCountLimit (" + scoreCalculationCountLimit + ") cannot be used together.");
             }
             terminationList.add(new ScoreCalculationCountTermination(calculateCountLimit));
         }
@@ -332,7 +332,7 @@ public class TerminationConfig extends AbstractConfig<TerminationConfig> {
                 compositeTermination = new AndCompositeTermination(terminationList);
             } else {
                 throw new IllegalStateException("The terminationCompositionStyle (" + terminationCompositionStyle
-                        + ") is not implemented.");
+                                                        + ") is not implemented.");
             }
             return compositeTermination;
         } else {
@@ -349,35 +349,35 @@ public class TerminationConfig extends AbstractConfig<TerminationConfig> {
         if (millisecondsSpentLimit != null) {
             if (millisecondsSpentLimit < 0L) {
                 throw new IllegalArgumentException("The termination millisecondsSpentLimit (" + millisecondsSpentLimit
-                        + ") cannot be negative.");
+                                                           + ") cannot be negative.");
             }
             timeMillisSpentLimit += millisecondsSpentLimit;
         }
         if (secondsSpentLimit != null) {
             if (secondsSpentLimit < 0L) {
                 throw new IllegalArgumentException("The termination secondsSpentLimit (" + secondsSpentLimit
-                        + ") cannot be negative.");
+                                                           + ") cannot be negative.");
             }
             timeMillisSpentLimit += secondsSpentLimit * 1_000L;
         }
         if (minutesSpentLimit != null) {
             if (minutesSpentLimit < 0L) {
                 throw new IllegalArgumentException("The termination minutesSpentLimit (" + minutesSpentLimit
-                        + ") cannot be negative.");
+                                                           + ") cannot be negative.");
             }
             timeMillisSpentLimit += minutesSpentLimit * 60_000L;
         }
         if (hoursSpentLimit != null) {
             if (hoursSpentLimit < 0L) {
                 throw new IllegalArgumentException("The termination hoursSpentLimit (" + hoursSpentLimit
-                        + ") cannot be negative.");
+                                                           + ") cannot be negative.");
             }
             timeMillisSpentLimit += hoursSpentLimit * 3_600_000L;
         }
         if (daysSpentLimit != null) {
             if (daysSpentLimit < 0L) {
                 throw new IllegalArgumentException("The termination daysSpentLimit (" + daysSpentLimit
-                        + ") cannot be negative.");
+                                                           + ") cannot be negative.");
             }
             timeMillisSpentLimit += daysSpentLimit * 86_400_000L;
         }
@@ -403,36 +403,41 @@ public class TerminationConfig extends AbstractConfig<TerminationConfig> {
         long unimprovedTimeMillisSpentLimit = 0L;
         if (unimprovedMillisecondsSpentLimit != null) {
             if (unimprovedMillisecondsSpentLimit < 0L) {
-                throw new IllegalArgumentException("The termination unimprovedMillisecondsSpentLimit (" + unimprovedMillisecondsSpentLimit
-                        + ") cannot be negative.");
+                throw new IllegalArgumentException(
+                        "The termination unimprovedMillisecondsSpentLimit (" + unimprovedMillisecondsSpentLimit
+                                + ") cannot be negative.");
             }
             unimprovedTimeMillisSpentLimit += unimprovedMillisecondsSpentLimit;
         }
         if (unimprovedSecondsSpentLimit != null) {
             if (unimprovedSecondsSpentLimit < 0L) {
-                throw new IllegalArgumentException("The termination unimprovedSecondsSpentLimit (" + unimprovedSecondsSpentLimit
-                        + ") cannot be negative.");
+                throw new IllegalArgumentException(
+                        "The termination unimprovedSecondsSpentLimit (" + unimprovedSecondsSpentLimit
+                                + ") cannot be negative.");
             }
             unimprovedTimeMillisSpentLimit += unimprovedSecondsSpentLimit * 1000L;
         }
         if (unimprovedMinutesSpentLimit != null) {
             if (unimprovedMinutesSpentLimit < 0L) {
-                throw new IllegalArgumentException("The termination unimprovedMinutesSpentLimit (" + unimprovedMinutesSpentLimit
-                        + ") cannot be negative.");
+                throw new IllegalArgumentException(
+                        "The termination unimprovedMinutesSpentLimit (" + unimprovedMinutesSpentLimit
+                                + ") cannot be negative.");
             }
             unimprovedTimeMillisSpentLimit += unimprovedMinutesSpentLimit * 60000L;
         }
         if (unimprovedHoursSpentLimit != null) {
             if (unimprovedHoursSpentLimit < 0L) {
-                throw new IllegalArgumentException("The termination unimprovedHoursSpentLimit (" + unimprovedHoursSpentLimit
-                        + ") cannot be negative.");
+                throw new IllegalArgumentException(
+                        "The termination unimprovedHoursSpentLimit (" + unimprovedHoursSpentLimit
+                                + ") cannot be negative.");
             }
             unimprovedTimeMillisSpentLimit += unimprovedHoursSpentLimit * 3600000L;
         }
         if (unimprovedDaysSpentLimit != null) {
             if (unimprovedDaysSpentLimit < 0L) {
-                throw new IllegalArgumentException("The termination unimprovedDaysSpentLimit (" + unimprovedDaysSpentLimit
-                        + ") cannot be negative.");
+                throw new IllegalArgumentException(
+                        "The termination unimprovedDaysSpentLimit (" + unimprovedDaysSpentLimit
+                                + ") cannot be negative.");
             }
             unimprovedTimeMillisSpentLimit += unimprovedDaysSpentLimit * 86400000L;
         }
@@ -442,43 +447,42 @@ public class TerminationConfig extends AbstractConfig<TerminationConfig> {
     @Override
     public void inherit(TerminationConfig inheritedConfig) {
         terminationClass = ConfigUtils.inheritOverwritableProperty(terminationClass,
-                inheritedConfig.getTerminationClass());
+                                                                   inheritedConfig.getTerminationClass());
         terminationCompositionStyle = ConfigUtils.inheritOverwritableProperty(terminationCompositionStyle,
-                inheritedConfig.getTerminationCompositionStyle());
+                                                                              inheritedConfig.getTerminationCompositionStyle());
         millisecondsSpentLimit = ConfigUtils.inheritOverwritableProperty(millisecondsSpentLimit,
-                inheritedConfig.getMillisecondsSpentLimit());
+                                                                         inheritedConfig.getMillisecondsSpentLimit());
         secondsSpentLimit = ConfigUtils.inheritOverwritableProperty(secondsSpentLimit,
-                inheritedConfig.getSecondsSpentLimit());
+                                                                    inheritedConfig.getSecondsSpentLimit());
         minutesSpentLimit = ConfigUtils.inheritOverwritableProperty(minutesSpentLimit,
-                inheritedConfig.getMinutesSpentLimit());
+                                                                    inheritedConfig.getMinutesSpentLimit());
         hoursSpentLimit = ConfigUtils.inheritOverwritableProperty(hoursSpentLimit,
-                inheritedConfig.getHoursSpentLimit());
+                                                                  inheritedConfig.getHoursSpentLimit());
         daysSpentLimit = ConfigUtils.inheritOverwritableProperty(daysSpentLimit,
-                inheritedConfig.getDaysSpentLimit());
+                                                                 inheritedConfig.getDaysSpentLimit());
         unimprovedMillisecondsSpentLimit = ConfigUtils.inheritOverwritableProperty(unimprovedMillisecondsSpentLimit,
-                inheritedConfig.getUnimprovedMillisecondsSpentLimit());
+                                                                                   inheritedConfig.getUnimprovedMillisecondsSpentLimit());
         unimprovedSecondsSpentLimit = ConfigUtils.inheritOverwritableProperty(unimprovedSecondsSpentLimit,
-                inheritedConfig.getUnimprovedSecondsSpentLimit());
+                                                                              inheritedConfig.getUnimprovedSecondsSpentLimit());
         unimprovedMinutesSpentLimit = ConfigUtils.inheritOverwritableProperty(unimprovedMinutesSpentLimit,
-                inheritedConfig.getUnimprovedMinutesSpentLimit());
+                                                                              inheritedConfig.getUnimprovedMinutesSpentLimit());
         unimprovedHoursSpentLimit = ConfigUtils.inheritOverwritableProperty(unimprovedHoursSpentLimit,
-                inheritedConfig.getUnimprovedHoursSpentLimit());
+                                                                            inheritedConfig.getUnimprovedHoursSpentLimit());
         unimprovedDaysSpentLimit = ConfigUtils.inheritOverwritableProperty(unimprovedDaysSpentLimit,
-                inheritedConfig.getUnimprovedDaysSpentLimit());
+                                                                           inheritedConfig.getUnimprovedDaysSpentLimit());
         bestScoreLimit = ConfigUtils.inheritOverwritableProperty(bestScoreLimit,
-                inheritedConfig.getBestScoreLimit());
+                                                                 inheritedConfig.getBestScoreLimit());
         bestScoreFeasible = ConfigUtils.inheritOverwritableProperty(bestScoreFeasible,
-                inheritedConfig.getBestScoreFeasible());
+                                                                    inheritedConfig.getBestScoreFeasible());
         stepCountLimit = ConfigUtils.inheritOverwritableProperty(stepCountLimit,
-                inheritedConfig.getStepCountLimit());
+                                                                 inheritedConfig.getStepCountLimit());
         unimprovedStepCountLimit = ConfigUtils.inheritOverwritableProperty(unimprovedStepCountLimit,
-                inheritedConfig.getUnimprovedStepCountLimit());
+                                                                           inheritedConfig.getUnimprovedStepCountLimit());
         calculateCountLimit = ConfigUtils.inheritOverwritableProperty(calculateCountLimit,
-                inheritedConfig.getCalculateCountLimit());
+                                                                      inheritedConfig.getCalculateCountLimit());
         scoreCalculationCountLimit = ConfigUtils.inheritOverwritableProperty(scoreCalculationCountLimit,
-                inheritedConfig.getScoreCalculationCountLimit());
+                                                                             inheritedConfig.getScoreCalculationCountLimit());
         terminationConfigList = ConfigUtils.inheritMergeableListConfig(
                 terminationConfigList, inheritedConfig.getTerminationConfigList());
     }
-
 }

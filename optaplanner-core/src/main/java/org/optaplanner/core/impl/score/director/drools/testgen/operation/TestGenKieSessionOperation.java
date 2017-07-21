@@ -22,5 +22,4 @@ public interface TestGenKieSessionOperation {
     void invoke(KieSession kieSession);
 
     void print(StringBuilder sb);
-
 }

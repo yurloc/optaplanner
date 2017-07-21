@@ -186,11 +186,11 @@ public class TestGenDroolsScoreDirector<Solution_> extends DroolsScoreDirector<S
 
         if (logger.isTraceEnabled()) {
             logger.trace("          Updating variable {}.{}[{}]: {} → {}",
-                    entity,
-                    variableDescriptor.getVariableName(),
-                    variableDescriptor.getVariablePropertyType().getSimpleName(),
-                    oldValues.pop(),
-                    variableDescriptor.getValue(entity));
+                         entity,
+                         variableDescriptor.getVariableName(),
+                         variableDescriptor.getVariablePropertyType().getSimpleName(),
+                         oldValues.pop(),
+                         variableDescriptor.getValue(entity));
         }
     }
 
@@ -216,5 +216,4 @@ public class TestGenDroolsScoreDirector<Solution_> extends DroolsScoreDirector<S
     private RuntimeException wrapOriginalException(RuntimeException e) {
         return new RuntimeException(e.getMessage() + "\nDrools test written to: " + testFile.getAbsolutePath(), e);
     }
-
 }

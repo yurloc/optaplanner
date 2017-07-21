@@ -43,7 +43,7 @@ public class PillarSwapMove<Solution_> extends AbstractMove<Solution_> {
     protected final List<Object> rightPillar;
 
     public PillarSwapMove(List<GenuineVariableDescriptor<Solution_>> variableDescriptorList,
-            List<Object> leftPillar, List<Object> rightPillar) {
+                          List<Object> leftPillar, List<Object> rightPillar) {
         this.variableDescriptorList = variableDescriptorList;
         this.leftPillar = leftPillar;
         this.rightPillar = rightPillar;
@@ -81,7 +81,8 @@ public class PillarSwapMove<Solution_> extends AbstractMove<Solution_> {
                     ValueRangeDescriptor<Solution_> valueRangeDescriptor = variableDescriptor.getValueRangeDescriptor();
                     Solution_ workingSolution = scoreDirector.getWorkingSolution();
                     for (Object rightEntity : rightPillar) {
-                        ValueRange rightValueRange = valueRangeDescriptor.extractValueRange(workingSolution, rightEntity);
+                        ValueRange rightValueRange = valueRangeDescriptor.extractValueRange(workingSolution,
+                                                                                            rightEntity);
                         if (!rightValueRange.contains(leftValue)) {
                             return false;
                         }
@@ -206,5 +207,4 @@ public class PillarSwapMove<Solution_> extends AbstractMove<Solution_> {
             first = false;
         }
     }
-
 }

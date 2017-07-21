@@ -52,9 +52,9 @@ public final class NearbyDistanceMatrix {
                     size++;
                 }
                 System.arraycopy(destinations, insertIndex, destinations, insertIndex + 1,
-                        size - insertIndex - 1);
+                                 size - insertIndex - 1);
                 System.arraycopy(distances, insertIndex, distances, insertIndex + 1,
-                        size - insertIndex - 1);
+                                 size - insertIndex - 1);
                 destinations[insertIndex] = destination;
                 distances[insertIndex] = distance;
                 highestDistance = distances[size - 1];
@@ -62,7 +62,7 @@ public final class NearbyDistanceMatrix {
         }
         if (size != destinationSize) {
             throw new IllegalStateException("The destinationIterator's size (" + size
-                    + ") differs from the expected destinationSize (" + destinationSize + ").");
+                                                    + ") differs from the expected destinationSize (" + destinationSize + ").");
         }
         originToDestinationsMap.put(origin, destinations);
     }
@@ -71,5 +71,4 @@ public final class NearbyDistanceMatrix {
         Object[] destinations = originToDestinationsMap.get(origin);
         return destinations[nearbyIndex];
     }
-
 }

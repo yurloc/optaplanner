@@ -37,5 +37,4 @@ class TestGenParsedValueProvider extends TestGenAbstractValueProvider<Object> {
     public String toString() {
         return value.getClass().getSimpleName() + "." + parseMethod.getName() + "(\"" + value.toString() + "\")";
     }
-
 }

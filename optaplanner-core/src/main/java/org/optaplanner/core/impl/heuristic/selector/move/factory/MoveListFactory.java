@@ -40,5 +40,4 @@ public interface MoveListFactory<Solution_> {
      * @return never null
      */
     List<? extends Move<Solution_>> createMoveList(Solution_ solution);
-
 }

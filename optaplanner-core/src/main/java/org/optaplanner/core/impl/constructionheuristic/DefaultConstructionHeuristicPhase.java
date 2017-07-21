@@ -42,7 +42,8 @@ public class DefaultConstructionHeuristicPhase<Solution_> extends AbstractPhase<
     protected final boolean skipBestSolutionCloningInSteps = true;
 
     public DefaultConstructionHeuristicPhase(int phaseIndex, String logIndentation,
-            BestSolutionRecaller<Solution_> bestSolutionRecaller, Termination termination) {
+                                             BestSolutionRecaller<Solution_> bestSolutionRecaller,
+                                             Termination termination) {
         super(phaseIndex, logIndentation, bestSolutionRecaller, termination);
     }
 
@@ -75,19 +76,19 @@ public class DefaultConstructionHeuristicPhase<Solution_> extends AbstractPhase<
             if (stepScope.getStep() == null) {
                 if (termination.isPhaseTerminated(phaseScope)) {
                     logger.trace("{}    Step index ({}), time spent ({}) terminated without picking a nextStep.",
-                            logIndentation,
-                            stepScope.getStepIndex(),
-                            stepScope.getPhaseScope().calculateSolverTimeMillisSpentUpToNow());
+                                 logIndentation,
+                                 stepScope.getStepIndex(),
+                                 stepScope.getPhaseScope().calculateSolverTimeMillisSpentUpToNow());
                 } else if (stepScope.getSelectedMoveCount() == 0L) {
                     logger.warn("{}    No doable selected move at step index ({}), time spent ({})."
-                            + " Terminating phase early.",
-                            logIndentation,
-                            stepScope.getStepIndex(),
-                            stepScope.getPhaseScope().calculateSolverTimeMillisSpentUpToNow());
+                                        + " Terminating phase early.",
+                                logIndentation,
+                                stepScope.getStepIndex(),
+                                stepScope.getPhaseScope().calculateSolverTimeMillisSpentUpToNow());
                 } else {
                     throw new IllegalStateException("The step index (" + stepScope.getStepIndex()
-                            + ") has selected move count (" + stepScope.getSelectedMoveCount()
-                            + ") but failed to pick a nextStep (" + stepScope.getStep() + ").");
+                                                            + ") has selected move count (" + stepScope.getSelectedMoveCount()
+                                                            + ") but failed to pick a nextStep (" + stepScope.getStep() + ").");
                 }
                 // Although stepStarted has been called, stepEnded is not called for this step
                 break;
@@ -139,12 +140,12 @@ public class DefaultConstructionHeuristicPhase<Solution_> extends AbstractPhase<
         if (logger.isDebugEnabled()) {
             long timeMillisSpent = stepScope.getPhaseScope().calculateSolverTimeMillisSpentUpToNow();
             logger.debug("{}    CH step ({}), time spent ({}), score ({}), selected move count ({}),"
-                    + " picked move ({}).",
-                    logIndentation,
-                    stepScope.getStepIndex(), timeMillisSpent,
-                    stepScope.getScore(),
-                    stepScope.getSelectedMoveCount(),
-                    stepScope.getStepString());
+                                 + " picked move ({}).",
+                         logIndentation,
+                         stepScope.getStepIndex(), timeMillisSpent,
+                         stepScope.getScore(),
+                         stepScope.getSelectedMoveCount(),
+                         stepScope.getStepString());
         }
     }
 
@@ -157,13 +158,13 @@ public class DefaultConstructionHeuristicPhase<Solution_> extends AbstractPhase<
         decider.phaseEnded(phaseScope);
         phaseScope.endingNow();
         logger.info("{}Construction Heuristic phase ({}) ended: time spent ({}), best score ({}),"
-                        + " score calculation speed ({}/sec), step total ({}).",
-                logIndentation,
-                phaseIndex,
-                phaseScope.calculateSolverTimeMillisSpentUpToNow(),
-                phaseScope.getBestScore(),
-                phaseScope.getPhaseScoreCalculationSpeed(),
-                phaseScope.getNextStepIndex());
+                            + " score calculation speed ({}/sec), step total ({}).",
+                    logIndentation,
+                    phaseIndex,
+                    phaseScope.calculateSolverTimeMillisSpentUpToNow(),
+                    phaseScope.getBestScore(),
+                    phaseScope.getPhaseScoreCalculationSpeed(),
+                    phaseScope.getNextStepIndex());
     }
 
     @Override
@@ -172,5 +173,4 @@ public class DefaultConstructionHeuristicPhase<Solution_> extends AbstractPhase<
         entityPlacer.solvingEnded(solverScope);
         decider.solvingEnded(solverScope);
     }
-
 }

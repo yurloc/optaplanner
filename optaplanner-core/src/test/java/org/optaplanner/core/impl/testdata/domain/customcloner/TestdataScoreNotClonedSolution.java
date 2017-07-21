@@ -48,5 +48,4 @@ public class TestdataScoreNotClonedSolution implements SolutionCloner<TestdataSc
         clone.entity.setValue(original.entity.getValue());
         return clone;
     }
-
 }

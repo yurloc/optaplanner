@@ -41,5 +41,4 @@ public class NullValueReinitializeVariableEntityFilter<Solution_> implements Sel
         Object value = variableDescriptor.getValue(entity);
         return value == null;
     }
-
 }

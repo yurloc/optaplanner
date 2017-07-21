@@ -43,9 +43,9 @@ public class BestSolutionRecallerTest {
 
     private static <Solution_> ConstructionHeuristicStepScope<Solution_> setupConstrunctionHeuristics(
             DefaultSolverScope<Solution_> solverScope) {
-        ConstructionHeuristicPhaseScope<Solution_>  phaseScope = mock(ConstructionHeuristicPhaseScope.class);
+        ConstructionHeuristicPhaseScope<Solution_> phaseScope = mock(ConstructionHeuristicPhaseScope.class);
         when(phaseScope.getSolverScope()).thenReturn(solverScope);
-        ConstructionHeuristicStepScope<Solution_>  stepScope = mock(ConstructionHeuristicStepScope.class);
+        ConstructionHeuristicStepScope<Solution_> stepScope = mock(ConstructionHeuristicStepScope.class);
         when(stepScope.getPhaseScope()).thenReturn(phaseScope);
         return stepScope;
     }
@@ -85,10 +85,11 @@ public class BestSolutionRecallerTest {
     }
 
     protected void doProcessWorkingSolutionDuringStep(Score originalBestScore, Score stepScore,
-            boolean stepImprovesBestSolution) {
+                                                      boolean stepImprovesBestSolution) {
         DefaultSolverScope<AbstractSolution> solverScope = createSolverScope();
         AbstractSolution originalBestSolution = mock(AbstractSolution.class);
-        when(solverScope.getScoreDirector().getSolutionDescriptor().getScore(originalBestSolution)).thenReturn(originalBestScore);
+        when(solverScope.getScoreDirector().getSolutionDescriptor().getScore(originalBestSolution)).thenReturn(
+                originalBestScore);
         solverScope.setBestSolution(originalBestSolution);
         solverScope.setBestScore(originalBestScore);
 
@@ -116,7 +117,6 @@ public class BestSolutionRecallerTest {
         doProcessWorkingSolutionDuringMove(bestScore, moveScore, false);
     }
 
-
     @Test
     public void unimprovedInitializedProcessWorkingSolutionDuringMove() {
         Score bestScore = SimpleScore.valueOf(0);
@@ -139,10 +139,11 @@ public class BestSolutionRecallerTest {
     }
 
     protected void doProcessWorkingSolutionDuringMove(Score originalBestScore, Score moveScore,
-            boolean moveImprovesBestSolution) {
+                                                      boolean moveImprovesBestSolution) {
         DefaultSolverScope<AbstractSolution> solverScope = createSolverScope();
         AbstractSolution originalBestSolution = mock(AbstractSolution.class);
-        when(solverScope.getScoreDirector().getSolutionDescriptor().getScore(originalBestSolution)).thenReturn(originalBestScore);
+        when(solverScope.getScoreDirector().getSolutionDescriptor().getScore(originalBestSolution)).thenReturn(
+                originalBestScore);
         solverScope.setBestSolution(originalBestSolution);
         solverScope.setBestScore(originalBestScore);
 
@@ -163,5 +164,4 @@ public class BestSolutionRecallerTest {
             assertEquals(originalBestScore, solverScope.getBestScore());
         }
     }
-
 }

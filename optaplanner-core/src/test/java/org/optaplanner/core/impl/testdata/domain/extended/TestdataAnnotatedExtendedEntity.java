@@ -49,5 +49,4 @@ public class TestdataAnnotatedExtendedEntity extends TestdataEntity {
     // ************************************************************************
     // Complex methods
     // ************************************************************************
-
 }

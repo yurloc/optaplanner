@@ -29,9 +29,11 @@ import org.optaplanner.core.impl.solver.scope.DefaultSolverScope;
 import org.optaplanner.core.impl.testdata.domain.TestdataEntity;
 import org.optaplanner.core.impl.testdata.domain.TestdataValue;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
-import static org.optaplanner.core.impl.testdata.util.PlannerAssert.*;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.assertAllCodesOfIterator;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.assertCodesOfIterator;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.verifyPhaseLifecycle;
 
 public class DefaultPillarSelectorTest {
 
@@ -93,7 +95,7 @@ public class DefaultPillarSelectorTest {
 
         GenuineVariableDescriptor variableDescriptor = TestdataEntity.buildVariableDescriptorForValue();
         EntitySelector entitySelector = SelectorTestUtils.mockEntitySelector(variableDescriptor.getEntityDescriptor(),
-                a, b, c, d, e, f);
+                                                                             a, b, c, d, e, f);
 
         DefaultPillarSelector pillarSelector = new DefaultPillarSelector(
                 entitySelector, Arrays.asList(variableDescriptor), false, false, 1, Integer.MAX_VALUE);
@@ -205,7 +207,7 @@ public class DefaultPillarSelectorTest {
 
         GenuineVariableDescriptor variableDescriptor = TestdataEntity.buildVariableDescriptorForValue();
         EntitySelector entitySelector = SelectorTestUtils.mockEntitySelector(variableDescriptor.getEntityDescriptor(),
-                a, b, c, d, e, f);
+                                                                             a, b, c, d, e, f);
 
         DefaultPillarSelector pillarSelector = new DefaultPillarSelector(
                 entitySelector, Arrays.asList(variableDescriptor), true, true, 1, Integer.MAX_VALUE);
@@ -291,7 +293,7 @@ public class DefaultPillarSelectorTest {
 
         GenuineVariableDescriptor variableDescriptor = TestdataEntity.buildVariableDescriptorForValue();
         EntitySelector entitySelector = SelectorTestUtils.mockEntitySelector(variableDescriptor.getEntityDescriptor(),
-                a, b, c, d, e, f);
+                                                                             a, b, c, d, e, f);
 
         DefaultPillarSelector pillarSelector = new DefaultPillarSelector(
                 entitySelector, Arrays.asList(variableDescriptor), true, true, 2, 2);
@@ -388,5 +390,4 @@ public class DefaultPillarSelectorTest {
         assertEquals(true, pillarSelector.isCountable());
         assertEquals(true, pillarSelector.isNeverEnding());
     }
-
 }

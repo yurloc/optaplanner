@@ -24,8 +24,9 @@ import org.optaplanner.core.api.score.Score;
 import org.optaplanner.core.api.solver.Solver;
 import org.optaplanner.core.impl.score.definition.ScoreDefinition;
 
-import static java.lang.annotation.ElementType.*;
-import static java.lang.annotation.RetentionPolicy.*;
+import static java.lang.annotation.ElementType.FIELD;
+import static java.lang.annotation.ElementType.METHOD;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
  * Specifies that a property (or a field) on a {@link PlanningSolution} class holds the {@link Score} of that solution.
@@ -56,7 +57,9 @@ public @interface PlanningScore {
      */
     int bendableSoftLevelsSize() default NO_LEVEL_SIZE;
 
-    /** Workaround for annotation limitation in {@link #bendableHardLevelsSize()} and {@link #bendableSoftLevelsSize()}. */
+    /**
+     * Workaround for annotation limitation in {@link #bendableHardLevelsSize()} and {@link #bendableSoftLevelsSize()}.
+     */
     int NO_LEVEL_SIZE = -1;
 
     /**
@@ -68,7 +71,10 @@ public @interface PlanningScore {
      */
     Class<? extends ScoreDefinition> scoreDefinitionClass() default NullScoreDefinition.class;
 
-    /** Workaround for annotation limitation in {@link #scoreDefinitionClass()}. */
-    interface NullScoreDefinition extends ScoreDefinition {}
+    /**
+     * Workaround for annotation limitation in {@link #scoreDefinitionClass()}.
+     */
+    interface NullScoreDefinition extends ScoreDefinition {
 
+    }
 }

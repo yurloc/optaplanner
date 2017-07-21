@@ -74,5 +74,4 @@ public abstract class AbstractSelector implements Selector {
     public SelectionCacheType getCacheType() {
         return SelectionCacheType.JUST_IN_TIME;
     }
-
 }

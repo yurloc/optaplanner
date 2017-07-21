@@ -18,6 +18,7 @@ package org.optaplanner.core.impl.heuristic.selector;
 
 import org.optaplanner.core.impl.heuristic.selector.common.iterator.ListIterable;
 
-public interface ListIterableSelector<T> extends IterableSelector<T>, ListIterable<T> {
+public interface ListIterableSelector<T> extends IterableSelector<T>,
+                                                 ListIterable<T> {
 
 }

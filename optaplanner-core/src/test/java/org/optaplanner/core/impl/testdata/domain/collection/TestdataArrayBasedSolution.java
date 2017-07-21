@@ -30,7 +30,8 @@ import org.optaplanner.core.impl.testdata.domain.TestdataValue;
 public class TestdataArrayBasedSolution extends TestdataObject {
 
     public static SolutionDescriptor<TestdataArrayBasedSolution> buildSolutionDescriptor() {
-        return SolutionDescriptor.buildSolutionDescriptor(TestdataArrayBasedSolution.class, TestdataArrayBasedEntity.class);
+        return SolutionDescriptor.buildSolutionDescriptor(TestdataArrayBasedSolution.class,
+                                                          TestdataArrayBasedEntity.class);
     }
 
     private TestdataValue[] values;
@@ -76,5 +77,4 @@ public class TestdataArrayBasedSolution extends TestdataObject {
     // ************************************************************************
     // Complex methods
     // ************************************************************************
-
 }

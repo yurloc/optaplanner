@@ -84,14 +84,14 @@ public abstract class AbstractSolution<S extends Score> implements Serializable 
                 value = field.get(this);
             } catch (IllegalAccessException e) {
                 throw new IllegalStateException("The class (" + instanceClass + ") has a field (" + field
-                        + ") which can not be read to create the problem facts.", e);
+                                                        + ") which can not be read to create the problem facts.", e);
             }
             if (value != null) {
                 if (value instanceof Collection) {
                     factList.addAll((Collection) value);
                 } else if (value instanceof Map) {
                     throw new IllegalStateException("The class (" + instanceClass + ") has a field (" + field
-                            + ") which is a " + Map.class.getSimpleName() + " and that's not yet supported.");
+                                                            + ") which is a " + Map.class.getSimpleName() + " and that's not yet supported.");
                 } else {
                     factList.add(value);
                 }
@@ -104,7 +104,7 @@ public abstract class AbstractSolution<S extends Score> implements Serializable 
     }
 
     private boolean isFieldAPlanningEntityPropertyOrPlanningEntityCollectionProperty(Field field,
-            Class<?> fieldInstanceClass) {
+                                                                                     Class<?> fieldInstanceClass) {
         if (field.isAnnotationPresent(PlanningEntityProperty.class)
                 || field.isAnnotationPresent(PlanningEntityCollectionProperty.class)) {
             return true;
@@ -117,5 +117,4 @@ public abstract class AbstractSolution<S extends Score> implements Serializable 
         }
         return false;
     }
-
 }

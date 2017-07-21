@@ -41,7 +41,7 @@ import org.optaplanner.core.impl.testdata.domain.TestdataSolution;
 import org.optaplanner.core.impl.testdata.domain.TestdataValue;
 import org.optaplanner.core.impl.testdata.util.PlannerTestUtils;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 public class DefaultPartitionedSearchPhaseTest {
 
@@ -83,12 +83,12 @@ public class DefaultPartitionedSearchPhaseTest {
     private static TestdataSolution createSolution(int entities, int values) {
         TestdataSolution solution = new TestdataSolution();
         solution.setEntityList(IntStream.range(0, entities)
-                .mapToObj(i -> new TestdataEntity(Character.toString((char) (65 + i))))
-                .collect(Collectors.toList())
+                                       .mapToObj(i -> new TestdataEntity(Character.toString((char) (65 + i))))
+                                       .collect(Collectors.toList())
         );
         solution.setValueList(IntStream.range(0, values)
-                .mapToObj(i -> new TestdataValue(Integer.toString(i)))
-                .collect(Collectors.toList())
+                                      .mapToObj(i -> new TestdataValue(Integer.toString(i)))
+                                      .collect(Collectors.toList())
         );
         return solution;
     }
@@ -132,7 +132,5 @@ public class DefaultPartitionedSearchPhaseTest {
             }
             return partitions;
         }
-
     }
-
 }

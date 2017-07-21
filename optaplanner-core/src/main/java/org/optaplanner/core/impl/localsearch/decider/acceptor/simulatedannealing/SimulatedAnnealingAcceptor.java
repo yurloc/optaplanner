@@ -51,7 +51,7 @@ public class SimulatedAnnealingAcceptor extends AbstractAcceptor {
         for (double startingTemperatureLevel : ScoreUtils.extractLevelDoubles(startingTemperature)) {
             if (startingTemperatureLevel < 0.0) {
                 throw new IllegalArgumentException("The startingTemperature (" + startingTemperature
-                        + ") cannot have negative level (" + startingTemperatureLevel + ").");
+                                                           + ") cannot have negative level (" + startingTemperatureLevel + ").");
             }
         }
         startingTemperatureLevels = ScoreUtils.extractLevelDoubles(startingTemperature);
@@ -111,5 +111,4 @@ public class SimulatedAnnealingAcceptor extends AbstractAcceptor {
         }
         // TODO implement reheating
     }
-
 }

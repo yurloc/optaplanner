@@ -55,5 +55,4 @@ public abstract class AbstractOriginalChangeIterator<S extends Move> extends Upc
     }
 
     protected abstract S newChangeSelection(Object entity, Object toValue);
-
 }

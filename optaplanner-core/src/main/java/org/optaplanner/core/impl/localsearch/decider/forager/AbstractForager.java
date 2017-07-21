@@ -31,5 +31,4 @@ public abstract class AbstractForager extends LocalSearchPhaseLifecycleListenerA
     // ************************************************************************
     // Worker methods
     // ************************************************************************
-
 }

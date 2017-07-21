@@ -34,19 +34,22 @@ public class TestdataMultiVarEntity extends TestdataObject {
 
     public static GenuineVariableDescriptor<TestdataMultiVarSolution> buildVariableDescriptorForPrimaryValue() {
         SolutionDescriptor<TestdataMultiVarSolution> solutionDescriptor = TestdataMultiVarSolution.buildSolutionDescriptor();
-        EntityDescriptor<TestdataMultiVarSolution> entityDescriptor = solutionDescriptor.findEntityDescriptorOrFail(TestdataMultiVarEntity.class);
+        EntityDescriptor<TestdataMultiVarSolution> entityDescriptor = solutionDescriptor.findEntityDescriptorOrFail(
+                TestdataMultiVarEntity.class);
         return entityDescriptor.getGenuineVariableDescriptor("primaryValue");
     }
 
     public static GenuineVariableDescriptor<TestdataMultiVarSolution> buildVariableDescriptorForSecondaryValue() {
         SolutionDescriptor<TestdataMultiVarSolution> solutionDescriptor = TestdataMultiVarSolution.buildSolutionDescriptor();
-        EntityDescriptor<TestdataMultiVarSolution> entityDescriptor = solutionDescriptor.findEntityDescriptorOrFail(TestdataMultiVarEntity.class);
+        EntityDescriptor<TestdataMultiVarSolution> entityDescriptor = solutionDescriptor.findEntityDescriptorOrFail(
+                TestdataMultiVarEntity.class);
         return entityDescriptor.getGenuineVariableDescriptor("secondaryValue");
     }
 
     public static GenuineVariableDescriptor<TestdataMultiVarSolution> buildVariableDescriptorForTertiaryNullableValue() {
         SolutionDescriptor<TestdataMultiVarSolution> solutionDescriptor = TestdataMultiVarSolution.buildSolutionDescriptor();
-        EntityDescriptor<TestdataMultiVarSolution> entityDescriptor = solutionDescriptor.findEntityDescriptorOrFail(TestdataMultiVarEntity.class);
+        EntityDescriptor<TestdataMultiVarSolution> entityDescriptor = solutionDescriptor.findEntityDescriptorOrFail(
+                TestdataMultiVarEntity.class);
         return entityDescriptor.getGenuineVariableDescriptor("tertiaryNullableValue");
     }
 
@@ -63,7 +66,7 @@ public class TestdataMultiVarEntity extends TestdataObject {
     }
 
     public TestdataMultiVarEntity(String code, TestdataValue primaryValue, TestdataValue secondaryValue,
-            TestdataOtherValue tertiaryNullableValue) {
+                                  TestdataOtherValue tertiaryNullableValue) {
         super(code);
         this.primaryValue = primaryValue;
         this.secondaryValue = secondaryValue;
@@ -100,5 +103,4 @@ public class TestdataMultiVarEntity extends TestdataObject {
     // ************************************************************************
     // Complex methods
     // ************************************************************************
-
 }

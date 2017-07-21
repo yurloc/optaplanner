@@ -279,5 +279,4 @@ public class DefaultSolverScope<Solution_> {
             runnableThreadSemaphore.release();
         }
     }
-
 }

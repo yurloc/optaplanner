@@ -47,7 +47,7 @@ public class ComparatorSelectionSorter<Solution_, T> implements SelectionSorter<
                 break;
             default:
                 throw new IllegalStateException("The selectionSorterOrder (" + selectionSorterOrder
-                        + ") is not implemented.");
+                                                        + ") is not implemented.");
         }
     }
 
@@ -55,5 +55,4 @@ public class ComparatorSelectionSorter<Solution_, T> implements SelectionSorter<
     public void sort(ScoreDirector<Solution_> scoreDirector, List<T> selectionList) {
         selectionList.sort(appliedComparator);
     }
-
 }

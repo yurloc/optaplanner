@@ -33,7 +33,7 @@ class TestGenMapValueProvider extends TestGenAbstractValueProvider<Map<?, ?>> {
     private final List<TestGenFact> requiredFacts;
 
     public TestGenMapValueProvider(Map<?, ?> value, String identifier, Type[] typeArguments,
-            Map<Object, TestGenFact> existingInstances) {
+                                   Map<Object, TestGenFact> existingInstances) {
         super(value);
         this.identifier = identifier;
         this.typeArguments = typeArguments;
@@ -67,9 +67,9 @@ class TestGenMapValueProvider extends TestGenAbstractValueProvider<Map<?, ?>> {
         for (Map.Entry<? extends Object, ? extends Object> entry : value.entrySet()) {
             sb.append(String.format("        //%s => %s\n", entry.getKey(), entry.getValue()));
             sb.append(String.format("        %s.put(%s, %s);\n",
-                    identifier,
-                    existingInstances.get(entry.getKey()),
-                    existingInstances.get(entry.getValue())));
+                                    identifier,
+                                    existingInstances.get(entry.getKey()),
+                                    existingInstances.get(entry.getValue())));
         }
     }
 
@@ -77,5 +77,4 @@ class TestGenMapValueProvider extends TestGenAbstractValueProvider<Map<?, ?>> {
     public String toString() {
         return identifier;
     }
-
 }

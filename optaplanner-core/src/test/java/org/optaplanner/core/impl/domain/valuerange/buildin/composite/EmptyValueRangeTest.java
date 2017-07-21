@@ -20,9 +20,10 @@ import java.util.Random;
 
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
-import static org.optaplanner.core.impl.testdata.util.PlannerAssert.*;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.assertAllElementsOfIterator;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.assertElementsOfIterator;
 
 public class EmptyValueRangeTest {
 
@@ -52,5 +53,4 @@ public class EmptyValueRangeTest {
         Random workingRandom = mock(Random.class);
         assertElementsOfIterator(new EmptyValueRange<Integer>().createRandomIterator(workingRandom));
     }
-
 }

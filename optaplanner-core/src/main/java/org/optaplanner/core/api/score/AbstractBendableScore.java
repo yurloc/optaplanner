@@ -49,18 +49,21 @@ public abstract class AbstractBendableScore<S extends FeasibilityScore<S>> exten
             int endIndex = scoreString.indexOf(levelSuffix, startIndex);
             if (endIndex < 0) {
                 throw new IllegalArgumentException("The scoreString (" + scoreString
-                        + ") for the scoreClass (" + scoreClass.getSimpleName()
-                        + ") doesn't follow the correct pattern (" + buildScorePattern(true, LEVEL_SUFFIXES) + "):"
-                        + " the levelSuffix (" + levelSuffix
-                        + ") isn't in the scoreSubstring (" + scoreString.substring(startIndex) + ").");
+                                                           + ") for the scoreClass (" + scoreClass.getSimpleName()
+                                                           + ") doesn't follow the correct pattern (" + buildScorePattern(
+                        true, LEVEL_SUFFIXES) + "):"
+                                                           + " the levelSuffix (" + levelSuffix
+                                                           + ") isn't in the scoreSubstring (" + scoreString.substring(
+                        startIndex) + ").");
             }
             String scoreSubString = scoreString.substring(startIndex, endIndex);
             if (!scoreSubString.startsWith("[") || !scoreSubString.endsWith("]")) {
                 throw new IllegalArgumentException("The scoreString (" + scoreString
-                        + ") for the scoreClass (" + scoreClass.getSimpleName()
-                        + ") doesn't follow the correct pattern (" + buildScorePattern(true, LEVEL_SUFFIXES) + "):"
-                        + " the scoreSubString (" + scoreSubString
-                        + ") does not start and end with \"[\" and \"]\".");
+                                                           + ") for the scoreClass (" + scoreClass.getSimpleName()
+                                                           + ") doesn't follow the correct pattern (" + buildScorePattern(
+                        true, LEVEL_SUFFIXES) + "):"
+                                                           + " the scoreSubString (" + scoreSubString
+                                                           + ") does not start and end with \"[\" and \"]\".");
             }
             if (scoreSubString.equals("[]")) {
                 scoreTokens[1 + i] = new String[0];
@@ -71,9 +74,11 @@ public abstract class AbstractBendableScore<S extends FeasibilityScore<S>> exten
         }
         if (startIndex != scoreString.length() + "/".length()) {
             throw new IllegalArgumentException("The scoreString (" + scoreString
-                    + ") for the scoreClass (" + scoreClass.getSimpleName()
-                    + ") doesn't follow the correct pattern (" + buildScorePattern(true, LEVEL_SUFFIXES) + "):"
-                    + " the suffix (" + scoreString.substring(startIndex - 1) + ") is unsupported.");
+                                                       + ") for the scoreClass (" + scoreClass.getSimpleName()
+                                                       + ") doesn't follow the correct pattern (" + buildScorePattern(
+                    true, LEVEL_SUFFIXES) + "):"
+                                                       + " the suffix (" + scoreString.substring(
+                    startIndex - 1) + ") is unsupported.");
         }
         return scoreTokens;
     }
@@ -148,5 +153,4 @@ public abstract class AbstractBendableScore<S extends FeasibilityScore<S>> exten
         }
         return shortString.toString();
     }
-
 }

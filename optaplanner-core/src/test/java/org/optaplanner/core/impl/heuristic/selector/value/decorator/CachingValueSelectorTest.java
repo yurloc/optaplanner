@@ -27,7 +27,8 @@ import org.optaplanner.core.impl.testdata.domain.TestdataEntity;
 import org.optaplanner.core.impl.testdata.domain.TestdataValue;
 
 import static org.mockito.Mockito.*;
-import static org.optaplanner.core.impl.testdata.util.PlannerAssert.*;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.assertAllCodesOfValueSelector;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.verifyPhaseLifecycle;
 
 public class CachingValueSelectorTest {
 
@@ -105,5 +106,4 @@ public class CachingValueSelectorTest {
         verify(childValueSelector, times(timesCalled)).iterator();
         verify(childValueSelector, times(timesCalled)).getSize();
     }
-
 }

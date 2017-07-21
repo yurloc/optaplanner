@@ -114,12 +114,13 @@ public class XStreamXmlSolverFactory<Solution_> extends AbstractSolverFactory<So
         } catch (ConversionException e) {
             String lineNumber = e.get("line number");
             throw new IllegalArgumentException("Unmarshalling of solverConfigResource (" + solverConfigResource
-                    + ") fails on line number (" + lineNumber + ")."
-                    + (Objects.equals(e.get("required-type"), "java.lang.Class")
+                                                       + ") fails on line number (" + lineNumber + ")."
+                                                       + (Objects.equals(e.get("required-type"), "java.lang.Class")
                     ? "\n  Maybe the classname on line number (" + lineNumber + ") is surrounded by whitespace, which is invalid."
                     : ""), e);
         } catch (IOException e) {
-            throw new IllegalArgumentException("Reading the solverConfigResource (" + solverConfigResource + ") failed.", e);
+            throw new IllegalArgumentException(
+                    "Reading the solverConfigResource (" + solverConfigResource + ") failed.", e);
         }
     }
 
@@ -147,5 +148,4 @@ public class XStreamXmlSolverFactory<Solution_> extends AbstractSolverFactory<So
         solverConfig = (SolverConfig) xStream.fromXML(reader);
         return this;
     }
-
 }

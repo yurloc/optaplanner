@@ -36,7 +36,8 @@ public class FromEntityPropertyValueSelector<Solution_> extends AbstractValueSel
 
     protected Solution_ workingSolution;
 
-    public FromEntityPropertyValueSelector(ValueRangeDescriptor<Solution_> valueRangeDescriptor, boolean randomSelection) {
+    public FromEntityPropertyValueSelector(ValueRangeDescriptor<Solution_> valueRangeDescriptor,
+                                           boolean randomSelection) {
         this.valueRangeDescriptor = valueRangeDescriptor;
         this.randomSelection = randomSelection;
     }
@@ -101,5 +102,4 @@ public class FromEntityPropertyValueSelector<Solution_> extends AbstractValueSel
     public String toString() {
         return getClass().getSimpleName() + "(" + getVariableDescriptor().getVariableName() + ")";
     }
-
 }

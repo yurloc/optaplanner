@@ -23,8 +23,9 @@ import java.util.Collection;
 import org.optaplanner.core.api.domain.variable.PlanningVariable;
 import org.optaplanner.core.api.solver.SolverFactory;
 
-import static java.lang.annotation.ElementType.*;
-import static java.lang.annotation.RetentionPolicy.*;
+import static java.lang.annotation.ElementType.FIELD;
+import static java.lang.annotation.ElementType.METHOD;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
  * Provides the planning values that can be used for a {@link PlanningVariable}.
@@ -43,5 +44,4 @@ public @interface ValueRangeProvider {
      * @return never null, must be unique across a {@link SolverFactory}
      */
     String id();
-
 }

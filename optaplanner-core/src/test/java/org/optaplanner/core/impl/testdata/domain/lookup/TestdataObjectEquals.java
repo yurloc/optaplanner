@@ -46,5 +46,4 @@ public class TestdataObjectEquals {
         final TestdataObjectEquals other = (TestdataObjectEquals) obj;
         return Objects.equals(this.id, other.id);
     }
-
 }

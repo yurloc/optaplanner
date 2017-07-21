@@ -27,10 +27,10 @@ import org.optaplanner.core.impl.solver.scope.DefaultSolverScope;
 import org.optaplanner.core.impl.testdata.domain.TestdataEntity;
 import org.optaplanner.core.impl.testdata.domain.TestdataValue;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
-import static org.optaplanner.core.impl.testdata.util.PlannerAssert.*;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.assertCode;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.verifyPhaseLifecycle;
 
 public class MimicReplayingValueSelectorTest {
 
@@ -95,7 +95,7 @@ public class MimicReplayingValueSelectorTest {
     }
 
     private void runOriginalAsserts(MimicRecordingValueSelector recordingValueSelector,
-            MimicReplayingValueSelector replayingValueSelector) {
+                                    MimicReplayingValueSelector replayingValueSelector) {
         Iterator<Object> recordingIterator = recordingValueSelector.iterator();
         assertNotNull(recordingIterator);
         Iterator<Object> replayingIterator = replayingValueSelector.iterator();
@@ -126,5 +126,4 @@ public class MimicReplayingValueSelectorTest {
         assertEquals(3L, recordingValueSelector.getSize());
         assertEquals(3L, replayingValueSelector.getSize());
     }
-
 }

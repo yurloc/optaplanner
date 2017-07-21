@@ -37,7 +37,8 @@ public class TestdataEntityProvidingEntity extends TestdataObject {
 
     public static GenuineVariableDescriptor<TestdataEntityProvidingSolution> buildVariableDescriptorForValue() {
         SolutionDescriptor<TestdataEntityProvidingSolution> solutionDescriptor = TestdataEntityProvidingSolution.buildSolutionDescriptor();
-        EntityDescriptor<TestdataEntityProvidingSolution> entityDescriptor = solutionDescriptor.findEntityDescriptorOrFail(TestdataEntityProvidingEntity.class);
+        EntityDescriptor<TestdataEntityProvidingSolution> entityDescriptor = solutionDescriptor.findEntityDescriptorOrFail(
+                TestdataEntityProvidingEntity.class);
         return entityDescriptor.getGenuineVariableDescriptor("value");
     }
 
@@ -72,5 +73,4 @@ public class TestdataEntityProvidingEntity extends TestdataObject {
     public List<TestdataValue> getValueRange() {
         return valueRange;
     }
-
 }

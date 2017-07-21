@@ -46,7 +46,8 @@ public final class HardSoftBigDecimalScore extends AbstractScore<HardSoftBigDeci
         return valueOfUninitialized(initScore, hardScore, softScore);
     }
 
-    public static HardSoftBigDecimalScore valueOfUninitialized(int initScore, BigDecimal hardScore, BigDecimal softScore) {
+    public static HardSoftBigDecimalScore valueOfUninitialized(int initScore, BigDecimal hardScore,
+                                                               BigDecimal softScore) {
         return new HardSoftBigDecimalScore(initScore, hardScore, softScore);
     }
 
@@ -237,5 +238,4 @@ public final class HardSoftBigDecimalScore extends AbstractScore<HardSoftBigDeci
     public boolean isCompatibleArithmeticArgument(Score otherScore) {
         return otherScore instanceof HardSoftBigDecimalScore;
     }
-
 }

@@ -29,5 +29,4 @@ public abstract class AbstractTabuSizeStrategy implements TabuSizeStrategy {
         }
         return tabuSize;
     }
-
 }

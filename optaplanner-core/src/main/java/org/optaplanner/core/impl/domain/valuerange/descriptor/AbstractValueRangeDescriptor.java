@@ -32,7 +32,7 @@ public abstract class AbstractValueRangeDescriptor<Solution_> implements ValueRa
     protected final boolean addNullInValueRange;
 
     public AbstractValueRangeDescriptor(GenuineVariableDescriptor<Solution_> variableDescriptor,
-            boolean addNullInValueRange) {
+                                        boolean addNullInValueRange) {
         this.variableDescriptor = variableDescriptor;
         this.addNullInValueRange = addNullInValueRange;
     }
@@ -70,5 +70,4 @@ public abstract class AbstractValueRangeDescriptor<Solution_> implements ValueRa
     public String toString() {
         return getClass().getSimpleName() + "(" + variableDescriptor.getVariableName() + ")";
     }
-
 }

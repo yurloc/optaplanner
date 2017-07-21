@@ -38,7 +38,7 @@ public class TestGenKieSessionUpdate implements TestGenKieSessionOperation {
     private final TestGenFact value;
 
     public TestGenKieSessionUpdate(int id, TestGenFact entity, VariableDescriptor<?> variableDescriptor,
-            TestGenFact value) {
+                                   TestGenFact value) {
         if (value == null) {
             throw new IllegalArgumentException("value may not be null");
         }
@@ -56,7 +56,6 @@ public class TestGenKieSessionUpdate implements TestGenKieSessionOperation {
 
     /**
      * Get the value that is used to update a fact's field (an entity's variable).
-     *
      * @return a TestGenFact representing the new value, never null (null value is represented by
      * {@link TestGenNullFact})
      */
@@ -68,11 +67,11 @@ public class TestGenKieSessionUpdate implements TestGenKieSessionOperation {
     public void invoke(KieSession kieSession) {
         if (logger.isTraceEnabled()) {
             logger.trace("        [{}] {}.{}: {} → {}",
-                    id,
-                    entity.getInstance(),
-                    accessor.getName(),
-                    accessor.executeGetter(entity.getInstance()),
-                    value.getInstance());
+                         id,
+                         entity.getInstance(),
+                         accessor.getName(),
+                         accessor.executeGetter(entity.getInstance()),
+                         value.getInstance());
         }
         accessor.executeSetter(entity.getInstance(), value.getInstance());
         FactHandle fh = kieSession.getFactHandle(entity.getInstance());
@@ -87,12 +86,11 @@ public class TestGenKieSessionUpdate implements TestGenKieSessionOperation {
         sb.append(String.format("        //%s\n", this));
         sb.append(String.format("        %s.%s(%s);\n", entity, setterName, value));
         sb.append(String.format("        kieSession.update(kieSession.getFactHandle(%s), %s, \"%s\");\n",
-                entity, entity, variableName));
+                                entity, entity, variableName));
     }
 
     @Override
     public String toString() {
         return "operation U #" + id;
     }
-
 }

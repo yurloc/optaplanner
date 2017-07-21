@@ -25,5 +25,4 @@ class TestGenStringValueProvider extends TestGenAbstractValueProvider<String> {
     public String toString() {
         return '"' + value + '"';
     }
-
 }

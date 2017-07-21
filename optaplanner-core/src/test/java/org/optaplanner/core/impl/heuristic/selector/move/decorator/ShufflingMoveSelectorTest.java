@@ -28,7 +28,8 @@ import org.optaplanner.core.impl.phase.scope.AbstractStepScope;
 import org.optaplanner.core.impl.solver.scope.DefaultSolverScope;
 
 import static org.mockito.Mockito.*;
-import static org.optaplanner.core.impl.testdata.util.PlannerAssert.*;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.assertAllCodesOfMoveSelector;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.verifyPhaseLifecycle;
 
 public class ShufflingMoveSelectorTest {
 
@@ -49,7 +50,8 @@ public class ShufflingMoveSelectorTest {
 
     public void run(SelectionCacheType cacheType, int timesCalled) {
         MoveSelector childMoveSelector = SelectorTestUtils.mockMoveSelector(DummyMove.class,
-                new DummyMove("a1"), new DummyMove("a2"), new DummyMove("a3"));
+                                                                            new DummyMove("a1"), new DummyMove("a2"),
+                                                                            new DummyMove("a3"));
 
         ShufflingMoveSelector moveSelector = new ShufflingMoveSelector(childMoveSelector, cacheType);
         verify(childMoveSelector, times(1)).isNeverEnding();
@@ -119,5 +121,4 @@ public class ShufflingMoveSelectorTest {
         verify(childMoveSelector, times(timesCalled)).iterator();
         verify(childMoveSelector, times(timesCalled)).getSize();
     }
-
 }

@@ -44,7 +44,9 @@ public class QueuedEntityPlacerConfigTest {
 
         HeuristicConfigPolicy configPolicy = buildHeuristicConfigPolicy(solutionDescriptor);
         QueuedEntityPlacerConfig placerConfig = QueuedEntityPlacerConfig.unfoldNew(configPolicy,
-                Arrays.asList(primaryMoveSelectorConfig, secondaryMoveSelectorConfig));
+                                                                                   Arrays.asList(
+                                                                                           primaryMoveSelectorConfig,
+                                                                                           secondaryMoveSelectorConfig));
 
         QueuedEntityPlacer entityPlacer = placerConfig.buildEntityPlacer(configPolicy);
         // TODO assert placements. See also AbstractEntityPlacerTest.assertEntityPlacement()
@@ -56,5 +58,4 @@ public class QueuedEntityPlacerConfigTest {
         when(scoreDirectorFactory.getScoreDefinition()).thenReturn(new SimpleScoreDefinition());
         return new HeuristicConfigPolicy(EnvironmentMode.REPRODUCIBLE, scoreDirectorFactory);
     }
-
 }

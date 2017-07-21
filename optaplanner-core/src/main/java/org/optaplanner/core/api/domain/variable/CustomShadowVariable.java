@@ -22,8 +22,9 @@ import java.lang.annotation.Target;
 import org.optaplanner.core.api.domain.entity.PlanningEntity;
 import org.optaplanner.core.impl.domain.variable.listener.VariableListener;
 
-import static java.lang.annotation.ElementType.*;
-import static java.lang.annotation.RetentionPolicy.*;
+import static java.lang.annotation.ElementType.FIELD;
+import static java.lang.annotation.ElementType.METHOD;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
  * Specifies that a bean property (or a field) is a custom shadow of 1 or more {@link PlanningVariable}'s.
@@ -51,13 +52,16 @@ public @interface CustomShadowVariable {
      */
     Class<? extends VariableListener> variableListenerClass() default NullVariableListener.class;
 
-    /** Workaround for annotation limitation in {@link #variableListenerClass()}. */
-    interface NullVariableListener extends VariableListener {}
+    /**
+     * Workaround for annotation limitation in {@link #variableListenerClass()}.
+     */
+    interface NullVariableListener extends VariableListener {
+
+    }
 
     /**
      * The source variables (masters) that trigger a change to this shadow variable (slave).
      * @return never null (unless {@link #variableListenerRef()} is not null), at least 1
      */
     PlanningVariableReference[] sources() default {};
-
 }

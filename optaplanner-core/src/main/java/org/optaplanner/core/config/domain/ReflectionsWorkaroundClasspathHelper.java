@@ -43,7 +43,6 @@ public abstract class ReflectionsWorkaroundClasspathHelper {
     /**
      * Gets the current thread context class loader.
      * {@code Thread.currentThread().getContextClassLoader()}.
-     *
      * @return the context class loader, may be null
      */
     public static ClassLoader contextClassLoader() {
@@ -53,7 +52,6 @@ public abstract class ReflectionsWorkaroundClasspathHelper {
     /**
      * Gets the class loader of this library.
      * {@code Reflections.class.getClassLoader()}.
-     *
      * @return the static library class loader, may be null
      */
     public static ClassLoader staticClassLoader() {
@@ -64,7 +62,6 @@ public abstract class ReflectionsWorkaroundClasspathHelper {
      * Returns an array of class Loaders initialized from the specified array.
      * <p>
      * If the input is null or empty, it defaults to both {@link #contextClassLoader()} and {@link #staticClassLoader()}
-     *
      * @return the array of class loaders, not null
      */
     public static ClassLoader[] classLoaders(ClassLoader... classLoaders) {
@@ -76,8 +73,7 @@ public abstract class ReflectionsWorkaroundClasspathHelper {
                     staticClassLoader != null && contextClassLoader != staticClassLoader ?
                             new ClassLoader[]{contextClassLoader, staticClassLoader} :
                             new ClassLoader[]{contextClassLoader} :
-                    new ClassLoader[] {};
-
+                    new ClassLoader[]{};
         }
     }
 
@@ -92,7 +88,6 @@ public abstract class ReflectionsWorkaroundClasspathHelper {
      * and {@link #staticClassLoader()} are used for {@link ClassLoader#getResources(String)}.
      * <p>
      * The returned URLs retains the order of the given {@code classLoaders}.
-     *
      * @return the collection of URLs, not null
      */
     public static Collection<URL> forPackage(String name, ClassLoader... classLoaders) {
@@ -110,7 +105,6 @@ public abstract class ReflectionsWorkaroundClasspathHelper {
      * and {@link #staticClassLoader()} are used for {@link ClassLoader#getResources(String)}.
      * <p>
      * The returned URLs retains the order of the given {@code classLoaders}.
-     *
      * @return the collection of URLs, not null
      */
     public static Collection<URL> forResource(String resourceName, ClassLoader... classLoaders) {
@@ -146,7 +140,6 @@ public abstract class ReflectionsWorkaroundClasspathHelper {
      * <p>
      * If the optional {@link ClassLoader}s are not specified, then both {@link #contextClassLoader()}
      * and {@link #staticClassLoader()} are used for {@link ClassLoader#getResources(String)}.
-     *
      * @return the URL containing the class, null if not found
      */
     public static URL forClass(Class<?> aClass, ClassLoader... classLoaders) {
@@ -156,7 +149,8 @@ public abstract class ReflectionsWorkaroundClasspathHelper {
             try {
                 final URL url = classLoader.getResource(resourceName);
                 if (url != null) {
-                    final String normalizedUrl = url.toExternalForm().substring(0, url.toExternalForm().lastIndexOf(aClass.getPackage().getName().replace(".", "/")));
+                    final String normalizedUrl = url.toExternalForm().substring(0, url.toExternalForm().lastIndexOf(
+                            aClass.getPackage().getName().replace(".", "/")));
                     return new URL(normalizedUrl);
                 }
             } catch (MalformedURLException e) {
@@ -175,7 +169,6 @@ public abstract class ReflectionsWorkaroundClasspathHelper {
      * {@link #contextClassLoader()} and {@link #staticClassLoader()}.
      * <p>
      * The returned URLs retains the order of the given {@code classLoaders}.
-     *
      * @return the collection of URLs, not null
      */
     public static Collection<URL> forClassLoader() {
@@ -192,7 +185,6 @@ public abstract class ReflectionsWorkaroundClasspathHelper {
      * and {@link #staticClassLoader()} are used for {@link ClassLoader#getResources(String)}.
      * <p>
      * The returned URLs retains the order of the given {@code classLoaders}.
-     *
      * @return the collection of URLs, not null
      */
     public static Collection<URL> forClassLoader(ClassLoader... classLoaders) {
@@ -218,7 +210,6 @@ public abstract class ReflectionsWorkaroundClasspathHelper {
      * This finds the URLs using the {@code java.class.path} system property.
      * <p>
      * The returned collection of URLs retains the classpath order.
-     *
      * @return the collection of URLs, not null
      */
     public static Collection<URL> forJavaClassPath() {
@@ -242,8 +233,7 @@ public abstract class ReflectionsWorkaroundClasspathHelper {
 
     /**
      * Cleans the URL.
-     *
-     * @param url  the URL to clean, not null
+     * @param url the URL to clean, not null
      * @return the path, not null
      */
     public static String cleanPath(final URL url) {

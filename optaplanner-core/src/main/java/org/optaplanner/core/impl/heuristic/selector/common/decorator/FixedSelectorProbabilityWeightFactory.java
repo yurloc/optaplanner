@@ -34,5 +34,4 @@ public class FixedSelectorProbabilityWeightFactory<Solution_, Selector_ extends 
     public double createProbabilityWeight(ScoreDirector<Solution_> scoreDirector, Selector_ selector) {
         return fixedProbabilityWeightMap.get(selector);
     }
-
 }

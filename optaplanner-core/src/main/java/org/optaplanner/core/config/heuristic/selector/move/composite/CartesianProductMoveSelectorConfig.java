@@ -29,7 +29,7 @@ import org.optaplanner.core.config.util.ConfigUtils;
 import org.optaplanner.core.impl.heuristic.selector.move.MoveSelector;
 import org.optaplanner.core.impl.heuristic.selector.move.composite.CartesianProductMoveSelector;
 
-import static org.apache.commons.lang3.ObjectUtils.*;
+import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
 
 @XStreamAlias("cartesianProductMoveSelector")
 public class CartesianProductMoveSelectorConfig extends MoveSelectorConfig<CartesianProductMoveSelectorConfig> {
@@ -68,12 +68,13 @@ public class CartesianProductMoveSelectorConfig extends MoveSelectorConfig<Carte
 
     @Override
     public MoveSelector buildBaseMoveSelector(HeuristicConfigPolicy configPolicy,
-            SelectionCacheType minimumCacheType, boolean randomSelection) {
+                                              SelectionCacheType minimumCacheType, boolean randomSelection) {
         List<MoveSelector> moveSelectorList = new ArrayList<>(moveSelectorConfigList.size());
         for (MoveSelectorConfig moveSelectorConfig : moveSelectorConfigList) {
             moveSelectorList.add(
                     moveSelectorConfig.buildMoveSelector(configPolicy,
-                            minimumCacheType, SelectionOrder.fromRandomSelectionBoolean(randomSelection)));
+                                                         minimumCacheType,
+                                                         SelectionOrder.fromRandomSelectionBoolean(randomSelection)));
         }
         boolean ignoreEmptyChildIterators_ = defaultIfNull(ignoreEmptyChildIterators, true);
         return new CartesianProductMoveSelector(moveSelectorList, ignoreEmptyChildIterators_, randomSelection);
@@ -99,5 +100,4 @@ public class CartesianProductMoveSelectorConfig extends MoveSelectorConfig<Carte
     public String toString() {
         return getClass().getSimpleName() + "(" + moveSelectorConfigList + ")";
     }
-
 }

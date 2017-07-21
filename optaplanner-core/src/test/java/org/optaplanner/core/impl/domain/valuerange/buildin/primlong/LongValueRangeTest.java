@@ -20,9 +20,10 @@ import java.util.Random;
 
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
-import static org.optaplanner.core.impl.testdata.util.PlannerAssert.*;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.assertAllElementsOfIterator;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.assertElementsOfIterator;
 
 public class LongValueRangeTest {
 
@@ -74,12 +75,14 @@ public class LongValueRangeTest {
     public void createOriginalIterator() {
         assertAllElementsOfIterator(new LongValueRange(0L, 7L).createOriginalIterator(), 0L, 1L, 2L, 3L, 4L, 5L, 6L);
         assertAllElementsOfIterator(new LongValueRange(100L, 104L).createOriginalIterator(), 100L, 101L, 102L, 103L);
-        assertAllElementsOfIterator(new LongValueRange(-4L, 3L).createOriginalIterator(), -4L, -3L, -2L, -1L, 0L, 1L, 2L);
+        assertAllElementsOfIterator(new LongValueRange(-4L, 3L).createOriginalIterator(), -4L, -3L, -2L, -1L, 0L, 1L,
+                                    2L);
         assertAllElementsOfIterator(new LongValueRange(7L, 7L).createOriginalIterator());
         // IncrementUnit
         assertAllElementsOfIterator(new LongValueRange(0L, 10L, 2L).createOriginalIterator(), 0L, 2L, 4L, 6L, 8L);
         assertAllElementsOfIterator(new LongValueRange(-1L, 9L, 2L).createOriginalIterator(), -1L, 1L, 3L, 5L, 7L);
-        assertAllElementsOfIterator(new LongValueRange(100L, 120L, 5L).createOriginalIterator(), 100L, 105L, 110L, 115L);
+        assertAllElementsOfIterator(new LongValueRange(100L, 120L, 5L).createOriginalIterator(), 100L, 105L, 110L,
+                                    115L);
     }
 
     @Test
@@ -101,5 +104,4 @@ public class LongValueRangeTest {
         when(workingRandom.nextInt(anyInt())).thenReturn(3, 0);
         assertElementsOfIterator(new LongValueRange(100L, 120L, 5L).createRandomIterator(workingRandom), 115L, 100L);
     }
-
 }

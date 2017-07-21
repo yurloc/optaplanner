@@ -26,7 +26,7 @@ import org.optaplanner.core.impl.testdata.domain.TestdataEntity;
 import org.optaplanner.core.impl.testdata.domain.TestdataSolution;
 
 import static org.mockito.Mockito.*;
-import static org.optaplanner.core.impl.testdata.util.PlannerAssert.*;
+import static org.optaplanner.core.impl.testdata.util.PlannerAssert.assertCodesOfIterator;
 
 public class WeightFactorySelectionSorterTest {
 
@@ -61,5 +61,4 @@ public class WeightFactorySelectionSorterTest {
         selectionSorter.sort(scoreDirector, selectionList);
         assertCodesOfIterator(selectionList.iterator(), "D", "C", "B", "A");
     }
-
 }

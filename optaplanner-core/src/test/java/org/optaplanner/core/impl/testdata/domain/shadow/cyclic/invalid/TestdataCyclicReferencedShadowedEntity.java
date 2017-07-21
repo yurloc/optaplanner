@@ -38,7 +38,8 @@ public class TestdataCyclicReferencedShadowedEntity extends TestdataObject {
 
     public static GenuineVariableDescriptor buildVariableDescriptorForValue() {
         SolutionDescriptor solutionDescriptor = TestdataCyclicReferencedShadowedSolution.buildSolutionDescriptor();
-        EntityDescriptor entityDescriptor = solutionDescriptor.findEntityDescriptorOrFail(TestdataCyclicReferencedShadowedEntity.class);
+        EntityDescriptor entityDescriptor = solutionDescriptor.findEntityDescriptorOrFail(
+                TestdataCyclicReferencedShadowedEntity.class);
         return entityDescriptor.getGenuineVariableDescriptor("value");
     }
 
@@ -119,7 +120,5 @@ public class TestdataCyclicReferencedShadowedEntity extends TestdataObject {
             entity.setCutsOwnHair(value != null && !barber);
             scoreDirector.afterVariableChanged(entity, "cutsOwnHair");
         }
-
     }
-
 }

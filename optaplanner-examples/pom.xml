@@ -21,6 +21,10 @@
   </description>
   <url>https://www.optaplanner.org</url>
 
+  <properties>
+    <exec.mainClass>org.optaplanner.examples.app.OptaPlannerExamplesApp</exec.mainClass>
+  </properties>
+
   <repositories>
     <!-- TODO remove this once maven central replicates the jboss repository -->
     <!-- Included so the examples sources in the distribution zip build out-of-the-box with maven -->
@@ -56,13 +60,7 @@
           <!-- WARNING: This configuration must be run with "mvn exec:java" not "mvn exec:exec". -->
           <!-- It is impossible to write a configuration that is compatible with both exec:java and exec:exec -->
           <configuration>
-            <mainClass>org.optaplanner.examples.app.OptaPlannerExamplesApp</mainClass>
-            <arguments>
-              <argument>-Xms256m</argument>
-              <!-- Most examples run (potentially slower) with max heap of 128 MB (so -Xmx128m), but 1 example's dataset requires 1.5 GB -->
-              <argument>-Xmx1536m</argument>
-              <argument>-server</argument>
-            </arguments>
+            <mainClass>${exec.mainClass}</mainClass>
           </configuration>
         </plugin>
       </plugins>

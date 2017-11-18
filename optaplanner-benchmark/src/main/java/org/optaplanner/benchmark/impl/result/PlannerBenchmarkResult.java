@@ -57,6 +57,8 @@ public class PlannerBenchmarkResult {
     // If it is an aggregation, many properties can stay null
 
     private Integer availableProcessors = null;
+    @Deprecated // Legacy
+    private String loggingLevel = null;
     private String loggingLevelOptaPlannerCore = null;
     private String loggingLevelDroolsCore = null;
     private Long maxMemory = null;
@@ -461,6 +463,7 @@ public class PlannerBenchmarkResult {
                     newResult = new PlannerBenchmarkResult();
                     newResult.setAggregation(true);
                     newResult.availableProcessors = oldResult.availableProcessors;
+                    newResult.loggingLevel = oldResult.loggingLevel;
                     newResult.loggingLevelOptaPlannerCore = oldResult.loggingLevelOptaPlannerCore;
                     newResult.loggingLevelDroolsCore = oldResult.loggingLevelDroolsCore;
                     newResult.maxMemory = oldResult.maxMemory;
@@ -479,6 +482,8 @@ public class PlannerBenchmarkResult {
                 } else {
                     newResult.availableProcessors = ConfigUtils.mergeProperty(
                             newResult.availableProcessors, oldResult.availableProcessors);
+                    newResult.loggingLevel = ConfigUtils.mergeProperty(
+                            newResult.loggingLevel, oldResult.loggingLevel);
                     newResult.loggingLevelOptaPlannerCore = ConfigUtils.mergeProperty(
                             newResult.loggingLevelOptaPlannerCore, oldResult.loggingLevelOptaPlannerCore);
                     newResult.loggingLevelDroolsCore = ConfigUtils.mergeProperty(

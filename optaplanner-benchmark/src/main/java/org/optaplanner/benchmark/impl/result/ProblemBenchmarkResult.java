@@ -63,6 +63,8 @@ public class ProblemBenchmarkResult<Solution_> {
     private String name = null;
 
     private ProblemProvider<Solution_> problemProvider;
+    @Deprecated // Legacy of PLANNER-858
+    private File inputSolutionFile = null;
     private boolean writeOutputSolutionEnabled = false;
 
     @XStreamImplicit(itemFieldName = "problemStatistic")
@@ -442,8 +444,13 @@ public class ProblemBenchmarkResult<Solution_> {
         if (this == o) {
             return true;
         } else if (o instanceof ProblemBenchmarkResult) {
-            ProblemBenchmarkResult other = (ProblemBenchmarkResult) o;
-            return problemProvider.equals(other.getProblemProvider());
+            ProblemBenchmarkResult<?> other = (ProblemBenchmarkResult) o;
+            if (problemProvider != null) {
+                return problemProvider.equals(other.getProblemProvider());
+            } else {
+                // legacy branche due to PLANNER-858
+                return inputSolutionFile.equals(other.inputSolutionFile);
+            }
         } else {
             return false;
         }

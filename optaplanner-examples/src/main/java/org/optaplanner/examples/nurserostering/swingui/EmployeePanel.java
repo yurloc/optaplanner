@@ -233,8 +233,8 @@ public class EmployeePanel extends JPanel {
         public void actionPerformed(ActionEvent e) {
             List<Employee> employeeList = nurseRosteringPanel.getSolution().getEmployeeList();
             // Add 1 to array size to add null, which makes the entity unassigned
-            JComboBox employeeListField = new JComboBox(
-                    employeeList.toArray(new Object[employeeList.size() + 1]));
+            JComboBox<Employee> employeeListField = new JComboBox<>(
+                    employeeList.toArray(new Employee[employeeList.size() + 1]));
             LabeledComboBoxRenderer.applyToComboBox(employeeListField);
             employeeListField.setSelectedItem(shiftAssignment.getEmployee());
             int result = JOptionPane.showConfirmDialog(EmployeePanel.this.getRootPane(), employeeListField,

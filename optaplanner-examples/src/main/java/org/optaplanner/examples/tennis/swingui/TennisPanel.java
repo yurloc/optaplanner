@@ -257,8 +257,8 @@ public class TennisPanel extends SolutionPanel<TennisSolution> {
             listFieldsPanel.add(new JLabel("Team:"));
             List<Team> teamList = getSolution().getTeamList();
             // Add 1 to array size to add null, which makes the entity unassigned
-            JComboBox teamListField = new JComboBox(
-                    teamList.toArray(new Object[teamList.size() + 1]));
+            JComboBox<Team> teamListField = new JComboBox<>(
+                    teamList.toArray(new Team[teamList.size() + 1]));
             LabeledComboBoxRenderer.applyToComboBox(teamListField);
             teamListField.setSelectedItem(teamAssignment.getTeam());
             listFieldsPanel.add(teamListField);

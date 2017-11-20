@@ -263,8 +263,8 @@ public class CloudBalancingPanel extends SolutionPanel<CloudBalance> {
             listFieldsPanel.add(new JLabel("Computer:"));
             List<CloudComputer> computerList = getSolution().getComputerList();
             // Add 1 to array size to add null, which makes the entity unassigned
-            JComboBox computerListField = new JComboBox(
-                    computerList.toArray(new Object[computerList.size() + 1]));
+            JComboBox<CloudComputer> computerListField = new JComboBox<>(
+                    computerList.toArray(new CloudComputer[computerList.size() + 1]));
             LabeledComboBoxRenderer.applyToComboBox(computerListField);
             computerListField.setSelectedItem(process.getComputer());
             listFieldsPanel.add(computerListField);

@@ -22,10 +22,9 @@ import java.util.Map;
 import java.util.Set;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
-import org.optaplanner.examples.common.swingui.components.Labeled;
 
 @XStreamAlias("TaEmployee")
-public class Employee extends TaskOrEmployee implements Labeled {
+public class Employee extends TaskOrEmployee {
 
     private String fullName;
 

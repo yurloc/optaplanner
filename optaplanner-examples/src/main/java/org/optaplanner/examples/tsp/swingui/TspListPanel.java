@@ -125,7 +125,7 @@ public class TspListPanel extends JPanel implements Scrollable {
         @Override
         public void actionPerformed(ActionEvent e) {
             TspSolution tspSolution = tspPanel.getSolution();
-            JComboBox previousStandstillListField = new JComboBox();
+            JComboBox<Standstill> previousStandstillListField = new JComboBox<>();
             for (Standstill previousStandstill : tspSolution.getVisitList()) {
                 previousStandstillListField.addItem(previousStandstill);
             }

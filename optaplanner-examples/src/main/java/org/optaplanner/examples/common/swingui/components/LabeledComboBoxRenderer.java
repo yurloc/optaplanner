@@ -18,29 +18,33 @@ package org.optaplanner.examples.common.swingui.components;
 
 import java.awt.Component;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.ListCellRenderer;
 
 /**
  * Display the user-friendly {@link Labeled#getLabel()} instead of the developer-friendly {@link Object#toString()}.
+ * @param <E> the type of elements in the combo box
  */
-public class LabeledComboBoxRenderer implements ListCellRenderer {
+public class LabeledComboBoxRenderer<E extends Labeled> implements ListCellRenderer<E> {
 
-    public static void applyToComboBox(JComboBox comboBox) {
-        comboBox.setRenderer(new LabeledComboBoxRenderer(comboBox.getRenderer()));
+    public static <E extends Labeled> void applyToComboBox(JComboBox<E> comboBox) {
+        comboBox.setRenderer(new LabeledComboBoxRenderer<>(comboBox.getRenderer()));
     }
 
-    private final ListCellRenderer originalListCellRenderer;
+    private final ListCellRenderer<? super E> originalListCellRenderer;
 
-    public LabeledComboBoxRenderer(ListCellRenderer originalListCellRenderer) {
+    public LabeledComboBoxRenderer(ListCellRenderer<? super E> originalListCellRenderer) {
         this.originalListCellRenderer = originalListCellRenderer;
     }
 
     @Override
-    public Component getListCellRendererComponent(JList list, Object value, int index,
+    public Component getListCellRendererComponent(JList<? extends E> list, E value, int index,
             boolean isSelected, boolean cellHasFocus) {
-        String label = (value == null) ? "" : ((Labeled) value).getLabel();
-        return originalListCellRenderer.getListCellRendererComponent(list, label, index, isSelected, cellHasFocus);
+        Component component = originalListCellRenderer
+                .getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+        ((JLabel) component).setText(value == null ? "" : value.getLabel());
+        return component;
     }
 
 }

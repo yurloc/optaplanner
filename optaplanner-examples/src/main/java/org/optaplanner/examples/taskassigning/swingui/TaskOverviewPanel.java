@@ -184,16 +184,16 @@ public class TaskOverviewPanel extends JPanel implements Scrollable {
             taskOrEmployeeList.addAll(taskAssigningPanel.getSolution().getEmployeeList());
             taskOrEmployeeList.addAll(taskAssigningPanel.getSolution().getTaskList());
             // Add 1 to array size to add null, which makes the entity unassigned
-            JComboBox TaskOrEmployeeListField = new JComboBox(
-                    taskOrEmployeeList.toArray(new Object[taskOrEmployeeList.size() + 1]));
-            LabeledComboBoxRenderer.applyToComboBox(TaskOrEmployeeListField);
-            TaskOrEmployeeListField.setSelectedItem(task.getPreviousTaskOrEmployee());
-            listFieldsPanel.add(TaskOrEmployeeListField);
+            JComboBox<TaskOrEmployee> taskOrEmployeeListField = new JComboBox<>(
+                    taskOrEmployeeList.toArray(new TaskOrEmployee[taskOrEmployeeList.size() + 1]));
+            LabeledComboBoxRenderer.applyToComboBox(taskOrEmployeeListField);
+            taskOrEmployeeListField.setSelectedItem(task.getPreviousTaskOrEmployee());
+            listFieldsPanel.add(taskOrEmployeeListField);
             int result = JOptionPane.showConfirmDialog(TaskOverviewPanel.this.getRootPane(),
                     listFieldsPanel, "Select previous task or employee for " + task.getLabel(),
                     JOptionPane.OK_CANCEL_OPTION);
             if (result == JOptionPane.OK_OPTION) {
-                TaskOrEmployee toTaskOrEmployee = (TaskOrEmployee) TaskOrEmployeeListField.getSelectedItem();
+                TaskOrEmployee toTaskOrEmployee = (TaskOrEmployee) taskOrEmployeeListField.getSelectedItem();
                 taskAssigningPanel.getSolutionBusiness().doChangeMove(task, "previousTaskOrEmployee", toTaskOrEmployee);
                 taskAssigningPanel.getSolverAndPersistenceFrame().resetScreen();
             }

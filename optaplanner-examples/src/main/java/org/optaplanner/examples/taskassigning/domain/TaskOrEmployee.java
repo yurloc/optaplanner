@@ -19,9 +19,10 @@ package org.optaplanner.examples.taskassigning.domain;
 import org.optaplanner.core.api.domain.entity.PlanningEntity;
 import org.optaplanner.core.api.domain.variable.InverseRelationShadowVariable;
 import org.optaplanner.examples.common.domain.AbstractPersistable;
+import org.optaplanner.examples.common.swingui.components.Labeled;
 
 @PlanningEntity
-public abstract class TaskOrEmployee extends AbstractPersistable {
+public abstract class TaskOrEmployee extends AbstractPersistable implements Labeled {
 
     // Shadow variables
     @InverseRelationShadowVariable(sourceVariableName = "previousTaskOrEmployee")

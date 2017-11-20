@@ -185,8 +185,8 @@ public class PatientAdmissionSchedulePanel extends SolutionPanel<PatientAdmissio
             JPanel listFieldsPanel = new JPanel(new GridLayout(2, 1));
             List<Bed> bedList = getSolution().getBedList();
             // Add 1 to array size to add null, which makes the entity unassigned
-            JComboBox bedListField = new JComboBox(
-                    bedList.toArray(new Object[bedList.size() + 1]));
+            JComboBox<Bed> bedListField = new JComboBox<>(
+                    bedList.toArray(new Bed[bedList.size() + 1]));
             LabeledComboBoxRenderer.applyToComboBox(bedListField);
             bedListField.setSelectedItem(bedDesignation.getBed());
             listFieldsPanel.add(bedListField);

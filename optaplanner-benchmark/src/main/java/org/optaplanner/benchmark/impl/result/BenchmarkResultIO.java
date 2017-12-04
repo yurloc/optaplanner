@@ -110,6 +110,7 @@ public class BenchmarkResultIO {
             throw new IllegalArgumentException(
                     "Failed reading plannerBenchmarkResultFile (" + plannerBenchmarkResultFile + ").", e);
         }
+        plannerBenchmarkResult.upgrade();
         plannerBenchmarkResult.setBenchmarkReportDirectory(plannerBenchmarkResultFile.getParentFile());
         restoreOmittedBidirectionalFields(plannerBenchmarkResult);
         restoreOtherOmittedFields(configContext, plannerBenchmarkResult);

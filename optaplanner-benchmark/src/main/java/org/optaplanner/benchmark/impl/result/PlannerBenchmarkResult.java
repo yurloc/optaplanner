@@ -510,6 +510,15 @@ public class PlannerBenchmarkResult {
         return result;
     }
 
+    void upgrade() {
+        for (SolverBenchmarkResult solverBenchmarkResult : solverBenchmarkResultList) {
+            solverBenchmarkResult.upgrade();
+        }
+        for (ProblemBenchmarkResult problemBenchmarkResult : unifiedProblemBenchmarkResultList) {
+            problemBenchmarkResult.upgrade();
+        }
+    }
+
     @Override
     public String toString() {
         return getName();

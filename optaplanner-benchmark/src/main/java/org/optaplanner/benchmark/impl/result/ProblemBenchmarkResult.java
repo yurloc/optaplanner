@@ -507,6 +507,9 @@ public class ProblemBenchmarkResult<Solution_> {
         return mergeMap;
     }
 
+    void upgrade() {
+    }
+
     @Override
     public String toString() {
         return getName();

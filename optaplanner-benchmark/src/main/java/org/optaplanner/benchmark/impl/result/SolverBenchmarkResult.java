@@ -379,6 +379,9 @@ public class SolverBenchmarkResult {
         return mergeMap;
     }
 
+    void upgrade() {
+    }
+
     @Override
     public String toString() {
         return getName();

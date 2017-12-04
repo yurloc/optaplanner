@@ -415,6 +415,12 @@ public class SingleBenchmarkResult implements BenchmarkResult {
         return newResult;
     }
 
+    void upgrade() {
+        for (SubSingleBenchmarkResult subSingleBenchmarkResult : subSingleBenchmarkResultList) {
+            subSingleBenchmarkResult.upgrade();
+        }
+    }
+
     @Override
     public String toString() {
         return getName();

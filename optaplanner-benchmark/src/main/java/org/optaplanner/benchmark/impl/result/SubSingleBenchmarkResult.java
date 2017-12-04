@@ -288,6 +288,9 @@ public class SubSingleBenchmarkResult implements BenchmarkResult {
         return newResult;
     }
 
+    void upgrade() {
+    }
+
     @Override
     public String toString() {
         return getName();

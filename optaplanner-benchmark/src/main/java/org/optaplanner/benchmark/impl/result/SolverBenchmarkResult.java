@@ -380,6 +380,9 @@ public class SolverBenchmarkResult {
     }
 
     void upgrade() {
+        for (SingleBenchmarkResult singleBenchmarkResult : singleBenchmarkResultList) {
+            singleBenchmarkResult.upgrade();
+        }
     }
 
     @Override

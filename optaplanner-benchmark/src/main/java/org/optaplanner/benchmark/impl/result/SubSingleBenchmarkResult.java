@@ -70,6 +70,12 @@ public class SubSingleBenchmarkResult implements BenchmarkResult {
     private Integer ranking = null;
 
     // ************************************************************************
+    // Backward compatibility
+    // ************************************************************************
+
+    int uninitializedVariableCount = 0;
+
+    // ************************************************************************
     // Constructors and simple getters/setters
     // ************************************************************************
 

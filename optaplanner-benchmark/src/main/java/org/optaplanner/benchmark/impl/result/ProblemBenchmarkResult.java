@@ -36,6 +36,7 @@ import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import org.optaplanner.benchmark.config.ProblemBenchmarksConfig;
 import org.optaplanner.benchmark.config.statistic.ProblemStatisticType;
 import org.optaplanner.benchmark.config.statistic.SingleStatisticType;
+import org.optaplanner.benchmark.impl.loader.FileProblemProvider;
 import org.optaplanner.benchmark.impl.loader.ProblemProvider;
 import org.optaplanner.benchmark.impl.measurement.ScoreDifferencePercentage;
 import org.optaplanner.benchmark.impl.ranking.TotalScoreSingleBenchmarkRankingComparator;
@@ -78,6 +79,9 @@ public class ProblemBenchmarkResult<Solution_> {
 
     @XStreamOmitField // Loaded lazily from singleBenchmarkResults
     private Integer maximumSubSingleCount = null;
+
+    // Used when deserializing old results
+    private File inputSolutionFile = null;
 
     // ************************************************************************
     // Report accumulates
@@ -508,6 +512,15 @@ public class ProblemBenchmarkResult<Solution_> {
     }
 
     void upgrade() {
+        // PLANNER-858: inputSolutionFile replaced by problemProvider in 7.3.0
+        if (inputSolutionFile != null) {
+            if (problemProvider != null) {
+                throw new IllegalStateException();
+            }
+            // the 1st param, solutionFileIO is not (de)serialized, so it's OK to use null
+            problemProvider = new FileProblemProvider<>(null, inputSolutionFile);
+            inputSolutionFile = null;
+        }
     }
 
     @Override

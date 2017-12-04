@@ -227,14 +227,9 @@ public class PlannerBenchmarkResult {
     }
 
     public int getMaximumSubSingleCount() {
-        int maximumSubSingleCount = 0;
-        for (ProblemBenchmarkResult problemBenchmarkResult : unifiedProblemBenchmarkResultList) {
-            int problemMaximumSubSingleCount = problemBenchmarkResult.getMaximumSubSingleCount();
-            if (problemMaximumSubSingleCount > maximumSubSingleCount) {
-                maximumSubSingleCount = problemMaximumSubSingleCount;
-            }
-        }
-        return maximumSubSingleCount;
+        return unifiedProblemBenchmarkResultList.stream()
+                .mapToInt(res -> res.getMaximumSubSingleCount())
+                .max().orElse(0);
     }
 
     public String findScoreLevelLabel(int scoreLevel) {

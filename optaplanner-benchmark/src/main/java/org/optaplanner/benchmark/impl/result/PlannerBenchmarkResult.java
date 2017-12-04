@@ -87,6 +87,12 @@ public class PlannerBenchmarkResult {
     private SolverBenchmarkResult favoriteSolverBenchmarkResult = null;
 
     // ************************************************************************
+    // Backward compatibility
+    // ************************************************************************
+
+    private String loggingLevel = null;
+
+    // ************************************************************************
     // Constructors and simple getters/setters
     // ************************************************************************
 
@@ -511,6 +517,14 @@ public class PlannerBenchmarkResult {
     }
 
     void upgrade() {
+        // Commit 5cb57c088: start tracking drools logging level too (7.0.0.Final)
+        if (loggingLevel != null ) {
+            if (loggingLevelOptaPlannerCore != null) {
+                throw new IllegalStateException();
+            }
+            loggingLevelOptaPlannerCore = loggingLevel;
+            loggingLevel = null;
+        }
         for (SolverBenchmarkResult solverBenchmarkResult : solverBenchmarkResultList) {
             solverBenchmarkResult.upgrade();
         }

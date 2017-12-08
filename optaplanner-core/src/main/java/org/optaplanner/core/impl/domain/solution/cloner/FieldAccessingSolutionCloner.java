@@ -41,8 +41,6 @@ import java.util.SortedMap;
 import java.util.SortedSet;
 import java.util.TreeMap;
 import java.util.TreeSet;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
 
 import org.apache.commons.lang3.tuple.Pair;
 import org.optaplanner.core.api.domain.solution.PlanningSolution;
@@ -59,10 +57,10 @@ public class FieldAccessingSolutionCloner<Solution_> implements SolutionCloner<S
 
     protected final SolutionDescriptor<Solution_> solutionDescriptor;
 
-    protected final ConcurrentMap<Class, Constructor> constructorCache = new ConcurrentHashMap<>();
-    protected final ConcurrentMap<Class, List<Field>> fieldListCache = new ConcurrentHashMap<>();
-    protected final ConcurrentMap<Pair<Field, Class>, Boolean> deepCloneDecisionFieldCache = new ConcurrentHashMap<>();
-    protected final ConcurrentMap<Class, Boolean> deepCloneDecisionActualValueClassCache = new ConcurrentHashMap<>();
+    protected final Map<Class, Constructor> constructorCache = new HashMap<>();
+    protected final Map<Class, List<Field>> fieldListCache = new HashMap<>();
+    protected final Map<Pair<Field, Class>, Boolean> deepCloneDecisionFieldCache = new HashMap<>();
+    protected final Map<Class, Boolean> deepCloneDecisionActualValueClassCache = new HashMap<>();
 
     public FieldAccessingSolutionCloner(SolutionDescriptor<Solution_> solutionDescriptor) {
         this.solutionDescriptor = solutionDescriptor;

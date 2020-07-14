@@ -27,6 +27,7 @@ import java.util.stream.Collectors;
 import javax.inject.Singleton;
 
 import org.drools.core.base.ClassFieldAccessorFactory;
+import org.drools.core.base.accumulators.CollectSetAccumulateFunction;
 import org.jboss.jandex.AnnotationInstance;
 import org.jboss.jandex.AnnotationTarget;
 import org.jboss.jandex.ClassInfo;
@@ -131,6 +132,12 @@ class OptaPlannerProcessor {
                 reflectiveClassList.add(scoreDirectorFactoryConfig.getIncrementalScoreCalculatorClass());
             }
         }
+//        reflectiveClassList.add(CollectSetAccumulateFunction.class);
+//        reflectiveClassList.add(DroolsAbstractAccumulateFunction.class);
+//        reflectiveClassList.add(DroolsUniAccumulateFunction.class);
+//        reflectiveClassList.add(DroolsBiAccumulateFunction.class);
+//        reflectiveClassList.add(DroolsTriAccumulateFunction.class);
+//        reflectiveClassList.add(DroolsQuadAccumulateFunction.class);
         reflectiveClass.produce(
                 new ReflectiveClassBuildItem(true, false, false,
                         reflectiveClassList.stream().map(Class::getName).toArray(String[]::new)));

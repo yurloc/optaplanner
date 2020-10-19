@@ -64,7 +64,7 @@ class TestGenMapValueProvider extends TestGenAbstractValueProvider<Map<?, ?>> {
         String k = ((Class<?>) typeArguments[0]).getSimpleName();
         String v = ((Class<?>) typeArguments[1]).getSimpleName();
         sb.append(String.format("        HashMap<%s, %s> %s = new HashMap<>();\n", k, v, identifier));
-        for (Map.Entry<? extends Object, ? extends Object> entry : value.entrySet()) {
+        for (Map.Entry<?, ?> entry : value.entrySet()) {
             sb.append(String.format("        //%s => %s\n", entry.getKey(), entry.getValue()));
             sb.append(String.format("        %s.put(%s, %s);\n",
                     identifier,

@@ -21,7 +21,7 @@ import java.util.List;
 class TestGenExistingInstanceValueProvider extends TestGenAbstractValueProvider<Object> {
 
     private final String identifier;
-    private List<TestGenFact> facts;
+    private final List<TestGenFact> facts;
 
     public TestGenExistingInstanceValueProvider(Object value, String identifier, TestGenFact fact) {
         super(value);

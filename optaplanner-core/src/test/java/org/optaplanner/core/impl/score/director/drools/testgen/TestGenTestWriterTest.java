@@ -123,7 +123,9 @@ public class TestGenTestWriterTest {
         for (int i = 0; i < Math.min(expectedLines.size(), actualLines.size()); i++) {
             String expectedLine = StringUtils.replace(expectedLines.get(i),
                     DRL_FILE_PLACEHOLDER, new File(DRL_FILE_PATH).getAbsolutePath());
-            assertThat(actualLines.get(i)).isEqualTo(expectedLine).withFailMessage("At line " + (i + 1));
+            assertThat(actualLines.get(i))
+                    .describedAs("Check line %d in %s", i + 1, expected.getFileName())
+                    .isEqualTo(expectedLine);
         }
 
         // then check line counts are the same

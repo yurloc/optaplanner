@@ -93,11 +93,9 @@ class TestGenTestWriter {
                 // imports from update operations (including shadow variable updates with inline values)
                 journal.getMoveOperations().stream()
                         .filter(op -> op instanceof TestGenKieSessionUpdate)
-                        .flatMap(up -> {
-                            return ((TestGenKieSessionUpdate) up).getValue().getImports().stream();
-                        }))
+                        .flatMap(up -> ((TestGenKieSessionUpdate) up).getValue().getImports().stream()))
                 .filter(cls -> !cls.getPackage().getName().equals("java.lang"))
-                .map(cls -> cls.getCanonicalName());
+                .map(Class::getCanonicalName);
 
         Stream.concat(imports.stream(), classes)
                 .distinct()

@@ -171,7 +171,7 @@ public class DroolsScoreDirector<Solution_, Score_ extends Score<Score_>>
     // public void beforeVariableChanged(VariableDescriptor variableDescriptor, Object entity) // Do nothing
 
     @Override
-    public void afterVariableChanged(VariableDescriptor variableDescriptor, Object entity) {
+    public void afterVariableChanged(VariableDescriptor<Solution_> variableDescriptor, Object entity) {
         update(entity, variableDescriptor.getVariableName());
         super.afterVariableChanged(variableDescriptor, entity);
     }

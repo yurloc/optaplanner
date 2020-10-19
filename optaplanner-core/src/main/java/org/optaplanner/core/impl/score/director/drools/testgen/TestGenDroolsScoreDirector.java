@@ -167,7 +167,7 @@ public class TestGenDroolsScoreDirector<Solution_, Score_ extends Score<Score_>>
     }
 
     @Override
-    public void beforeVariableChanged(VariableDescriptor variableDescriptor, Object entity) {
+    public void beforeVariableChanged(VariableDescriptor<Solution_> variableDescriptor, Object entity) {
         if (logger.isTraceEnabled()) {
             Object oldValue = variableDescriptor.getValue(entity);
             if (oldValue == null) {
@@ -181,7 +181,7 @@ public class TestGenDroolsScoreDirector<Solution_, Score_ extends Score<Score_>>
     }
 
     @Override
-    public void afterVariableChanged(VariableDescriptor variableDescriptor, Object entity) {
+    public void afterVariableChanged(VariableDescriptor<Solution_> variableDescriptor, Object entity) {
         super.afterVariableChanged(variableDescriptor, entity);
         journal.update(entity, variableDescriptor);
 

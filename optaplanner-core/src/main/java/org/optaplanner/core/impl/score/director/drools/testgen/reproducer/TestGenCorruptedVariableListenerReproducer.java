@@ -48,8 +48,9 @@ public class TestGenCorruptedVariableListenerReproducer implements
     }
 
     private static Score<?> extractScore(KieSession kieSession) {
-        AbstractScoreHolder sh = (AbstractScoreHolder) kieSession.getGlobal(DroolsScoreDirector.GLOBAL_SCORE_HOLDER_KEY);
-        return sh.extractScore(0);
+        AbstractScoreHolder scoreHolder =
+                (AbstractScoreHolder) kieSession.getGlobal(DroolsScoreDirector.GLOBAL_SCORE_HOLDER_KEY);
+        return scoreHolder.extractScore(0);
     }
 
     @Override

@@ -64,8 +64,8 @@ public class TestGenDroolsScoreDirector<Solution_, Score_ extends Score<Score_>>
         // set a fresh score holder
         ScoreDefinition<Score_> scoreDefinition = getScoreDefinition();
         if (scoreDefinition != null) {
-            ScoreHolder<Score_> sh = scoreDefinition.buildScoreHolder(constraintMatchEnabledPreference);
-            newKieSession.setGlobal(DroolsScoreDirector.GLOBAL_SCORE_HOLDER_KEY, sh);
+            ScoreHolder<Score_> scoreHolder = scoreDefinition.buildScoreHolder(constraintMatchEnabledPreference);
+            newKieSession.setGlobal(DroolsScoreDirector.GLOBAL_SCORE_HOLDER_KEY, scoreHolder);
         }
 
         return newKieSession;

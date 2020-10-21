@@ -68,7 +68,9 @@ public class TestGenCorruptedScoreReproducer implements TestGenOriginalProblemRe
             if (e.getMessage() != null && e.getMessage().startsWith("No fact handle for ")) {
                 // this is common when removing insert of a fact that is later updated - not interesting
                 logger.debug("    Can't remove insert: {}", e.toString());
-            } else if (e.getMessage() != null && e.getMessage().startsWith("Error evaluating constraint '")) {
+            } else if (e.getMessage() != null
+                    && (e.getMessage().startsWith("Error evaluating constraint '")
+                            || e.getMessage().startsWith("Exception executing consequence for rule "))) {
                 // this is common after pruning setup code, which can lead to NPE during rule evaluation
                 logger.debug("    Can't drop field setup: {}", e.toString());
             } else {

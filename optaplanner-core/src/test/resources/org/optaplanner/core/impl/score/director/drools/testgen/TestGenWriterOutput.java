@@ -8,8 +8,8 @@ import org.kie.api.KieServices;
 import org.kie.api.builder.KieFileSystem;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
-import org.optaplanner.core.api.score.holder.ScoreHolder;
 import org.optaplanner.core.impl.score.buildin.simple.SimpleScoreDefinition;
+import org.optaplanner.core.impl.score.holder.AbstractScoreHolder;
 import org.optaplanner.core.impl.testdata.domain.TestdataEntity;
 import org.optaplanner.core.impl.testdata.domain.TestdataValue;
 
@@ -29,7 +29,7 @@ public class TestGenWriterOutput {
         KieContainer kieContainer = kieServices.newKieContainer(kieServices.getRepository().getDefaultReleaseId());
         KieSession kieSession = kieContainer.newKieSession();
 
-        ScoreHolder scoreHolder = new SimpleScoreDefinition().buildScoreHolder(true);
+        AbstractScoreHolder scoreHolder = new SimpleScoreDefinition().buildScoreHolder(true);
         kieSession.setGlobal("scoreHolder", scoreHolder);
 
         String string_0 = new String();

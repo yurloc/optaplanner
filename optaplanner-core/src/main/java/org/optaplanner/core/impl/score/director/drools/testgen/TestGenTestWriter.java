@@ -28,13 +28,13 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Stream;
 
-import org.optaplanner.core.api.score.holder.ScoreHolder;
 import org.optaplanner.core.impl.score.definition.ScoreDefinition;
 import org.optaplanner.core.impl.score.director.drools.DroolsScoreDirector;
 import org.optaplanner.core.impl.score.director.drools.testgen.fact.TestGenFact;
 import org.optaplanner.core.impl.score.director.drools.testgen.operation.TestGenKieSessionOperation;
 import org.optaplanner.core.impl.score.director.drools.testgen.operation.TestGenKieSessionUpdate;
 import org.optaplanner.core.impl.score.director.drools.testgen.reproducer.TestGenCorruptedScoreException;
+import org.optaplanner.core.impl.score.holder.AbstractScoreHolder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -82,7 +82,7 @@ class TestGenTestWriter {
         }
         if (scoreDefinition != null) {
             imports.add("org.junit.jupiter.api.Assertions");
-            imports.add(ScoreHolder.class.getCanonicalName());
+            imports.add(AbstractScoreHolder.class.getCanonicalName());
             imports.add(scoreDefinition.getClass().getCanonicalName());
         }
 
@@ -130,7 +130,8 @@ class TestGenTestWriter {
                 .append("        KieSession kieSession = kieContainer.newKieSession();\n\n");
         if (scoreDefinition != null) {
             sb
-                    .append("        ScoreHolder scoreHolder = new ").append(scoreDefinition.getClass().getSimpleName())
+                    .append("        AbstractScoreHolder scoreHolder = new ")
+                    .append(scoreDefinition.getClass().getSimpleName())
                     .append("().buildScoreHolder(").append(constraintMatchEnabled).append(");\n");
             sb
                     .append("        kieSession.setGlobal(\"").append(DroolsScoreDirector.GLOBAL_SCORE_HOLDER_KEY)

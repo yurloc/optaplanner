@@ -28,6 +28,7 @@ import org.optaplanner.core.api.score.constraint.ConstraintMatchTotal;
 import org.optaplanner.core.api.score.holder.ScoreHolder;
 import org.optaplanner.core.impl.domain.entity.descriptor.EntityDescriptor;
 import org.optaplanner.core.impl.domain.variable.descriptor.VariableDescriptor;
+import org.optaplanner.core.impl.heuristic.move.Move;
 import org.optaplanner.core.impl.score.definition.ScoreDefinition;
 import org.optaplanner.core.impl.score.director.drools.DroolsScoreDirector;
 import org.optaplanner.core.impl.score.director.drools.DroolsScoreDirectorFactory;
@@ -35,6 +36,7 @@ import org.optaplanner.core.impl.score.director.drools.testgen.reproducer.TestGe
 import org.optaplanner.core.impl.score.director.drools.testgen.reproducer.TestGenCorruptedScoreReproducer;
 import org.optaplanner.core.impl.score.director.drools.testgen.reproducer.TestGenCorruptedVariableListenerReproducer;
 import org.optaplanner.core.impl.score.director.drools.testgen.reproducer.TestGenDroolsExceptionReproducer;
+import org.optaplanner.core.impl.score.director.drools.testgen.reproducer.TestGenOriginalProblemReproducer;
 
 public class TestGenDroolsScoreDirector<Solution_, Score_ extends Score<Score_>>
         extends DroolsScoreDirector<Solution_, Score_> {
@@ -113,15 +115,7 @@ public class TestGenDroolsScoreDirector<Solution_, Score_ extends Score<Score_>>
                 // If the genuine update is removed the shadow update obviously becomes inconsistent, which leads
                 // to a false positive and the journal no longer reproduces the original issue. This is the current
                 // state.
-                TestGenKieSessionJournal minJournal = TestGenerator.minimize(journal, reproducer);
-                try {
-                    minJournal.replay(createKieSession());
-                    throw new IllegalStateException();
-                } catch (TestGenCorruptedScoreException tgcse) {
-                    writer.setCorruptedScoreException(tgcse);
-                }
-                writer.print(minJournal, testFile);
-                throw wrapOriginalException(e);
+                minimize(journal, reproducer, e);
             } else {
                 throw new UnsupportedOperationException("Stale shadow variable reproducer not implemented.", e);
             }
@@ -136,15 +130,22 @@ public class TestGenDroolsScoreDirector<Solution_, Score_ extends Score<Score_>>
             // catch corrupted score exception and create a minimal reproducing test
             // TODO check it's really corrupted score
             TestGenCorruptedScoreReproducer reproducer = new TestGenCorruptedScoreReproducer(e.getMessage(), this);
-            TestGenKieSessionJournal minJournal = TestGenerator.minimize(journal, reproducer);
-            try {
-                minJournal.replay(createKieSession());
-                throw new IllegalStateException();
-            } catch (TestGenCorruptedScoreException tgcse) {
-                writer.setCorruptedScoreException(tgcse);
+            minimize(journal, reproducer, e);
+        }
+    }
+
+    @Override
+    public void assertExpectedUndoMoveScore(Move<Solution_> move, Score_ beforeMoveScore) {
+        try {
+            super.assertExpectedUndoMoveScore(move, beforeMoveScore);
+        } catch (IllegalStateException e) {
+            // catch corrupted score exception and create a minimal reproducing test
+            if (!e.getMessage().startsWith("UndoMove corruption ")) {
+                logger.warn("TestGen is currently unable to handle {}. Rethrowing...", e.toString());
+                throw e;
             }
-            writer.print(minJournal, testFile);
-            throw wrapOriginalException(e);
+            TestGenCorruptedScoreReproducer reproducer = new TestGenCorruptedScoreReproducer(e.getMessage(), this);
+            minimize(journal, reproducer, e);
         }
     }
 
@@ -212,6 +213,21 @@ public class TestGenDroolsScoreDirector<Solution_, Score_ extends Score<Score_>>
     public void afterProblemFactRemoved(Object problemFact) {
         journal.delete(problemFact);
         super.afterProblemFactRemoved(problemFact);
+    }
+
+    private void minimize(
+            TestGenKieSessionJournal journal,
+            TestGenOriginalProblemReproducer reproducer,
+            RuntimeException exception) {
+        TestGenKieSessionJournal minJournal = TestGenerator.minimize(journal, reproducer);
+        try {
+            minJournal.replay(createKieSession());
+            throw new IllegalStateException();
+        } catch (TestGenCorruptedScoreException corruptedScoreException) {
+            writer.setCorruptedScoreException(corruptedScoreException);
+        }
+        writer.print(minJournal, testFile);
+        throw wrapOriginalException(exception);
     }
 
     private RuntimeException wrapOriginalException(RuntimeException e) {

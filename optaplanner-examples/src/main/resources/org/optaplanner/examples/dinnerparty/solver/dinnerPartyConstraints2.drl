@@ -19,16 +19,8 @@ package org.optaplanner.examples.dinnerparty.solver;
 
 import org.optaplanner.core.api.score.buildin.simple.SimpleScoreHolder;
 
-import org.optaplanner.examples.dinnerparty.domain.Gender;
-import org.optaplanner.examples.dinnerparty.domain.Guest;
-import org.optaplanner.examples.dinnerparty.domain.Hobby;
-import org.optaplanner.examples.dinnerparty.domain.HobbyPractician;
-import org.optaplanner.examples.dinnerparty.domain.Job;
-import org.optaplanner.examples.dinnerparty.domain.JobType;
-import org.optaplanner.examples.dinnerparty.domain.DinnerParty;
-import org.optaplanner.examples.dinnerparty.domain.Seat;
-import org.optaplanner.examples.dinnerparty.domain.SeatDesignation;
-import org.optaplanner.examples.dinnerparty.domain.Table;
+import org.optaplanner.examples.dinnerparty.app.DroolsReproducerTest.HobbyPractician;
+import org.optaplanner.examples.dinnerparty.app.DroolsReproducerTest.SeatDesignation;
 
 global SimpleScoreHolder scoreHolder;
 

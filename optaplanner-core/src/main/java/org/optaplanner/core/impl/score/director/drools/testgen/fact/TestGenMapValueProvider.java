@@ -69,7 +69,8 @@ class TestGenMapValueProvider extends TestGenAbstractValueProvider<Map<?, ?>> {
             sb.append(String.format("        %s.put(%s, %s);\n",
                     identifier,
                     existingInstances.get(entry.getKey()),
-                    existingInstances.get(entry.getValue())));
+                    existingInstances.getOrDefault(entry.getValue(),
+                            new TestGenInlineValue(entry.getValue(), existingInstances))));
         }
     }
 

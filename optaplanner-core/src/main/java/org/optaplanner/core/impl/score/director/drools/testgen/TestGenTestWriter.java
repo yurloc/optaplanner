@@ -30,6 +30,7 @@ import java.util.stream.Stream;
 
 import org.optaplanner.core.impl.score.definition.ScoreDefinition;
 import org.optaplanner.core.impl.score.director.drools.DroolsScoreDirector;
+import org.optaplanner.core.impl.score.director.drools.OptaPlannerRuleEventListener;
 import org.optaplanner.core.impl.score.director.drools.testgen.fact.TestGenFact;
 import org.optaplanner.core.impl.score.director.drools.testgen.operation.TestGenKieSessionOperation;
 import org.optaplanner.core.impl.score.director.drools.testgen.operation.TestGenKieSessionUpdate;
@@ -77,6 +78,8 @@ class TestGenTestWriter {
         imports.add("org.kie.api.builder.KieFileSystem");
         imports.add("org.kie.api.runtime.KieContainer");
         imports.add("org.kie.api.runtime.KieSession");
+        imports.add("org.kie.internal.event.rule.RuleEventManager");
+        imports.add(OptaPlannerRuleEventListener.class.getCanonicalName());
         if (!scoreDrlFileList.isEmpty()) {
             imports.add("java.io.File");
         }
@@ -127,7 +130,8 @@ class TestGenTestWriter {
                 .append("        kieServices.newKieBuilder(kfs).buildAll(ExecutableModelProject.class);\n")
                 .append("        KieContainer kieContainer = kieServices.newKieContainer("
                         + "kieServices.getRepository().getDefaultReleaseId());\n")
-                .append("        KieSession kieSession = kieContainer.newKieSession();\n\n");
+                .append("        KieSession kieSession = kieContainer.newKieSession();\n")
+                .append("        ((RuleEventManager) kieSession).addEventListener(new OptaPlannerRuleEventListener());\n\n");
         if (scoreDefinition != null) {
             sb
                     .append("        AbstractScoreHolder scoreHolder = new ")

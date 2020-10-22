@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.kie.api.runtime.KieSession;
+import org.kie.internal.event.rule.RuleEventManager;
 import org.optaplanner.core.api.score.Score;
 import org.optaplanner.core.api.score.constraint.ConstraintMatchTotal;
 import org.optaplanner.core.api.score.holder.ScoreHolder;
@@ -32,6 +33,7 @@ import org.optaplanner.core.impl.heuristic.move.Move;
 import org.optaplanner.core.impl.score.definition.ScoreDefinition;
 import org.optaplanner.core.impl.score.director.drools.DroolsScoreDirector;
 import org.optaplanner.core.impl.score.director.drools.DroolsScoreDirectorFactory;
+import org.optaplanner.core.impl.score.director.drools.OptaPlannerRuleEventListener;
 import org.optaplanner.core.impl.score.director.drools.testgen.reproducer.TestGenCorruptedScoreException;
 import org.optaplanner.core.impl.score.director.drools.testgen.reproducer.TestGenCorruptedScoreReproducer;
 import org.optaplanner.core.impl.score.director.drools.testgen.reproducer.TestGenCorruptedVariableListenerReproducer;
@@ -62,6 +64,7 @@ public class TestGenDroolsScoreDirector<Solution_, Score_ extends Score<Score_>>
 
     public KieSession createKieSession() {
         KieSession newKieSession = getScoreDirectorFactory().newKieSession();
+        ((RuleEventManager) kieSession).addEventListener(new OptaPlannerRuleEventListener());
 
         // set a fresh score holder
         ScoreDefinition<Score_> scoreDefinition = getScoreDefinition();

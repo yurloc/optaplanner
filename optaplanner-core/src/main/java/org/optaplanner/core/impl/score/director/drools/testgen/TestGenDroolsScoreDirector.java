@@ -21,6 +21,7 @@ import java.util.Collection;
 import java.util.Deque;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import org.kie.api.runtime.KieSession;
 import org.kie.internal.event.rule.RuleEventManager;
@@ -174,12 +175,8 @@ public class TestGenDroolsScoreDirector<Solution_, Score_ extends Score<Score_>>
     public void beforeVariableChanged(VariableDescriptor<Solution_> variableDescriptor, Object entity) {
         if (logger.isTraceEnabled()) {
             Object oldValue = variableDescriptor.getValue(entity);
-            if (oldValue == null) {
-                // ArrayDeque doesn't allow null values
-                oldValues.push("null");
-            } else {
-                oldValues.push(oldValue.toString());
-            }
+            // ArrayDeque doesn't allow null values. Insert "null" if old value is null, otherwise its toString().
+            oldValues.push(Objects.toString(oldValue));
         }
         super.beforeVariableChanged(variableDescriptor, entity);
     }

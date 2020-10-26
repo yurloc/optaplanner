@@ -10,6 +10,7 @@ import org.kie.api.KieServices;
 import org.kie.api.builder.KieFileSystem;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
+import org.kie.internal.builder.conf.PropertySpecificOption;
 import org.kie.internal.event.rule.RuleEventManager;
 import org.optaplanner.core.impl.score.buildin.hardsoft.HardSoftScoreDefinition;
 import org.optaplanner.core.impl.score.director.drools.OptaPlannerRuleEventListener;
@@ -26,7 +27,12 @@ public class DroolsReproducerTest {
         KieFileSystem kfs = kieServices.newKieFileSystem();
         kfs.write(kieServices.getResources().newClassPathResource(
                 "org/optaplanner/examples/travelingtournament/solver/travelingTournamentConstraints.drl"));
+        kfs.writeKModuleXML(kieServices.newKieModuleModel().setConfigurationProperty(
+                PropertySpecificOption.PROPERTY_NAME,
+                PropertySpecificOption.ALLOWED.toString()).toXML());
         kieServices.newKieBuilder(kfs).buildAll(ExecutableModelProject.class);
+        // Use this instead of the executable model to see the expected (correct) behavior (the reproducer will fail).
+        //kieServices.newKieBuilder(kfs).buildAll();
         KieContainer kieContainer = kieServices.newKieContainer(kieServices.getRepository().getDefaultReleaseId());
         KieSession kieSession = kieContainer.newKieSession();
         ((RuleEventManager) kieSession).addEventListener(new OptaPlannerRuleEventListener());

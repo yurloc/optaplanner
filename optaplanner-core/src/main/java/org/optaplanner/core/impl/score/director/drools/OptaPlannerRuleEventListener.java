@@ -30,6 +30,10 @@ public final class OptaPlannerRuleEventListener implements RuleEventListener {
 
     @Override
     public void onDeleteMatch(Match match) {
+        // This is supposed to run during the second fireAllRules()
+        // in org/optaplanner/examples/travelingtournament/app/DroolsReproducerTest.java:73.
+        // To see this, turn off the executable model.
+        System.out.println("UNMATCH " + match);
         undoPreviousMatch((AgendaItem) match);
     }
 

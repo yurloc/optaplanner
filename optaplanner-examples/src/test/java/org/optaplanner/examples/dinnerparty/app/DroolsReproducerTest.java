@@ -22,6 +22,7 @@ import org.drools.modelcompiler.ExecutableModelProject;
 import org.junit.jupiter.api.Test;
 import org.kie.api.KieServices;
 import org.kie.api.builder.KieFileSystem;
+import org.kie.api.event.rule.DebugAgendaEventListener;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 import org.kie.internal.builder.conf.PropertySpecificOption;
@@ -35,8 +36,12 @@ import org.optaplanner.examples.dinnerparty.domain.Job;
 import org.optaplanner.examples.dinnerparty.domain.JobType;
 import org.optaplanner.examples.dinnerparty.domain.Seat;
 import org.optaplanner.examples.dinnerparty.domain.SeatDesignation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class DroolsReproducerTest {
+
+    private static final Logger logger = LoggerFactory.getLogger(DroolsReproducerTest.class);
 
     @Test
     public void test() {
@@ -51,6 +56,7 @@ public class DroolsReproducerTest {
         KieContainer kieContainer = kieServices.newKieContainer(kieServices.getRepository().getDefaultReleaseId());
         KieSession kieSession = kieContainer.newKieSession();
         ((RuleEventManager) kieSession).addEventListener(new OptaPlannerRuleEventListener());
+        kieSession.addEventListener(new DebugAgendaEventListener());
 
         AbstractScoreHolder<SimpleScore> scoreHolder = new SimpleScoreDefinition().buildScoreHolder(true);
         kieSession.setGlobal("scoreHolder", scoreHolder);
@@ -76,6 +82,7 @@ public class DroolsReproducerTest {
         kieSession.insert(julianSeatDesignation);
         kieSession.insert(taylorSeatDesignation);
 
+        logger.info("FIRE 1");
         kieSession.fireAllRules();
         assertEquals(0, scoreHolder.extractScore(0).getScore());
 
@@ -83,6 +90,8 @@ public class DroolsReproducerTest {
         // but there is no common hobby => the rule is expected to fire (but it doesn't).
         taylorSeatDesignation.setSeat(seatR);
         kieSession.update(kieSession.getFactHandle(taylorSeatDesignation), taylorSeatDesignation, "seat");
+
+        logger.info("FIRE 2");
         kieSession.fireAllRules();
         // Assert the corrupted score to make sure the bug is reproducible.
         assertEquals(0, scoreHolder.extractScore(0).getScore());
@@ -97,6 +106,7 @@ public class DroolsReproducerTest {
         // Insert everything into a fresh session to see the uncorrupted score.
         kieSession.insert(julianSeatDesignation);
         kieSession.insert(taylorSeatDesignation);
+        logger.info("FIRE 3");
         kieSession.fireAllRules();
         assertEquals(-100, scoreHolder.extractScore(0).getScore());
     }

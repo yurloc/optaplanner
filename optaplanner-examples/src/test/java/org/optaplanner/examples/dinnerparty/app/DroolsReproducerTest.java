@@ -55,55 +55,48 @@ public class DroolsReproducerTest {
         AbstractScoreHolder<SimpleScore> scoreHolder = new SimpleScoreDefinition().buildScoreHolder(true);
         kieSession.setGlobal("scoreHolder", scoreHolder);
 
-        SeatDesignation seatDesignation_138 = new SeatDesignation();
-        SeatDesignation seatDesignation_139 = new SeatDesignation();
-        Guest guest_282 = new Guest();
-        Guest guest_283 = new Guest();
-        Job job_590 = new Job();
-        Seat seat_752 = new Seat();
-        Seat seat_753 = new Seat();
-        //Julian
-        seatDesignation_138.setGuest(guest_282);
-        //Taylor
-        seatDesignation_139.setGuest(guest_283);
-        //Julian
-        guest_282.setJob(job_590);
-        //Taylor
-        guest_283.setJob(job_590);
-        //Republican(Socialite)
-        job_590.setJobType(JobType.SOCIALITE);
-        //11.10
-        seat_752.setRightSeat(seat_753);
-        //11.11
+        SeatDesignation julianSeatDesignation = new SeatDesignation();
+        SeatDesignation taylorSeatDesignation = new SeatDesignation();
+        Guest julian = new Guest();
+        Guest taylor = new Guest();
+        Job sharedJob = new Job();
+        Seat seatL = new Seat();
+        Seat seatR = new Seat();
 
-        //operation I #138
-        kieSession.insert(seatDesignation_138);
-        //operation I #139
-        kieSession.insert(seatDesignation_139);
+        julianSeatDesignation.setGuest(julian);
+        taylorSeatDesignation.setGuest(taylor);
+        julian.setJob(sharedJob);
+        taylor.setJob(sharedJob);
+        sharedJob.setJobType(JobType.SOCIALITE);
 
-        //operation U #11389
-        seatDesignation_138.setSeat(seat_752);
-        kieSession.update(kieSession.getFactHandle(seatDesignation_138), seatDesignation_138, "seat");
-        //operation F #11393
+        // Seats are next to each other, but SeatDesignations are not yet assigned to seats => rule does not fire.
+        seatL.setRightSeat(seatR);
+        julianSeatDesignation.setSeat(seatL);
+
+        kieSession.insert(julianSeatDesignation);
+        kieSession.insert(taylorSeatDesignation);
+
         kieSession.fireAllRules();
-        //operation U #11398
-        seatDesignation_139.setSeat(seat_753);
-        kieSession.update(kieSession.getFactHandle(seatDesignation_139), seatDesignation_139, "seat");
-        //operation F #11399
+        assertEquals(0, scoreHolder.extractScore(0).getScore());
+
+        // Assign Taylor's SD to the right seat. Julian and Taylor now sit next to each other
+        // but there is no common hobby => the rule is expected to fire (but it doesn't).
+        taylorSeatDesignation.setSeat(seatR);
+        kieSession.update(kieSession.getFactHandle(taylorSeatDesignation), taylorSeatDesignation, "seat");
         kieSession.fireAllRules();
         // Assert the corrupted score to make sure the bug is reproducible.
         assertEquals(0, scoreHolder.extractScore(0).getScore());
 
-        // Create a fresh kieSession.
+        // But the rule fires when both facts are inserted into a fresh KieSession.
+
+        // Create a fresh KieSession.
         kieSession = kieContainer.newKieSession();
         scoreHolder = new SimpleScoreDefinition().buildScoreHolder(true);
         kieSession.setGlobal("scoreHolder", scoreHolder);
 
         // Insert everything into a fresh session to see the uncorrupted score.
-        //operation I #138
-        kieSession.insert(seatDesignation_138);
-        //operation I #139
-        kieSession.insert(seatDesignation_139);
+        kieSession.insert(julianSeatDesignation);
+        kieSession.insert(taylorSeatDesignation);
         kieSession.fireAllRules();
         assertEquals(-100, scoreHolder.extractScore(0).getScore());
     }

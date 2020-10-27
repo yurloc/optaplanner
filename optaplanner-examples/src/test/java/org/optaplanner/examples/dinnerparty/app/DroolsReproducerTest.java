@@ -52,7 +52,9 @@ public class DroolsReproducerTest {
         kfs.writeKModuleXML(kieServices.newKieModuleModel().setConfigurationProperty(
                 PropertySpecificOption.PROPERTY_NAME,
                 PropertySpecificOption.ALLOWED.toString()).toXML());
+        // Comment this out and use buildAll() to see the expected (correct) Drools behavior.
         kieServices.newKieBuilder(kfs).buildAll(ExecutableModelProject.class);
+        //kieServices.newKieBuilder(kfs).buildAll();
         KieContainer kieContainer = kieServices.newKieContainer(kieServices.getRepository().getDefaultReleaseId());
         KieSession kieSession = kieContainer.newKieSession();
         ((RuleEventManager) kieSession).addEventListener(new OptaPlannerRuleEventListener());
@@ -91,7 +93,7 @@ public class DroolsReproducerTest {
         taylorSeatDesignation.setSeat(seatR);
         kieSession.update(kieSession.getFactHandle(taylorSeatDesignation), taylorSeatDesignation, "seat");
 
-        logger.info("FIRE 2");
+        logger.info("FIRE 2"); // rule activation will be visible on stderr after this log entry if exec model is not used
         kieSession.fireAllRules();
         // Assert the corrupted score to make sure the bug is reproducible.
         assertEquals(0, scoreHolder.extractScore(0).getScore());

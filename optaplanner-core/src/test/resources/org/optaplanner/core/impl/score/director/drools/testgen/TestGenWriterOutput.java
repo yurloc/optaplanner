@@ -1,8 +1,9 @@
 package org.optaplanner.testgen;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.io.File;
 import org.drools.modelcompiler.ExecutableModelProject;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.kie.api.KieServices;
 import org.kie.api.builder.KieFileSystem;
@@ -55,7 +56,7 @@ public class TestGenWriterOutput {
         //operation F #3
         kieSession.fireAllRules();
         // This is the corrupted score, just to make sure the bug is reproducible
-        Assertions.assertEquals("1", scoreHolder.extractScore(0).toString());
+        assertEquals("1", scoreHolder.extractScore(0).toString());
         kieSession = kieContainer.newKieSession();
         scoreHolder = new SimpleScoreDefinition().buildScoreHolder(true);
         kieSession.setGlobal("scoreHolder", scoreHolder);
@@ -64,6 +65,6 @@ public class TestGenWriterOutput {
         //operation I #0
         kieSession.insert(testdataValue_2);
         kieSession.fireAllRules();
-        Assertions.assertEquals("0", scoreHolder.extractScore(0).toString());
+        assertEquals("0", scoreHolder.extractScore(0).toString());
     }
 }

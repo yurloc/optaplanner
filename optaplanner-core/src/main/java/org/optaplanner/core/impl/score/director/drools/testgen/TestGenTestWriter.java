@@ -84,7 +84,7 @@ class TestGenTestWriter {
             imports.add("java.io.File");
         }
         if (scoreDefinition != null) {
-            imports.add("org.junit.jupiter.api.Assertions");
+            sb.append("import static org.junit.jupiter.api.Assertions.assertEquals;\n\n");
             imports.add(AbstractScoreHolder.class.getCanonicalName());
             imports.add(scoreDefinition.getClass().getCanonicalName());
         }
@@ -162,7 +162,7 @@ class TestGenTestWriter {
         if (scoreEx != null) {
             sb
                     .append("        // This is the corrupted score, just to make sure the bug is reproducible\n")
-                    .append("        Assertions.assertEquals(\"").append(scoreEx.getWorkingScore())
+                    .append("        assertEquals(\"").append(scoreEx.getWorkingScore())
                     .append("\", scoreHolder.extractScore(0).toString());\n");
             // demonstrate the uncorrupted score
             sb
@@ -179,7 +179,7 @@ class TestGenTestWriter {
             }
             sb
                     .append("        kieSession.fireAllRules();\n")
-                    .append("        Assertions.assertEquals(\"").append(scoreEx.getUncorruptedScore())
+                    .append("        assertEquals(\"").append(scoreEx.getUncorruptedScore())
                     .append("\", scoreHolder.extractScore(0).toString());\n");
         }
         sb

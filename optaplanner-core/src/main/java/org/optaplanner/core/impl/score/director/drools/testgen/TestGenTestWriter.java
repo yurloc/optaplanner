@@ -86,6 +86,7 @@ class TestGenTestWriter {
         if (scoreDefinition != null) {
             sb.append("import static org.junit.jupiter.api.Assertions.assertEquals;\n\n");
             imports.add(AbstractScoreHolder.class.getCanonicalName());
+            imports.add(scoreDefinition.getZeroScore().getClass().getCanonicalName());
             imports.add(scoreDefinition.getClass().getCanonicalName());
         }
 
@@ -134,7 +135,9 @@ class TestGenTestWriter {
                 .append("        ((RuleEventManager) kieSession).addEventListener(new OptaPlannerRuleEventListener());\n\n");
         if (scoreDefinition != null) {
             sb
-                    .append("        AbstractScoreHolder scoreHolder = new ")
+                    .append("        AbstractScoreHolder<")
+                    .append(scoreDefinition.getZeroScore().getClass().getSimpleName())
+                    .append("> scoreHolder = new ")
                     .append(scoreDefinition.getClass().getSimpleName())
                     .append("().buildScoreHolder(").append(constraintMatchEnabled).append(");\n");
             sb

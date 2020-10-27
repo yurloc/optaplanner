@@ -10,6 +10,7 @@ import org.kie.api.builder.KieFileSystem;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 import org.kie.internal.event.rule.RuleEventManager;
+import org.optaplanner.core.api.score.buildin.simple.SimpleScore;
 import org.optaplanner.core.impl.score.buildin.simple.SimpleScoreDefinition;
 import org.optaplanner.core.impl.score.director.drools.OptaPlannerRuleEventListener;
 import org.optaplanner.core.impl.score.holder.AbstractScoreHolder;
@@ -33,7 +34,7 @@ public class TestGenWriterOutput {
         KieSession kieSession = kieContainer.newKieSession();
         ((RuleEventManager) kieSession).addEventListener(new OptaPlannerRuleEventListener());
 
-        AbstractScoreHolder scoreHolder = new SimpleScoreDefinition().buildScoreHolder(true);
+        AbstractScoreHolder<SimpleScore> scoreHolder = new SimpleScoreDefinition().buildScoreHolder(true);
         kieSession.setGlobal("scoreHolder", scoreHolder);
 
         String string_0 = new String();

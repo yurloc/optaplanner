@@ -9,6 +9,7 @@ import org.kie.api.KieServices;
 import org.kie.api.builder.KieFileSystem;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
+import org.kie.internal.builder.conf.PropertySpecificOption;
 import org.kie.internal.event.rule.RuleEventManager;
 import org.optaplanner.core.api.score.buildin.simple.SimpleScore;
 import org.optaplanner.core.impl.score.buildin.simple.SimpleScoreDefinition;
@@ -29,6 +30,9 @@ public class TestGenWriterOutput {
                 .newClassPathResource("x"));
         kfs.write(kieServices.getResources()
                 .newClassPathResource("y"));
+        kfs.writeKModuleXML(kieServices.newKieModuleModel().setConfigurationProperty(
+                PropertySpecificOption.PROPERTY_NAME,
+                PropertySpecificOption.ALLOWED.toString()).toXML());
         kieServices.newKieBuilder(kfs).buildAll(ExecutableModelProject.class);
         KieContainer kieContainer = kieServices.newKieContainer(kieServices.getRepository().getDefaultReleaseId());
         KieSession kieSession = kieContainer.newKieSession();

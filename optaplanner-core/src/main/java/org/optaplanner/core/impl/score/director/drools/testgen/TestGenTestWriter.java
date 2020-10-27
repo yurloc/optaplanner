@@ -78,6 +78,7 @@ class TestGenTestWriter {
         imports.add("org.kie.api.builder.KieFileSystem");
         imports.add("org.kie.api.runtime.KieContainer");
         imports.add("org.kie.api.runtime.KieSession");
+        imports.add("org.kie.internal.builder.conf.PropertySpecificOption");
         imports.add("org.kie.internal.event.rule.RuleEventManager");
         imports.add(OptaPlannerRuleEventListener.class.getCanonicalName());
         if (!scoreDrlFileList.isEmpty()) {
@@ -127,6 +128,10 @@ class TestGenTestWriter {
                     .append("        kfs.write(kieServices.getResources()\n")
                     .append("                .newClassPathResource(\"").append(drl).append("\"));\n");
         });
+        sb
+                .append("        kfs.writeKModuleXML(kieServices.newKieModuleModel().setConfigurationProperty(\n")
+                .append("                PropertySpecificOption.PROPERTY_NAME,\n")
+                .append("                PropertySpecificOption.ALLOWED.toString()).toXML());\n");
         sb
                 .append("        kieServices.newKieBuilder(kfs).buildAll(ExecutableModelProject.class);\n")
                 .append("        KieContainer kieContainer = kieServices.newKieContainer("

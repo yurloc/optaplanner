@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <solver xmlns="https://www.optaplanner.org/xsd/solver" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="https://www.optaplanner.org/xsd/solver https://www.optaplanner.org/xsd/solver/solver.xsd">
-  <!-- To slowly prove there are no bugs in this code -->
-  <!--<environmentMode>FULL_ASSERT</environmentMode>-->
+  <!--<environmentMode>FULL_ASSERT</environmentMode>--><!-- To slowly prove there are no bugs in this code -->
   <!--<moveThreadCount>AUTO</moveThreadCount>--><!-- To solve faster by saturating multiple CPU cores -->
 
   <solutionClass>org.optaplanner.examples.taskassigning.domain.TaskAssigningSolution</solutionClass>
@@ -25,18 +24,18 @@
       <changeMoveSelector>
         <!--      <cacheType>STEP</cacheType>-->
         <!--      <selectionOrder>ORIGINAL</selectionOrder>-->
-        <entitySelector>
-          <cacheType>STEP</cacheType>
-          <selectionOrder>SHUFFLED</selectionOrder>
-        </entitySelector>
+<!--        <entitySelector>-->
+<!--          <cacheType>STEP</cacheType>-->
+<!--          <selectionOrder>SHUFFLED</selectionOrder>-->
+<!--        </entitySelector>-->
       </changeMoveSelector>
       <swapMoveSelector>
         <!--      <cacheType>STEP</cacheType>-->
         <!--      <selectionOrder>ORIGINAL</selectionOrder>-->
-        <entitySelector>
-          <cacheType>STEP</cacheType>
-          <selectionOrder>SHUFFLED</selectionOrder>
-        </entitySelector>
+<!--        <entitySelector>-->
+<!--          <cacheType>STEP</cacheType>-->
+<!--          <selectionOrder>SHUFFLED</selectionOrder>-->
+<!--        </entitySelector>-->
       </swapMoveSelector>
     </unionMoveSelector>
 <!--    <forager>-->

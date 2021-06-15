@@ -14,57 +14,56 @@
  * limitations under the License.
  */
 
-package org.optaplanner.examples.taskassigning.domain;
+package org.optaplanner.examples.taskassigning.persistence.orig;
 
 import org.optaplanner.core.api.domain.entity.PlanningEntity;
 import org.optaplanner.core.api.domain.entity.PlanningPin;
+import org.optaplanner.core.api.domain.variable.AnchorShadowVariable;
 import org.optaplanner.core.api.domain.variable.CustomShadowVariable;
+import org.optaplanner.core.api.domain.variable.PlanningVariable;
+import org.optaplanner.core.api.domain.variable.PlanningVariableGraphType;
 import org.optaplanner.core.api.domain.variable.PlanningVariableReference;
-import org.optaplanner.examples.common.domain.AbstractPersistable;
 import org.optaplanner.examples.common.swingui.components.Labeled;
-import org.optaplanner.examples.taskassigning.domain.solver.CustomCollectionInverseRelationShadowVariableListener;
+import org.optaplanner.examples.taskassigning.domain.Affinity;
+import org.optaplanner.examples.taskassigning.domain.Customer;
+import org.optaplanner.examples.taskassigning.domain.Priority;
+import org.optaplanner.examples.taskassigning.domain.Skill;
+import org.optaplanner.examples.taskassigning.domain.TaskType;
 import org.optaplanner.examples.taskassigning.domain.solver.StartTimeUpdatingVariableListener;
 import org.optaplanner.examples.taskassigning.domain.solver.TaskDifficultyComparator;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
-// TODO convert entity difficulty to value strength
 @PlanningEntity(difficultyComparatorClass = TaskDifficultyComparator.class)
 @XStreamAlias("TaTask")
-public class Task extends AbstractPersistable implements Labeled {
+public class TmpOrigTask extends TmpTaskOrEmployee implements Labeled {
 
     private TaskType taskType;
     private int indexInTaskType;
     private Customer customer;
     private int readyTime;
     private Priority priority;
-    // TODO keep this and make it possible to pin values?
     @PlanningPin
     private boolean pinned;
 
+    // Planning variables: changes during planning, between score calculations.
+    @PlanningVariable(valueRangeProviderRefs = { "employeeRange", "taskRange" }, graphType = PlanningVariableGraphType.CHAINED)
+    private TmpTaskOrEmployee previousTaskOrEmployee;
+
     // Shadow variables
-    // This maybe duplicates @InverseRelationshipShadowVariable. The field type may be either `Employee` or `Set<Employee>`
-    // depending on whether the genuine `@PlanningVariable List<Task> tasks` is disjoint or not (for task assignment it
-    // is disjoint, for other domains it may not be).
-    // FIXME temporary custom shadow variable listener, will be replaced by a generic one
-    @CustomShadowVariable(
-            variableListenerClass = CustomCollectionInverseRelationShadowVariableListener.class,
-            sources = @PlanningVariableReference(entityClass = Employee.class, variableName = "tasks"))
-    // TODO the entity (Employee) or just the collection variable (List<Task>)?
-    private Employee employee;
-    // FIXME temporary custom shadow variable listener, will be replaced by a generic one
-    @CustomShadowVariable(variableListenerRef = @PlanningVariableReference(variableName = "employee"))
-    private Integer index;
+    // Task nextTask inherited from superclass
+    @AnchorShadowVariable(sourceVariableName = "previousTaskOrEmployee")
+    private TmpOrigEmployee employee;
     @CustomShadowVariable(variableListenerClass = StartTimeUpdatingVariableListener.class,
             // Arguable, to adhere to API specs (although this works), nextTask and employee should also be a source,
             // because this shadow must be triggered after nextTask and employee (but there is no need to be triggered by those)
-            sources = { @PlanningVariableReference(entityClass = Employee.class, variableName = "tasks") })
+            sources = { @PlanningVariableReference(variableName = "previousTaskOrEmployee") })
     private Integer startTime; // In minutes
 
-    public Task() {
+    public TmpOrigTask() {
     }
 
-    public Task(long id, TaskType taskType, int indexInTaskType, Customer customer, int readyTime, Priority priority) {
+    public TmpOrigTask(long id, TaskType taskType, int indexInTaskType, Customer customer, int readyTime, Priority priority) {
         super(id);
         this.taskType = taskType;
         this.indexInTaskType = indexInTaskType;
@@ -122,20 +121,21 @@ public class Task extends AbstractPersistable implements Labeled {
         this.pinned = pinned;
     }
 
-    public Employee getEmployee() {
+    public TmpTaskOrEmployee getPreviousTaskOrEmployee() {
+        return previousTaskOrEmployee;
+    }
+
+    public void setPreviousTaskOrEmployee(TmpTaskOrEmployee previousTaskOrEmployee) {
+        this.previousTaskOrEmployee = previousTaskOrEmployee;
+    }
+
+    @Override
+    public TmpOrigEmployee getEmployee() {
         return employee;
     }
 
-    public void setEmployee(Employee employee) {
+    public void setEmployee(TmpOrigEmployee employee) {
         this.employee = employee;
-    }
-
-    public Integer getIndex() {
-        return index;
-    }
-
-    public void setIndex(Integer index) {
-        this.index = index;
     }
 
     public Integer getStartTime() {
@@ -177,6 +177,7 @@ public class Task extends AbstractPersistable implements Labeled {
         return (employee == null) ? Affinity.NONE : employee.getAffinity(customer);
     }
 
+    @Override
     public Integer getEndTime() {
         if (startTime == null) {
             return null;

@@ -14,42 +14,32 @@
  * limitations under the License.
  */
 
-package org.optaplanner.examples.taskassigning.domain;
+package org.optaplanner.examples.taskassigning.persistence.orig;
 
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.optaplanner.core.api.domain.entity.PlanningEntity;
-import org.optaplanner.core.api.domain.variable.PlanningCollectionVariable;
-import org.optaplanner.examples.common.domain.AbstractPersistable;
 import org.optaplanner.examples.common.swingui.components.Labeled;
+import org.optaplanner.examples.taskassigning.domain.Affinity;
+import org.optaplanner.examples.taskassigning.domain.Customer;
+import org.optaplanner.examples.taskassigning.domain.Skill;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
-@PlanningEntity
 @XStreamAlias("TaEmployee")
-public class Employee extends AbstractPersistable implements Labeled {
+public class TmpOrigEmployee extends TmpTaskOrEmployee implements Labeled {
 
     private String fullName;
 
     private Set<Skill> skillSet;
     private Map<Customer, Affinity> affinityMap;
 
-    // TODO maybe needs graphType=DISJOINT_LIST(_ORDERED)
-    // - disjoint because otherwise the inverse relation shadow variable would be a collection
-    // - ordered because otherwise index shadow variable is not possible
-    @PlanningCollectionVariable(valueRangeProviderRefs = "taskRange")
-    private List<Task> tasks;
-
-    // TODO pinning
-
-    public Employee() {
+    public TmpOrigEmployee() {
     }
 
-    public Employee(long id, String fullName) {
+    public TmpOrigEmployee(long id, String fullName) {
         super(id);
         this.fullName = fullName;
         skillSet = new LinkedHashSet<>();
@@ -80,17 +70,19 @@ public class Employee extends AbstractPersistable implements Labeled {
         this.affinityMap = affinityMap;
     }
 
-    public List<Task> getTasks() {
-        return tasks;
-    }
-
-    public void setTasks(List<Task> tasks) {
-        this.tasks = tasks;
-    }
-
     // ************************************************************************
     // Complex methods
     // ************************************************************************
+
+    @Override
+    public TmpOrigEmployee getEmployee() {
+        return this;
+    }
+
+    @Override
+    public Integer getEndTime() {
+        return 0;
+    }
 
     /**
      * @param customer never null
@@ -102,10 +94,6 @@ public class Employee extends AbstractPersistable implements Labeled {
             affinity = Affinity.NONE;
         }
         return affinity;
-    }
-
-    public Integer getEndTime() {
-        return tasks.isEmpty() ? 0 : tasks.get(tasks.size() - 1).getEndTime();
     }
 
     @Override

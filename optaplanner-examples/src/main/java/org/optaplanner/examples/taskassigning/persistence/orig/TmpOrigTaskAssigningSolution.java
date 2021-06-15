@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.optaplanner.examples.taskassigning.domain;
+package org.optaplanner.examples.taskassigning.persistence.orig;
 
 import java.util.List;
 
@@ -25,6 +25,9 @@ import org.optaplanner.core.api.domain.solution.ProblemFactCollectionProperty;
 import org.optaplanner.core.api.domain.valuerange.ValueRangeProvider;
 import org.optaplanner.core.api.score.buildin.bendable.BendableScore;
 import org.optaplanner.examples.common.domain.AbstractPersistable;
+import org.optaplanner.examples.taskassigning.domain.Customer;
+import org.optaplanner.examples.taskassigning.domain.Skill;
+import org.optaplanner.examples.taskassigning.domain.TaskType;
 import org.optaplanner.persistence.xstream.api.score.buildin.bendable.BendableScoreXStreamConverter;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
@@ -32,7 +35,7 @@ import com.thoughtworks.xstream.annotations.XStreamConverter;
 
 @PlanningSolution
 @XStreamAlias("TaTaskAssigningSolution")
-public class TaskAssigningSolution extends AbstractPersistable {
+public class TmpOrigTaskAssigningSolution extends AbstractPersistable {
 
     @ProblemFactCollectionProperty
     private List<Skill> skillList;
@@ -40,25 +43,26 @@ public class TaskAssigningSolution extends AbstractPersistable {
     private List<TaskType> taskTypeList;
     @ProblemFactCollectionProperty
     private List<Customer> customerList;
-    @ValueRangeProvider(id = "taskRange")
+    @ValueRangeProvider(id = "employeeRange")
     @ProblemFactCollectionProperty
-    private List<Task> taskList;
+    private List<TmpOrigEmployee> employeeList;
 
     @PlanningEntityCollectionProperty
-    private List<Employee> employeeList;
+    @ValueRangeProvider(id = "taskRange")
+    private List<TmpOrigTask> taskList;
 
     @XStreamConverter(BendableScoreXStreamConverter.class)
     @PlanningScore(bendableHardLevelsSize = 1, bendableSoftLevelsSize = 4)
     private BendableScore score;
 
-    /** Relates to {@link Task#getStartTime()}. */
+    /** Relates to {@link TmpOrigTask#getStartTime()}. */
     private int frozenCutoff; // In minutes
 
-    public TaskAssigningSolution() {
+    public TmpOrigTaskAssigningSolution() {
     }
 
-    public TaskAssigningSolution(long id, List<Skill> skillList, List<TaskType> taskTypeList,
-            List<Customer> customerList, List<Employee> employeeList, List<Task> taskList) {
+    public TmpOrigTaskAssigningSolution(long id, List<Skill> skillList, List<TaskType> taskTypeList,
+            List<Customer> customerList, List<TmpOrigEmployee> employeeList, List<TmpOrigTask> taskList) {
         super(id);
         this.skillList = skillList;
         this.taskTypeList = taskTypeList;
@@ -91,19 +95,19 @@ public class TaskAssigningSolution extends AbstractPersistable {
         this.customerList = customerList;
     }
 
-    public List<Employee> getEmployeeList() {
+    public List<TmpOrigEmployee> getEmployeeList() {
         return employeeList;
     }
 
-    public void setEmployeeList(List<Employee> employeeList) {
+    public void setEmployeeList(List<TmpOrigEmployee> employeeList) {
         this.employeeList = employeeList;
     }
 
-    public List<Task> getTaskList() {
+    public List<TmpOrigTask> getTaskList() {
         return taskList;
     }
 
-    public void setTaskList(List<Task> taskList) {
+    public void setTaskList(List<TmpOrigTask> taskList) {
         this.taskList = taskList;
     }
 

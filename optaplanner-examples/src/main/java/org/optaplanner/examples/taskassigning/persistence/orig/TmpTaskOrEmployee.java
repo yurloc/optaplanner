@@ -14,31 +14,31 @@
  * limitations under the License.
  */
 
-package org.optaplanner.examples.taskassigning.domain;
+package org.optaplanner.examples.taskassigning.persistence.orig;
 
 import org.optaplanner.core.api.domain.entity.PlanningEntity;
 import org.optaplanner.core.api.domain.variable.InverseRelationShadowVariable;
 import org.optaplanner.examples.common.domain.AbstractPersistable;
 
 @PlanningEntity
-public abstract class TaskOrEmployee extends AbstractPersistable {
+public abstract class TmpTaskOrEmployee extends AbstractPersistable {
 
     // Shadow variables
     @InverseRelationShadowVariable(sourceVariableName = "previousTaskOrEmployee")
-    protected Task nextTask;
+    protected TmpOrigTask nextTask;
 
-    public TaskOrEmployee() {
+    public TmpTaskOrEmployee() {
     }
 
-    public TaskOrEmployee(long id) {
+    public TmpTaskOrEmployee(long id) {
         super(id);
     }
 
-    public Task getNextTask() {
+    public TmpOrigTask getNextTask() {
         return nextTask;
     }
 
-    public void setNextTask(Task nextTask) {
+    public void setNextTask(TmpOrigTask nextTask) {
         this.nextTask = nextTask;
     }
 
@@ -50,6 +50,6 @@ public abstract class TaskOrEmployee extends AbstractPersistable {
     /**
      * @return sometimes null
      */
-    public abstract Employee getEmployee();
+    public abstract TmpOrigEmployee getEmployee();
 
 }

@@ -32,7 +32,7 @@ import org.optaplanner.persistence.xstream.impl.domain.solution.XStreamSolutionF
 /**
  * Reads a solution that was serialized from the original domain model on master into the new non-chained model.
  */
-public class BridgeTaskAssigningXmlSolutionFileIO implements SolutionFileIO<TaskAssigningSolution> {
+public class TmpBridgeTaskAssigningXmlSolutionFileIO implements SolutionFileIO<TaskAssigningSolution> {
 
     private final OrigTaskAssigningSolutionIO origIO = new OrigTaskAssigningSolutionIO();
     private final TaskAssigningXmlSolutionFileIO currentIO = new TaskAssigningXmlSolutionFileIO();
@@ -45,7 +45,7 @@ public class BridgeTaskAssigningXmlSolutionFileIO implements SolutionFileIO<Task
         return currentIO.read(inputSolutionFile);
     }
 
-    private TaskAssigningSolution convert(OrigTaskAssigningSolution origSolution) {
+    private TaskAssigningSolution convert(TmpOrigTaskAssigningSolution origSolution) {
         Map<Long, Employee> employeeByIdMap = origSolution.getEmployeeList().stream()
                 .map(origEmployee -> {
                     Employee employee = new Employee(origEmployee.getId(), origEmployee.getFullName());
@@ -72,10 +72,10 @@ public class BridgeTaskAssigningXmlSolutionFileIO implements SolutionFileIO<Task
                 })
                 .collect(Collectors.toMap(Task::getId, Function.identity()));
 
-        for (OrigEmployee origEmployee : origSolution.getEmployeeList()) {
+        for (TmpOrigEmployee origEmployee : origSolution.getEmployeeList()) {
             Employee employee = employeeByIdMap.get(origEmployee.getId());
             employee.setTasks(new ArrayList<>());
-            OrigTask nextTask = origEmployee.getNextTask();
+            TmpOrigTask nextTask = origEmployee.getNextTask();
             int index = 0;
             while (nextTask != null) {
                 Task task = taskByIdMap.get(nextTask.getId());
@@ -106,10 +106,10 @@ public class BridgeTaskAssigningXmlSolutionFileIO implements SolutionFileIO<Task
         return "xml";
     }
 
-    private static class OrigTaskAssigningSolutionIO extends XStreamSolutionFileIO<OrigTaskAssigningSolution> {
+    private static class OrigTaskAssigningSolutionIO extends XStreamSolutionFileIO<TmpOrigTaskAssigningSolution> {
 
         public OrigTaskAssigningSolutionIO() {
-            super(OrigTaskAssigningSolution.class);
+            super(TmpOrigTaskAssigningSolution.class);
         }
     }
 }

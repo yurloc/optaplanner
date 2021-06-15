@@ -36,7 +36,7 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 @PlanningEntity(difficultyComparatorClass = TaskDifficultyComparator.class)
 @XStreamAlias("TaTask")
-public class OrigTask extends TaskOrEmployee implements Labeled {
+public class TmpOrigTask extends TmpTaskOrEmployee implements Labeled {
 
     private TaskType taskType;
     private int indexInTaskType;
@@ -48,22 +48,22 @@ public class OrigTask extends TaskOrEmployee implements Labeled {
 
     // Planning variables: changes during planning, between score calculations.
     @PlanningVariable(valueRangeProviderRefs = { "employeeRange", "taskRange" }, graphType = PlanningVariableGraphType.CHAINED)
-    private TaskOrEmployee previousTaskOrEmployee;
+    private TmpTaskOrEmployee previousTaskOrEmployee;
 
     // Shadow variables
     // Task nextTask inherited from superclass
     @AnchorShadowVariable(sourceVariableName = "previousTaskOrEmployee")
-    private OrigEmployee employee;
+    private TmpOrigEmployee employee;
     @CustomShadowVariable(variableListenerClass = StartTimeUpdatingVariableListener.class,
             // Arguable, to adhere to API specs (although this works), nextTask and employee should also be a source,
             // because this shadow must be triggered after nextTask and employee (but there is no need to be triggered by those)
             sources = { @PlanningVariableReference(variableName = "previousTaskOrEmployee") })
     private Integer startTime; // In minutes
 
-    public OrigTask() {
+    public TmpOrigTask() {
     }
 
-    public OrigTask(long id, TaskType taskType, int indexInTaskType, Customer customer, int readyTime, Priority priority) {
+    public TmpOrigTask(long id, TaskType taskType, int indexInTaskType, Customer customer, int readyTime, Priority priority) {
         super(id);
         this.taskType = taskType;
         this.indexInTaskType = indexInTaskType;
@@ -121,20 +121,20 @@ public class OrigTask extends TaskOrEmployee implements Labeled {
         this.pinned = pinned;
     }
 
-    public TaskOrEmployee getPreviousTaskOrEmployee() {
+    public TmpTaskOrEmployee getPreviousTaskOrEmployee() {
         return previousTaskOrEmployee;
     }
 
-    public void setPreviousTaskOrEmployee(TaskOrEmployee previousTaskOrEmployee) {
+    public void setPreviousTaskOrEmployee(TmpTaskOrEmployee previousTaskOrEmployee) {
         this.previousTaskOrEmployee = previousTaskOrEmployee;
     }
 
     @Override
-    public OrigEmployee getEmployee() {
+    public TmpOrigEmployee getEmployee() {
         return employee;
     }
 
-    public void setEmployee(OrigEmployee employee) {
+    public void setEmployee(TmpOrigEmployee employee) {
         this.employee = employee;
     }
 

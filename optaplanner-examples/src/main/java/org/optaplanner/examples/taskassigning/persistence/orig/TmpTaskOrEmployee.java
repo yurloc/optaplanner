@@ -21,24 +21,24 @@ import org.optaplanner.core.api.domain.variable.InverseRelationShadowVariable;
 import org.optaplanner.examples.common.domain.AbstractPersistable;
 
 @PlanningEntity
-public abstract class TaskOrEmployee extends AbstractPersistable {
+public abstract class TmpTaskOrEmployee extends AbstractPersistable {
 
     // Shadow variables
     @InverseRelationShadowVariable(sourceVariableName = "previousTaskOrEmployee")
-    protected OrigTask nextTask;
+    protected TmpOrigTask nextTask;
 
-    public TaskOrEmployee() {
+    public TmpTaskOrEmployee() {
     }
 
-    public TaskOrEmployee(long id) {
+    public TmpTaskOrEmployee(long id) {
         super(id);
     }
 
-    public OrigTask getNextTask() {
+    public TmpOrigTask getNextTask() {
         return nextTask;
     }
 
-    public void setNextTask(OrigTask nextTask) {
+    public void setNextTask(TmpOrigTask nextTask) {
         this.nextTask = nextTask;
     }
 
@@ -50,6 +50,6 @@ public abstract class TaskOrEmployee extends AbstractPersistable {
     /**
      * @return sometimes null
      */
-    public abstract OrigEmployee getEmployee();
+    public abstract TmpOrigEmployee getEmployee();
 
 }

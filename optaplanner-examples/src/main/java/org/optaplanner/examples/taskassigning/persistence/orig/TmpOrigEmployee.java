@@ -29,17 +29,17 @@ import org.optaplanner.examples.taskassigning.domain.Skill;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 @XStreamAlias("TaEmployee")
-public class OrigEmployee extends TaskOrEmployee implements Labeled {
+public class TmpOrigEmployee extends TmpTaskOrEmployee implements Labeled {
 
     private String fullName;
 
     private Set<Skill> skillSet;
     private Map<Customer, Affinity> affinityMap;
 
-    public OrigEmployee() {
+    public TmpOrigEmployee() {
     }
 
-    public OrigEmployee(long id, String fullName) {
+    public TmpOrigEmployee(long id, String fullName) {
         super(id);
         this.fullName = fullName;
         skillSet = new LinkedHashSet<>();
@@ -75,7 +75,7 @@ public class OrigEmployee extends TaskOrEmployee implements Labeled {
     // ************************************************************************
 
     @Override
-    public OrigEmployee getEmployee() {
+    public TmpOrigEmployee getEmployee() {
         return this;
     }
 

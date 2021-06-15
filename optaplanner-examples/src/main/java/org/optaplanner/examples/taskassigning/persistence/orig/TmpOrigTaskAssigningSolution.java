@@ -35,7 +35,7 @@ import com.thoughtworks.xstream.annotations.XStreamConverter;
 
 @PlanningSolution
 @XStreamAlias("TaTaskAssigningSolution")
-public class OrigTaskAssigningSolution extends AbstractPersistable {
+public class TmpOrigTaskAssigningSolution extends AbstractPersistable {
 
     @ProblemFactCollectionProperty
     private List<Skill> skillList;
@@ -45,24 +45,24 @@ public class OrigTaskAssigningSolution extends AbstractPersistable {
     private List<Customer> customerList;
     @ValueRangeProvider(id = "employeeRange")
     @ProblemFactCollectionProperty
-    private List<OrigEmployee> employeeList;
+    private List<TmpOrigEmployee> employeeList;
 
     @PlanningEntityCollectionProperty
     @ValueRangeProvider(id = "taskRange")
-    private List<OrigTask> taskList;
+    private List<TmpOrigTask> taskList;
 
     @XStreamConverter(BendableScoreXStreamConverter.class)
     @PlanningScore(bendableHardLevelsSize = 1, bendableSoftLevelsSize = 4)
     private BendableScore score;
 
-    /** Relates to {@link OrigTask#getStartTime()}. */
+    /** Relates to {@link TmpOrigTask#getStartTime()}. */
     private int frozenCutoff; // In minutes
 
-    public OrigTaskAssigningSolution() {
+    public TmpOrigTaskAssigningSolution() {
     }
 
-    public OrigTaskAssigningSolution(long id, List<Skill> skillList, List<TaskType> taskTypeList,
-            List<Customer> customerList, List<OrigEmployee> employeeList, List<OrigTask> taskList) {
+    public TmpOrigTaskAssigningSolution(long id, List<Skill> skillList, List<TaskType> taskTypeList,
+            List<Customer> customerList, List<TmpOrigEmployee> employeeList, List<TmpOrigTask> taskList) {
         super(id);
         this.skillList = skillList;
         this.taskTypeList = taskTypeList;
@@ -95,19 +95,19 @@ public class OrigTaskAssigningSolution extends AbstractPersistable {
         this.customerList = customerList;
     }
 
-    public List<OrigEmployee> getEmployeeList() {
+    public List<TmpOrigEmployee> getEmployeeList() {
         return employeeList;
     }
 
-    public void setEmployeeList(List<OrigEmployee> employeeList) {
+    public void setEmployeeList(List<TmpOrigEmployee> employeeList) {
         this.employeeList = employeeList;
     }
 
-    public List<OrigTask> getTaskList() {
+    public List<TmpOrigTask> getTaskList() {
         return taskList;
     }
 
-    public void setTaskList(List<OrigTask> taskList) {
+    public void setTaskList(List<TmpOrigTask> taskList) {
         this.taskList = taskList;
     }
 
